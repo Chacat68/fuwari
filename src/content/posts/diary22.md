@@ -3,7 +3,7 @@ title: 如果离去，记得带上自己
 published: 2024-07-23
 updated: 2024-07-23
 description: '我似乎对离去的事物有种念念不忘的愁绪，似乎到了结局心里的石头落了地，但总是期盼有转机。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104160029110.png?imageSlim'
 tags: [最小成本, 生活, 简洁, 日常]
 category: '生活随笔'
 draft: false
