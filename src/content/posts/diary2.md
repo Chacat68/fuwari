@@ -3,7 +3,7 @@ title: 写给32岁的自己：关于创作与决策的思考
 published: 2020-02-17
 updated: 2020-02-17
 description: '在32岁这一年，作者反思了时间管理、创作过程中的焦虑感以及幸福感的来源，并探讨了创作边界和决策的重要性。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501042750536.png?imageSlim'
 tags: [生活节奏, 时间管理, 家庭生活, 创造力, 幸福感, 决策, 边界, 压力, 技术, 团队]
 category: '生活随笔'
 draft: false

@@ -3,7 +3,7 @@ title: 随笔：在忙碌中寻找幸福时刻
 published: 2021-10-23
 updated: 2021-10-23
 description: '在忙碌的生活中抽出时间陪伴家人朋友，反思时间管理和创作过程中的焦虑感，并通过参观美术馆和参加朋友的生日会，找到了生活中的幸福感。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501042645752.png?imageSlim'
 tags: [生活节奏, 时间管理, 家庭生活, 幸福感, 压力, 个人成长, 社交, 艺术欣赏]
 category: '生活随笔'
 draft: false
