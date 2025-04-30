@@ -1,10 +1,11 @@
 ---
 title: 从过往看自我接纳
 published: 2024-06-23
-description: 成为一个自爱的人，学会自我肯定、自我接纳和自我愉悦，是人生中必修的一门功课。
-category: 它山之石
-tags: [自爱, 自我肯定, 自我接纳, 自我愉悦]
+updated: 
+description: '成为一个自爱的人，学会自我肯定、自我接纳和自我愉悦，是人生中必修的一门功课。'
 image: ''
+tags: [自爱, 自我肯定, 自我接纳, 自我愉悦]
+category: '它山之石'
 draft: false
 ---
 

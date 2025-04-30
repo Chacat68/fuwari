@@ -1,10 +1,11 @@
 ---
 title: 《我曾七次鄙视自己的灵魂》- 纪伯伦
 published: 2023-11-11
-description: 对自己的七次鄙视，从崇高到软弱，从容易到错误，从美德到虚伪。
-category: 它山之石
-tags: [生活,诗句,英文,时间,命运，际遇]
+updated: 
+description: '对自己的七次鄙视，从崇高到软弱，从容易到错误，从美德到虚伪。'
 image: ''
+tags: [生活,诗句,英文,时间,命运，际遇]
+category: '它山之石'
 draft: false
 ---
 

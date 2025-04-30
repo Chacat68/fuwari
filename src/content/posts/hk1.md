@@ -1,10 +1,11 @@
 ---
 title: 港乐集《C.Y.KONG&Jean》
 published: 2020-02-17
-description: 介绍了香港音乐人C.Y.KONG和Jean Chien的作品和影响。
-category: 生活随笔
-tags: [港乐, 粤语, 作曲人, 音乐, CY Kong, Jean Chien]
+updated: 
+description: '介绍了香港音乐人C.Y.KONG和Jean Chien的作品和影响。'
 image: ''
+tags: [港乐, 粤语, 作曲人, 音乐, CY Kong, Jean Chien]
+category: '生活随笔'
 draft: false
 ---
 

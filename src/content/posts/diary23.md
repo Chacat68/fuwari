@@ -1,10 +1,11 @@
 ---
 title: 生命的告别：写给逝去的外婆
 published: 2024-08-08
-description: 人生总是在不断地遇见与告别，缘分总有落尽时，所幸在同行的路上，没有落下太多遗憾。
-category: 生活随笔
-tags: [亲人, 离世, 情绪, 日常]
+updated: 
+description: '人生总是在不断地遇见与告别，缘分总有落尽时，所幸在同行的路上，没有落下太多遗憾。'
 image: ''
+tags: [亲人, 离世, 情绪, 日常]
+category: '生活随笔'
 draft: false
 ---
 

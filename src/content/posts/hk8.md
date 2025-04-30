@@ -1,10 +1,11 @@
 ---
 title: 港乐集《假使世界 原来不像你预期》
 published: 2025-03-09 12:00:00
-description: 风雨总有限期　终于会等到梦寐 --南區少年兒童合唱團
-category: 生活随笔
-tags: [粤语音乐, 方皓玟, 港乐集, 南区少年儿童合唱团, 翻唱]
+updated: 
+description: '风雨总有限期　终于会等到梦寐 --南區少年兒童合唱團'
 image: ''
+tags: [粤语音乐, 方皓玟, 港乐集, 南区少年儿童合唱团, 翻唱]
+category: '生活随笔'
 draft: false
 ---
 

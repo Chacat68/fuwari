@@ -1,10 +1,11 @@
 ---
 title: 设计素材库：收集、整理与检索的三步法
 published: 2022-04-23
-description: 介绍了如何收集、整理和检索设计素材，帮助读者打造高效的素材库。
-category: 设计思考
-tags: [设计, 素材库, 工具, 效率]
+updated: 
+description: '介绍了如何收集、整理和检索设计素材，帮助读者打造高效的素材库。'
 image: ''
+tags: [设计, 素材库, 工具, 效率]
+category: '设计思考'
 draft: false
 ---
 

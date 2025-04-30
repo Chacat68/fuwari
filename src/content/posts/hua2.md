@@ -1,10 +1,11 @@
 ---
-title:  华语集《王菲：执迷不悔》
+title: 华语集《王菲：执迷不悔》
 published: 2024-01-02
-description: 有时执迷，但却不悔，我必须走，寻找新的出路。迷茫却无法停止，只因我的感觉指引.
-category: 生活随笔
-tags: [音乐，王菲，执迷不悔，国语]
+updated: 
+description: '有时执迷，但却不悔，我必须走，寻找新的出路。迷茫却无法停止，只因我的感觉指引.'
 image: ''
+tags: [音乐，王菲，执迷不悔，国语]
+category: '生活随笔'
 draft: false
 ---
 

@@ -1,10 +1,11 @@
 ---
 title: 未曾预想的问题
 published: 2024-09-24
-description: 生活里发生的随机事件，有时候真的让你哭笑不得。
-category: 生活随笔
-tags: [生活, 问题, 随机, 游戏, 崩溃]
+updated: 
+description: '生活里发生的随机事件，有时候真的让你哭笑不得。'
 image: ''
+tags: [生活, 问题, 随机, 游戏, 崩溃]
+category: '生活随笔'
 draft: false
 ---
 

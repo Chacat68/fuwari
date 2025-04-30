@@ -6,7 +6,7 @@ description: 'Read more about Markdown features in Fuwari'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104010045379.png?imageSlim'
 tags: [Demo, Example, Markdown, Fuwari]
 category: 'Examples'
-draft: false 
+draft: false
 ---
 
 ## GitHub Repository Cards

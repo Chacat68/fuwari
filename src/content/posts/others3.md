@@ -1,10 +1,11 @@
 ---
 title: 在苦海中前行：白桦《船》的生命力量
 published: 2024-09-05
-description: 面对强大于自身千万倍的对手，能援救自己的只有清醒和勇敢。
-category: 它山之石
-tags: [诗句, 中文, 船, 命运, 际遇]
+updated: 
+description: '面对强大于自身千万倍的对手，能援救自己的只有清醒和勇敢。'
 image: ''
+tags: [诗句, 中文, 船, 命运, 际遇]
+category: '它山之石'
 draft: false
 ---
 

@@ -1,10 +1,11 @@
 ---
 title: 从策展到创作：AI助手的三种应用场景
 published: 2023-02-25
-description: 探讨了AI在创作过程中的应用及其未来发展趋势。
-category: 人工智能
-tags: [AI, 设计, 创作, 工具, 效率]
+updated: 
+description: '探讨了AI在创作过程中的应用及其未来发展趋势。'
 image: ''
+tags: [AI, 设计, 创作, 工具, 效率]
+category: '人工智能'
 draft: false
 ---
 

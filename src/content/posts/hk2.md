@@ -1,10 +1,11 @@
 ---
 title: 港乐集《薛凯琪的异想世界》
 published: 2021-05-21
-description: 最近在《乘风破浪的姐姐3》里面看到薛凯琪，她是我最喜欢的粤语女歌手之一
-category: 生活随笔
-tags: [生活, 粤语歌手, 薛凯琪, 音乐，粤语]
+updated: 
+description: '最近在《乘风破浪的姐姐3》里面看到薛凯琪，她是我最喜欢的粤语女歌手之一'
 image: ''
+tags: [生活, 粤语歌手, 薛凯琪, 音乐，粤语]
+category: '生活随笔'
 draft: false
 ---
 

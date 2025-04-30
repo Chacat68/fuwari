@@ -1,10 +1,11 @@
 ---
 title: 不要温和地走进那良夜
 published: 2023-03-06
-description: 不要温和地走进那良夜：共处痛苦与快乐，面对失败，独处喜欢自己的陪伴。
-category: 它山之石
-tags: [生活,诗句,英文,生命]
+updated: 
+description: '不要温和地走进那良夜：共处痛苦与快乐，面对失败，独处喜欢自己的陪伴。'
 image: ''
+tags: [生活,诗句,英文,生命]
+category: '它山之石'
 draft: false
 ---
 

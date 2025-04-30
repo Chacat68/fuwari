@@ -1,10 +1,11 @@
 ---
 title: 新居、旧习与归途：一段回家的故事
 published: 2023-07-04
-description: 本文介绍了Notion的核心功能及其在知识管理中的应用，包括功能块、自由排版、页面和信息组织系统等。
-category: 生活随笔
-tags: [生活, 新屋入伙, 装修, 家具, 家电]
+updated: 
+description: '本文介绍了Notion的核心功能及其在知识管理中的应用，包括功能块、自由排版、页面和信息组织系统等。'
 image: ''
+tags: [生活, 新屋入伙, 装修, 家具, 家电]
+category: '生活随笔'
 draft: false
 ---
 

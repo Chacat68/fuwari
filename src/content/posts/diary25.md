@@ -1,10 +1,11 @@
 ---
 title: 告别主流叙事：寻找人生新坐标
 published: 2024-11-04
-description: 中年人生的自我救赎，探索不同的可能性。
-category: 生活随笔
-tags: [稀缺, 生活, 生活, 日常]
+updated: 
+description: '中年人生的自我救赎，探索不同的可能性。'
 image: ''
+tags: [稀缺, 生活, 生活, 日常]
+category: '生活随笔'
 draft: false
 ---
 
