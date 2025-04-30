@@ -20,7 +20,7 @@ draft: false
 
 南区少年儿童合唱团的这版翻唱，以纯净的童声演绎这首充满哲理的歌曲，别有一番韵味。那清澈的嗓音中透露出的坚定与希望，仿佛在告诉我们：风雨总有限期，终于会等到梦寐。
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=317758626&bvid=BV19P411a7f6&cid=1248875832&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?bvid=BV1fK4y1s7Qf&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ::bilibili{#BV19P411a7f6}
 
