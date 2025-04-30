@@ -1,7 +1,7 @@
 ---
 title: 平静中的剧变：2024生活札记
 published: 2024-12-31
-updated: 
+updated: 2024-12-31
 description: '算是这一年的记录，快乐生活.'
 image: ''
 tags: [稀缺, 生活, 生活, 日常]

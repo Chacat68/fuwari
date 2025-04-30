@@ -1,7 +1,7 @@
 ---
 title: 设计思考：AI融入生活的一年观察
 published: 2024-09-26
-updated: 
+updated: 2024-09-26
 description: '自从GPT-3.5爆发以来，短短一年多的时间，大模型的应用从极客圈扩展到更广泛的人群'
 image: ''
 tags: [GPT, AI, 翻译, 写作, 大模型]

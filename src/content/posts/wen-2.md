@@ -1,7 +1,7 @@
 ---
 title: The Invitation《生活的邀请函》
 published: 2023-03-04
-updated: 
+updated: 2023-03-04
 description: '生活的邀请函：共处痛苦与快乐，面对失败，独处喜欢自己的陪伴。'
 image: ''
 tags: [生活,诗句,英文,生命]

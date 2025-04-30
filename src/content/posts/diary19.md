@@ -1,7 +1,7 @@
 ---
 title: 耳畔的世界：我的播客使用指南
 published: 2024-06-25
-updated: 
+updated: 2024-06-25
 description: '听播客已经成为我最近特别喜欢的爱好。作为一种纯粹的信息媒介，不同背景的频道让我发现了许多有趣的事情。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104010045379.png?imageSlim'
 tags: [种田, 游戏, 参考, 像素]

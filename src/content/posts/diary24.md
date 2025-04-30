@@ -1,7 +1,7 @@
 ---
 title: 随笔：稀缺的晴天与幸福
 published: 2024-11-04
-updated: 
+updated: 2024-11-04
 description: '稀缺是日常生活中容易被忽视的片段。'
 image: ''
 tags: [稀缺, 生活, 生活, 日常]

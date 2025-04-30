@@ -1,7 +1,7 @@
 ---
 title: 信息管理的进化：AI时代的笔记整理术
 published: 2021-07-25
-updated: 
+updated: 2021-07-25
 description: '反思过去太过于粗放随意的信息处理方式，信息的流动、关联、整合都存在问题'
 image: ''
 tags: [notion, 信息, 整理, AI, 思考, 数学, 信息理论]

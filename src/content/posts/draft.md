@@ -1,7 +1,7 @@
 ---
 title: Draft Example
 published: 2022-07-01
-updated: 
+updated: 2022-07-01
 description: ''
 image: ''
 tags: [Markdown, Blogging, Demo]

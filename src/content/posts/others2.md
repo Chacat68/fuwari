@@ -1,7 +1,7 @@
 ---
 title: 泰戈尔的生命之歌：《生如夏花》赏析
 published: 2024-09-03
-updated: 
+updated: 2024-09-03
 description: '《生如夏花》（Let life be beautiful like summer flowers ）泰戈尔写的诗歌，收录在《飞鸟集》。'
 image: ''
 tags: [诗句, 英文, 自尊, 命运, 际遇]
