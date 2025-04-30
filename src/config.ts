@@ -26,7 +26,7 @@ export const siteConfig: SiteConfig = {
 	},
 	toc: {
 		enable: true, // 在文章右侧显示目录
-		depth: 2, // 在目录中显示的最大标题深度，范围从1到3
+		depth: 3, // 在目录中显示的最大标题深度，范围从1到3
 	},
 	favicon: [
 		// 将此数组留空以使用默认图标
