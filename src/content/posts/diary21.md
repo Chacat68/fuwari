@@ -3,7 +3,7 @@ title: 随笔：告别完美主义的困扰
 published: 2024-07-05
 updated: 2024-07-05
 description: '以最小成本去让事情运转，在完美主义的眼中变得不可接受，但似乎是让事情运转的最优解，迷恋繁复和过度追求简洁，皆不可取。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501042343768.png?imageSlim'
 tags: [最小成本, 生活, 简洁, 日常]
 category: '生活随笔'
 draft: false

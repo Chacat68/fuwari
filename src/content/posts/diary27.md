@@ -3,7 +3,7 @@ title: 我的 2025 软件工具箱：AI 时代的生产力清单
 published: 2025-02-20
 updated: 2025-02-20
 description: '精选多款实用软件推荐，涵盖 AI、笔记、开发、游戏、阅读等领域，主要面向苹果生态系统用户。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501042251538.png?imageSlim'
 tags: [软件推荐, AI工具, 效率工具, 开发工具, MacOS]
 category: '生活随笔'
 draft: false
