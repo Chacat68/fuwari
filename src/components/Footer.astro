@@ -1,8 +1,32 @@
 ---
-
 import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
+import { getSortedPosts } from "../utils/content-utils";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+
 const currentYear = new Date().getFullYear();
+
+// 获取所有文章并计算总字数
+const posts = await getSortedPosts();
+let totalWords = 0;
+
+// 遍历所有文章，累加字数
+for (const post of posts) {
+    const { remarkPluginFrontmatter } = await post.render();
+    if (remarkPluginFrontmatter && remarkPluginFrontmatter.words) {
+        totalWords += remarkPluginFrontmatter.words;
+    }
+}
+
+// 格式化总字数，使用 k 单位表示千位数
+const formatToK = (num) => {
+    if (num >= 1000) {
+        return Math.round(num / 1000) + 'K';
+    }
+    return num.toString();
+};
+const formattedTotalWords = formatToK(totalWords);
 ---
 
 <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
@@ -13,6 +37,7 @@ const currentYear = new Date().getFullYear();
         &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
+        <span class="text-50 text-sm font-medium">{formattedTotalWords} {i18n(I18nKey.wordsCount)}</span> / {posts.length} {i18n(I18nKey.postsCount)}<br>
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
