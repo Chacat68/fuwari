@@ -58,8 +58,8 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/demo-avatar.png", // 相对于/src目录。如果以'/'开头，则相对于/public目录
-	name: "Lorem Ipsum",
-	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	name: "CHACAT",
+	bio: "日常在阅读、创作、跑步。",
 	links: [
 		{
 			name: "X/Twitter",
