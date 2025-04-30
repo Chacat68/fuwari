@@ -10,6 +10,7 @@ export type SiteConfig = {
 		hue: number;
 		fixed: boolean;
 	};
+	defaultPostImage?: string; // 没有图片的文章将使用此默认网络图片
 	banner: {
 		enable: boolean;
 		src: string;

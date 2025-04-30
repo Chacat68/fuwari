@@ -14,6 +14,8 @@ export const siteConfig: SiteConfig = {
 		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
 		fixed: true, // 对访问者隐藏主题颜色选择器
 	},
+	defaultPostImage:
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501043318743.png?imageSlim", // 没有图片的文章将使用此默认网络图片
 	banner: {
 		enable: true,
 		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/General%205824x3264%20AI%20art%20illustration%20concept%20art%20tower%20science%20f.jpg?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录

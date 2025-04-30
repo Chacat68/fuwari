@@ -2,6 +2,7 @@
 import path from "node:path";
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
+import { siteConfig } from "../config";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getDir } from "../utils/url-utils";
@@ -36,7 +37,11 @@ const {
 } = Astro.props;
 const className = Astro.props.class;
 
-const hasCover = image !== undefined && image !== null && image !== "";
+const hasCover = true; // 总是显示封面，如果没有指定图片则使用默认图片
+const actualImage =
+	image !== undefined && image !== null && image !== ""
+		? image
+		: siteConfig.defaultPostImage;
 
 const coverWidth = "28%";
 
@@ -73,7 +78,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 
     </div>
 
-    {hasCover && <a href={url} aria-label={title}
+    <a href={url} aria-label={title}
                     class:list={["group",
                         "max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0",
                         "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
@@ -84,21 +89,15 @@ const { remarkPluginFrontmatter } = await entry.render();
                   class="transition opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
-                  class="w-full h-full">
+        <ImageWrapper 
+            src={actualImage ?? ''}
+            basePath={image !== "" ? path.join("content/posts/", getDir(entry.id ?? "")) : ""} 
+            alt={image !== "" ? "Cover Image of the Post" : "Default Cover Image"}
+            class="w-full h-full">
         </ImageWrapper>
-    </a>}
+    </a>
 
-    {!hasCover &&
-        <a href={url} aria-label={title} class="!hidden md:!flex btn-regular w-[3.25rem]
-         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
-         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
-        ">
-            <Icon name="material-symbols:chevron-right-rounded"
-                  class="transition text-[var(--primary)] text-4xl mx-auto">
-            </Icon>
-        </a>
-    }
+    {/* 移除了原来的非封面按钮，因为现在总是显示封面 */}
 </div>
 <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden"></div>
 
