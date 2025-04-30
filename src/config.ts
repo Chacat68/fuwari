@@ -62,11 +62,11 @@ export const profileConfig: ProfileConfig = {
 	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 	links: [
 		{
-			name: "Twitter",
+			name: "X/Twitter",
 			icon: "fa6-brands:twitter", // 访问 https://icones.js.org/ 获取图标代码
 			// 如果尚未包含相应的图标集，您需要安装它
 			// `pnpm add @iconify-json/<图标集名称>`
-			url: "https://twitter.com",
+			url: "https://x.com/Chacat68",
 		},
 		{
 			name: "Steam",
