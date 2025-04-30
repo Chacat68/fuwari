@@ -50,7 +50,42 @@ export default defineConfig({
 			},
 		}),
 		svelte(),
-		sitemap(),
+		sitemap({
+			// 设置全局的changefreq和priority，提高搜索引擎对网站的理解
+			changefreq: "weekly",
+			lastmod: new Date(),
+			priority: 0.7,
+			// 过滤掉不需要包含在sitemap中的页面
+			filter: (page) => {
+				// 排除草稿和临时页面
+				return !page.includes("/draft/") && !page.includes("/temp/");
+			},
+			// 自定义序列化，可以处理URL格式
+			serialize: (item) => {
+				// 为不同类型的页面设置不同的优先级
+				if (item.url.includes("/posts/")) {
+					// 文章页面优先级更高
+					item.priority = 0.9;
+					// 文章更新频率可能更高
+					item.changefreq = "daily";
+				} else if (item.url === "https://www.chawfoo.com/") {
+					// 首页优先级最高
+					item.priority = 1.0;
+					item.changefreq = "daily";
+				} else if (item.url.includes("/archive/")) {
+					// 归档页面
+					item.priority = 0.8;
+				} else if (item.url.includes("/about/")) {
+					// 关于页面
+					item.priority = 0.6;
+				}
+				return item;
+			},
+			// 添加自定义页面到sitemap
+			customPages: [
+				// 可以添加一些可能不在路由中但需要被索引的页面
+			],
+		}),
 	],
 	markdown: {
 		remarkPlugins: [
