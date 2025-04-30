@@ -92,6 +92,4 @@ Hi，我是查猫CHACAT，85后，游戏迷、书迷、手机摄影师、长内�
 
 感谢你的喜欢，如有问题讨论，欢迎通过以下方式与我联系：
 
-Twitter：https://twitter.com/Chacat68
-
 邮件：[chawf56@outlook.com](mailto:chawf56@outlook.com)
