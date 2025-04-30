@@ -17,7 +17,7 @@ You can add dynamic cards that link to GitHub repositories, on page load, the re
 Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 
 ```markdown
-::github{repo="saicaca/fuwari"}
+::github{repo="Chacat68/fygame"}
 ```
 
 ## Admonitions
