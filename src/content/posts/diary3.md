@@ -3,7 +3,7 @@ title: 随笔：从消费者到创造者的转变
 published: 2021-05-13
 updated: 2021-05-13
 description: '最近自己的工作暂停，忽然之间生活里拥有了许多自由分配时间，在每一天的24个小时里，自己开始认真思考，每一个小时应该怎么过。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250103135535921.png?imageSlim'
 tags: [生活节奏, 时间管理, 信息控制, 家庭生活, 创造力, 健康, 疫情, UE引擎, 博客, 编程]
 category: '生活随笔'
 draft: false

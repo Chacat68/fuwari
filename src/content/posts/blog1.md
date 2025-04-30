@@ -3,7 +3,7 @@ title: 使用Notion搭建个人博客
 published: 2023-04-25
 updated: 2023-04-25
 description: '使用 Notion 搭建个人博客的部署和配置过程。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501042536930.png?imageSlim'
 tags: [商业模式, 远程工作, 公司文化, 独立经营, 创新, 生产力]
 category: '设计思考'
 draft: false
