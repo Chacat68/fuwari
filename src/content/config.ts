@@ -19,6 +19,18 @@ const postsCollection = defineCollection({
 		nextSlug: z.string().default(""),
 	}),
 });
+
+const friendsCollection = defineCollection({
+	schema: z.object({
+		name: z.string(),
+		url: z.string().url(),
+		avatar: z.string().url(),
+		description: z.string(),
+		order: z.number().optional().default(0),
+	}),
+});
+
 export const collections = {
 	posts: postsCollection,
+	friends: friendsCollection,
 };

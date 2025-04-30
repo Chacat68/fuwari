@@ -42,6 +42,10 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
+		{
+			name: "友链", // 暂时使用硬编码值，避免循环依赖
+			url: "/friends/",
+		},
 		LinkPreset.About,
 		{
 			name: "建筑指南",
