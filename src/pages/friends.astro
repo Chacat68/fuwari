@@ -29,8 +29,8 @@ friends.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
                                 <img src={friend.data.avatar} alt={friend.data.name} class="w-full h-full object-cover" />
                             </div>
                             <div>
-                                <h2 class="text-lg font-bold text-black dark:text-white">{friend.data.name}</h2>
-                                <p class="text-black/60 dark:text-white/60 text-sm">{friend.data.description}</p>
+                                <h2 class="text-lg font-bold text-black/90 dark:text-white/90 transition-colors duration-200">{friend.data.name}</h2>
+                                <p class="text-black/70 dark:text-white/70 text-sm transition-colors duration-200">{friend.data.description}</p>
                             </div>
                         </div>
                     </a>
