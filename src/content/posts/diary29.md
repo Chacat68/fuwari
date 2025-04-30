@@ -3,7 +3,7 @@ title: 随笔-缘至
 published: 2025-04-21 02:00:00
 updated: 2025-04-21 02:00:00
 description: '分享个人生活节奏的调整、心态的变化以及通过散步和创作来平衡身心健康的经验，记录迈入中年后的生活感悟和重建秩序的过程。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250103145600297.png?imageSlim'
 tags: [生活感悟, 心态调整, 中年生活, 健康管理, 日常习惯]
 category: '生活随笔'
 draft: false
