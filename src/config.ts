@@ -69,14 +69,9 @@ export const profileConfig: ProfileConfig = {
 			url: "https://x.com/Chacat68",
 		},
 		{
-			name: "Steam",
-			icon: "fa6-brands:steam",
-			url: "https://store.steampowered.com",
-		},
-		{
 			name: "GitHub",
 			icon: "fa6-brands:github",
-			url: "https://github.com/saicaca/fuwari",
+			url: "https://github.com/Chacat68",
 		},
 	],
 };
