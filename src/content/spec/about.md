@@ -14,7 +14,7 @@ Hi，我是查猫CHACAT，85后，游戏迷、书迷、手机摄影师、长内�
 ### godot demo
 根据Brackeys教程做出来的Demo，后续由小外甥继续
 
-::github{repo="FChacat68/fygame"}
+::github{repo="Chacat68/fygame"}
 
 ---
 
