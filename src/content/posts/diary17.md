@@ -1,9 +1,11 @@
 ---
 title: 记录最近跑步的快乐
 published: 2024-06-04
-summary: 不管怎样，先跑起来！酸痛会有，快乐亦然！
+description: 不管怎样，先跑起来！酸痛会有，快乐亦然！
 category: 生活随笔
 tags: [跑步, 快乐, 酸痛, 生活]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

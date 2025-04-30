@@ -1,9 +1,11 @@
 ---
 title: The Invitation《生活的邀请函》
 published: 2023-03-04
-summary: 生活的邀请函：共处痛苦与快乐，面对失败，独处喜欢自己的陪伴。
+description: 生活的邀请函：共处痛苦与快乐，面对失败，独处喜欢自己的陪伴。
 category: 它山之石
 tags: [生活,诗句,英文,生命]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

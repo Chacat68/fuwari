@@ -1,9 +1,11 @@
 ---
 title: AI美术创作：从概念图到3D建模的革新
 published: 2022-12-04
-summary: 介绍了AI在2D和3D设计中的应用，探讨了未来的发展趋势。
+description: 介绍了AI在2D和3D设计中的应用，探讨了未来的发展趋势。
 category: 人工智能
 tags: [AI, 设计, 素材库, 工具, 效率]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

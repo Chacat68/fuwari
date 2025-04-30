@@ -1,9 +1,11 @@
 ---
 title:  华语集《伍佰：泪桥》
 published: 2023-12-12
-summary: 那一刻，感受到亏欠
+description: 那一刻，感受到亏欠
 category: 生活随笔
 tags: [音乐, 伍佰, 摇滚, 情感, 回忆, 人生]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

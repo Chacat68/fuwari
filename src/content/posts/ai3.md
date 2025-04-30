@@ -1,9 +1,11 @@
 ---
 title: Ollama 本地大模型部署教程
 published: 2024-03-09
-summary: Ollama本地大模型的使用教程，提及Ollama推荐模型列表：Llama、Mistral、Qwen2等.
+description: Ollama本地大模型的使用教程，提及Ollama推荐模型列表：Llama、Mistral、Qwen2等.
 category: 人工智能
 tags: [AI, 设计, Ollama, 工具, 效率, 本地]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

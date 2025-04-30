@@ -1,9 +1,11 @@
 ---
 title: 从零开始：5小时内的Godot游戏制作
 published: 2024-05-25
-summary: 使用Godot4.2的体验记录，它比3.x阶段的使用体验成熟不少，现在可以作为一个创作工具去使用。
+description: 使用Godot4.2的体验记录，它比3.x阶段的使用体验成熟不少，现在可以作为一个创作工具去使用。
 category: 设计思考
 tags: [Godot, 使用经验, 创作, 工具]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

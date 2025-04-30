@@ -1,9 +1,11 @@
 ---
 title: 《IF 如果》
 published: 2020-01-17
-summary: 分享了Rudyard Kipling的诗歌《If》的翻译。
+description: 分享了Rudyard Kipling的诗歌《If》的翻译。
 category: 它山之石
 tags: [生活,诗句,英文,Rudyard Kipling]
+image: ''
+draft: false
 ---
 
 > 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
