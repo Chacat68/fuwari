@@ -3,7 +3,7 @@ title: 随笔：种田游戏的美术风格研究
 published: 2024-06-10
 updated: 2024-06-10
 description: '这是我们正在筹划的模拟经营游戏项目的前期灵感与素材搜集！'
-image: 'ttps://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104011637394.png?imageSlim'
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104011637394.png?imageSlim'
 tags: [种田, 游戏, 参考, 像素]
 category: '生活随笔'
 draft: false
