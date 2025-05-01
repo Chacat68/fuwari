@@ -3,7 +3,7 @@ title: 读《美学的经济》：审美价值的商业实践
 published: 2021-07-24
 updated: 2021-07-24
 description: '分享了《重来》系列书籍的读后感，探讨了独立运作的商业模式、远程工作的优势以及冷静的公司文化等内容。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501121955371.png?imageSlim'
 tags: [美学, 经济学, 哲学, 交叉思考, 美学经济学, 美学与经济, 美学与经济学, 美学与经济学的交叉思考]
 category: '设计思考'
 draft: false

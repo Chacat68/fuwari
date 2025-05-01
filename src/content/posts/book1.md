@@ -3,7 +3,7 @@ title: 读《重来》：一种更简单的商业成功之道
 published: 2020-12-07
 updated: 2020-12-07
 description: '分享了《重来》系列书籍的读后感，探讨了独立运作的商业模式、远程工作的优势以及冷静的公司文化等内容。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501122048862.png?imageSlim'
 tags: [商业模式, 远程工作, 公司文化, 独立经营, 创新, 生产力]
 category: '设计思考'
 draft: false
