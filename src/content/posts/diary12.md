@@ -3,7 +3,7 @@ title: 进击的巨人：关于对错与救赎的思考
 published: 2023-11-07
 updated: 2023-11-07
 description: '趁着最终季的更新，花了一天时间，一口气看完了《进击的巨人》'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174100810.png?imageSlim'
 tags: [进击的巨人, 电影, 观影, 动漫, 生活]
 category: '生活随笔'
 draft: false

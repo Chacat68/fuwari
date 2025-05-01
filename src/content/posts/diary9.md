@@ -3,7 +3,7 @@ title: Notion笔记实践 2.0
 published: 2022-11-17
 updated: 2022-11-17
 description: '本文介绍了Notion的核心功能及其在知识管理中的应用，包括功能块、自由排版、页面和信息组织系统等。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174207263.png?imageSlim'
 tags: [Notion, 笔记工具, 知识管理, 信息组织, 专题]
 category: '设计思考'
 draft: false

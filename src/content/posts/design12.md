@@ -3,7 +3,7 @@ title: 无极缩放：SLG游戏的镜头设计解析
 published: 2021-11-18
 updated: 2021-11-18
 description: '讨论了无极缩放设计在游戏中的应用，包括缩放层级、信息分层、资源管理队列方面的设计思路和解决方案。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174459433.png?imageSlim'
 tags: [游戏设计, 无极缩放, 资源管理, 信息分层, 策略游戏]
 category: '设计思考'
 draft: false

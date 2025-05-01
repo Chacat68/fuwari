@@ -3,7 +3,7 @@ title: 设计思考：迪特·拉姆斯的十大设计原则
 published: 2021-06-18
 updated: 2021-06-18
 description: '介绍了迪特·拉姆斯提出的好设计的10个原则，包括创新、美感、实用性等方面，帮助读者理解优秀设计的核心要素。'
-image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501043415249.png?imageSlim'
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501175649339.png?imageSlim'
 tags: [商业, 设计, 远程工作, 创业, 管理]
 category: '设计思考'
 draft: false

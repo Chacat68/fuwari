@@ -3,7 +3,7 @@ title: 简述游戏地图制作过程
 published: 2020-12-21
 updated: 2020-12-21
 description: '介绍了策略游戏地图设计方法，包括原型搭建、地形细化和动线设计。通过实例讲解，帮助读者了解如何设计出合理且有趣的游戏地图。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501175457785.png?imageSlim'
 tags: [游戏设计, 地图制作, 策略游戏, 地形设计, 三国, 设计方法]
 category: '设计思考'
 draft: false

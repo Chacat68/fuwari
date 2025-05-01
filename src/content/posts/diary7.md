@@ -3,7 +3,7 @@ title: 从键盘到语音：写作效率的突破
 published: 2022-03-10
 updated: 2022-03-10
 description: '探讨了使用语音输入的写作体验，包括在粤语和普通话输入下的不同感受，以及语音输入如何提高写作效率和思维流畅度。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174352524.png?imageSlim'
 tags: [写作技巧, 语音输入, 工作效率, 写作工具, 语言转换]
 category: '生活随笔'
 draft: false

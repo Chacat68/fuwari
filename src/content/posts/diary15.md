@@ -3,7 +3,7 @@ title: 2023年必装Chrome插件推荐
 published: 2023-03-11
 updated: 2023-03-11
 description: '2023年chrome浏览器插件介绍和推荐。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501173821439.png?imageSlim'
 tags: [浏览器插件, 效率工具, 翻译工具, 网页优化, 设计工具]
 category: '生活随笔'
 draft: false

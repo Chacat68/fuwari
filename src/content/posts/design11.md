@@ -3,7 +3,7 @@ title: 策略游戏地图系统设计方法论
 published: 2025-02-03
 updated: 2025-02-03
 description: '探讨策略游戏地图系统设计的核心要素，包括瓦片选择、数据管理、信息展示等关键技术方案'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174533830.png?imageSlim'
 tags: [游戏开发, 地图系统, 策略游戏, 技术方案]
 category: '设计思考'
 draft: false

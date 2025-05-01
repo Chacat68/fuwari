@@ -3,7 +3,7 @@ title: 设计师的灵感管理：Eagle 4.0全新体验
 published: 2024-02-19
 updated: 2024-02-19
 description: '使用Eagle搭建灵感库的方法和步骤，包括素材收集、整理和搜索的技巧，以及介绍了软件的插件系统和一些插件的功能'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174749078.png?imageSlim'
 tags: [游戏设计, 地图制作, 策略游戏, 地形设计, 三国, 设计方法]
 category: '设计思考'
 draft: false

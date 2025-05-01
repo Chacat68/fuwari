@@ -3,7 +3,7 @@ title: 秋日北京：古今交融的文化之旅
 published: 2022-08-15
 updated: 2022-08-15
 description: '记录了在北京的旅行经历，包括参观故宫、圆明园等地的感受和见闻。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174317213.png?imageSlim'
 tags: [旅行, 北京, 故宫, 圆明园, 文化]
 category: '生活随笔'
 draft: false

@@ -3,7 +3,7 @@ title: 设计方法论：解读迪士尼的故事板创作
 published: 2024-05-24
 updated: 2024-05-24
 description: '在白板上用文字和图片去辅助思考的过程，比纯文字更加清晰。电影动漫行业里用画面帧的方式去展现过程，可以展现大量的细节'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174712623.png?imageSlim'
 tags: [迪士尼, 故事板, 白板, 设计方法]
 category: '设计思考'
 draft: false

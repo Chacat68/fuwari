@@ -3,7 +3,7 @@ title: ComfyUI实战：模型、插件与工作流全解析
 published: 2024-10-03
 updated: 2024-10-03
 description: 'ComfyUI 是一个专为 Stable Diffusion 设计的基于节点的图形用户界面。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501174614910.png?imageSlim'
 tags: [ComfyUI, 实践经验, 创作, 工具]
 category: '人工智能'
 draft: false

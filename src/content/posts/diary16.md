@@ -3,7 +3,7 @@ title: Chrome插件推荐 2024版
 published: 2024-04-10
 updated: 2024-04-10
 description: '2024年版的Chrome插件推荐，由于AI的崛起，许多产品纷纷引入了AI功能，因此值得重新把产品做一遍。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501173821439.png?imageSlim'
 tags: [插件推荐, Chrome, AI, 产品]
 category: '生活随笔'
 draft: false

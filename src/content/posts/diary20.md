@@ -3,7 +3,7 @@ title: 简单写作指南：用口语化表达解决写作焦虑
 published: 2024-06-28
 updated: 2024-06-28
 description: '曾经有一段时间，我总是羞于发表自己撰写的内容，担心词藻不够优美。然而，对读者而言，易读性比高深的表达更为重要。一个让文章更加易读的技巧是：用口语化的方式进行写作。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501173638695.png?imageSlim'
 tags: [写作, 技巧, 口语, 日常]
 category: '生活随笔'
 draft: false

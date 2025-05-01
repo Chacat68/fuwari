@@ -3,7 +3,7 @@ title: 从零开始的AI工具之旅：主流AI应用深度体验与分析
 published: 2023-03-01
 updated: 2023-03-01
 description: 'AI入门经验分享，包括ChatGPT、Notion与AI、MidJourney和Stable Diffusion的介绍和使用经验。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501175820648.png?imageSlim'
 tags: [AI, 设计, 创作, 工具, 效率]
 category: '人工智能'
 draft: false
