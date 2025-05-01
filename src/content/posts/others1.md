@@ -3,7 +3,7 @@ title: 自尊的六大支柱：一份生活指南
 published: 2024-05-15
 updated: 2024-05-15
 description: '基于《自尊的六大支柱》书里的理论，向内求，支柱稳健！'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501172954967.png?imageSlim'
 tags: [生活, 诗句, 英文, 自尊, 命运, 际遇]
 category: '它山之石'
 draft: false

@@ -3,7 +3,7 @@ title: The Invitation《生活的邀请函》
 published: 2023-03-04
 updated: 2023-03-04
 description: '生活的邀请函：共处痛苦与快乐，面对失败，独处喜欢自己的陪伴。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501173248808.png?imageSlim'
 tags: [生活,诗句,英文,生命]
 category: '它山之石'
 draft: false

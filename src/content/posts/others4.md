@@ -3,7 +3,7 @@ title: Paul Graham：如何做出伟大的工作？
 published: 2024-12-07
 updated: 2024-12-07
 description: '如果收集许多不同领域的优秀工作技巧清单，它们的共同点会是什么样子？我决定通过制作这个清单来找出答案。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501173112332.png?imageSlim'
 tags: [诗句, 中文, 船, 命运, 际遇]
 category: '它山之石'
 draft: false
