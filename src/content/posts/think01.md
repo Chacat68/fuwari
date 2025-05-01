@@ -3,7 +3,7 @@ title: 未曾预想的问题
 published: 2024-09-24
 updated: 2024-09-24
 description: '生活里发生的随机事件，有时候真的让你哭笑不得。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501170623402.png?imageSlim'
 tags: [生活, 问题, 随机, 游戏, 崩溃]
 category: '生活随笔'
 draft: false
