@@ -13,6 +13,33 @@ const description = "这些是我正在进行的项目，不断更新中";
 const projects = await getCollection("projects");
 // 按order排序
 projects.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+
+// 计算当前日期和年份进度
+const now = new Date();
+const currentYear = now.getFullYear();
+const startOfYear = new Date(currentYear, 0, 1);
+const endOfYear = new Date(currentYear + 1, 0, 1);
+const yearProgress =
+	((now.getTime() - startOfYear.getTime()) /
+		(endOfYear.getTime() - startOfYear.getTime())) *
+	100;
+
+// 计算当天进度
+const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+const dayProgress =
+	((now.getTime() - startOfDay.getTime()) /
+		(endOfDay.getTime() - startOfDay.getTime())) *
+	100;
+
+// 计算当前是一年中的第几天
+const dayOfYear =
+	Math.floor((now.getTime() - startOfYear.getTime()) / (24 * 60 * 60 * 1000)) +
+	1;
+
+// 格式化数字，保留5位小数
+const yearProgressFormatted = yearProgress.toFixed(5);
+const dayProgressFormatted = dayProgress.toFixed(5);
 ---
 
 <MainGridLayout title={title} description={description}>
@@ -20,6 +47,24 @@ projects.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
         <div class="card-base z-10 px-9 py-6 relative w-full">
             <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">{title}</h1>
             <p class="text-black/70 dark:text-white/70 mb-8 transition-colors duration-200">{description}</p>
+            
+            <!-- 添加时间显示 -->
+            <div class="mb-8 p-4 rounded-xl bg-white/10 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-md transition-colors duration-200">
+                <div class="text-black/70 dark:text-white/70 text-base font-medium space-y-2">
+                    <div class="flex items-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mr-2"></div>
+                        <span>今天是 {currentYear} 年的第 <span class="time-number">{dayOfYear}</span> 天</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mr-2"></div>
+                        <span>今年已过 <span class="time-number year-progress">0</span>%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mr-2"></div>
+                        <span>今天已过 <span class="time-number day-progress">0</span>%</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {projects.map((project) => (
@@ -40,3 +85,88 @@ projects.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
         </div>
     </div>
 </MainGridLayout>
+
+<style>
+.time-number {
+    display: inline-block;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--primary);
+}
+</style>
+
+<script define:vars={{ yearProgressFormatted, dayProgressFormatted }}>
+// 数字滚动动画函数
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = progress * (end - start) + start;
+        
+        // 根据元素类名决定保留的小数位数
+        if (element.classList.contains('year-progress')) {
+            element.textContent = Math.floor(value); // 年份进度只显示整数
+        } else {
+            element.textContent = value.toFixed(5); // 其他数字保持原样
+        }
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// 计算当前时间的进度
+function calculateProgress() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const startOfYear = new Date(currentYear, 0, 1);
+    const endOfYear = new Date(currentYear + 1, 0, 1);
+    const yearProgress = ((now.getTime() - startOfYear.getTime()) / (endOfYear.getTime() - startOfYear.getTime())) * 100;
+
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const dayProgress = ((now.getTime() - startOfDay.getTime()) / (endOfDay.getTime() - startOfDay.getTime())) * 100;
+
+    return { yearProgress, dayProgress };
+}
+
+// 更新进度显示
+function updateProgress() {
+    const yearProgressElement = document.querySelector('.year-progress');
+    const dayProgressElement = document.querySelector('.day-progress');
+    
+    if (!yearProgressElement || !dayProgressElement) return;
+    
+    const { yearProgress, dayProgress } = calculateProgress();
+    
+    // 更新显示
+    yearProgressElement.textContent = Math.floor(yearProgress); // 年份进度只显示整数
+    dayProgressElement.textContent = dayProgress.toFixed(5); // 当天进度保持小数
+}
+
+// 页面加载后执行初始动画
+document.addEventListener('DOMContentLoaded', () => {
+    // 获取元素
+    const yearProgressElement = document.querySelector('.year-progress');
+    const dayProgressElement = document.querySelector('.day-progress');
+    
+    if (!yearProgressElement || !dayProgressElement) return;
+    
+    // 获取初始进度值
+    const yearProgress = parseFloat(yearProgressFormatted);
+    const dayProgress = parseFloat(dayProgressFormatted);
+    
+    // 执行数字滚动动画
+    setTimeout(() => {
+        animateValue(yearProgressElement, 0, yearProgress, 1000); // 减少动画时间从2000ms到1000ms
+        animateValue(dayProgressElement, 0, dayProgress, 1000); // 减少动画时间从2000ms到1000ms
+        
+        // 设置定时器，每10毫秒更新一次进度
+        setInterval(updateProgress, 10);
+    }, 300); // 减少初始延迟从500ms到300ms
+});
+</script>
