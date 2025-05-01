@@ -36,7 +36,18 @@ export default defineConfig({
 			containers: ["main", "#toc"],
 			smoothScrolling: true,
 			cache: true,
-			preload: true,
+			preload: {
+				enabled: true,
+				customFetch: (url) => {
+					return fetch(url, {
+						credentials: "same-origin", // 设置凭证模式
+						mode: "cors",
+						headers: {
+							"X-Requested-With": "XMLHttpRequest",
+						},
+					});
+				},
+			},
 			accessibility: true,
 			updateHead: true,
 			updateBodyClass: false,
