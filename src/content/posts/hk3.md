@@ -3,7 +3,7 @@ title: 港乐集《麦浚龙：痴恋三部曲》
 published: 2022-04-17
 updated: 2022-04-17
 description: '分享了麦浚龙的一组粤语歌曲三部曲，探讨了歌词中对初恋、怀念和遗憾的描写，以及歌手在香港乐坛的独特音乐风格。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501172118922.png?imageSlim'
 tags: [粤语音乐, 香港歌手, 麦浚龙, 音乐评论, 粤语流行曲]
 category: '生活随笔'
 draft: false

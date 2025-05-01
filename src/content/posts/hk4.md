@@ -3,7 +3,7 @@ title: 港乐集《"大笑姑婆"杨千嬅》
 published: 2023-03-03
 updated: 2023-03-03
 description: '杨千嬅是我最喜欢的港台女歌手之一，她的歌伴随我整个青年时代，特别是《野孩子》这张专辑，也见证了她与黄伟文的友情分分合合。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501172043852.png?imageSlim'
 tags: [粤语音乐, 香港歌手, 杨千嬅, 音乐评论, 粤语流行曲]
 category: '生活随笔'
 draft: false
