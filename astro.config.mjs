@@ -30,9 +30,8 @@ export default defineConfig({
 		}),
 		swup({
 			theme: false,
-			animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
-			// the default value `transition-` cause transition delay
-			// when the Tailwind class `transition-all` is used
+			animationClass: "transition-", // see https://swup.js.org/options/#animationselector
+			// 使用默认值以避免404错误
 			containers: ["main", "#toc"],
 			smoothScrolling: true,
 			cache: true,
