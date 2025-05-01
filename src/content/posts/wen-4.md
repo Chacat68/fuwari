@@ -3,7 +3,7 @@ title: 每个人都有自己的时间轴
 published: 2023-03-13
 updated: 2023-03-13
 description: '在命运为你安排的属于自己的时区里，一切都准时。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501173421681.png?imageSlim'
 tags: [生活,诗句,英文,时间,命运，际遇]
 category: '它山之石'
 draft: false
