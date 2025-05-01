@@ -3,7 +3,7 @@ title: 求知若饥 虚心若愚：乔布斯的人生箴言
 published: 2025-01-08
 updated: 2025-01-08
 description: '乔布斯在斯坦福大学毕业典礼上的演讲，讲述了他的三个故事：关于如何串联生命中的点滴、关于爱与失去、关于死亡的故事。他鼓励大家要相信，这些点滴会在未来以某种方式连接起来；要找到自己热爱的事业，不要将就；要记住自己即将死去，这是避免陷入'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501170923573.png?imageSlim'
 tags: [演讲, 中文, 英文, 乔布斯, 际遇]
 category: '它山之石'
 draft: false
