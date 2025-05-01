@@ -45,15 +45,14 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		{
+			name: "项目",
+			url: "/projects/",
+		},
+		{
 			name: "友链", // 暂时使用硬编码值，避免循环依赖
 			url: "/friends/",
 		},
 		LinkPreset.About,
-		{
-			name: "建筑指南",
-			url: "https://arch.chawfoo.com/", // 内部链接不应包含基本路径，因为它会自动添加
-			external: true, // 显示外部链接图标并在新标签页中打开
-		},
 		{
 			name: "Hobby",
 			url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加

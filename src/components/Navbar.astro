@@ -36,6 +36,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
                 let iconName = "";
                 if (l.url === "/") iconName = "material-symbols:home-outline-rounded";
                 else if (l.url === "/archive/") iconName = "material-symbols:archive-outline-rounded";
+                else if (l.url === "/projects/") iconName = "material-symbols:dashboard-rounded";
                 else if (l.url === "/friends/") iconName = "material-symbols:group-outline-rounded";
                 else if (l.url === "/about/") iconName = "material-symbols:person-outline-rounded";
                 else if (l.url.includes("arch.chawfoo.com")) iconName = "material-symbols:architecture-rounded";
