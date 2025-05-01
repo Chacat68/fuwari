@@ -11,14 +11,14 @@ export const siteConfig: SiteConfig = {
 	subtitle: "阅读、思考、写作",
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	themeColor: {
-		hue: 200, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
+		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
 		fixed: true, // 对访问者隐藏主题颜色选择器
 	},
 	defaultPostImage:
 		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501121856906.png?imageSlim", // 没有图片的文章将使用此默认网络图片
 	banner: {
 		enable: true,
-		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501122407981.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
+		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501122847733.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
 		position: "center", // 等同于object-position，仅支持'top'、'center'、'bottom'。默认为'center'
 		credit: {
 			enable: false, // 显示横幅图片的署名文本
