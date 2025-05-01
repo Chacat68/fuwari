@@ -1,3 +1,8 @@
+---
+title: "About"
+description: "关于我和我的博客"
+---
+
 # About
 
 ![31231314](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim)
