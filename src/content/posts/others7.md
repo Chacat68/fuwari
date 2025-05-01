@@ -3,7 +3,7 @@ title: 游戏循环：视频游戏代码架构
 published: 2025-03-09 22:00:00
 updated: 2025-03-09 22:00:00
 description: '游戏循环是视频游戏开发中的核心概念，负责协调和管理游戏的各个方面，包括画面渲染、用户输入处理、物理模拟和人工智能等。本文详细介绍游戏循环的概念、重要性及如何设计一个高效的游戏循环。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501171049217.png?imageSlim'
 tags: [游戏开发, 游戏引擎, 代码架构, 性能优化]
 category: '它山之石'
 draft: false
