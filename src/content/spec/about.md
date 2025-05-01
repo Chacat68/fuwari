@@ -61,31 +61,6 @@ Hi，我是查猫CHACAT，85后，游戏迷、书迷、手机摄影师、长内�
 
 ---
 
-## 我的工具
-
-### 设备
-
-- **笔记本**：MacBook Pro 16寸 2021
-- **手机**：iPhone 13 Pro / OnePlus 8 Pro
-- **平板**：iPad mini 6
-- **耳机**：AirPods 3
-- **游戏机**：Switch
-
-### 游戏开发
-
-- **游戏引擎**：Unity、Unreal、Godot
-- **游戏开发语言**：C#、GDScript
-- **IDE**：Cursor、VSCode、Xcode
-
-### 常用App
-
-- **写作**：Notion、Obsidian、备忘录
-- **浏览器**：Chrome、Brave
-- **效率**：Raycast、Loop、Eagle
-- **AI工具**：ChatGPT、Claude、Midjourney、DeepSeek&API
-
----
-
 ## 与我联系
 
 感谢你的喜欢，如有问题讨论，欢迎通过以下方式与我联系：
