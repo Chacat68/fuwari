@@ -11,7 +11,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "阅读、思考、写作",
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	themeColor: {
-		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
+		hue: 200, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
 		fixed: true, // 对访问者隐藏主题颜色选择器
 	},
 	defaultPostImage:
