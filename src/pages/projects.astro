@@ -57,11 +57,11 @@ const dayProgressFormatted = dayProgress.toFixed(5);
                     </div>
                     <div class="flex items-center">
                         <div class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mr-2"></div>
-                        <span>今年已过 <span class="time-number year-progress">0</span>%</span>
+                        <span>今年已过 <span class="time-number year-progress">{Math.floor(yearProgress)}</span>%</span>
                     </div>
                     <div class="flex items-center">
                         <div class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mr-2"></div>
-                        <span>今天已过 <span class="time-number day-progress">0</span>%</span>
+                        <span>今天已过 <span class="time-number day-progress">{dayProgressFormatted}</span>%</span>
                     </div>
                 </div>
             </div>
