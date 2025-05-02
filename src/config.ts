@@ -21,8 +21,8 @@ export const siteConfig: SiteConfig = {
 		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501122847733.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
 		position: "center", // 等同于object-position，仅支持'top'、'center'、'bottom'。默认为'center'
 		credit: {
-			enable: false, // 显示横幅图片的署名文本
-			text: "", // 要显示的署名文本
+			enable: true, // 显示横幅图片的署名文本
+			text: "CHACAT绘制", // 要显示的署名文本
 			url: "", // （可选）原始作品或艺术家页面的URL链接
 		},
 	},
