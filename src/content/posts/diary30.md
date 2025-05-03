@@ -51,7 +51,7 @@ draft: false
 
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250503030027875.png?imageSlim)
 
-`fuwari` 主题本身不包含友链功能。我将之前主题的友链页面迁移了过来，并额外添加了代码复制功能，方便访客复制代码片段。
+`fuwari` 主题本身不包含友链功能。我将之前主题的友链页面迁移了过来，并额外添加了代码复制功能，方便复制代码片段。
 
 ### 精简文章列表
 
@@ -60,6 +60,12 @@ draft: false
 原 `fuwari` 主题的文章列表会显示分类、标签、发布时间等元信息。为了保持列表的简洁性，我选择隐藏了这些元素。
 
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250503030317637.png?imageSlim)
+
+### 首页封面
+
+![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250503135534706.png?imageSlim)
+
+首页的封面图是之前用 midjourney 生成的，灵感是中国色的水墨山水画。
 
 ## 结语
 
