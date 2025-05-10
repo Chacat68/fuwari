@@ -1,12 +1,31 @@
 ---
+import { siteConfig } from "../../config";
 import { quotes } from "../../constants/quotes";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import WidgetLayout from "./WidgetLayout.astro";
 
-// Select a random quote
-const randomIndex = Math.floor(Math.random() * quotes.length);
-const randomQuote = quotes[randomIndex];
+// 根据色调范围将引言分类
+const warmQuotes = quotes.filter((_, index) => index % 3 === 0); // 暖色调引言 (0-120度)
+const neutralQuotes = quotes.filter((_, index) => index % 3 === 1); // 中性色调引言 (121-240度)
+const coolQuotes = quotes.filter((_, index) => index % 3 === 2); // 冷色调引言 (241-360度)
+
+// 获取当前主题色调
+const currentHue = siteConfig.themeColor.hue;
+
+// 根据当前色调选择相应类别的引言
+let quoteCategory: typeof warmQuotes;
+if (currentHue >= 0 && currentHue <= 120) {
+	quoteCategory = warmQuotes;
+} else if (currentHue > 120 && currentHue <= 240) {
+	quoteCategory = neutralQuotes;
+} else {
+	quoteCategory = coolQuotes;
+}
+
+// 从选定类别中随机选择一个引言
+const randomIndex = Math.floor(Math.random() * quoteCategory.length);
+const randomQuote = quoteCategory[randomIndex];
 
 interface Props {
 	class?: string;
