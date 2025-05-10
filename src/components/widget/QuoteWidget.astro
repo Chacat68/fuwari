@@ -16,9 +16,9 @@ const className = Astro.props.class;
 const style = Astro.props.style;
 ---
 <WidgetLayout name={i18n(I18nKey.quote)} id="quote-widget" class={className} style={style}>
-    <div class="text-sm italic">
+    <div class="text-sm italic text-neutral-800 dark:text-neutral-200">
         <p>"{randomQuote.text}"</p>
-        <p class="text-right mt-1">- {randomQuote.author}</p>
+        <p class="text-right mt-1 text-neutral-600 dark:text-neutral-400">- {randomQuote.author}</p>
     </div>
 </WidgetLayout>
 
