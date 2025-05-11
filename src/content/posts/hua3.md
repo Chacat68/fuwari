@@ -15,7 +15,7 @@ draft: false
 
 年少的我对这首歌词的理解是对恋人的眷恋，而现在我却觉得是对自己的眷恋。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GaLJWrwcCzA?si=c4BZBHnhMdXcehn2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/GaLJWrwcCzA?si=c4BZBHnhMdXcehn2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 歌词：
 

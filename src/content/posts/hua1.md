@@ -23,25 +23,25 @@ draft: false
 
 这首歌让许多人爱上了陈绮贞。"我喜欢看着你发呆，想象你在想什么"，简单的歌词道出了爱情最纯粹的模样。这首歌不仅是关于旅行，更是关于生命中遇见的每一段故事。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jR74DTy0wTY?si=Q0aTJ_oebUAF_Hih" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/jR74DTy0wTY?si=Q0aTJ_oebUAF_Hih" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《太阳》
 
 在繁忙的城市生活中，这首歌就像是一缕温暖的阳光。"我们都是太阳的孩子，我们都是月亮的女儿"，歌词里藏着对生命的赞美，对自然的敬意。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/E9Ne1jVFiEY?si=JFoeFCaR120HbuOX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/E9Ne1jVFiEY?si=JFoeFCaR120HbuOX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《华丽的冒险》
 
 一首关于勇气和梦想的歌。"在安静的角落，我们要华丽的冒险"，每个平凡的日子里，都藏着不平凡的可能。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/R12xOa5n9yo?si=HNJVr3f-lu0th2Jr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/R12xOa5n9yo?si=HNJVr3f-lu0th2Jr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《时间的歌》
 
 时间是最神奇的魔法师，这首歌用温柔的旋律，诉说着时光流逝中的感悟。"时间是一条长长的河，我们都在河的两岸"，每个音符都像是时光的倒影。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Ll9e-ZoyTws?si=oKKYMW7UlITIwUdn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/Ll9e-ZoyTws?si=oKKYMW7UlITIwUdn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《小步舞曲》
 
@@ -53,6 +53,6 @@ draft: false
 
 用这首充满青春气息的歌曲作为结尾。十七岁之后的生活，依然充满着无限可能，就像陈绮贞的音乐一样，永远保持着对生活的热爱和期待。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/s-6bZX1OUj8?si=8MN0PfsLq6CjPFAT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/s-6bZX1OUj8?si=8MN0PfsLq6CjPFAT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
