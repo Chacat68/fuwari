@@ -1,19 +1,19 @@
 /* Page transition animations with Swup */
 html.is-changing .transition-fade {
-    @apply transition-all duration-200
+    @apply transition-all duration-300 ease-out
 }
 html.is-animating .transition-fade {
-    @apply opacity-0 translate-y-4
+    @apply opacity-0 translate-y-3 scale-[0.98]
 }
 
 /* Fade-in animations for components */
 @keyframes fade-in-up {
     0% {
-        transform: translateY(2rem);
+        transform: translateY(1.5rem) scale(0.98);
         opacity: 0;
     }
     100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }
@@ -21,8 +21,9 @@ html.is-animating .transition-fade {
 /* Main components */
 .onload-animation {
     opacity: 0;
-    animation: 300ms fade-in-up;
+    animation: 400ms cubic-bezier(0.16, 1, 0.3, 1) fade-in-up;
     animation-fill-mode: forwards;
+    will-change: transform, opacity;
 }
 #navbar {
     animation-delay: 0ms
