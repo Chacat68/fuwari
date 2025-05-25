@@ -56,7 +56,7 @@ const groups = sortedMoments.reduce((
   return grouped;
 }, []).sort((a, b) => b.year - a.year); // 按年份降序排序
 
-const pageTitle = "碎碎念";
+const pageTitle = "此刻";
 const pageDescription = "这里会记录一些我的日常思考和随笔。";
 
 function formatDate(date: Date) {
@@ -108,7 +108,7 @@ function formatDate(date: Date) {
                      </article>
                      {moment.data.image && (
                        <div class="mt-4">
-                         <img src={moment.data.image} alt={moment.data.title || "碎碎念图片"} class="rounded-lg max-w-full" />
+                         <img src={moment.data.image} alt={moment.data.title || "此刻图片"} class="rounded-lg max-w-full" />
                        </div>
                      )}
                   </div>

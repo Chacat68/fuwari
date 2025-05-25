@@ -45,7 +45,7 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		{
-			name: "碎碎念",
+			name: "此刻",
 			url: "/moments/my-moments/",
 		},
 		{
