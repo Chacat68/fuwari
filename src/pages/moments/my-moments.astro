@@ -2,34 +2,40 @@
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/MainGridLayout.astro';
 
-// 函数：从内容中提取时间戳
-function extractDateFromContent(content: string): Date | null {
-  const regex = /\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]/;
+// 函数：从内容中提取时间戳并返回日期和清理后的内容
+function extractDateAndCleanContent(content: string): { date: Date | null, cleanedContent: string } {
+  const regex = /(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])\s*/;
   const match = content.match(regex);
+  let date: Date | null = null;
+  let cleanedContent = content;
+
   if (match && match[1]) {
-    // 将匹配到的日期时间字符串转换为 Date 对象
-    // 注意：直接解析 'YYYY-MM-DD HH:mm:ss' 可能因浏览器而异，更安全的做法是转换为 ISO 格式或手动解析
-    // 这里尝试直接解析，如果不行可能需要更复杂的逻辑
     try {
-      const date = new Date(match[1].replace(' ', 'T')); // 转换为 ISO 格式尝试解析
-      return isNaN(date.getTime()) ? null : date;
+      // 提取并解析时间戳
+      const dateString = match[1].substring(1, match[1].length - 1); // 移除方括号
+      const parsedDate = new Date(dateString.replace(' ', 'T'));
+      date = isNaN(parsedDate.getTime()) ? null : parsedDate;
+
+      // 移除匹配到的时间戳（包括后面的空格）
+      cleanedContent = content.replace(regex, '').trim();
+
     } catch (e) {
-      console.error('Failed to parse date from content:', match[1], e);
-      return null;
+      console.error('Failed to parse date from content:', match ? match[1] : 'No match', e);
     }
   }
-  return null;
+
+  return { date, cleanedContent };
 }
 
 const moments = await getCollection('moments');
 
 // 获取用于排序和显示的时间，优先从内容提取，其次 fromtmatter，最后默认值
 const momentsWithDateAndContent = await Promise.all(moments.map(async moment => {
-  const dateFromContent = extractDateFromContent(moment.body);
+  const { date: dateFromContent, cleanedContent } = extractDateAndCleanContent(moment.body);
   const displayDate = dateFromContent || moment.data.updated || new Date(moment.slug.split('/').pop()?.split('.')[0] || 0);
   const sortDate = dateFromContent || moment.data.updated || new Date(0); // 用于排序，没有日期沉底
-  const { Content } = await moment.render();
-  return { ...moment, displayDate, sortDate: sortDate.getTime(), Content };
+  
+  return { ...moment, displayDate, sortDate: sortDate.getTime(), rawContent: cleanedContent };
 }));
 
 // 按时间降序排序
@@ -76,7 +82,6 @@ function formatDate(date: Date) {
             <div class="w-[70%] md:w-[80%] transition text-left text-50">{group.moments.length} 条</div>
           </div>
           {group.moments.map(moment => {
-            const Content = moment.Content; // 直接使用预先获取的 Content
             return (
               <div class="group btn-plain !block h-auto w-full rounded-lg hover:text-[initial]">
                 <div class="flex flex-row justify-start items-center h-full">
@@ -97,8 +102,9 @@ function formatDate(date: Date) {
                   </div>
                   {/* moment content */}
                   <div class="w-[70%] md:w-[80%] text-left font-bold group-hover:translate-x-1 transition-all text-75">
-                     <article class="prose dark:prose-invert max-w-none !my-0">
-                        <Content />
+                     <article class="prose dark:prose-invert max-w-none !my-0"
+                       set:html={moment.rawContent}
+                     >
                      </article>
                   </div>
                 </div>
