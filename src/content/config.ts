@@ -53,6 +53,7 @@ const momentsCollection = defineCollection({
 		description: z.string().optional(),
 		updated: z.date().optional(),
 		order: z.number().optional().default(0),
+		image: z.string().optional(),
 	}),
 });
 
