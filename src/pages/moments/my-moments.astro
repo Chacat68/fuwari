@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/MainGridLayout.astro'; // 假设你使用 MainGridLayout 布局
+
+const moments = await getCollection('moments');
+const momentEntry = moments.find(entry => entry.slug === 'my-moments');
+
+if (!momentEntry) {
+  return Astro.redirect('/404'); // 如果找不到对应的 slug，重定向到 404 页面
+}
+
+const { Content } = await momentEntry.render();
+---
+
+<Layout title={momentEntry.data.title} description={momentEntry.data.description}>
+  <article class="prose dark:prose-invert">
+    <Content />
+  </article>
+</Layout> 
