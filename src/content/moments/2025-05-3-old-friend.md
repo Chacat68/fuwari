@@ -1,6 +1,6 @@
 ---
 title: 老友
-updated: 2025-05-23T18:33:25Z
+updated: 2025-05-3
 image: https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250506064339106.jpeg?imageSlim
 ---
 
