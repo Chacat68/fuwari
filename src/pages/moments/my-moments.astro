@@ -2,17 +2,62 @@
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/MainGridLayout.astro';
 
+// 函数：从内容中提取时间戳
+function extractDateFromContent(content: string): Date | null {
+  const regex = /\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]/;
+  const match = content.match(regex);
+  if (match && match[1]) {
+    // 将匹配到的日期时间字符串转换为 Date 对象
+    // 注意：直接解析 'YYYY-MM-DD HH:mm:ss' 可能因浏览器而异，更安全的做法是转换为 ISO 格式或手动解析
+    // 这里尝试直接解析，如果不行可能需要更复杂的逻辑
+    try {
+      const date = new Date(match[1].replace(' ', 'T')); // 转换为 ISO 格式尝试解析
+      return isNaN(date.getTime()) ? null : date;
+    } catch (e) {
+      console.error('Failed to parse date from content:', match[1], e);
+      return null;
+    }
+  }
+  return null;
+}
+
 const moments = await getCollection('moments');
 
-// 按 updated 日期降序排序，如果 updated 不存在则按创建日期或文件名排序
-const sortedMoments = moments.sort((a, b) => {
-  const dateA = a.data.updated || new Date(a.slug.split('/').pop()?.split('.')[0] || 0);
-  const dateB = b.data.updated || new Date(b.slug.split('/').pop()?.split('.')[0] || 0);
-  return dateB.getTime() - dateA.getTime();
-});
+// 获取用于排序和显示的时间，优先从内容提取，其次 fromtmatter，最后默认值
+const momentsWithDateAndContent = await Promise.all(moments.map(async moment => {
+  const dateFromContent = extractDateFromContent(moment.body);
+  const displayDate = dateFromContent || moment.data.updated || new Date(moment.slug.split('/').pop()?.split('.')[0] || 0);
+  const sortDate = dateFromContent || moment.data.updated || new Date(0); // 用于排序，没有日期沉底
+  const { Content } = await moment.render();
+  return { ...moment, displayDate, sortDate: sortDate.getTime(), Content };
+}));
+
+// 按时间降序排序
+const sortedMoments = momentsWithDateAndContent.sort((a, b) => b.sortDate - a.sortDate);
+
+// 按年份分组
+const groups = sortedMoments.reduce((
+  grouped: { year: number; moments: typeof momentsWithDateAndContent }[],
+  moment
+) => {
+  const year = moment.displayDate.getFullYear();
+  let group = grouped.find(g => g.year === year);
+  if (!group) {
+    group = { year, moments: [] };
+    grouped.push(group);
+  }
+  group.moments.push(moment);
+  return grouped;
+}, []).sort((a, b) => b.year - a.year); // 按年份降序排序
 
 const pageTitle = "碎碎念";
 const pageDescription = "这里会记录一些我的日常思考和随笔。";
+
+function formatDate(date: Date) {
+	const month = (date.getMonth() + 1).toString().padStart(2, "0");
+	const day = date.getDate().toString().padStart(2, "0");
+	return `${month}-${day}`;
+}
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -21,19 +66,47 @@ const pageDescription = "这里会记录一些我的日常思考和随笔。";
     <p class="text-neutral-500 dark:text-neutral-400 mb-8">{pageDescription}</p>
     
     {
-      sortedMoments.map(async moment => {
-        const { Content } = await moment.render();
-        return (
-          <div class="mb-6 pb-4 border-b border-neutral-200 dark:border-neutral-700 last:border-b-0">
-            <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
-              {moment.data.updated ? moment.data.updated.toLocaleDateString() : ''}
+      groups.map(group => (
+        <div>
+          <div class="flex flex-row w-full items-center h-[3.75rem]">
+            <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">{group.year}</div>
+            <div class="w-[15%] md:w-[10%]">
+                <div class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
             </div>
-            <article class="prose dark:prose-invert max-w-none">
-              <Content />
-            </article>
+            <div class="w-[70%] md:w-[80%] transition text-left text-50">{group.moments.length} 条</div>
           </div>
-        );
-      })
+          {group.moments.map(moment => {
+            const Content = moment.Content; // 直接使用预先获取的 Content
+            return (
+              <div class="group btn-plain !block h-auto w-full rounded-lg hover:text-[initial]">
+                <div class="flex flex-row justify-start items-center h-full">
+                  {/* date */}
+                  <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
+                    {formatDate(moment.displayDate)}
+                  </div>
+                  {/* dot and line */}
+                  <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center justify-center">
+                    <div class="transition-all w-1 h-1 rounded group-hover:h-5
+                          bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+                          outline outline-4 z-50
+                          outline-[var(--card-bg)]
+                          group-hover:outline-[var(--btn-plain-bg-hover)]
+                          group-active:outline-[var(--btn-plain-bg-active)]
+                          "
+                    ></div>
+                  </div>
+                  {/* moment content */}
+                  <div class="w-[70%] md:w-[80%] text-left font-bold group-hover:translate-x-1 transition-all text-75">
+                     <article class="prose dark:prose-invert max-w-none !my-0">
+                        <Content />
+                     </article>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ))
     }
   </div>
 </Layout> 
