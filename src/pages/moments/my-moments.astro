@@ -1,19 +1,39 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '@layouts/MainGridLayout.astro'; // 假设你使用 MainGridLayout 布局
+import Layout from '@layouts/MainGridLayout.astro';
 
 const moments = await getCollection('moments');
-const momentEntry = moments.find(entry => entry.slug === 'my-moments');
 
-if (!momentEntry) {
-  return Astro.redirect('/404'); // 如果找不到对应的 slug，重定向到 404 页面
-}
+// 按 updated 日期降序排序，如果 updated 不存在则按创建日期或文件名排序
+const sortedMoments = moments.sort((a, b) => {
+  const dateA = a.data.updated || new Date(a.slug.split('/').pop()?.split('.')[0] || 0);
+  const dateB = b.data.updated || new Date(b.slug.split('/').pop()?.split('.')[0] || 0);
+  return dateB.getTime() - dateA.getTime();
+});
 
-const { Content } = await momentEntry.render();
+const pageTitle = "碎碎念";
+const pageDescription = "这里会记录一些我的日常思考和随笔。";
 ---
 
-<Layout title={momentEntry.data.title} description={momentEntry.data.description}>
-  <article class="prose dark:prose-invert">
-    <Content />
-  </article>
+<Layout title={pageTitle} description={pageDescription}>
+  <div class="card-base px-8 py-6">
+    <h1 class="text-3xl font-bold mb-6">{pageTitle}</h1>
+    <p class="text-neutral-500 dark:text-neutral-400 mb-8">{pageDescription}</p>
+    
+    {
+      sortedMoments.map(async moment => {
+        const { Content } = await moment.render();
+        return (
+          <div class="mb-6 pb-4 border-b border-neutral-200 dark:border-neutral-700 last:border-b-0">
+            <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
+              {moment.data.updated ? moment.data.updated.toLocaleDateString() : ''}
+            </div>
+            <article class="prose dark:prose-invert max-w-none">
+              <Content />
+            </article>
+          </div>
+        );
+      })
+    }
+  </div>
 </Layout> 
