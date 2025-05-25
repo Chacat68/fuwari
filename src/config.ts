@@ -43,6 +43,7 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
+		LinkPreset.About,
 		LinkPreset.Archive,
 		{
 			name: "碎碎念",
@@ -61,7 +62,6 @@ export const navBarConfig: NavBarConfig = {
 			url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加
 			external: true, // 显示外部链接图标并在新标签页中打开
 		},
-		LinkPreset.About,
 	],
 };
 
