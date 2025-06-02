@@ -7,9 +7,13 @@ description: "关于我和我的博客"
 
 ![31231314](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim)
 
-Hi，我是查猫CHACAT，85后，游戏迷、书迷、手机摄影师、长内容爱好者，EVA粉丝，日常在阅读、创作、跑步。
+哈喽，我是查猫CHACAT，85后，从小是游戏迷，书迷，现在这两个内容是我生活的两大支柱。
 
-- 博客会记录 [**生活随笔**](https://blog.chawfoo.com/archive/category/生活随笔)、[**设计思考**](https://www.chawfoo.com/archive/category/设计思考)、[**它山之石**](https://blog.chawfoo.com/archive/category/它山之石)
+最近在读书、创作、跑步，过安静有趣的生活，喝茶吹水，不断创作一些新东西，源源不断给自己创造心流！
+
+🎮游戏开发者、 ✍️内容创作者、📱手机摄影师
+
+- 博客会记录 [**生活随笔**](https://www.chawfoo.com/archive/category/生活随笔)、[**设计思考**](https://www.chawfoo.com/archive/category/设计思考)、[**它山之石**](https://www.chawfoo.com/archive/category/它山之石)
 - 我喜欢建筑，把它们做了一个整理：[**建筑指南**](https://arch.chawfoo.com/)
 - 喜欢的电影、音乐、游戏等，整理到：[**My-NeoDB**](https://neodb.social/users/Charliefoo/)
 - 最后，把这些年做过的一些事情记录下来，汇总成：[**WorkPage**](https://work.chawfoo.com/)
