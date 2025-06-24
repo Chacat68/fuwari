@@ -19,6 +19,48 @@ const postsCollection = defineCollection({
 		nextSlug: z.string().default(""),
 	}),
 });
+
+const friendsCollection = defineCollection({
+	schema: z.object({
+		name: z.string(),
+		url: z.string().url(),
+		avatar: z.string().url(),
+		description: z.string(),
+		order: z.number().optional().default(0),
+	}),
+});
+
+const projectsCollection = defineCollection({
+	schema: z.object({
+		name: z.string(),
+		url: z.string().url(),
+		cover: z.string().url(),
+		description: z.string(),
+		order: z.number().optional().default(0),
+	}),
+});
+
+const specCollection = defineCollection({
+	schema: z.object({
+		title: z.string().optional(),
+		description: z.string().optional(),
+	}),
+});
+
+const momentsCollection = defineCollection({
+	schema: z.object({
+		title: z.string().optional(),
+		description: z.string().optional(),
+		updated: z.date().optional(),
+		order: z.number().optional().default(0),
+		image: z.string().optional(),
+	}),
+});
+
 export const collections = {
 	posts: postsCollection,
+	friends: friendsCollection,
+	projects: projectsCollection,
+	spec: specCollection,
+	moments: momentsCollection,
 };

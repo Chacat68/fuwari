@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { navBarConfig, siteConfig } from "../config";
+import { navBarConfig, profileConfig, siteConfig } from "../config";
 import { LinkPresets } from "../constants/link-presets";
 import { LinkPreset, type NavBarLink } from "../types/config";
 import { url } from "../utils/url-utils";
@@ -27,16 +27,29 @@ let links: NavBarLink[] = navBarConfig.links.map(
         "card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4"]}>
         <a href={url('/')} class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95">
             <div class="flex flex-row text-[var(--primary)] items-center text-md">
-                <Icon name="material-symbols:home-outline-rounded" class="text-[1.75rem] mb-1 mr-2" />
+                <img src={url('/logo/logo.png')} class="w-7 h-7 mr-2 hidden" alt="网站图标" />
                 {siteConfig.title}
             </div>
         </a>
         <div class="hidden md:flex">
             {links.map((l) => {
+                // 根据链接名称或URL确定图标
+                let iconName = "";
+                if (l.url === "/") iconName = "material-symbols:home-outline-rounded";
+                else if (l.url === "/archive/") iconName = "material-symbols:archive-outline-rounded";
+                else if (l.url === "/projects/") iconName = "material-symbols:dashboard-rounded";
+                else if (l.url === "/friends/") iconName = "material-symbols:group-outline-rounded";
+                else if (l.url === "/moments/my-moments/") iconName = "material-symbols:schedule-outline";
+                else if (l.url === "/about/") iconName = "material-symbols:person-outline-rounded";
+                else if (l.url.includes("arch.chawfoo.com")) iconName = "material-symbols:architecture-rounded";
+                else if (l.url.includes("neodb")) iconName = "material-symbols:interests-outline-rounded";
+                else iconName = "material-symbols:link";
+                
                 return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
                           class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"
                 >
                     <div class="flex items-center">
+                        {iconName && <Icon name={iconName} class="text-[1.25rem] mr-1.5" />}
                         {l.name}
                         {l.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]"></Icon>}
                     </div>

@@ -8,33 +8,35 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "Fuwari",
-	subtitle: "Demo Site",
-	lang: "en", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
+	title: "付之一笑",
+	subtitle: "阅读、思考、写作",
+	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	themeColor: {
-		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: false, // Hide the theme color picker for visitors
+		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
+		fixed: true, // 对访问者隐藏主题颜色选择器
 	},
+	defaultPostImage:
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501123146419.png?imageSlim", // 没有图片的文章将使用此默认网络图片
 	banner: {
-		enable: false,
-		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
+		enable: true,
+		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250510164049488.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
+		position: "center", // 等同于object-position，仅支持'top'、'center'、'bottom'。默认为'center'
 		credit: {
-			enable: false, // Display the credit text of the banner image
-			text: "", // Credit text to be displayed
-			url: "", // (Optional) URL link to the original artwork or artist's page
+			enable: true, // 显示横幅图片的署名文本
+			text: "CHACAT绘制", // 要显示的署名文本
+			url: "", // （可选）原始作品或艺术家页面的URL链接
 		},
 	},
 	toc: {
-		enable: true, // Display the table of contents on the right side of the post
-		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
+		enable: true, // 在文章右侧显示目录
+		depth: 3, // 在目录中显示的最大标题深度，范围从1到3
 	},
 	favicon: [
-		// Leave this array empty to use the default favicon
+		// 将此数组留空以使用默认图标
 		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
+		//   src: '/favicon/icon.png',    // 图标路径，相对于/public目录
+		//   theme: 'light',              // （可选）'light'或'dark'，仅当您有不同的明暗模式图标时设置
+		//   sizes: '32x32',              // （可选）图标的尺寸，仅当您有不同尺寸的图标时设置
 		// }
 	],
 };
@@ -43,36 +45,49 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
+		{
+			name: "此刻",
+			url: "/moments/my-moments/",
+		},
+		{
+			name: "项目",
+			url: "/projects/",
+		},
+		{
+			name: "友链", // 暂时使用硬编码值，避免循环依赖
+			url: "/friends/",
+		},
 		LinkPreset.About,
 		{
-			name: "GitHub",
-			url: "https://github.com/saicaca/fuwari", // Internal links should not include the base path, as it is automatically added
-			external: true, // Show an external link icon and will open in a new tab
+			name: "Hobby",
+			url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加
+			external: true, // 显示外部链接图标并在新标签页中打开
 		},
 	],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-	name: "Lorem Ipsum",
-	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	avatar:
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
+	name: "CHACAT",
+	bio: "日常在阅读、创作、跑步。",
 	links: [
 		{
-			name: "Twitter",
-			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
-			url: "https://twitter.com",
+			name: "X/Twitter",
+			icon: "fa6-brands:twitter", // 访问 https://icones.js.org/ 获取图标代码
+			// 如果尚未包含相应的图标集，您需要安装它
+			// `pnpm add @iconify-json/<图标集名称>`
+			url: "https://x.com/Chacat68",
 		},
 		{
-			name: "Steam",
-			icon: "fa6-brands:steam",
-			url: "https://store.steampowered.com",
+			name: "Bluesky",
+			icon: "fa6-brands:bluesky",
+			url: "https://chacat68.bsky.social",
 		},
 		{
 			name: "GitHub",
 			icon: "fa6-brands:github",
-			url: "https://github.com/saicaca/fuwari",
+			url: "https://github.com/Chacat68",
 		},
 	],
 };

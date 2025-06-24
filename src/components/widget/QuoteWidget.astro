@@ -1,0 +1,27 @@
+---
+import { quotes } from "../../constants/quotes";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+import WidgetLayout from "./WidgetLayout.astro";
+
+// Select a random quote
+const randomIndex = Math.floor(Math.random() * quotes.length);
+const randomQuote = quotes[randomIndex];
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+const className = Astro.props.class;
+const style = Astro.props.style;
+---
+<WidgetLayout name={i18n(I18nKey.quote)} id="quote-widget" class={className} style={style}>
+    <div class="text-sm italic text-neutral-800 dark:text-neutral-200">
+        <p>"{randomQuote.text}"</p>
+        <p class="text-right mt-1 text-neutral-600 dark:text-neutral-400">- {randomQuote.author}</p>
+    </div>
+</WidgetLayout>
+
+<script>
+    // Optional: Add client-side logic if needed, e.g., refresh quote on click
+</script>

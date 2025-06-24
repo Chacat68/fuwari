@@ -9,6 +9,7 @@ import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
@@ -26,7 +27,7 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://fuwari.vercel.app/",
+	site: "https://www.chawfoo.com/",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
@@ -35,13 +36,23 @@ export default defineConfig({
 		}),
 		swup({
 			theme: false,
-			animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
-			// the default value `transition-` cause transition delay
-			// when the Tailwind class `transition-all` is used
+			animationClass: "transition-", // see https://swup.js.org/options/#animationselector
+			// 使用默认值以避免404错误
 			containers: ["main", "#toc"],
 			smoothScrolling: true,
 			cache: true,
-			preload: true,
+			preload: {
+				enabled: true,
+				customFetch: (url) => {
+					return fetch(url, {
+						credentials: "same-origin", // 设置凭证模式
+						mode: "cors",
+						headers: {
+							"X-Requested-With": "XMLHttpRequest",
+						},
+					});
+				},
+			},
 			accessibility: true,
 			updateHead: true,
 			updateBodyClass: false,
@@ -55,6 +66,7 @@ export default defineConfig({
 				"fa6-solid": ["*"],
 			},
 		}),
+    
 		expressiveCode({
 			themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
 			plugins: [
@@ -115,6 +127,14 @@ export default defineConfig({
 		rehypePlugins: [
 			rehypeKatex,
 			rehypeSlug,
+			[
+				rehypeExternalLinks,
+				{
+					content: false,
+					target: "_blank",
+					rel: ["nofollow", "noopener", "noreferrer"],
+				},
+			],
 			[
 				rehypeComponents,
 				{
