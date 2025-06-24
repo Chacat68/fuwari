@@ -15,7 +15,7 @@ draft: false
 
 时隔多年再听这首歌，那种淡淡的忧伤和坚强依然能够触动内心最柔软的地方。王心凌用她独特的嗓音诠释了分别时的不舍，以及对未来的美好祝愿。
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=257564515&bvid=BV15Y411T7Cq&cid=749097148&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/Gw4Q7-NBFWs?si=AVEE_NK38wM1wpxD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 歌词：
 
