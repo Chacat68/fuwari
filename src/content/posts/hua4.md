@@ -2,7 +2,7 @@
 title: 王心凌《我会好好的》
 published: 2025-06-25
 updated: 2025-06-25
-description: '那些年我们一起追过的甜心教主，用最温柔的声音告诉我们，即使分别也要好好的。'
+description: '我会好好的，即使分开也要好好的。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250625014851848.png?imageSlim'
 tags: [音乐，王心凌，我会好好的，国语，甜心教主]
 category: '生活随笔'
