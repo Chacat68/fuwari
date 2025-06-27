@@ -19,7 +19,7 @@ export const siteConfig: SiteConfig = {
 		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501123146419.png?imageSlim", // 没有图片的文章将使用此默认网络图片
 	banner: {
 		enable: true,
-		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250510164049488.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
+		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250628033838334.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
 		position: "center", // 等同于object-position，仅支持'top'、'center'、'bottom'。默认为'center'
 		credit: {
 			enable: true, // 显示横幅图片的署名文本
