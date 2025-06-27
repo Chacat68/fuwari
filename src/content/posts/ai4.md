@@ -5,7 +5,7 @@ updated: 2025-06-11 00:30:00
 description: '深度体验Cherry Studio这款支持多LLM提供商的桌面客户端，探索其强大的MCP协议支持和丰富的功能生态。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250611005902963.png?imageSlim'
 tags: [AI工具, 开源项目, MCP, 大模型, 效率工具, Cherry Studio]
-category: '技术评测'
+category: '人工智能'
 draft: false
 ---
 
