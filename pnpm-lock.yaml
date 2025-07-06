@@ -4277,6 +4277,9 @@ packages:
   rehype-expressive-code@0.41.2:
     resolution: {integrity: sha512-vHYfWO9WxAw6kHHctddOt+P4266BtyT1mrOIuxJD+1ELuvuJAa5uBIhYt0OVMyOhlvf57hzWOXJkHnMhpaHyxw==}
 
+  rehype-external-links@3.0.0:
+    resolution: {integrity: sha512-yp+e5N9V3C6bwBeAC4n796kc86M4gJCdlVhiMTxIrJG5UHDMh+PJANf9heqORJbt1nrCbDwIlAZKjANIaVBbvw==}
+
   rehype-katex@7.0.1:
     resolution: {integrity: sha512-OiM2wrZ/wuhKkigASodFoo8wimG3H12LWQaH8qSPVJn9apWKFSH3YOCtbKpBorTVw/eI7cuT21XBbvwEswbIOA==}
 
@@ -10064,6 +10067,9 @@ snapshots:
   rehype-expressive-code@0.41.2:
     dependencies:
       expressive-code: 0.41.2
+
+  rehype-external-links@3.0.0:
+    dependencies:
       '@types/hast': 3.0.4
       '@ungap/structured-clone': 1.3.0
       hast-util-is-element: 3.0.0
