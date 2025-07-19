@@ -81,6 +81,11 @@ export const profileConfig: ProfileConfig = {
 			url: "https://x.com/Chacat68",
 		},
 		{
+			name: "Threads",
+			icon: "fa6-brands:threads",
+			url: "https://www.threads.com/@chacat68",
+		},
+		{
 			name: "Bluesky",
 			icon: "fa6-brands:bluesky",
 			url: "https://chacat68.bsky.social",
