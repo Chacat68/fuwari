@@ -3,6 +3,13 @@ import { onMount } from "svelte";
 
 export let sortedPosts: Post[] = [];
 
+// 调试：检查接收到的数据
+console.log('HeatmapChart received sortedPosts:', sortedPosts?.length || 'undefined');
+if (sortedPosts && sortedPosts.length > 0) {
+	console.log('First post:', sortedPosts[0]);
+	console.log('Sample post dates:', sortedPosts.slice(0, 3).map(p => p.data.published));
+}
+
 interface Post {
 	slug: string;
 	data: {
@@ -26,13 +33,37 @@ let tooltipPosition = { x: 0, y: 0 };
 let totalPosts = 0;
 let activeDays = 0;
 let maxPostsInDay = 0;
+let weeklyData: DayData[][] = [];
+let monthLabels: { label: string; span: number }[] = [];
 
-// 获取过去一年的日期范围
+// 响应式计算周数据和月份标签
+$: {
+	console.log('Reactive update: heatmapData.length =', heatmapData.length);
+	weeklyData = getWeeklyData();
+	monthLabels = getMonthLabels();
+	console.log('weeklyData.length =', weeklyData.length);
+	console.log('monthLabels.length =', monthLabels.length);
+}
+
+// 获取文章发布的日期范围（显示最近一年的数据，确保最后一个格子是今天）
 function getDateRange(): { start: Date; end: Date } {
-	const end = new Date();
-	const start = new Date();
-	start.setFullYear(end.getFullYear() - 1);
-	return { start, end };
+	// 获取今天的日期字符串，然后创建对应的Date对象
+	// 这样可以避免时区问题
+	const todayStr = new Date().toISOString().split('T')[0];
+	const today = new Date(todayStr + 'T00:00:00.000Z');
+	
+	// 计算开始日期：往前推364天（总共365天，包含今天）
+	const start = new Date(today);
+	start.setUTCDate(today.getUTCDate() - 364);
+	
+	console.log('Date range calculation:', {
+		todayStr,
+		start: formatDate(start),
+		end: formatDate(today),
+		totalDays: Math.floor((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1
+	});
+	
+	return { start, end: today };
 }
 
 // 格式化日期为 YYYY-MM-DD
@@ -87,12 +118,18 @@ onMount(() => {
 		}
 	});
 
+	// 调试信息
+	console.log('Total posts:', sortedPosts.length);
+	console.log('Posts by date:', postsByDate);
+
 	// 生成所有日期的数据
 	const data: DayData[] = [];
 	const currentDate = new Date(start);
 	let maxCount = 0;
 
-	while (currentDate <= end) {
+	// 确保包含结束日期（今天）- 使用日期字符串比较更可靠
+	const endDateStr = formatDate(end);
+	while (true) {
 		const dateStr = formatDate(currentDate);
 		const posts = postsByDate.get(dateStr) || [];
 		const count = posts.length;
@@ -108,8 +145,19 @@ onMount(() => {
 			posts,
 		});
 
+		// 如果已经处理了结束日期，退出循环
+		if (dateStr === endDateStr) {
+			break;
+		}
+
 		currentDate.setDate(currentDate.getDate() + 1);
 	}
+
+	// 调试信息：检查生成的数据
+	console.log('Generated data length:', data.length);
+	console.log('First date:', data[0]?.date);
+	console.log('Last date:', data[data.length - 1]?.date);
+	console.log('End date should be:', formatDate(end));
 
 	// 计算活跃度等级和统计信息
 	let postsCount = 0;
@@ -122,6 +170,12 @@ onMount(() => {
 			activeDaysCount++;
 		}
 	});
+
+	// 调试信息
+	console.log('Max count:', maxCount);
+	console.log('Total posts count:', postsCount);
+	console.log('Active days:', activeDaysCount);
+	console.log('Sample data with levels:', data.filter(d => d.count > 0).slice(0, 5));
 
 	heatmapData = data;
 	totalPosts = postsCount;
@@ -184,9 +238,13 @@ function getMonthLabels(): { label: string; span: number }[] {
 	return monthLabels;
 }
 
-// 按周分组数据
+// 按周分组数据，确保最后一个格子是今天
 function getWeeklyData(): DayData[][] {
-	if (heatmapData.length === 0) return [];
+	console.log('getWeeklyData called, heatmapData.length:', heatmapData.length);
+	if (heatmapData.length === 0) {
+		console.log('Returning empty array because heatmapData is empty');
+		return [];
+	}
 
 	const weeks: DayData[][] = [];
 	let currentWeek: DayData[] = [];
@@ -211,9 +269,14 @@ function getWeeklyData(): DayData[][] {
 
 		currentWeek.push(day);
 
-		// 如果是周六或者是最后一天，结束当前周
-		if (dayOfWeek === 6 || index === heatmapData.length - 1) {
-			// 填充剩余的空白
+		// 如果是周六，结束当前周
+		if (dayOfWeek === 6) {
+			weeks.push([...currentWeek]);
+			currentWeek = [];
+		}
+		// 如果是最后一天且不是周六，填充剩余空白并结束
+		else if (index === heatmapData.length - 1) {
+			// 填充剩余的空白到周六
 			while (currentWeek.length < 7) {
 				currentWeek.push({
 					date: "",
@@ -223,7 +286,6 @@ function getWeeklyData(): DayData[][] {
 				});
 			}
 			weeks.push([...currentWeek]);
-			currentWeek = [];
 		}
 	});
 
@@ -233,7 +295,7 @@ function getWeeklyData(): DayData[][] {
 
 <div class="heatmap-container">
 	<div class="heatmap-header">
-		<h3 class="text-lg font-bold text-75">文章发布热力图</h3>
+		<h3 class="text-lg font-bold text-75">文章发布</h3>
 		<div class="heatmap-stats">
 			<span class="stat-item text-50">总计 <strong class="text-75">{totalPosts}</strong> 篇文章</span>
 			<span class="stat-item text-50">活跃 <strong class="text-75">{activeDays}</strong> 天</span>
@@ -243,7 +305,7 @@ function getWeeklyData(): DayData[][] {
 	
 	<!-- 月份标签 -->
 	<div class="month-labels">
-		{#each getMonthLabels() as month}
+		{#each monthLabels as month}
 			<span class="month-label text-50" style="flex: {month.span}">{month.label}</span>
 		{/each}
 	</div>
@@ -263,12 +325,13 @@ function getWeeklyData(): DayData[][] {
 		
 		<!-- 热力图方块 -->
 		<div class="heatmap-weeks">
-			{#each getWeeklyData() as week}
+			{#each weeklyData as week}
 				<div class="heatmap-week">
 					{#each week as day}
 						<div
 						class="heatmap-day level-{day.level}"
 						class:empty={!day.date}
+						data-date={day.date}
 						on:mouseenter={(e) => day.date && handleMouseEnter(e, day)}
 					on:mouseleave={handleMouseLeave}
 					role="button"

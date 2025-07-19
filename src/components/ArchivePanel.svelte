@@ -4,7 +4,7 @@ import { onMount } from "svelte";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getPostUrlBySlug } from "../utils/url-utils";
-import HeatmapChart from "./HeatmapChart.svelte";
+// 移除热力图组件导入，因为已在 archive.astro 中单独使用
 
 export let tags: string[];
 export let categories: string[];
@@ -96,8 +96,7 @@ onMount(async () => {
 });
 </script>
 
-<!-- 热力图组件 -->
-<HeatmapChart {sortedPosts} />
+<!-- 热力图组件已移至 archive.astro 页面 -->
 
 <div class="card-base px-8 py-6">
     {#each groups as group}
