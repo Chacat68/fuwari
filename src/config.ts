@@ -111,13 +111,12 @@ export const xTwitterConfig: XTwitterConfig = {
 	username: "Chacat68", // 从profileConfig中获取的用户名
 	// API密钥配置（需要从环境变量中获取，确保安全）
 	// 获取方式：https://developer.twitter.com/en/portal/dashboard
-	bearerToken: process.env.TWITTER_BEARER_TOKEN, // 推荐使用Bearer Token
-	apiKey: process.env.TWITTER_API_KEY,
-	apiSecret: process.env.TWITTER_API_SECRET,
-	accessToken: process.env.TWITTER_ACCESS_TOKEN,
-	accessTokenSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+	bearerToken: import.meta.env.TWITTER_BEARER_TOKEN, // 推荐使用Bearer Token
+	apiKey: import.meta.env.TWITTER_API_KEY,
+	apiSecret: import.meta.env.TWITTER_API_SECRET,
+	accessToken: import.meta.env.TWITTER_ACCESS_TOKEN,
+	accessTokenSecret: import.meta.env.TWITTER_ACCESS_TOKEN_SECRET,
 	// 功能配置
 	maxTweets: 10, // 最大获取推文数量
 	cacheTime: 30, // 缓存30分钟
-	fallbackToMock: true, // API失败时使用模拟数据
 };

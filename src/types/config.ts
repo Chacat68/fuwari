@@ -103,5 +103,4 @@ export type XTwitterConfig = {
 	bearerToken?: string; // Bearer令牌（推荐使用）
 	maxTweets?: number; // 最大获取推文数量，默认10
 	cacheTime?: number; // 缓存时间（分钟），默认30分钟
-	fallbackToMock?: boolean; // API失败时是否回退到模拟数据，默认true
 };
