@@ -1,0 +1,172 @@
+---
+// X平台内容显示组件
+// 支持显示最新推文和嵌入式推文
+
+interface Props {
+  username?: string; // X用户名
+  tweetId?: string; // 特定推文ID
+  theme?: 'light' | 'dark'; // 主题
+  maxTweets?: number; // 最大显示推文数量
+  showReplies?: boolean; // 是否显示回复
+}
+
+const { 
+  username = 'Chacat68', 
+  tweetId,
+  theme = 'dark',
+  maxTweets = 3,
+  showReplies = false 
+} = Astro.props;
+
+// 生成嵌入代码的配置
+const embedConfig = {
+  theme,
+  'tweet-limit': maxTweets,
+  'show-replies': showReplies ? 'true' : 'false'
+};
+
+// 构建嵌入URL参数
+const embedParams = Object.entries(embedConfig)
+  .map(([key, value]) => `data-${key}="${value}"`)
+  .join(' ');
+---
+
+<div class="card-base p-4 mb-6">
+  <div class="flex items-center gap-2 mb-4">
+    <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+    <h3 class="text-lg font-semibold text-black/90 dark:text-white/90">最新动态</h3>
+  </div>
+  
+  {tweetId ? (
+    <!-- 显示特定推文 -->
+    <div class="twitter-embed-container">
+      <blockquote class="twitter-tweet" data-theme={theme}>
+        <a href={`https://twitter.com/${username}/status/${tweetId}`}></a>
+      </blockquote>
+    </div>
+  ) : (
+    <!-- 显示时间线 -->
+    <div class="twitter-timeline-container">
+      <a 
+        class="twitter-timeline" 
+        href={`https://twitter.com/${username}`}
+        data-height="400"
+        data-theme={theme}
+        data-tweet-limit={maxTweets}
+        data-show-replies={showReplies ? 'true' : 'false'}
+        data-chrome="noheader nofooter noborders transparent"
+      >
+        正在加载 @{username} 的推文...
+      </a>
+    </div>
+  )}
+  
+  <!-- 备用内容：当Twitter嵌入不可用时显示 -->
+  <div class="fallback-content hidden">
+    <div class="text-center py-8 text-neutral-500 dark:text-neutral-400">
+      <p class="mb-2">无法加载X平台内容</p>
+      <a 
+        href={`https://x.com/${username}`} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="text-blue-500 hover:text-blue-600 transition-colors"
+      >
+        访问 @{username} 的X主页
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Twitter嵌入脚本 -->
+<script>
+  // 扩展Window接口以支持twttr属性
+  declare global {
+    interface Window {
+      twttr?: {
+        widgets: {
+          load(): void;
+        };
+      };
+    }
+  }
+
+  // 动态加载Twitter嵌入脚本
+  function loadTwitterScript() {
+    if ((window as any).twttr) {
+      // 如果脚本已加载，重新渲染组件
+      (window as any).twttr.widgets.load();
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    script.charset = 'utf-8';
+    
+    // 脚本加载成功后的回调
+    script.onload = function() {
+      console.log('Twitter嵌入脚本加载成功');
+      // 等待脚本初始化完成
+      setTimeout(() => {
+        if ((window as any).twttr && (window as any).twttr.widgets) {
+          (window as any).twttr.widgets.load();
+        }
+      }, 100);
+    };
+    
+    // 脚本加载失败时显示备用内容
+    script.onerror = function() {
+      console.warn('Twitter嵌入脚本加载失败，显示备用内容');
+      const containers = document.querySelectorAll('.twitter-embed-container, .twitter-timeline-container');
+      const fallbacks = document.querySelectorAll('.fallback-content');
+      
+      containers.forEach(container => (container as HTMLElement).style.display = 'none');
+      fallbacks.forEach(fallback => fallback.classList.remove('hidden'));
+    };
+    
+    document.head.appendChild(script);
+  }
+  
+  // 页面加载完成后初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadTwitterScript);
+  } else {
+    loadTwitterScript();
+  }
+  
+  // 添加超时机制，如果5秒内没有加载成功则显示备用内容
+  setTimeout(() => {
+    if (!(window as any).twttr) {
+      console.warn('Twitter嵌入脚本加载超时，显示备用内容');
+      const containers = document.querySelectorAll('.twitter-embed-container, .twitter-timeline-container');
+      const fallbacks = document.querySelectorAll('.fallback-content');
+      
+      containers.forEach(container => (container as HTMLElement).style.display = 'none');
+      fallbacks.forEach(fallback => fallback.classList.remove('hidden'));
+    }
+  }, 5000);
+</script>
+
+<style>
+  /* 自定义样式以匹配博客主题 */
+  .twitter-timeline-container,
+  .twitter-embed-container {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .twitter-timeline-container a[data-height] {
+      height: 300px !important;
+    }
+  }
+  
+  /* 深色模式适配 */
+  .dark .twitter-timeline-container,
+  .dark .twitter-embed-container {
+    filter: brightness(0.9);
+  }
+</style>

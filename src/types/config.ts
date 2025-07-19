@@ -91,3 +91,17 @@ export type BlogPostData = {
 export type ExpressiveCodeConfig = {
 	theme: string;
 };
+
+// X平台API配置类型
+export type XTwitterConfig = {
+	enable: boolean; // 是否启用X平台集成
+	username?: string; // X平台用户名
+	apiKey?: string; // X平台API密钥
+	apiSecret?: string; // X平台API密钥
+	accessToken?: string; // 访问令牌
+	accessTokenSecret?: string; // 访问令牌密钥
+	bearerToken?: string; // Bearer令牌（推荐使用）
+	maxTweets?: number; // 最大获取推文数量，默认10
+	cacheTime?: number; // 缓存时间（分钟），默认30分钟
+	fallbackToMock?: boolean; // API失败时是否回退到模拟数据，默认true
+};

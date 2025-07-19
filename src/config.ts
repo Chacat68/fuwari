@@ -4,6 +4,7 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
+	XTwitterConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -102,4 +103,21 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Note: Some styles (such as background color) are being overridden, see the astro.config.mjs file.
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
+};
+
+// X平台API配置
+export const xTwitterConfig: XTwitterConfig = {
+	enable: true, // 默认关闭，需要配置API密钥后启用
+	username: "Chacat68", // 从profileConfig中获取的用户名
+	// API密钥配置（需要从环境变量中获取，确保安全）
+	// 获取方式：https://developer.twitter.com/en/portal/dashboard
+	bearerToken: process.env.TWITTER_BEARER_TOKEN, // 推荐使用Bearer Token
+	apiKey: process.env.TWITTER_API_KEY,
+	apiSecret: process.env.TWITTER_API_SECRET,
+	accessToken: process.env.TWITTER_ACCESS_TOKEN,
+	accessTokenSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+	// 功能配置
+	maxTweets: 10, // 最大获取推文数量
+	cacheTime: 30, // 缓存30分钟
+	fallbackToMock: true, // API失败时使用模拟数据
 };
