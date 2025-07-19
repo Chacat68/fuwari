@@ -150,13 +150,17 @@ function updateProgress() {
     dayProgressElement.textContent = dayProgress.toFixed(5); // 当天进度保持小数
 }
 
-// 页面加载后执行初始动画
-document.addEventListener('DOMContentLoaded', () => {
+// 初始化动画的函数
+function initializeAnimation() {
     // 获取元素
     const yearProgressElement = document.querySelector('.year-progress');
     const dayProgressElement = document.querySelector('.day-progress');
     
-    if (!yearProgressElement || !dayProgressElement) return;
+    if (!yearProgressElement || !dayProgressElement) {
+        // 如果元素还没有加载，稍后重试
+        setTimeout(initializeAnimation, 100);
+        return;
+    }
     
     // 获取初始进度值
     const yearProgress = parseFloat(yearProgressFormatted);
@@ -170,5 +174,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // 设置定时器，每10毫秒更新一次进度
         setInterval(updateProgress, 10);
     }, 300); // 减少初始延迟从500ms到300ms
+}
+
+// 页面加载后执行初始动画
+document.addEventListener('DOMContentLoaded', initializeAnimation);
+
+// 为了确保在所有情况下都能触发动画，添加额外的触发方式
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAnimation);
+} else {
+    // 如果文档已经加载完成，直接执行
+    initializeAnimation();
+}
+
+// 监听页面可见性变化，当页面重新变为可见时重新初始化动画
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        setTimeout(initializeAnimation, 100);
+    }
 });
 </script>
