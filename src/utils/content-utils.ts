@@ -5,7 +5,13 @@ import { getCategoryUrl } from "@utils/url-utils.ts";
 
 export async function getSortedPosts() {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+		const isDraftFilter = import.meta.env.PROD ? data.draft !== true : true;
+		// 过滤未来日期的文章
+		const today = new Date();
+		today.setHours(23, 59, 59, 999); // 设置为今天的最后一刻
+		const isFutureDate = new Date(data.published) > today;
+		
+		return isDraftFilter && !isFutureDate;
 	});
 
 	const sorted = allBlogPosts.sort((a, b) => {
@@ -24,6 +30,24 @@ export async function getSortedPosts() {
 	}
 
 	return sorted;
+}
+
+// 获取所有文章的总数（包括未来日期的文章，但不包括草稿）
+export async function getAllPostsCount(): Promise<number> {
+	const allBlogPosts = await getCollection("posts", ({ data }) => {
+		// 只过滤草稿文章，不过滤未来日期的文章
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
+	return allBlogPosts.length;
+}
+
+// 获取所有文章（包括未来日期的文章，但不包括草稿）
+export async function getAllPosts() {
+	const allBlogPosts = await getCollection("posts", ({ data }) => {
+		// 只过滤草稿文章，不过滤未来日期的文章
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
+	return allBlogPosts;
 }
 
 export type Tag = {

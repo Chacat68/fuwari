@@ -2,13 +2,10 @@
 import { onMount } from "svelte";
 
 export let sortedPosts: Post[] = [];
+export let totalPostsCount = 0;
+export let allPosts: Post[] = [];
 
-// 调试：检查接收到的数据
-console.log('HeatmapChart received sortedPosts:', sortedPosts?.length || 'undefined');
-if (sortedPosts && sortedPosts.length > 0) {
-	console.log('First post:', sortedPosts[0]);
-	console.log('Sample post dates:', sortedPosts.slice(0, 3).map(p => p.data.published));
-}
+// 接收文章数据、总文章数和所有文章数据作为属性
 
 interface Post {
 	slug: string;
@@ -106,7 +103,7 @@ onMount(() => {
 	const { start, end } = getDateRange();
 	const postsByDate = new Map<string, Post[]>();
 
-	// 按日期分组文章
+	// 按日期分组文章（用于热力图显示）
 	sortedPosts.forEach((post) => {
 		const dateStr = formatDate(post.data.published);
 		if (!postsByDate.has(dateStr)) {
@@ -115,6 +112,27 @@ onMount(() => {
 		const posts = postsByDate.get(dateStr);
 		if (posts) {
 			posts.push(post);
+		}
+	});
+
+	// 计算所有文章的活跃天数和最大文章数（包括未来日期的文章）
+	const allPostsByDate = new Map<string, Post[]>();
+	allPosts.forEach((post) => {
+		const dateStr = formatDate(post.data.published);
+		if (!allPostsByDate.has(dateStr)) {
+			allPostsByDate.set(dateStr, []);
+		}
+		const posts = allPostsByDate.get(dateStr);
+		if (posts) {
+			posts.push(post);
+		}
+	});
+	const totalActiveDays = allPostsByDate.size;
+	// 计算所有文章中单日最大文章数
+	let maxPostsInDayAll = 0;
+	allPostsByDate.forEach((posts) => {
+		if (posts.length > maxPostsInDayAll) {
+			maxPostsInDayAll = posts.length;
 		}
 	});
 
@@ -179,8 +197,8 @@ onMount(() => {
 
 	heatmapData = data;
 	totalPosts = postsCount;
-	activeDays = activeDaysCount;
-	maxPostsInDay = maxCount;
+	activeDays = totalActiveDays; // 使用所有文章的活跃天数
+	maxPostsInDay = maxPostsInDayAll; // 使用所有文章的最大单日文章数
 });
 
 // 获取月份标签，基于实际的周数分布
@@ -297,7 +315,7 @@ function getWeeklyData(): DayData[][] {
 	<div class="heatmap-header">
 		<h3 class="text-lg font-bold text-75">文章发布</h3>
 		<div class="heatmap-stats">
-			<span class="stat-item text-50">总计 <strong class="text-75">{totalPosts}</strong> 篇文章</span>
+			<span class="stat-item text-50">总计 <strong class="text-75">{totalPostsCount}</strong> 篇文章</span>
 			<span class="stat-item text-50">活跃 <strong class="text-75">{activeDays}</strong> 天</span>
 			<span class="stat-item text-50">最多 <strong class="text-75">{maxPostsInDay}</strong> 篇/天</span>
 		</div>
