@@ -52,7 +52,21 @@ async function fetchTweetsFromAPI(): Promise<XTweet[]> {
     }
     
     // 转换日期字符串为Date对象
-    const tweets: XTweet[] = result.data.map((tweet: any) => ({
+    const tweets: XTweet[] = result.data.map((tweet: {
+      id: string;
+      content: string;
+      displayDate: string;
+      likes: number;
+      replies: number;
+      retweets: number;
+      type: 'x-tweet';
+      images?: string[];
+      author?: {
+        name: string;
+        username: string;
+        avatar?: string;
+      };
+    }) => ({
       ...tweet,
       displayDate: new Date(tweet.displayDate)
     }));

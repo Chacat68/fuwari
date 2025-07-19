@@ -26,7 +26,7 @@ async function fetchTweetsFromAPI(): Promise<XTweet[]> {
     };
 
     if (xTwitterConfig.bearerToken) {
-      headers['Authorization'] = `Bearer ${xTwitterConfig.bearerToken}`;
+      headers.Authorization = `Bearer ${xTwitterConfig.bearerToken}`;
     }
 
     const username = xTwitterConfig.username || 'Chacat68';
@@ -58,9 +58,25 @@ async function fetchTweetsFromAPI(): Promise<XTweet[]> {
     const tweetsData = await tweetsResponse.json();
     
     // 转换API数据为内部格式
-    const tweets: XTweet[] = tweetsData.data?.map((tweet: any) => {
+    const tweets: XTweet[] = tweetsData.data?.map((tweet: {
+      id: string;
+      text: string;
+      created_at: string;
+      public_metrics?: {
+        like_count?: number;
+        reply_count?: number;
+        retweet_count?: number;
+      };
+      attachments?: {
+        media_keys?: string[];
+      };
+    }) => {
       const media = tweetsData.includes?.media || [];
-      const tweetMedia = media.filter((m: any) => 
+      const tweetMedia = media.filter((m: {
+        media_key: string;
+        url?: string;
+        preview_image_url?: string;
+      }) => 
         tweet.attachments?.media_keys?.includes(m.media_key)
       );
       
@@ -72,7 +88,10 @@ async function fetchTweetsFromAPI(): Promise<XTweet[]> {
         replies: tweet.public_metrics?.reply_count || 0,
         retweets: tweet.public_metrics?.retweet_count || 0,
         type: 'x-tweet' as const,
-        images: tweetMedia.map((m: any) => m.url || m.preview_image_url).filter(Boolean),
+        images: tweetMedia.map((m: {
+          url?: string;
+          preview_image_url?: string;
+        }) => m.url || m.preview_image_url).filter(Boolean),
         author: {
           name: userData.data?.name || '',
           username: userData.data?.username || '',
@@ -90,7 +109,7 @@ async function fetchTweetsFromAPI(): Promise<XTweet[]> {
   }
 }
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async () => {
   try {
     const tweets = await fetchTweetsFromAPI();
     

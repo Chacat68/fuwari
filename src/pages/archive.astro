@@ -4,7 +4,7 @@ import HeatmapChart from "@components/HeatmapChart.svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getSortedPosts, getAllPostsCount, getAllPosts } from "../utils/content-utils";
+import { getAllPosts, getAllPostsCount, getSortedPosts } from "../utils/content-utils";
 
 const sortedPosts = await getSortedPosts();
 const totalPostsCount = await getAllPostsCount();
