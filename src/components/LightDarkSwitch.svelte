@@ -47,13 +47,15 @@ function toggleScheme() {
 }
 
 function showPanel() {
+	if (typeof document === "undefined") return;
 	const panel = document.querySelector("#light-dark-panel");
-	panel.classList.remove("float-panel-closed");
+	panel?.classList.remove("float-panel-closed");
 }
 
 function hidePanel() {
+	if (typeof document === "undefined") return;
 	const panel = document.querySelector("#light-dark-panel");
-	panel.classList.add("float-panel-closed");
+	panel?.classList.add("float-panel-closed");
 }
 </script>
 

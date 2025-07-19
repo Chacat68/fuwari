@@ -4,15 +4,26 @@ import { onMount } from "svelte";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getPostUrlBySlug } from "../utils/url-utils";
+import HeatmapChart from "./HeatmapChart.svelte";
 
 export let tags: string[];
 export let categories: string[];
 export let sortedPosts: Post[] = [];
 
-const params = new URLSearchParams(window.location.search);
-tags = params.has("tag") ? params.getAll("tag") : [];
-categories = params.has("category") ? params.getAll("category") : [];
-const uncategorized = params.get("uncategorized");
+let params: URLSearchParams;
+let uncategorized: string | null = null;
+
+// 在浏览器环境中初始化 URL 参数
+if (typeof window !== 'undefined') {
+	params = new URLSearchParams(window.location.search);
+	tags = params.has("tag") ? params.getAll("tag") : [];
+	categories = params.has("category") ? params.getAll("category") : [];
+	uncategorized = params.get("uncategorized");
+} else {
+	// 服务器端渲染时的默认值
+	tags = [];
+	categories = [];
+}
 
 interface Post {
 	slug: string;
@@ -84,6 +95,9 @@ onMount(async () => {
 	groups = groupedPostsArray;
 });
 </script>
+
+<!-- 热力图组件 -->
+<HeatmapChart {sortedPosts} />
 
 <div class="card-base px-8 py-6">
     {#each groups as group}

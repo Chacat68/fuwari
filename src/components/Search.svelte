@@ -32,11 +32,13 @@ const fakeResult: SearchResult[] = [
 ];
 
 const togglePanel = () => {
+	if (typeof document === "undefined") return;
 	const panel = document.getElementById("search-panel");
 	panel?.classList.toggle("float-panel-closed");
 };
 
 const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
+	if (typeof document === "undefined") return;
 	const panel = document.getElementById("search-panel");
 	if (!panel || !isDesktop) return;
 
