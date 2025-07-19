@@ -1,0 +1,377 @@
+---
+// Threads 内容显示组件 - 演示版本
+// 包含模拟帖子数据，用于展示功能效果
+
+interface Props {
+  username?: string;
+  maxPosts?: number;
+}
+
+const { username = 'chacat68', maxPosts = 5 } = Astro.props;
+
+// 模拟帖子数据
+const mockPosts = [
+  {
+    id: '1',
+    content: '今天的阅读笔记：《思考，快与慢》中提到的系统1和系统2思维模式，让我重新审视了自己的决策过程。快思维虽然高效，但慢思维的深度分析同样重要。 #阅读笔记 #思考',
+    displayDate: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2小时前
+    likes: 15,
+    replies: 3,
+    reposts: 2,
+    author: {
+      name: 'CHACAT',
+      username: 'chacat68',
+      avatar: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim'
+    },
+    url: 'https://www.threads.com/@chacat68/post/demo1'
+  },
+  {
+    id: '2',
+    content: '刚完成了一次10公里的晨跑，感觉整个人都充满了活力！运动真的是最好的充电方式。今天的目标：专注写作，完成那篇关于时间管理的文章。 🏃‍♂️✍️',
+    displayDate: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6小时前
+    likes: 28,
+    replies: 7,
+    reposts: 5,
+    author: {
+      name: 'CHACAT',
+      username: 'chacat68',
+      avatar: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim'
+    },
+    url: 'https://www.threads.com/@chacat68/post/demo2'
+  },
+  {
+    id: '3',
+    content: '分享一个有趣的发现：当我们专注于创作时，时间似乎过得特别快。这种"心流"状态让人着迷，也让我明白了为什么要选择自己真正热爱的事情。',
+    displayDate: new Date(Date.now() - 12 * 60 * 60 * 1000), // 12小时前
+    likes: 42,
+    replies: 12,
+    reposts: 8,
+    author: {
+      name: 'CHACAT',
+      username: 'chacat68',
+      avatar: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim'
+    },
+    url: 'https://www.threads.com/@chacat68/post/demo3'
+  },
+  {
+    id: '4',
+    content: '今天在咖啡店里偶遇了一位正在阅读《百年孤独》的朋友，我们聊了很久关于魔幻现实主义的话题。有时候，最好的对话就是这样不期而遇的。 ☕📚',
+    displayDate: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1天前
+    likes: 35,
+    replies: 9,
+    reposts: 4,
+    author: {
+      name: 'CHACAT',
+      username: 'chacat68',
+      avatar: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim'
+    },
+    url: 'https://www.threads.com/@chacat68/post/demo4'
+  },
+  {
+    id: '5',
+    content: '正在重新整理我的数字工作流程。发现简化工具链比添加更多工具更有效果。有时候，少即是多。 #效率 #工具',
+    displayDate: new Date(Date.now() - 36 * 60 * 60 * 1000), // 1.5天前
+    likes: 23,
+    replies: 6,
+    reposts: 3,
+    author: {
+      name: 'CHACAT',
+      username: 'chacat68',
+      avatar: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim'
+    },
+    url: 'https://www.threads.com/@chacat68/post/demo5'
+  }
+];
+
+// 限制显示的帖子数量
+const displayPosts = mockPosts.slice(0, maxPosts);
+
+// 格式化时间
+function formatTimeAgo(date: Date): string {
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  
+  const minutes = Math.floor(diff / (1000 * 60));
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  
+  if (minutes < 60) {
+    return `${minutes}分钟前`;
+  }
+  if (hours < 24) {
+    return `${hours}小时前`;
+  }
+  if (days < 7) {
+    return `${days}天前`;
+  }
+  return date.toLocaleDateString('zh-CN');
+}
+---
+
+<div class="threads-feed-demo">
+  <div class="threads-feed-header">
+    <div class="threads-logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.5c0-3.086.85-5.94 2.495-8.491C5.852 1.205 8.605.024 12.186 0h.007c3.581.024 6.334 1.205 8.184 3.509C21.65 5.56 22.5 8.414 22.5 11.5c0 3.086-.85 5.94-2.495 8.491C18.148 22.795 15.395 23.976 12.186 24zM12.5 2c-2.89 0-5.202.906-6.875 2.695C4.297 6.094 3.5 8.547 3.5 11.5s.797 5.406 2.125 6.805C7.298 20.094 9.61 21 12.5 21s5.202-.906 6.875-2.695C20.703 16.906 21.5 14.453 21.5 11.5s-.797-5.406-2.125-6.805C17.702 2.906 15.39 2 12.5 2z"/>
+      </svg>
+      <span>Threads</span>
+    </div>
+    <a 
+      href={`https://www.threads.com/@${username}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="threads-profile-link"
+    >
+      @{username}
+    </a>
+  </div>
+  
+  <div class="threads-posts">
+    {displayPosts.map((post) => (
+      <div class="threads-post">
+        <div class="threads-post-header">
+          <img 
+            src={post.author.avatar} 
+            alt={post.author.name} 
+            class="threads-post-avatar"
+          />
+          <div class="threads-post-author-info">
+            <div class="threads-post-author">{post.author.name}</div>
+            <div class="threads-post-username">@{post.author.username}</div>
+          </div>
+          <div class="threads-post-date">{formatTimeAgo(post.displayDate)}</div>
+        </div>
+        
+        <div class="threads-post-content">{post.content}</div>
+        
+        <div class="threads-post-stats">
+          <div class="threads-post-stat">
+            <span class="stat-icon">❤️</span>
+            <span>{post.likes}</span>
+          </div>
+          <div class="threads-post-stat">
+            <span class="stat-icon">💬</span>
+            <span>{post.replies}</span>
+          </div>
+          <div class="threads-post-stat">
+            <span class="stat-icon">🔄</span>
+            <span>{post.reposts}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  <div class="threads-feed-footer">
+    <a 
+      href={`https://www.threads.com/@${username}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="threads-view-profile"
+    >
+      查看完整档案
+    </a>
+  </div>
+</div>
+
+<style>
+  .threads-feed-demo {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-bg-secondary);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .threads-feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    flex-shrink: 0;
+  }
+  
+  .threads-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  
+  .threads-logo svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .threads-profile-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  
+  .threads-profile-link:hover {
+    opacity: 0.8;
+  }
+  
+  .threads-posts {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+  
+  .threads-post {
+    padding: 16px;
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.2s;
+  }
+  
+  .threads-post:hover {
+    background: var(--color-bg-hover, rgba(0, 0, 0, 0.02));
+  }
+  
+  .threads-post:last-child {
+    border-bottom: none;
+  }
+  
+  .threads-post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .threads-post-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .threads-post-author-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .threads-post-author {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  
+  .threads-post-username {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    line-height: 1.2;
+  }
+  
+  .threads-post-date {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  
+  .threads-post-content {
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+    font-size: 14px;
+  }
+  
+  .threads-post-stats {
+    display: flex;
+    gap: 16px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+  }
+  
+  .threads-post-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s;
+  }
+  
+  .threads-post-stat:hover {
+    color: var(--color-text);
+  }
+  
+  .stat-icon {
+    font-size: 14px;
+  }
+  
+  .threads-feed-footer {
+    padding: 12px 16px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+    text-align: center;
+    flex-shrink: 0;
+  }
+  
+  .threads-view-profile {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  
+  .threads-view-profile:hover {
+    opacity: 0.8;
+  }
+  
+  /* 滚动条样式 */
+  .threads-posts::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .threads-posts::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .threads-posts::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+  
+  .threads-posts::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-secondary);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .threads-feed-demo {
+      max-height: 400px;
+    }
+    
+    .threads-post {
+      padding: 12px;
+    }
+    
+    .threads-feed-header {
+      padding: 12px;
+    }
+    
+    .threads-post-header {
+      gap: 8px;
+    }
+    
+    .threads-post-avatar {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .threads-post-stats {
+      gap: 12px;
+    }
+  }
+</style>

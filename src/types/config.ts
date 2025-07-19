@@ -104,3 +104,13 @@ export type XTwitterConfig = {
 	maxTweets?: number; // 最大获取推文数量，默认10
 	cacheTime?: number; // 缓存时间（分钟），默认30分钟
 };
+
+// Threads API配置类型
+export type ThreadsConfig = {
+	enable: boolean; // 是否启用Threads集成
+	username?: string; // Threads用户名
+	accessToken?: string; // Threads访问令牌
+	maxPosts?: number; // 最大获取帖子数量，默认10
+	cacheTime?: number; // 缓存时间（分钟），默认30分钟
+	fallbackToMock?: boolean; // API失败时是否使用模拟数据
+};

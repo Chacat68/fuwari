@@ -4,6 +4,7 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
+	ThreadsConfig,
 	XTwitterConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
@@ -124,4 +125,17 @@ export const xTwitterConfig: XTwitterConfig = {
 	// 功能配置
 	maxTweets: 10, // 最大获取推文数量
 	cacheTime: 30, // 缓存30分钟
+};
+
+// Threads API配置
+export const threadsConfig: ThreadsConfig = {
+	enable: false, // 默认关闭，需要配置API密钥后启用
+	username: "Chacat68", // Threads用户名
+	// API密钥配置（需要从环境变量中获取，确保安全）
+	// 获取方式：https://developers.facebook.com/docs/threads
+	accessToken: import.meta.env.THREADS_ACCESS_TOKEN, // Threads访问令牌
+	// 功能配置
+	maxPosts: 10, // 最大获取帖子数量
+	cacheTime: 30, // 缓存30分钟
+	fallbackToMock: true, // API失败时使用模拟数据
 };
