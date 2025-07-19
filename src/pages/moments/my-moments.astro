@@ -27,11 +27,7 @@ function extractDateAndCleanContent(content: string): { date: Date | null, clean
   return { date, cleanedContent };
 }
 
-// 导入X平台API工具函数
-import { getXTweets, type XTweet } from '../../utils/x-twitter-api';
 
-// 获取X平台推文数据
-const xTweets: XTweet[] = await getXTweets();
 
 const moments = await getCollection('moments');
 
@@ -44,11 +40,9 @@ const momentsWithDateAndContent = await Promise.all(moments.map(async moment => 
   return { ...moment, displayDate, sortDate: sortDate.getTime(), rawContent: cleanedContent, type: 'moment' as const };
 }));
 
-// 合并moments和X推文，按时间排序
-const allItems = [...momentsWithDateAndContent, ...xTweets].sort((a, b) => {
-  const dateA = 'sortDate' in a ? a.sortDate : a.displayDate?.getTime() || 0;
-  const dateB = 'sortDate' in b ? b.sortDate : b.displayDate?.getTime() || 0;
-  return dateB - dateA;
+// 按时间排序
+const allItems = momentsWithDateAndContent.sort((a, b) => {
+  return b.sortDate - a.sortDate;
 });
 
 // 按年份分组
@@ -91,125 +85,39 @@ function formatDate(date: Date) {
             </div>
             <div class="w-[70%] md:w-[80%] transition text-left text-50">{group.items.length} 条</div>
           </div>
-          {group.items.map(item => {
-            if (item.type === 'x-tweet') {
-              // X平台推文显示
-              return (
-                <div class="group btn-plain !block h-auto w-full rounded-lg hover:text-[initial] mb-4">
-                  <div class="flex flex-row justify-start items-center h-full">
-                     {/* date with X logo */}
-                     <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50 flex items-center justify-end gap-2">
-                       {/* X Logo 在时间左侧 */}
-                       <svg class="w-4 h-4 text-black dark:text-white flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                       </svg>
-                       <span>{formatDate(item.displayDate)}</span>
+          {group.items.map(item => (
+            <div class="group btn-plain !block h-auto w-full rounded-lg hover:text-[initial] mb-4">
+              <div class="flex flex-row justify-start items-center h-full">
+                {/* date */}
+                <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
+                  {formatDate(item.displayDate)}
+                </div>
+                {/* dot and line */}
+                <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center justify-center">
+                  <div class="transition-all w-1 h-1 rounded group-hover:h-5
+                        bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+                        outline outline-4 z-50
+                        outline-[var(--card-bg)]
+                        group-hover:outline-[var(--btn-plain-bg-hover)]
+                        group-active:outline-[var(--btn-plain-bg-active)]
+                        "
+                  ></div>
+                </div>
+                {/* moment content */}
+                <div class="w-[70%] md:w-[80%] text-left font-bold group-hover:translate-x-1 transition-all text-75">
+                   <article class="prose dark:prose-invert max-w-none !my-0"
+                     set:html={item.rawContent}
+                   >
+                   </article>
+                   {item.data?.image && (
+                     <div class="mt-4">
+                       <img src={item.data.image} alt={item.data?.title || "此刻图片"} class="rounded-lg max-w-full" />
                      </div>
-                    {/* dot and line */}
-                    <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center justify-center">
-                      <div class="transition-all w-1 h-1 rounded group-hover:h-5
-                            bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
-                            outline outline-4 z-50
-                            outline-[var(--card-bg)]
-                            group-hover:outline-[var(--btn-plain-bg-hover)]
-                            group-active:outline-[var(--btn-plain-bg-active)]
-                            "
-                      ></div>
-                    </div>
-                    {/* X推文内容 */}
-                      <div class="w-[70%] md:w-[80%] text-left group-hover:translate-x-1 transition-all">
-                        <div class="text-75 font-normal leading-relaxed">{item.content}</div>
-                        
-                        {/* 显示推文图片 */}
-                        {item.images && item.images.length > 0 && (
-                          <div class="mt-3">
-                            {item.images.length === 1 ? (
-                              <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                                <img 
-                                  src={item.images[0]} 
-                                  alt="推文图片" 
-                                  class="w-full h-auto max-h-80 object-cover"
-                                  loading="lazy"
-                                />
-                              </div>
-                            ) : (
-                              <div class="grid grid-cols-2 gap-2">
-                                 {item.images.map((image, index) => (
-                                   <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                                     <img 
-                                       src={image} 
-                                       alt={`推文图片 ${index + 1}`} 
-                                       class="w-full h-auto max-h-40 object-cover"
-                                       loading="lazy"
-                                     />
-                                   </div>
-                                 ))}
-                               </div>
-                            )}
-                          </div>
-                        )}
-                        
-                        <div class="flex items-center gap-4 mt-3 text-sm text-neutral-500 dark:text-neutral-400">
-                          <span class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-                            {item.likes}
-                          </span>
-                          <span class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                            </svg>
-                            {item.replies}
-                          </span>
-                          <span class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
-                            {item.retweets}
-                          </span>
-                        </div>
-                      </div>
-                  </div>
+                   )}
                 </div>
-              );
-            } else {
-              // 普通moments内容显示
-              return (
-                <div class="group btn-plain !block h-auto w-full rounded-lg hover:text-[initial] mb-4">
-                  <div class="flex flex-row justify-start items-center h-full">
-                    {/* date */}
-                    <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
-                      {formatDate(item.displayDate)}
-                    </div>
-                    {/* dot and line */}
-                    <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center justify-center">
-                      <div class="transition-all w-1 h-1 rounded group-hover:h-5
-                            bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
-                            outline outline-4 z-50
-                            outline-[var(--card-bg)]
-                            group-hover:outline-[var(--btn-plain-bg-hover)]
-                            group-active:outline-[var(--btn-plain-bg-active)]
-                            "
-                      ></div>
-                    </div>
-                    {/* moment content */}
-                    <div class="w-[70%] md:w-[80%] text-left font-bold group-hover:translate-x-1 transition-all text-75">
-                       <article class="prose dark:prose-invert max-w-none !my-0"
-                         set:html={item.rawContent}
-                       >
-                       </article>
-                       {item.data?.image && (
-                         <div class="mt-4">
-                           <img src={item.data.image} alt={item.data?.title || "此刻图片"} class="rounded-lg max-w-full" />
-                         </div>
-                       )}
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-          })}
+              </div>
+            </div>
+          ))}
         </div>
       ))
     }
