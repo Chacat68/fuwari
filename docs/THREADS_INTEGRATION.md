@@ -1,4 +1,4 @@
-# Threads 集成指南
+image.png# Threads 集成指南
 
 本指南将帮助您在 Fuwari 博客中集成 Meta Threads 内容。
 
