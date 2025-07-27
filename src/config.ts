@@ -35,7 +35,7 @@ export const siteConfig: SiteConfig = {
 	umami: {
 		enable: true, // 启用 Umami 统计
 		websiteId: "e49c70c3-26a8-46d9-b241-6a47a00574f2", // 您的 Umami 网站 ID
-		src: "https://umami-nu-blush.vercel.app/script.js", // 您的 Umami 服务器地址
+		src: "https://umami.chawfoo.com/script.js", // 您的 Umami 服务器地址
 	},
 	favicon: [
 		// 将此数组留空以使用默认图标
