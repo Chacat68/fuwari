@@ -25,6 +25,12 @@ export type SiteConfig = {
 		enable: boolean;
 		depth: 1 | 2 | 3;
 	};
+	// Umami 统计配置
+	umami?: {
+		enable: boolean;
+		websiteId: string;
+		src: string;
+	};
 
 	favicon: Favicon[];
 };
