@@ -1,5 +1,6 @@
 ---
 // 内部链接组件 - 用于提高页面权重传递和用户体验
+import type { CollectionEntry } from 'astro:content';
 import { getSortedPosts } from "../../utils/content-utils";
 import { getPostUrlBySlug } from "../../utils/url-utils";
 
@@ -18,50 +19,51 @@ interface Props {
 
 const {
 	currentTags = [],
-	currentSlug = '',
+	currentSlug = "",
 	maxLinks = 5,
 	showTitle = true,
-	customTitle = '相关文章'
+	customTitle = "相关文章",
 } = Astro.props;
 
 // 获取所有已发布的文章
 const allPosts = await getSortedPosts();
 
 // 过滤掉当前文章
-const otherPosts = allPosts.filter(post => post.slug !== currentSlug);
+const otherPosts = allPosts.filter((post) => post.slug !== currentSlug);
 
 // 计算文章相关性得分
-function calculateRelevanceScore(post: any): number {
+function calculateRelevanceScore(post: CollectionEntry<'posts'>): number {
 	let score = 0;
 	const postTags = post.data.tags || [];
-	
+
 	// 标签匹配得分
-	const commonTags = currentTags.filter(tag => postTags.includes(tag));
+	const commonTags = currentTags.filter((tag) => postTags.includes(tag));
 	score += commonTags.length * 10;
-	
+
 	// 发布时间得分（越新越好）
 	const daysSincePublished = Math.floor(
-		(Date.now() - new Date(post.data.published).getTime()) / (1000 * 60 * 60 * 24)
+		(Date.now() - new Date(post.data.published).getTime()) /
+			(1000 * 60 * 60 * 24),
 	);
 	score += Math.max(0, 100 - daysSincePublished / 10);
-	
+
 	// 标题相似性得分（简单的关键词匹配）
 	if (currentTags.length > 0) {
 		const titleWords = post.data.title.toLowerCase().split(/\s+/);
-		const matchingWords = currentTags.filter(tag => 
-			titleWords.some((word: string) => word.includes(tag.toLowerCase()))
+		const matchingWords = currentTags.filter((tag) =>
+			titleWords.some((word: string) => word.includes(tag.toLowerCase())),
 		);
 		score += matchingWords.length * 5;
 	}
-	
+
 	return score;
 }
 
 // 获取相关文章
 const relatedPosts = otherPosts
-	.map(post => ({
+	.map((post) => ({
 		...post,
-		relevanceScore: calculateRelevanceScore(post)
+		relevanceScore: calculateRelevanceScore(post),
 	}))
 	.sort((a, b) => b.relevanceScore - a.relevanceScore)
 	.slice(0, maxLinks);
@@ -69,13 +71,15 @@ const relatedPosts = otherPosts
 // 如果没有足够的相关文章，补充最新文章
 if (relatedPosts.length < maxLinks) {
 	const additionalPosts = otherPosts
-		.filter(post => !relatedPosts.find(rp => rp.slug === post.slug))
+		.filter((post) => !relatedPosts.find((rp) => rp.slug === post.slug))
 		.slice(0, maxLinks - relatedPosts.length);
-	
-	relatedPosts.push(...additionalPosts.map(post => ({
-		...post,
-		relevanceScore: 0
-	})));
+
+	relatedPosts.push(
+		...additionalPosts.map((post) => ({
+			...post,
+			relevanceScore: 0,
+		})),
+	);
 }
 ---
 
@@ -111,17 +115,18 @@ if (relatedPosts.length < maxLinks) {
 	.internal-links-container {
 		margin: 2rem 0;
 		padding: 1.5rem;
-		border: 1px solid var(--color-border);
 		border-radius: var(--radius-large);
-		background: var(--color-bg-secondary);
+		background: var(--card-bg);
+		transition: all 0.3s ease;
+		border: 1px solid transparent;
 	}
 	
 	.internal-links-title {
 		margin: 0 0 1rem 0;
 		font-size: 1.2rem;
 		font-weight: 600;
-		color: var(--color-text-primary);
-		border-bottom: 2px solid var(--color-primary);
+		color: var(--primary);
+		border-bottom: 1px dashed var(--line-divider);
 		padding-bottom: 0.5rem;
 	}
 	
@@ -129,48 +134,49 @@ if (relatedPosts.length < maxLinks) {
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		display: grid;
-		gap: 0.75rem;
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		overflow-x: auto;
+		scrollbar-width: thin;
+		scrollbar-color: var(--scrollbar-bg) transparent;
 	}
 	
 	.internal-link-item {
 		margin: 0;
+		flex: 0 0 auto;
+		min-width: 200px;
+		max-width: 280px;
+		height: 120px;
+		display: flex;
 	}
 	
 	.internal-link {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		min-height: 120px;
 		padding: 0.75rem 1rem;
-		border-radius: var(--radius-medium);
-		background: var(--color-bg);
+		border-radius: calc(var(--radius-large) * 0.6);
+		background: var(--btn-regular-bg);
 		border: 1px solid transparent;
 		text-decoration: none;
-		color: var(--color-text-primary);
-		transition: all 0.2s ease;
+		color: var(--btn-content);
+		transition: all 0.3s ease;
 		position: relative;
 		overflow: hidden;
 	}
 	
 	.internal-link:hover {
-		border-color: var(--color-primary);
-		background: var(--color-bg-hover);
+		background: var(--btn-regular-bg-hover);
 		transform: translateY(-1px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	}
 	
-	.internal-link:before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0;
-		height: 100%;
-		width: 3px;
-		background: var(--color-primary);
-		transform: scaleY(0);
-		transition: transform 0.2s ease;
-	}
-	
-	.internal-link:hover:before {
-		transform: scaleY(1);
+	.internal-link:active {
+		background: var(--btn-regular-bg-active);
+		transform: translateY(0);
 	}
 	
 	.link-title {
@@ -178,6 +184,7 @@ if (relatedPosts.length < maxLinks) {
 		font-weight: 500;
 		margin-bottom: 0.25rem;
 		line-height: 1.4;
+		color: inherit;
 	}
 	
 	.link-tags {
@@ -190,10 +197,29 @@ if (relatedPosts.length < maxLinks) {
 	.tag {
 		font-size: 0.75rem;
 		padding: 0.125rem 0.5rem;
-		background: var(--color-primary-alpha);
-		color: var(--color-primary);
-		border-radius: var(--radius-small);
+		background: var(--primary);
+		color: white;
+		border-radius: calc(var(--radius-large) * 0.25);
 		font-weight: 500;
+		opacity: 0.8;
+	}
+	
+	/* 自定义滚动条样式 */
+	.internal-links-list::-webkit-scrollbar {
+		height: 6px;
+	}
+	
+	.internal-links-list::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	
+	.internal-links-list::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-bg);
+		border-radius: 3px;
+	}
+	
+	.internal-links-list::-webkit-scrollbar-thumb:hover {
+		background: var(--primary);
 	}
 	
 	/* 响应式设计 */
@@ -207,6 +233,15 @@ if (relatedPosts.length < maxLinks) {
 			font-size: 1.1rem;
 		}
 		
+		.internal-links-list {
+			gap: 0.75rem;
+		}
+		
+		.internal-link-item {
+			min-width: 180px;
+			max-width: 240px;
+		}
+		
 		.internal-link {
 			padding: 0.625rem 0.75rem;
 		}
@@ -218,23 +253,6 @@ if (relatedPosts.length < maxLinks) {
 		.tag {
 			font-size: 0.7rem;
 			padding: 0.1rem 0.4rem;
-		}
-	}
-	
-	/* 暗色模式适配 */
-	@media (prefers-color-scheme: dark) {
-		.internal-links-container {
-			border-color: var(--color-border-dark, #374151);
-			background: var(--color-bg-secondary-dark, #1f2937);
-		}
-		
-		.internal-link {
-			background: var(--color-bg-dark, #111827);
-			color: var(--color-text-primary-dark, #f9fafb);
-		}
-		
-		.internal-link:hover {
-			background: var(--color-bg-hover-dark, #374151);
 		}
 	}
 </style>
