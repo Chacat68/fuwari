@@ -5,6 +5,7 @@ import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { siteConfig } from "../config";
 
 const aboutPost = await getEntry("spec", "about");
 
@@ -13,8 +14,18 @@ if (!aboutPost) {
 }
 
 const { Content } = await render(aboutPost);
+
+// About页面SEO信息
+const aboutTitle = `关于我 - ${siteConfig.title}`;
+const aboutDescription = "了解更多关于查猫CHACAT的信息，游戏开发者、内容创作者、手机摄影师";
+const aboutKeywords = ["关于", "个人简介", "游戏开发", "内容创作", "摄影", "查猫", "CHACAT"];
 ---
-<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
+<MainGridLayout 
+	title={aboutTitle} 
+	description={aboutDescription}
+	image={siteConfig.banner?.src}
+	keywords={aboutKeywords}
+>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
         <div class="card-base z-10 px-9 py-6 relative w-full">
             <!-- 个人介绍部分：左右分栏布局 -->

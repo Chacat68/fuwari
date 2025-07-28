@@ -112,7 +112,21 @@ export default defineConfig({
 			},
 		}),
 		svelte(),
-		sitemap(),
+		sitemap({
+			filter: (page) => {
+				// 排除草稿页面和特殊页面
+				return !page.includes('/draft/') && !page.includes('/404');
+			},
+			changefreq: 'weekly',
+			priority: 0.7,
+			lastmod: new Date(),
+			customPages: [
+				'https://www.chawfoo.com/',
+				'https://www.chawfoo.com/about/',
+				'https://www.chawfoo.com/archive/',
+				'https://www.chawfoo.com/projects/',
+			],
+		})
 	],
 	markdown: {
 		remarkPlugins: [

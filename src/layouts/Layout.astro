@@ -26,9 +26,11 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
+	image?: string; // 用于社交媒体分享的图片
+	keywords?: string[]; // 页面关键词
 }
 
-let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
+let { title, banner, description, lang, setOGTypeArticle, image, keywords } = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -63,6 +65,32 @@ if (!lang) {
 }
 const siteLang = lang.replace("_", "-");
 
+// 社交媒体分享图片逻辑
+let shareImage: string;
+if (image && image.trim() !== "") {
+	// 使用传入的图片
+	shareImage = image.startsWith('http') ? image : new URL(image, Astro.site).href;
+} else if (banner && banner.trim() !== "") {
+	// 使用横幅图片作为分享图片
+	shareImage = banner.startsWith('http') ? banner : new URL(banner, Astro.site).href;
+} else if (siteConfig.defaultPostImage) {
+	// 使用默认文章图片
+	shareImage = siteConfig.defaultPostImage;
+} else {
+	// 使用网站横幅图片作为最后备选
+	shareImage = siteConfig.banner.src.startsWith('http') 
+		? siteConfig.banner.src 
+		: new URL(siteConfig.banner.src, Astro.site).href;
+}
+
+// 生成关键词字符串
+const keywordsString = keywords && keywords.length > 0 
+	? keywords.join(', ') 
+	: `${siteConfig.title}, ${siteConfig.subtitle}, 博客, ${profileConfig.name}`;
+
+// 生成canonical URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
 const bannerOffsetByPosition = {
 	top: `${BANNER_HEIGHT_EXTEND}vh`,
 	center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
@@ -83,11 +111,17 @@ const bannerOffset =
 		<meta charset="UTF-8" />
 		<meta name="description" content={description || pageTitle}>
 		<meta name="author" content={profileConfig.name}>
+		<meta name="keywords" content={keywordsString}>
+		<meta name="theme-color" content={`hsl(${siteConfig.themeColor.hue}, 75%, 60%)`}>
+		<link rel="canonical" href={canonicalURL} />
 
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={description || pageTitle}>
+		<meta property="og:image" content={shareImage}>
+		<meta property="og:image:alt" content={`${pageTitle} - ${siteConfig.title}`}>
+		<meta property="og:locale" content={siteLang}>
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
         ) : (
@@ -95,9 +129,13 @@ const bannerOffset =
         )}
 
 		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@Chacat68">
+		<meta name="twitter:creator" content="@Chacat68">
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
+		<meta name="twitter:image" content={shareImage}>
+		<meta name="twitter:image:alt" content={`${pageTitle} - ${siteConfig.title}`}>
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />

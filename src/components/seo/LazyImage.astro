@@ -1,0 +1,87 @@
+---
+// 延迟加载图片组件，优化性能和SEO
+interface Props {
+	src: string;
+	alt: string;
+	width?: number;
+	height?: number;
+	class?: string;
+	loading?: 'lazy' | 'eager';
+	decoding?: 'async' | 'sync' | 'auto';
+	fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+	src,
+	alt,
+	width,
+	height,
+	class: className,
+	loading = 'lazy',
+	decoding = 'async',
+	fetchpriority = 'auto'
+} = Astro.props;
+
+// 生成响应式图片的srcset（如果需要）
+const generateSrcSet = (baseSrc: string) => {
+	if (baseSrc.startsWith('http')) {
+		// 外部图片，返回原始src
+		return baseSrc;
+	}
+	// 本地图片可以生成多种尺寸
+	return baseSrc;
+};
+
+const imageSrc = generateSrcSet(src);
+---
+
+<img 
+	src={imageSrc}
+	alt={alt}
+	width={width}
+	height={height}
+	class={className}
+	loading={loading}
+	decoding={decoding}
+	fetchpriority={fetchpriority}
+	style="aspect-ratio: auto;"
+/>
+
+<style>
+	img {
+		max-width: 100%;
+		height: auto;
+		transition: opacity 0.3s ease;
+	}
+	
+	img[loading="lazy"] {
+		opacity: 0;
+		animation: fadeIn 0.3s ease forwards;
+	}
+	
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
+<script>
+	// 图片加载完成后的处理
+	document.addEventListener('DOMContentLoaded', () => {
+		const images = document.querySelectorAll('img[loading="lazy"]');
+		
+		images.forEach((img) => {
+			const imgElement = img as HTMLImageElement;
+			imgElement.addEventListener('load', () => {
+				imgElement.style.opacity = '1';
+			});
+			
+			imgElement.addEventListener('error', () => {
+				console.warn('图片加载失败:', imgElement.src);
+				// 可以设置默认图片
+				imgElement.style.opacity = '0.5';
+			});
+		});
+	});
+</script>
