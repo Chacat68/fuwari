@@ -1,0 +1,483 @@
+---
+// 增强导航组件 - 改善网站导航结构和用户体验
+import { siteConfig } from "../../config";
+import { url } from "../../utils/url-utils";
+
+interface Props {
+	// 当前页面路径，用于高亮当前页面
+	currentPath?: string;
+	// 是否显示面包屑导航
+	showBreadcrumb?: boolean;
+	// 面包屑数据
+	breadcrumbItems?: Array<{label: string, href: string}>;
+	// 是否显示搜索框
+	showSearch?: boolean;
+}
+
+const {
+	currentPath = '',
+	showBreadcrumb = true,
+	breadcrumbItems = [],
+	showSearch = true
+} = Astro.props;
+
+// 主导航菜单项
+const mainNavItems = [
+	{ label: '首页', href: '/', icon: '🏠' },
+	{ label: '文章', href: '/posts', icon: '📝' },
+	{ label: '归档', href: '/archive', icon: '📚' },
+	{ label: '项目', href: '/projects', icon: '🚀' },
+	{ label: '关于', href: '/about', icon: '👤' },
+];
+
+// 检查当前页面是否激活
+function isActive(href: string): boolean {
+	if (href === '/' && currentPath === '/') return true;
+	if (href !== '/' && currentPath.startsWith(href)) return true;
+	return false;
+}
+
+// 生成面包屑导航
+function generateBreadcrumb() {
+	const items = [{ label: '首页', href: '/' }];
+	
+	if (breadcrumbItems.length > 0) {
+		items.push(...breadcrumbItems);
+	} else {
+		// 根据当前路径自动生成面包屑
+		const pathSegments = currentPath.split('/').filter(segment => segment);
+		let currentHref = '';
+		
+		pathSegments.forEach((segment, index) => {
+			currentHref += `/${segment}`;
+			let label = segment;
+			
+			// 路径映射
+			switch (segment) {
+				case 'posts':
+					label = '文章';
+					break;
+				case 'archive':
+					label = '归档';
+					break;
+				case 'projects':
+					label = '项目';
+					break;
+				case 'about':
+					label = '关于';
+					break;
+				default:
+					// 首字母大写
+					label = segment.charAt(0).toUpperCase() + segment.slice(1);
+			}
+			
+			items.push({ label, href: currentHref });
+		});
+	}
+	
+	return items;
+}
+
+const breadcrumbData = generateBreadcrumb();
+---
+
+<nav class="enhanced-navigation" role="navigation" aria-label="主导航">
+	<!-- 主导航菜单 -->
+	<div class="main-nav-container">
+		<div class="nav-brand">
+			<a href="/" class="brand-link" aria-label="返回首页">
+				<span class="brand-icon">🌟</span>
+				<span class="brand-text">{siteConfig.title}</span>
+			</a>
+		</div>
+		
+		<ul class="nav-menu" role="menubar">
+			{mainNavItems.map((item) => (
+				<li class="nav-item" role="none">
+					<a 
+						href={item.href}
+						class={`nav-link ${isActive(item.href) ? 'active' : ''}`}
+						role="menuitem"
+						aria-current={isActive(item.href) ? 'page' : undefined}
+					>
+						<span class="nav-icon" aria-hidden="true">{item.icon}</span>
+						<span class="nav-text">{item.label}</span>
+					</a>
+				</li>
+			))}
+		</ul>
+		
+		<!-- 搜索框 -->
+		{showSearch && (
+			<div class="nav-search">
+				<button 
+					class="search-trigger"
+					aria-label="打开搜索"
+					type="button"
+				>
+					<span class="search-icon">🔍</span>
+					<span class="search-text">搜索</span>
+				</button>
+			</div>
+		)}
+		
+		<!-- 移动端菜单按钮 -->
+		<button 
+			class="mobile-menu-toggle"
+			aria-label="切换菜单"
+			aria-expanded="false"
+			type="button"
+		>
+			<span class="hamburger-line"></span>
+			<span class="hamburger-line"></span>
+			<span class="hamburger-line"></span>
+		</button>
+	</div>
+	
+	<!-- 面包屑导航 -->
+	{showBreadcrumb && breadcrumbData.length > 1 && (
+		<div class="breadcrumb-container">
+			<nav class="breadcrumb" aria-label="面包屑导航">
+				<ol class="breadcrumb-list">
+					{breadcrumbData.map((item, index) => (
+						<li class="breadcrumb-item">
+							{index < breadcrumbData.length - 1 ? (
+								<a href={item.href} class="breadcrumb-link">{item.label}</a>
+							) : (
+								<span class="breadcrumb-current" aria-current="page">{item.label}</span>
+							)}
+							{index < breadcrumbData.length - 1 && (
+								<span class="breadcrumb-separator" aria-hidden="true">›</span>
+							)}
+						</li>
+					))}
+				</ol>
+			</nav>
+		</div>
+	)}
+</nav>
+
+<style>
+	.enhanced-navigation {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: var(--color-bg);
+		border-bottom: 1px solid var(--color-border);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+	
+	.main-nav-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.75rem 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		gap: 1rem;
+	}
+	
+	.nav-brand {
+		display: flex;
+		align-items: center;
+	}
+	
+	.brand-link {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		text-decoration: none;
+		color: var(--color-text-primary);
+		font-weight: 600;
+		font-size: 1.2rem;
+		transition: color 0.2s ease;
+	}
+	
+	.brand-link:hover {
+		color: var(--color-primary);
+	}
+	
+	.brand-icon {
+		font-size: 1.5rem;
+	}
+	
+	.nav-menu {
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		gap: 0.5rem;
+	}
+	
+	.nav-item {
+		margin: 0;
+	}
+	
+	.nav-link {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		border-radius: var(--radius-medium);
+		text-decoration: none;
+		color: var(--color-text-secondary);
+		transition: all 0.2s ease;
+		position: relative;
+		min-height: var(--touch-target-min-size, 44px);
+	}
+	
+	.nav-link:hover {
+		color: var(--color-primary);
+		background: var(--color-bg-hover);
+	}
+	
+	.nav-link.active {
+		color: var(--color-primary);
+		background: var(--color-primary-alpha);
+		font-weight: 500;
+	}
+	
+	.nav-link.active::after {
+		content: '';
+		position: absolute;
+		bottom: -0.75rem;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 4px;
+		height: 4px;
+		background: var(--color-primary);
+		border-radius: 50%;
+	}
+	
+	.nav-icon {
+		font-size: 1.1rem;
+	}
+	
+	.nav-search {
+		display: flex;
+		align-items: center;
+	}
+	
+	.search-trigger {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-medium);
+		background: var(--color-bg-secondary);
+		color: var(--color-text-secondary);
+		cursor: pointer;
+		transition: all 0.2s ease;
+		min-height: var(--touch-target-min-size, 44px);
+	}
+	
+	.search-trigger:hover {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+	}
+	
+	.mobile-menu-toggle {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 44px;
+		height: 44px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		gap: 4px;
+	}
+	
+	.hamburger-line {
+		width: 20px;
+		height: 2px;
+		background: var(--color-text-primary);
+		transition: all 0.3s ease;
+	}
+	
+	.breadcrumb-container {
+		padding: 0.5rem 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		border-top: 1px solid var(--color-border-light);
+		background: var(--color-bg-secondary);
+	}
+	
+	.breadcrumb-list {
+		display: flex;
+		align-items: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+	
+	.breadcrumb-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0;
+	}
+	
+	.breadcrumb-link {
+		color: var(--color-text-secondary);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: color 0.2s ease;
+	}
+	
+	.breadcrumb-link:hover {
+		color: var(--color-primary);
+	}
+	
+	.breadcrumb-current {
+		color: var(--color-text-primary);
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+	
+	.breadcrumb-separator {
+		color: var(--color-text-tertiary);
+		font-size: 0.8rem;
+	}
+	
+	/* 移动端适配 */
+	@media (max-width: 768px) {
+		.nav-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: var(--color-bg);
+			border-top: 1px solid var(--color-border);
+			flex-direction: column;
+			padding: 1rem;
+			gap: 0.5rem;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+		
+		.nav-menu.active {
+			display: flex;
+		}
+		
+		.mobile-menu-toggle {
+			display: flex;
+		}
+		
+		.nav-search {
+			display: none;
+		}
+		
+		.search-text {
+			display: none;
+		}
+		
+		.nav-text {
+			font-size: 0.9rem;
+		}
+		
+		.breadcrumb-container {
+			padding: 0.5rem;
+		}
+		
+		.breadcrumb-list {
+			font-size: 0.8rem;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.main-nav-container {
+			padding: 0.5rem;
+		}
+		
+		.brand-text {
+			display: none;
+		}
+		
+		.breadcrumb-link,
+		.breadcrumb-current {
+			font-size: 0.8rem;
+		}
+	}
+	
+	/* 暗色模式适配 */
+	@media (prefers-color-scheme: dark) {
+		.enhanced-navigation {
+			background: var(--color-bg-dark, #111827);
+			border-bottom-color: var(--color-border-dark, #374151);
+		}
+		
+		.search-trigger {
+			background: var(--color-bg-secondary-dark, #1f2937);
+			border-color: var(--color-border-dark, #374151);
+		}
+	}
+	
+	/* 高对比度模式 */
+	@media (prefers-contrast: high) {
+		.nav-link {
+			border: 1px solid transparent;
+		}
+		
+		.nav-link:focus {
+			border-color: var(--color-primary);
+			outline: 2px solid var(--color-primary);
+			outline-offset: 2px;
+		}
+	}
+</style>
+
+<script>
+	// 移动端菜单切换
+	document.addEventListener('DOMContentLoaded', function() {
+		const mobileToggle = document.querySelector('.mobile-menu-toggle');
+		const navMenu = document.querySelector('.nav-menu');
+		
+		if (mobileToggle && navMenu) {
+			mobileToggle.addEventListener('click', function(this: HTMLButtonElement) {
+				const isExpanded = this.getAttribute('aria-expanded') === 'true';
+				this.setAttribute('aria-expanded', (!isExpanded).toString());
+				navMenu.classList.toggle('active');
+				
+				// 动画效果
+			const lines = this.querySelectorAll('.hamburger-line') as NodeListOf<HTMLElement>;
+			if (!isExpanded) {
+				lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+				lines[1].style.opacity = '0';
+				lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+			} else {
+				lines.forEach((line: HTMLElement) => {
+					line.style.transform = '';
+					line.style.opacity = '';
+				});
+			}
+			});
+		}
+		
+		// 搜索功能
+		const searchTrigger = document.querySelector('.search-trigger');
+		if (searchTrigger) {
+			searchTrigger.addEventListener('click', function(this: HTMLElement) {
+				// 这里可以集成现有的搜索功能
+				console.log('打开搜索');
+			});
+		}
+		
+		// 键盘导航支持
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape') {
+				// 关闭移动端菜单
+				if (navMenu && navMenu.classList.contains('active')) {
+					if (mobileToggle) {
+						(mobileToggle as HTMLButtonElement).click();
+					}
+				}
+			}
+		});
+	});
+</script>

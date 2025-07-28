@@ -14,6 +14,8 @@ import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
 import StructuredData from "../../components/seo/StructuredData.astro";
+import InternalLinks from "../../components/seo/InternalLinks.astro";
+import { optimizeTitle, generateDescription, extractKeywords, calculateReadingTime } from "@utils/seo-utils";
 
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
@@ -28,6 +30,30 @@ const { Content, headings } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
 
+// 使用SEO工具优化标题和描述
+const originalTitle = entry.data.title;
+const originalDescription = entry.data.description || '';
+const tags = entry.data.tags || [];
+const lang = entry.data.lang || 'zh';
+
+// 计算阅读时间和字数
+const readingTime = calculateReadingTime(entry.body);
+const wordCount = entry.body.replace(/<[^>]*>/g, '').split(/\s+/).filter(word => word.length > 0).length;
+
+// 提取关键词（如果没有标签）
+const extractedKeywords = tags.length > 0 ? tags : extractKeywords(entry.body, 5);
+
+// 优化标题
+const title = optimizeTitle(originalTitle, {
+	maxLength: 60,
+	addKeywords: extractedKeywords.slice(0, 2), // 只添加前2个关键词
+	addSiteTitle: true
+});
+
+// 优化描述
+const description = originalDescription || generateDescription(entry.body, 160);
+const keywords = extractedKeywords;
+
 // 获取文章图片用于结构化数据和社交分享
 const articleImage = entry.data.image || siteConfig.defaultPostImage;
 const fullImageUrl = articleImage?.startsWith('http') 
@@ -36,14 +62,12 @@ const fullImageUrl = articleImage?.startsWith('http')
 
 // 构建博客文章的结构化数据
 const blogPostingData = {
-	headline: entry.data.title,
-	description: entry.data.description || entry.data.title,
-	keywords: entry.data.tags,
+	headline: title,
+	description: description,
+	keywords: keywords,
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
 	...(entry.data.updated && { dateModified: formatDateToYYYYMMDD(entry.data.updated) }),
-	inLanguage: entry.data.lang
-		? entry.data.lang.replace("_", "-")
-		: siteConfig.lang.replace("_", "-"),
+	inLanguage: lang.replace("_", "-"),
 	...(fullImageUrl && { 
 		image: {
 			"@type": "ImageObject",
@@ -53,19 +77,19 @@ const blogPostingData = {
 		}
 	}),
 	url: Astro.url.href,
-	wordCount: remarkPluginFrontmatter.words || 0,
-	timeRequired: `PT${Math.ceil((remarkPluginFrontmatter.words || 0) / 200)}M`
+	wordCount: wordCount,
+	timeRequired: `PT${readingTime}M`
 };
 ---
 <MainGridLayout 
 	banner={entry.data.image} 
-	title={entry.data.title} 
-	description={entry.data.description} 
-	lang={entry.data.lang} 
+	title={title} 
+	description={description} 
+	lang={lang} 
 	setOGTypeArticle={true} 
 	headings={headings}
 	image={articleImage}
-	keywords={entry.data.tags}
+	keywords={keywords}
 >
     <StructuredData slot="head" type="BlogPosting" data={blogPostingData} />
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
@@ -132,6 +156,15 @@ const blogPostingData = {
             <Markdown class="mb-6 markdown-content onload-animation prose dark:prose-invert">
                 <Content />
             </Markdown>
+
+            <!-- 内部链接组件，提高页面权重传递 -->
+            <InternalLinks 
+                currentTags={entry.data.tags}
+                currentSlug={entry.slug}
+                maxLinks={5}
+                showTitle={true}
+                customTitle="相关推荐"
+            />
 
             {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 

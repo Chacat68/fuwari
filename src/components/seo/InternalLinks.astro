@@ -1,0 +1,240 @@
+---
+// 内部链接组件 - 用于提高页面权重传递和用户体验
+import { getSortedPosts } from "../../utils/content-utils";
+import { getPostUrlBySlug } from "../../utils/url-utils";
+
+interface Props {
+	// 当前文章的标签，用于查找相关文章
+	currentTags?: string[];
+	// 当前文章的slug，避免推荐自己
+	currentSlug?: string;
+	// 最大显示数量
+	maxLinks?: number;
+	// 显示标题
+	showTitle?: boolean;
+	// 自定义标题
+	customTitle?: string;
+}
+
+const {
+	currentTags = [],
+	currentSlug = '',
+	maxLinks = 5,
+	showTitle = true,
+	customTitle = '相关文章'
+} = Astro.props;
+
+// 获取所有已发布的文章
+const allPosts = await getSortedPosts();
+
+// 过滤掉当前文章
+const otherPosts = allPosts.filter(post => post.slug !== currentSlug);
+
+// 计算文章相关性得分
+function calculateRelevanceScore(post: any): number {
+	let score = 0;
+	const postTags = post.data.tags || [];
+	
+	// 标签匹配得分
+	const commonTags = currentTags.filter(tag => postTags.includes(tag));
+	score += commonTags.length * 10;
+	
+	// 发布时间得分（越新越好）
+	const daysSincePublished = Math.floor(
+		(Date.now() - new Date(post.data.published).getTime()) / (1000 * 60 * 60 * 24)
+	);
+	score += Math.max(0, 100 - daysSincePublished / 10);
+	
+	// 标题相似性得分（简单的关键词匹配）
+	if (currentTags.length > 0) {
+		const titleWords = post.data.title.toLowerCase().split(/\s+/);
+		const matchingWords = currentTags.filter(tag => 
+			titleWords.some((word: string) => word.includes(tag.toLowerCase()))
+		);
+		score += matchingWords.length * 5;
+	}
+	
+	return score;
+}
+
+// 获取相关文章
+const relatedPosts = otherPosts
+	.map(post => ({
+		...post,
+		relevanceScore: calculateRelevanceScore(post)
+	}))
+	.sort((a, b) => b.relevanceScore - a.relevanceScore)
+	.slice(0, maxLinks);
+
+// 如果没有足够的相关文章，补充最新文章
+if (relatedPosts.length < maxLinks) {
+	const additionalPosts = otherPosts
+		.filter(post => !relatedPosts.find(rp => rp.slug === post.slug))
+		.slice(0, maxLinks - relatedPosts.length);
+	
+	relatedPosts.push(...additionalPosts.map(post => ({
+		...post,
+		relevanceScore: 0
+	})));
+}
+---
+
+{relatedPosts.length > 0 && (
+	<div class="internal-links-container">
+		{showTitle && (
+			<h3 class="internal-links-title">{customTitle}</h3>
+		)}
+		<ul class="internal-links-list">
+			{relatedPosts.map((post) => (
+				<li class="internal-link-item">
+					<a 
+						href={getPostUrlBySlug(post.slug)}
+						class="internal-link"
+						title={post.data.description || post.data.title}
+					>
+						<span class="link-title">{post.data.title}</span>
+						{post.data.tags && post.data.tags.length > 0 && (
+							<span class="link-tags">
+								{post.data.tags.slice(0, 3).map((tag: string) => (
+									<span class="tag">{tag}</span>
+								))}
+							</span>
+						)}
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+)}
+
+<style>
+	.internal-links-container {
+		margin: 2rem 0;
+		padding: 1.5rem;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-large);
+		background: var(--color-bg-secondary);
+	}
+	
+	.internal-links-title {
+		margin: 0 0 1rem 0;
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: var(--color-text-primary);
+		border-bottom: 2px solid var(--color-primary);
+		padding-bottom: 0.5rem;
+	}
+	
+	.internal-links-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.75rem;
+	}
+	
+	.internal-link-item {
+		margin: 0;
+	}
+	
+	.internal-link {
+		display: block;
+		padding: 0.75rem 1rem;
+		border-radius: var(--radius-medium);
+		background: var(--color-bg);
+		border: 1px solid transparent;
+		text-decoration: none;
+		color: var(--color-text-primary);
+		transition: all 0.2s ease;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.internal-link:hover {
+		border-color: var(--color-primary);
+		background: var(--color-bg-hover);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+	
+	.internal-link:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 3px;
+		background: var(--color-primary);
+		transform: scaleY(0);
+		transition: transform 0.2s ease;
+	}
+	
+	.internal-link:hover:before {
+		transform: scaleY(1);
+	}
+	
+	.link-title {
+		display: block;
+		font-weight: 500;
+		margin-bottom: 0.25rem;
+		line-height: 1.4;
+	}
+	
+	.link-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		margin-top: 0.5rem;
+	}
+	
+	.tag {
+		font-size: 0.75rem;
+		padding: 0.125rem 0.5rem;
+		background: var(--color-primary-alpha);
+		color: var(--color-primary);
+		border-radius: var(--radius-small);
+		font-weight: 500;
+	}
+	
+	/* 响应式设计 */
+	@media (max-width: 768px) {
+		.internal-links-container {
+			margin: 1.5rem 0;
+			padding: 1rem;
+		}
+		
+		.internal-links-title {
+			font-size: 1.1rem;
+		}
+		
+		.internal-link {
+			padding: 0.625rem 0.75rem;
+		}
+		
+		.link-title {
+			font-size: 0.9rem;
+		}
+		
+		.tag {
+			font-size: 0.7rem;
+			padding: 0.1rem 0.4rem;
+		}
+	}
+	
+	/* 暗色模式适配 */
+	@media (prefers-color-scheme: dark) {
+		.internal-links-container {
+			border-color: var(--color-border-dark, #374151);
+			background: var(--color-bg-secondary-dark, #1f2937);
+		}
+		
+		.internal-link {
+			background: var(--color-bg-dark, #111827);
+			color: var(--color-text-primary-dark, #f9fafb);
+		}
+		
+		.internal-link:hover {
+			background: var(--color-bg-hover-dark, #374151);
+		}
+	}
+</style>

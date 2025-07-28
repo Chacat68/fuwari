@@ -1,0 +1,341 @@
+---
+// 页面加载速度优化组件
+export interface Props {
+	enablePreload?: boolean;
+	enableCompression?: boolean;
+	enableCaching?: boolean;
+	enableCriticalCSS?: boolean;
+	enableResourceHints?: boolean;
+	criticalResources?: string[];
+	preloadFonts?: string[];
+	preloadImages?: string[];
+}
+
+const {
+	enablePreload = true,
+	enableCompression = true,
+	enableCaching = true,
+	enableCriticalCSS = true,
+	enableResourceHints = true,
+	criticalResources = [],
+	preloadFonts = [],
+	preloadImages = []
+} = Astro.props;
+---
+
+<!-- 资源预加载提示 -->
+{enableResourceHints && (
+	<>
+		<!-- DNS预解析 -->
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//fonts.gstatic.com">
+		<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+		
+		<!-- 预连接重要资源 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	</>
+)}
+
+<!-- 字体预加载 -->
+{enablePreload && preloadFonts.map(font => (
+	<link rel="preload" href={font} as="font" type="font/woff2" crossorigin>
+))}
+
+<!-- 关键图片预加载 -->
+{enablePreload && preloadImages.map(image => (
+	<link rel="preload" href={image} as="image">
+))}
+
+<!-- 关键资源预加载 -->
+{enablePreload && criticalResources.map(resource => {
+	const extension = resource.split('.').pop()?.toLowerCase();
+	let asType = 'fetch';
+	
+	if (extension === 'css') asType = 'style';
+	else if (['js', 'mjs'].includes(extension || '')) asType = 'script';
+	else if (['woff', 'woff2', 'ttf'].includes(extension || '')) asType = 'font';
+	else if (['jpg', 'jpeg', 'png', 'webp', 'avif', 'svg'].includes(extension || '')) asType = 'image';
+	
+	return <link rel="preload" href={resource} as={asType} crossorigin={asType === 'font' ? true : undefined} />;
+})}
+
+<!-- 关键CSS内联 -->
+{enableCriticalCSS && (
+	<style>
+		/* 关键CSS - 首屏渲染优化 */
+		body {
+			font-display: swap;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		
+		/* 图片加载优化 */
+		img {
+			decoding: async;
+			loading: lazy;
+		}
+		
+		/* 减少布局偏移 */
+		.content-container {
+			min-height: 100vh;
+		}
+		
+		/* 优化滚动性能 */
+		* {
+			scroll-behavior: smooth;
+		}
+		
+		/* 减少重绘 */
+		.will-change {
+			will-change: transform, opacity;
+		}
+		
+		/* 硬件加速 */
+		.gpu-accelerated {
+			transform: translateZ(0);
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+	</style>
+)}
+
+<!-- 性能优化脚本 -->
+<script>
+	// 页面加载性能监控
+	function initPerformanceOptimization() {
+		// 1. 资源预加载管理
+		function preloadCriticalResources() {
+			const criticalImages = document.querySelectorAll('img[data-critical="true"]');
+			criticalImages.forEach(img => {
+				const imageElement = img as HTMLImageElement;
+				if (imageElement.dataset.src) {
+					const link = document.createElement('link');
+					link.rel = 'preload';
+					link.href = imageElement.dataset.src;
+					link.as = 'image';
+					document.head.appendChild(link);
+				}
+			});
+		}
+		
+		// 2. 图片懒加载优化
+		function optimizeImageLoading() {
+			const images = document.querySelectorAll('img[loading="lazy"]');
+			const imageObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						if (img.dataset.src) {
+							img.src = img.dataset.src;
+							img.removeAttribute('data-src');
+						}
+						imageObserver.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.01
+			});
+			
+			images.forEach(img => imageObserver.observe(img));
+		}
+		
+		// 3. 字体加载优化
+		function optimizeFontLoading() {
+			if ('fonts' in document) {
+				// 预加载关键字体
+				const fontPromises = [
+					document.fonts.load('400 16px Inter'),
+					document.fonts.load('600 16px Inter'),
+					document.fonts.load('700 16px Inter')
+				];
+				
+				Promise.all(fontPromises).then(() => {
+					document.documentElement.classList.add('fonts-loaded');
+				}).catch(() => {
+					// 字体加载失败时的降级处理
+					console.warn('Font loading failed, using fallback fonts');
+				});
+			}
+		}
+		
+		// 4. 代码分割和动态导入
+		function enableCodeSplitting() {
+			// 延迟加载非关键JavaScript
+			const deferredScripts = document.querySelectorAll('script[data-defer="true"]');
+			deferredScripts.forEach(script => {
+				const scriptElement = script as HTMLScriptElement;
+				const srcUrl = scriptElement.dataset.src;
+				if (srcUrl) {
+					setTimeout(() => {
+						const newScript = document.createElement('script');
+						newScript.src = srcUrl;
+						newScript.async = true;
+						document.head.appendChild(newScript);
+					}, 1000);
+				}
+			});
+		}
+		
+		// 5. 缓存策略优化
+		function optimizeCaching() {
+			// Service Worker注册（如果可用）
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/sw.js').catch(() => {
+					// Service Worker注册失败时的静默处理
+				});
+			}
+			
+			// 本地存储优化
+			try {
+				const cacheVersion = '1.0.0';
+				const storedVersion = localStorage.getItem('cache-version');
+				
+				if (storedVersion !== cacheVersion) {
+					// 清理旧缓存
+					localStorage.clear();
+					localStorage.setItem('cache-version', cacheVersion);
+				}
+			} catch (e) {
+				// 本地存储不可用时的静默处理
+			}
+		}
+		
+		// 6. 网络状态检测
+		function handleNetworkStatus() {
+			if ('connection' in navigator) {
+				const connection = (navigator as any).connection;
+				
+				// 根据网络状态调整资源加载策略
+				if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+					// 慢速网络：减少资源加载
+					document.documentElement.classList.add('slow-network');
+					
+					// 禁用非关键动画
+					const style = document.createElement('style');
+					style.textContent = `
+						.slow-network * {
+							animation-duration: 0.01ms !important;
+							animation-iteration-count: 1 !important;
+							transition-duration: 0.01ms !important;
+						}
+					`;
+					document.head.appendChild(style);
+				}
+			}
+		}
+		
+		// 7. 内存管理
+		function optimizeMemoryUsage() {
+			// 清理不再需要的事件监听器
+			window.addEventListener('beforeunload', () => {
+				// 清理全局变量和事件监听器
+				const observers = (window as any).intersectionObservers || [];
+				observers.forEach((observer: IntersectionObserver) => {
+					observer.disconnect();
+				});
+			});
+			
+			// 定期清理DOM中的无用元素
+			setInterval(() => {
+				const hiddenElements = document.querySelectorAll('[style*="display: none"]');
+				hiddenElements.forEach(element => {
+					if (element.getAttribute('data-keep') !== 'true') {
+						element.remove();
+					}
+				});
+			}, 30000); // 每30秒清理一次
+		}
+		
+		// 8. 性能监控
+		function monitorPerformance() {
+			if ('performance' in window) {
+				window.addEventListener('load', () => {
+					setTimeout(() => {
+						const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+						
+						// 记录关键性能指标
+						const metrics = {
+							fcp: 0, // First Contentful Paint
+							lcp: 0, // Largest Contentful Paint
+							fid: 0, // First Input Delay
+							cls: 0, // Cumulative Layout Shift
+							ttfb: perfData.responseStart - perfData.requestStart,
+							domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
+							loadComplete: perfData.loadEventEnd - perfData.loadEventStart
+						};
+						
+						// 可以发送到分析服务
+						console.log('Performance Metrics:', metrics);
+					}, 0);
+				});
+			}
+		}
+		
+		// 初始化所有优化
+		preloadCriticalResources();
+		optimizeImageLoading();
+		optimizeFontLoading();
+		enableCodeSplitting();
+		optimizeCaching();
+		handleNetworkStatus();
+		optimizeMemoryUsage();
+		monitorPerformance();
+	}
+	
+	// DOM加载完成后初始化
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initPerformanceOptimization);
+	} else {
+		initPerformanceOptimization();
+	}
+</script>
+
+<!-- 压缩和缓存提示 -->
+{enableCaching && (
+	<meta http-equiv="Cache-Control" content="public, max-age=31536000">
+)}
+
+{enableCompression && (
+	<meta http-equiv="Content-Encoding" content="gzip, br">
+)}
+
+<!-- 预加载下一页内容 -->
+<script>
+	// 智能预加载
+	function initIntelligentPreloading() {
+		const links = document.querySelectorAll('a[href^="/"]');
+		const preloadedUrls = new Set();
+		
+		const linkObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const link = entry.target as HTMLAnchorElement;
+					const href = link.href;
+					
+					if (!preloadedUrls.has(href)) {
+						preloadedUrls.add(href);
+						
+						// 创建预加载链接
+						const preloadLink = document.createElement('link');
+						preloadLink.rel = 'prefetch';
+						preloadLink.href = href;
+						document.head.appendChild(preloadLink);
+					}
+					
+					linkObserver.unobserve(link);
+				}
+			});
+		}, {
+			rootMargin: '100px 0px'
+		});
+		
+		links.forEach(link => linkObserver.observe(link));
+	}
+	
+	// 页面加载完成后启动智能预加载
+	window.addEventListener('load', () => {
+		setTimeout(initIntelligentPreloading, 2000);
+	});
+</script>

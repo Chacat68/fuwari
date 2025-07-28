@@ -1,0 +1,333 @@
+---
+// 移动端优化组件 - 提升移动端体验和页面加载性能
+---
+
+<!-- 移动端视口优化 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+<!-- 移动端浏览器优化 -->
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Fuwari">
+
+<!-- 预连接重要资源 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<!-- 关键CSS内联优化 -->
+<style>
+	/* 关键路径CSS - 首屏渲染优化 */
+	body {
+		font-display: swap; /* 字体加载优化 */
+	}
+	
+	/* 移动端触摸优化 */
+	a, button, [role="button"] {
+		touch-action: manipulation;
+		-webkit-tap-highlight-color: transparent;
+	}
+	
+	/* 移动端滚动优化 */
+	* {
+		-webkit-overflow-scrolling: touch;
+	}
+	
+	/* 防止移动端缩放导致的布局问题 */
+	input, textarea, select {
+		font-size: 16px; /* 防止iOS缩放 */
+	}
+	
+	/* 移动端图片优化 */
+	img {
+		max-width: 100%;
+		height: auto;
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: crisp-edges;
+	}
+	
+	/* 移动端表格优化 */
+	table {
+		overflow-x: auto;
+		display: block;
+		white-space: nowrap;
+	}
+	
+	/* 移动端代码块优化 */
+	pre, code {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	
+	/* 移动端导航优化 */
+	@media (max-width: 768px) {
+		/* 增大触摸目标 */
+		a, button, [role="button"] {
+			min-height: 44px;
+			min-width: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		/* 移动端字体大小优化 */
+		body {
+			font-size: 16px;
+			line-height: 1.6;
+		}
+		
+		h1 { font-size: 1.8rem; }
+		h2 { font-size: 1.5rem; }
+		h3 { font-size: 1.3rem; }
+		h4 { font-size: 1.1rem; }
+		h5 { font-size: 1rem; }
+		h6 { font-size: 0.9rem; }
+		
+		/* 移动端间距优化 */
+		.container {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+		
+		/* 移动端卡片优化 */
+		.card-base {
+			margin: 0.5rem 0;
+			border-radius: 0.75rem;
+		}
+	}
+	
+	/* 超小屏幕优化 */
+	@media (max-width: 480px) {
+		body {
+			font-size: 14px;
+		}
+		
+		.container {
+			padding-left: 0.75rem;
+			padding-right: 0.75rem;
+		}
+		
+		h1 { font-size: 1.6rem; }
+		h2 { font-size: 1.4rem; }
+		h3 { font-size: 1.2rem; }
+	}
+	
+	/* 横屏模式优化 */
+	@media (orientation: landscape) and (max-height: 500px) {
+		/* 横屏时减少垂直间距 */
+		header, nav {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+	}
+	
+	/* 高DPI屏幕优化 */
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+		img {
+			image-rendering: -webkit-optimize-contrast;
+		}
+	}
+	
+	/* 减少动画以提升性能 */
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+	
+	/* 暗色模式下的移动端优化 */
+	@media (prefers-color-scheme: dark) {
+		/* 减少蓝光，保护眼睛 */
+		body {
+			filter: contrast(0.9) brightness(0.9);
+		}
+		
+		/* 暗色模式下的触摸反馈 */
+		a:active, button:active {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+	}
+</style>
+
+<!-- 性能优化脚本 -->
+<script>
+	// 移动端性能优化
+	document.addEventListener('DOMContentLoaded', function() {
+		// 检测移动设备
+		const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+		
+		if (isMobile) {
+			// 移动端特定优化
+			document.body.classList.add('mobile-device');
+			
+			// 延迟加载非关键资源
+			setTimeout(() => {
+				// 预加载下一页内容（如果存在）
+				const nextPageLinks = document.querySelectorAll('a[href*="/posts/"], a[href*="/page/"]');
+				nextPageLinks.forEach((link: Element) => {
+					const anchor = link as HTMLAnchorElement;
+					if (anchor.href) {
+						const prefetchLink = document.createElement('link');
+						prefetchLink.rel = 'prefetch';
+						prefetchLink.href = anchor.href;
+						document.head.appendChild(prefetchLink);
+					}
+				});
+			}, 2000);
+			
+			// 移动端滚动优化
+			let ticking = false;
+			function updateScrollPosition() {
+				// 这里可以添加滚动相关的优化逻辑
+				ticking = false;
+			}
+			
+			window.addEventListener('scroll', () => {
+				if (!ticking) {
+					requestAnimationFrame(updateScrollPosition);
+					ticking = true;
+				}
+			}, { passive: true });
+			
+			// 移动端触摸优化
+			document.addEventListener('touchstart', function() {}, { passive: true });
+			document.addEventListener('touchmove', function() {}, { passive: true });
+		}
+		
+		// 图片懒加载优化
+		const images = document.querySelectorAll('img[data-src]');
+		if ('IntersectionObserver' in window) {
+			const imageObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						if (img.dataset.src) {
+							img.src = img.dataset.src;
+							img.removeAttribute('data-src');
+						}
+						imageObserver.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.01
+			});
+			
+			images.forEach(img => imageObserver.observe(img));
+		} else {
+			// 降级方案
+			images.forEach((img: Element) => {
+				const imgElement = img as HTMLImageElement;
+				if (imgElement.dataset.src) {
+					imgElement.src = imgElement.dataset.src;
+					imgElement.removeAttribute('data-src');
+				}
+			});
+		}
+		
+		// 字体加载优化
+		if ('fonts' in document) {
+			(document as any).fonts.ready.then(() => {
+				document.body.classList.add('fonts-loaded');
+			});
+		}
+		
+		// 网络状态检测
+		if ('connection' in navigator) {
+			const connection = (navigator as any).connection;
+			if (connection && connection.effectiveType) {
+				// 根据网络状况调整资源加载策略
+				if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
+					document.body.classList.add('slow-connection');
+					// 禁用非必要动画
+					document.documentElement.style.setProperty('--animation-duration', '0ms');
+				}
+			}
+		}
+	});
+	
+	// Service Worker 注册（如果可用）
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('/sw.js')
+				.then(registration => {
+					console.log('SW registered: ', registration);
+				})
+				.catch(registrationError => {
+					console.log('SW registration failed: ', registrationError);
+				});
+		});
+	}
+</script>
+
+<!-- 移动端特定的CSS变量 -->
+<style>
+	:root {
+		/* 移动端安全区域 */
+		--safe-area-inset-top: env(safe-area-inset-top);
+		--safe-area-inset-right: env(safe-area-inset-right);
+		--safe-area-inset-bottom: env(safe-area-inset-bottom);
+		--safe-area-inset-left: env(safe-area-inset-left);
+		
+		/* 移动端触摸目标最小尺寸 */
+		--touch-target-min-size: 44px;
+		
+		/* 移动端字体缩放 */
+		--mobile-font-scale: 1;
+		
+		/* 动画持续时间（可根据性能调整） */
+		--animation-duration: 300ms;
+	}
+	
+	/* 移动端安全区域适配 */
+	@supports (padding: max(0px)) {
+		body {
+			padding-top: max(var(--safe-area-inset-top), 0px);
+			padding-bottom: max(var(--safe-area-inset-bottom), 0px);
+		}
+		
+		.container {
+			padding-left: max(var(--safe-area-inset-left), 1rem);
+			padding-right: max(var(--safe-area-inset-right), 1rem);
+		}
+	}
+	
+	/* 慢网络连接下的优化 */
+	.slow-connection img {
+		filter: blur(0.5px); /* 轻微模糊减少数据使用 */
+	}
+	
+	.slow-connection .animation {
+		animation: none !important;
+	}
+	
+	/* 字体加载完成后的优化 */
+	.fonts-loaded {
+		font-display: auto;
+	}
+	
+	/* 移动设备特定样式 */
+	.mobile-device {
+		/* 移动端特定的优化 */
+	}
+	
+	.mobile-device * {
+		/* 禁用文本选择以提升触摸体验 */
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		user-select: none;
+	}
+	
+	.mobile-device input,
+	.mobile-device textarea,
+	.mobile-device [contenteditable] {
+		/* 重新启用文本选择 */
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		user-select: text;
+	}
+</style>

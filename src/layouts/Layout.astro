@@ -5,6 +5,8 @@ import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
+import MobileOptimization from "../components/seo/MobileOptimization.astro";
+import PerformanceOptimization from "../components/seo/PerformanceOptimization.astro";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -194,6 +196,18 @@ const bannerOffset =
 				data-website-id={siteConfig.umami.websiteId}
 			></script>
 		)}
+
+		<MobileOptimization />
+		<PerformanceOptimization 
+			enablePreload={true}
+			enableCompression={true}
+			enableCaching={true}
+			enableCriticalCSS={true}
+			enableResourceHints={true}
+			preloadFonts={[
+				'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2'
+			]}
+		/>
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
