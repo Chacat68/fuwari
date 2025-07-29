@@ -1,6 +1,6 @@
 ---
 // 内部链接组件 - 用于提高页面权重传递和用户体验
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 import { getSortedPosts } from "../../utils/content-utils";
 import { getPostUrlBySlug } from "../../utils/url-utils";
 
@@ -32,7 +32,7 @@ const allPosts = await getSortedPosts();
 const otherPosts = allPosts.filter((post) => post.slug !== currentSlug);
 
 // 计算文章相关性得分
-function calculateRelevanceScore(post: CollectionEntry<'posts'>): number {
+function calculateRelevanceScore(post: CollectionEntry<"posts">): number {
 	let score = 0;
 	const postTags = post.data.tags || [];
 
