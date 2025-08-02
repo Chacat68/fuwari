@@ -54,6 +54,22 @@ export const navBarConfig: NavBarConfig = {
 		{
 			name: "此刻",
 			url: "/moments/my-moments/",
+			// 项目二级菜单示例
+			children: [
+				{
+					name: "建筑指南",
+					url: "https://arch.chawfoo.com/",
+				},
+				{
+					name: "Hobby",
+					url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加
+					external: true, // 显示外部链接图标并在新标签页中打开
+				},
+				{
+					name: "WorkPage",
+					url: "https://work.chawfoo.com/",
+				},
+			],
 		},
 		{
 			name: "项目",
@@ -64,11 +80,6 @@ export const navBarConfig: NavBarConfig = {
 			url: "/friends/",
 		},
 		LinkPreset.About,
-		{
-			name: "Hobby",
-			url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加
-			external: true, // 显示外部链接图标并在新标签页中打开
-		},
 	],
 };
 

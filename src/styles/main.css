@@ -110,6 +110,52 @@
     .btn-regular-dark.success {
         @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
     }
+
+    /* 二级菜单样式 */
+    .nav-dropdown {
+        @apply relative;
+    }
+    
+    .nav-dropdown-menu {
+        @apply absolute top-full left-0 mt-1 min-w-[200px] 
+        bg-[var(--card-bg)] border border-[var(--line-divider)] 
+        rounded-lg shadow-lg opacity-0 invisible 
+        transition-all duration-200 z-50;
+        /* 添加向上的小箭头 */
+        &::before {
+            content: '';
+            @apply absolute -top-1 left-4 w-2 h-2 
+            bg-[var(--card-bg)] border-l border-t border-[var(--line-divider)] 
+            rotate-45 transform;
+        }
+    }
+    
+    .nav-dropdown:hover .nav-dropdown-menu {
+        @apply opacity-100 visible;
+        /* 添加轻微的向上移动动画 */
+        transform: translateY(-2px);
+    }
+    
+    .nav-dropdown-menu a {
+        @apply flex items-center px-4 py-2 text-sm 
+        hover:bg-[var(--btn-plain-bg-hover)] 
+        transition-colors duration-150 
+        text-black/75 dark:text-white/75 
+        hover:text-[var(--primary)];
+        
+        /* 第一个和最后一个项目的圆角 */
+        &:first-child {
+            @apply rounded-t-lg;
+        }
+        &:last-child {
+            @apply rounded-b-lg;
+        }
+    }
+    
+    /* 下拉箭头旋转动画 */
+    .nav-dropdown:hover .group-hover\:rotate-180 {
+        @apply rotate-180;
+    }
 }
 
 .custom-md img, #post-cover img {

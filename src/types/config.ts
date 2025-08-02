@@ -51,6 +51,8 @@ export type NavBarLink = {
 	name: string;
 	url: string;
 	external?: boolean;
+	// 二级菜单配置
+	children?: NavBarLink[];
 };
 
 export type NavBarConfig = {
