@@ -59,6 +59,7 @@ export const navBarConfig: NavBarConfig = {
 				{
 					name: "建筑指南",
 					url: "https://arch.chawfoo.com/",
+					external: true, // 显示外部链接图标并在新标签页中打开
 				},
 				{
 					name: "Hobby",
@@ -68,6 +69,7 @@ export const navBarConfig: NavBarConfig = {
 				{
 					name: "WorkPage",
 					url: "https://work.chawfoo.com/",
+					external: true, // 显示外部链接图标并在新标签页中打开
 				},
 			],
 		},
