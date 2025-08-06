@@ -1,0 +1,74 @@
+{
+  "name": "付之一笑 - 阅读、思考、写作",
+  "short_name": "付之一笑",
+  "description": "游戏开发者、内容创作者、手机摄影师的个人博客，分享技术见解、生活感悟和创作心得",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["blog", "technology", "photography", "games"],
+  "icons": [
+    {
+      "src": "/favicon/favicon-light-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/favicon-light-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/favicon-light-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/favicon-light-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "最新文章",
+      "short_name": "文章",
+      "description": "查看最新发布的文章",
+      "url": "/posts/",
+      "icons": [{ "src": "/favicon/favicon-light-32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "关于我",
+      "short_name": "关于",
+      "description": "了解更多关于作者的信息",
+      "url": "/about/",
+      "icons": [{ "src": "/favicon/favicon-light-32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "项目展示",
+      "short_name": "项目",
+      "description": "查看我的项目作品",
+      "url": "/projects/",
+      "icons": [{ "src": "/favicon/favicon-light-32.png", "sizes": "32x32" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/logo/logo.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "付之一笑博客首页"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

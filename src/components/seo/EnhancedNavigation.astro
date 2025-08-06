@@ -1,0 +1,500 @@
+---
+// 增强导航结构组件 - 提升SEO和用户体验
+import { siteConfig } from "../../config";
+
+interface BreadcrumbItem {
+	name: string;
+	url: string;
+	current?: boolean;
+}
+
+interface Props {
+	// 面包屑导航数据
+	breadcrumbs?: BreadcrumbItem[];
+	// 是否显示搜索功能
+	showSearch?: boolean;
+	// 当前页面标题
+	currentPageTitle?: string;
+	// 是否显示移动端菜单
+	showMobileMenu?: boolean;
+}
+
+const {
+	breadcrumbs = [],
+	showSearch = true,
+	currentPageTitle = '',
+	showMobileMenu = true
+} = Astro.props;
+
+// 生成面包屑结构化数据
+const breadcrumbStructuredData = breadcrumbs.length > 0 ? {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: breadcrumbs.map((item, index) => ({
+		"@type": "ListItem",
+		position: index + 1,
+		name: item.name,
+		item: new URL(item.url, Astro.site).href
+	}))
+} : null;
+---
+
+<!-- 面包屑导航结构化数据 -->
+{breadcrumbStructuredData && (
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
+)}
+
+<!-- 增强导航结构 -->
+<nav class="enhanced-navigation" role="navigation" aria-label="主导航">
+	<!-- 面包屑导航 -->
+	{breadcrumbs.length > 0 && (
+		<div class="breadcrumb-container">
+			<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+				{breadcrumbs.map((item, index) => (
+					<li 
+						class={`breadcrumb-item ${item.current ? 'current' : ''}`}
+						itemprop="itemListElement" 
+						itemscope 
+						itemtype="https://schema.org/ListItem"
+					>
+						{item.current ? (
+							<span 
+								itemprop="name" 
+								aria-current="page"
+								class="breadcrumb-current"
+							>
+								{item.name}
+							</span>
+						) : (
+							<a 
+								href={item.url} 
+								itemprop="item"
+								class="breadcrumb-link"
+							>
+								<span itemprop="name">{item.name}</span>
+							</a>
+						)}
+						<meta itemprop="position" content={String(index + 1)} />
+					</li>
+				))}
+			</ol>
+		</div>
+	)}
+	
+	<!-- 页面标题区域 -->
+	{currentPageTitle && (
+		<div class="page-title-container">
+			<h1 class="page-title">{currentPageTitle}</h1>
+		</div>
+	)}
+	
+	<!-- 搜索功能 -->
+	{showSearch && (
+		<div class="search-container">
+			<form class="search-form" role="search" aria-label="站内搜索">
+				<label for="site-search" class="sr-only">搜索内容</label>
+				<input 
+					id="site-search"
+					type="search" 
+					name="q" 
+					placeholder="搜索文章、标签..."
+					class="search-input"
+					aria-describedby="search-help"
+					autocomplete="off"
+				/>
+				<button 
+					type="submit" 
+					class="search-button"
+					aria-label="执行搜索"
+				>
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="11" cy="11" r="8"></circle>
+						<path d="m21 21-4.35-4.35"></path>
+					</svg>
+				</button>
+				<div id="search-help" class="sr-only">
+					输入关键词搜索文章内容、标题或标签
+				</div>
+			</form>
+		</div>
+	)}
+	
+	<!-- 移动端菜单按钮 -->
+	{showMobileMenu && (
+		<div class="mobile-menu-container">
+			<button 
+				id="mobile-menu-toggle"
+				class="mobile-menu-toggle"
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+				aria-label="打开导航菜单"
+			>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+			</button>
+			
+			<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+				<ul class="mobile-menu-list" role="menu">
+					<li role="none">
+						<a href="/" role="menuitem" class="mobile-menu-link">首页</a>
+					</li>
+					<li role="none">
+						<a href="/posts/" role="menuitem" class="mobile-menu-link">文章</a>
+					</li>
+					<li role="none">
+						<a href="/archive/" role="menuitem" class="mobile-menu-link">归档</a>
+					</li>
+					<li role="none">
+						<a href="/projects/" role="menuitem" class="mobile-menu-link">项目</a>
+					</li>
+					<li role="none">
+						<a href="/about/" role="menuitem" class="mobile-menu-link">关于</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	)}
+</nav>
+
+<style>
+	/* 增强导航样式 */
+	.enhanced-navigation {
+		position: relative;
+		width: 100%;
+		padding: 1rem 0;
+		border-bottom: 1px solid var(--border-color, #e5e7eb);
+		background: var(--nav-bg, #ffffff);
+	}
+	
+	/* 面包屑导航样式 */
+	.breadcrumb-container {
+		margin-bottom: 1rem;
+	}
+	
+	.breadcrumb {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		font-size: 0.875rem;
+		color: var(--text-secondary, #6b7280);
+	}
+	
+	.breadcrumb-item {
+		display: flex;
+		align-items: center;
+	}
+	
+	.breadcrumb-item:not(:last-child)::after {
+		content: '/';
+		margin: 0 0.5rem;
+		color: var(--text-muted, #9ca3af);
+	}
+	
+	.breadcrumb-link {
+		color: var(--link-color, #3b82f6);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+	
+	.breadcrumb-link:hover {
+		color: var(--link-hover-color, #1d4ed8);
+		text-decoration: underline;
+	}
+	
+	.breadcrumb-current {
+		color: var(--text-primary, #111827);
+		font-weight: 500;
+	}
+	
+	/* 页面标题样式 */
+	.page-title-container {
+		margin-bottom: 1.5rem;
+	}
+	
+	.page-title {
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--text-primary, #111827);
+		margin: 0;
+		line-height: 1.2;
+	}
+	
+	/* 搜索功能样式 */
+	.search-container {
+		margin-bottom: 1rem;
+	}
+	
+	.search-form {
+		display: flex;
+		max-width: 400px;
+		position: relative;
+	}
+	
+	.search-input {
+		flex: 1;
+		padding: 0.75rem 1rem;
+		border: 2px solid var(--border-color, #e5e7eb);
+		border-radius: 0.5rem 0 0 0.5rem;
+		font-size: 1rem;
+		outline: none;
+		transition: border-color 0.2s ease;
+	}
+	
+	.search-input:focus {
+		border-color: var(--primary-color, #3b82f6);
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+	}
+	
+	.search-button {
+		padding: 0.75rem 1rem;
+		background: var(--primary-color, #3b82f6);
+		color: white;
+		border: 2px solid var(--primary-color, #3b82f6);
+		border-radius: 0 0.5rem 0.5rem 0;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.search-button:hover {
+		background: var(--primary-hover, #1d4ed8);
+	}
+	
+	/* 移动端菜单样式 */
+	.mobile-menu-container {
+		display: none;
+	}
+	
+	.mobile-menu-toggle {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		width: 2rem;
+		height: 2rem;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		z-index: 10;
+	}
+	
+	.hamburger-line {
+		width: 2rem;
+		height: 0.25rem;
+		background: var(--text-primary, #111827);
+		border-radius: 10px;
+		transition: all 0.3s linear;
+		position: relative;
+		transform-origin: 1px;
+	}
+	
+	.mobile-menu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: var(--nav-bg, #ffffff);
+		border: 1px solid var(--border-color, #e5e7eb);
+		border-radius: 0.5rem;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+		transform: translateY(-10px);
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease;
+		z-index: 1000;
+	}
+	
+	.mobile-menu.active {
+		transform: translateY(0);
+		opacity: 1;
+		visibility: visible;
+	}
+	
+	.mobile-menu-list {
+		list-style: none;
+		margin: 0;
+		padding: 1rem 0;
+	}
+	
+	.mobile-menu-link {
+		display: block;
+		padding: 0.75rem 1.5rem;
+		color: var(--text-primary, #111827);
+		text-decoration: none;
+		transition: background-color 0.2s ease;
+	}
+	
+	.mobile-menu-link:hover {
+		background: var(--hover-bg, #f3f4f6);
+	}
+	
+	/* 无障碍辅助类 */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+	
+	/* 响应式设计 */
+	@media (max-width: 768px) {
+		.mobile-menu-container {
+			display: block;
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+		}
+		
+		.search-form {
+			max-width: 100%;
+		}
+		
+		.page-title {
+			font-size: 1.5rem;
+		}
+		
+		.breadcrumb {
+			font-size: 0.8rem;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.search-input {
+			padding: 0.5rem 0.75rem;
+			font-size: 0.875rem;
+		}
+		
+		.search-button {
+			padding: 0.5rem 0.75rem;
+		}
+		
+		.page-title {
+			font-size: 1.25rem;
+		}
+	}
+	
+	/* 深色模式支持 */
+	@media (prefers-color-scheme: dark) {
+		.enhanced-navigation {
+			--nav-bg: #1f2937;
+			--border-color: #374151;
+			--text-primary: #f9fafb;
+			--text-secondary: #d1d5db;
+			--text-muted: #9ca3af;
+			--link-color: #60a5fa;
+			--link-hover-color: #93c5fd;
+			--primary-color: #3b82f6;
+			--primary-hover: #2563eb;
+			--hover-bg: #374151;
+		}
+	}
+</style>
+
+<script>
+	// 增强导航功能脚本
+	document.addEventListener('DOMContentLoaded', () => {
+		// 移动端菜单切换
+		const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+		const mobileMenu = document.getElementById('mobile-menu');
+		
+		if (mobileMenuToggle && mobileMenu) {
+			mobileMenuToggle.addEventListener('click', () => {
+				const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+				
+				mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+				mobileMenu.setAttribute('aria-hidden', String(isExpanded));
+				mobileMenu.classList.toggle('active');
+				
+				// 更新按钮标签
+				mobileMenuToggle.setAttribute(
+					'aria-label', 
+					isExpanded ? '打开导航菜单' : '关闭导航菜单'
+				);
+			});
+			
+			// 点击外部关闭菜单
+			document.addEventListener('click', (event) => {
+				if (!mobileMenuToggle.contains(event.target as Node) && 
+					!mobileMenu.contains(event.target as Node)) {
+					mobileMenuToggle.setAttribute('aria-expanded', 'false');
+					mobileMenu.setAttribute('aria-hidden', 'true');
+					mobileMenu.classList.remove('active');
+					mobileMenuToggle.setAttribute('aria-label', '打开导航菜单');
+				}
+			});
+			
+			// ESC键关闭菜单
+			document.addEventListener('keydown', (event: KeyboardEvent) => {
+				if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+					mobileMenuToggle.setAttribute('aria-expanded', 'false');
+					mobileMenu.setAttribute('aria-hidden', 'true');
+					mobileMenu.classList.remove('active');
+					mobileMenuToggle.setAttribute('aria-label', '打开导航菜单');
+					mobileMenuToggle.focus();
+				}
+			});
+		}
+		
+		// 搜索功能增强
+		const searchForm = document.querySelector('.search-form');
+		const searchInput = document.getElementById('site-search') as HTMLInputElement;
+		
+		if (searchForm && searchInput) {
+			searchForm.addEventListener('submit', (event) => {
+				event.preventDefault();
+				const query = searchInput.value.trim();
+				
+				if (query) {
+					// 这里可以集成实际的搜索功能
+					// 例如跳转到搜索页面或触发搜索组件
+					window.location.href = `/search?q=${encodeURIComponent(query)}`;
+				}
+			});
+			
+			// 搜索建议功能（可选）
+			searchInput.addEventListener('input', debounce(() => {
+				const query = searchInput.value.trim();
+				if (query.length > 2) {
+					// 这里可以实现搜索建议功能
+					console.log('搜索建议:', query);
+				}
+			}, 300));
+		}
+		
+		// 面包屑导航键盘支持
+		const breadcrumbLinks = document.querySelectorAll('.breadcrumb-link');
+		breadcrumbLinks.forEach(link => {
+			link.addEventListener('keydown', (event) => {
+				const keyEvent = event as KeyboardEvent;
+				if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+					event.preventDefault();
+					(link as HTMLAnchorElement).click();
+				}
+			});
+		});
+	});
+	
+	// 防抖函数
+	function debounce(func: Function, wait: number) {
+		let timeout: NodeJS.Timeout;
+		return function executedFunction(...args: any[]) {
+			const later = () => {
+				clearTimeout(timeout);
+				func(...args);
+			};
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+		};
+	}
+</script>
