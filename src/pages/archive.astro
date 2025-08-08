@@ -4,8 +4,12 @@ import HeatmapChart from "@components/HeatmapChart.svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getAllPosts, getAllPostsCount, getSortedPosts } from "../utils/content-utils";
 import { siteConfig } from "../config";
+import {
+	getAllPosts,
+	getAllPostsCount,
+	getSortedPosts,
+} from "../utils/content-utils";
 
 const sortedPosts = await getSortedPosts();
 const totalPostsCount = await getAllPostsCount();
@@ -14,7 +18,13 @@ const allPosts = await getAllPosts();
 // Archive页面SEO信息
 const archiveTitle = `文章归档 - ${siteConfig.title}`;
 const archiveDescription = `浏览所有${totalPostsCount}篇文章的归档，按时间和热力图展示内容创作历程`;
-const archiveKeywords = ["文章归档", "博客归档", "时间线", "热力图", "内容创作"];
+const archiveKeywords = [
+	"文章归档",
+	"博客归档",
+	"时间线",
+	"热力图",
+	"内容创作",
+];
 ---
 
 <MainGridLayout 
@@ -23,7 +33,7 @@ const archiveKeywords = ["文章归档", "博客归档", "时间线", "热力图
 	image={siteConfig.banner?.src}
 	keywords={archiveKeywords}
 >
-    <HeatmapChart sortedPosts={sortedPosts} totalPostsCount={totalPostsCount} allPosts={allPosts} client:only="svelte"></HeatmapChart>
-    <ArchivePanel sortedPosts={sortedPosts} client:only="svelte"></ArchivePanel>
+    <HeatmapChart sortedPosts={sortedPosts} totalPostsCount={totalPostsCount} allPosts={allPosts} client:load></HeatmapChart>
+<ArchivePanel sortedPosts={sortedPosts} client:load></ArchivePanel>
 </MainGridLayout>
 
