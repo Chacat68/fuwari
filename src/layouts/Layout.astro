@@ -362,7 +362,7 @@ function initCustomScrollbar() {
 		{
 			target: bodyElement,
 			cancel: {
-				nativeScrollbarsOverlaid: true,    // don't initialize the overlay scrollbar if there is a native one
+				nativeScrollbarsOverlaid: false,    // 完全替代原生滚动条，避免重复显示
 			}
 		}, {
 		scrollbars: {

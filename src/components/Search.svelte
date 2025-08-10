@@ -197,4 +197,12 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
     max-height: calc(100vh - 100px);
     overflow-y: auto;
   }
+  /* 确保搜索面板使用统一的滚动条样式 */
+  .search-panel::-webkit-scrollbar {
+    display: none;
+  }
+  .search-panel {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 </style>

@@ -119,7 +119,7 @@ const mainPanelTop = siteConfig.banner.enable
 
             {"toc-hide": siteConfig.banner.enable}]}
         >
-            <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
+            <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-auto overflow-x-hidden hide-scrollbar">
                 <div id="toc" class="w-full h-full transition-fade ">
                     <div class="h-8 w-full"></div>
                     <TOC headings={headings}></TOC>

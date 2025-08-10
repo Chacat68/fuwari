@@ -188,13 +188,17 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		optimizeDeps: {
+			// 排除有问题的 @swup/astro 依赖
+			exclude: ['@swup/astro']
+		},
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {
-					// temporarily suppress this warning
+					// 忽略 "use client" 指令警告
 					if (
-						warning.message.includes("is dynamically imported by") &&
-						warning.message.includes("but also statically imported by")
+						warning.code === "MODULE_LEVEL_DIRECTIVE" &&
+						warning.message.includes('"use client"')
 					) {
 						return;
 					}
@@ -202,5 +206,5 @@ export default defineConfig({
 				},
 			},
 		},
-	},
+	}
 });
