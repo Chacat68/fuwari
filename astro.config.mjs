@@ -115,18 +115,18 @@ export default defineConfig({
 		sitemap({
 			filter: (page) => {
 				// 排除草稿页面和特殊页面
-				return !page.includes('/draft/') && !page.includes('/404');
+				return !page.includes("/draft/") && !page.includes("/404");
 			},
-			changefreq: 'weekly',
+			changefreq: "weekly",
 			priority: 0.7,
 			lastmod: new Date(),
 			customPages: [
-				'https://www.chawfoo.com/',
-				'https://www.chawfoo.com/about/',
-				'https://www.chawfoo.com/archive/',
-				'https://www.chawfoo.com/projects/',
+				"https://www.chawfoo.com/",
+				"https://www.chawfoo.com/about/",
+				"https://www.chawfoo.com/archive/",
+				"https://www.chawfoo.com/projects/",
 			],
-		})
+		}),
 	],
 	markdown: {
 		remarkPlugins: [
@@ -188,17 +188,13 @@ export default defineConfig({
 		],
 	},
 	vite: {
-		optimizeDeps: {
-			// 排除有问题的 @swup/astro 依赖
-			exclude: ['@swup/astro']
-		},
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {
-					// 忽略 "use client" 指令警告
+					// temporarily suppress this warning
 					if (
-						warning.code === "MODULE_LEVEL_DIRECTIVE" &&
-						warning.message.includes('"use client"')
+						warning.message.includes("is dynamically imported by") &&
+						warning.message.includes("but also statically imported by")
 					) {
 						return;
 					}
@@ -206,5 +202,5 @@ export default defineConfig({
 				},
 			},
 		},
-	}
+	},
 });
