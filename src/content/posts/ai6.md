@@ -1,7 +1,7 @@
 ---
 title: ComfyUI提示词小助手：让AI绘画更简单高效的全能插件
-published: 2025-08-10
-updated: 2025-08-10
+published: 2025-08-10 23:00:00
+updated: 2025-08-10 23:00:00
 description: '介绍一款功能强大的ComfyUI提示词插件，支持翻译、扩写、图像反推等多种功能，让AI绘画工作流更加便捷高效。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501175820648.png?imageSlim'
 tags: [AI, ComfyUI, 提示词, 插件, 绘画, 工具]

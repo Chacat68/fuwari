@@ -1,7 +1,7 @@
 ---
 title: Game Maker's Toolkit：游戏设计的深度解析
-published: 2025-08-10
-updated: 2025-08-10
+published: 2025-08-10 22:00:00
+updated: 2025-08-10 22:00:00
 description: '推荐YouTube上最优秀的游戏设计分析频道Game Maker''s Toolkit，深入了解Mark Brown如何通过专业视角解析游戏设计的奥秘。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250810222923259.webp?imageSlim'
 tags: [YouTube推荐, 游戏设计, 视频分析, 教育内容, 独立开发]
