@@ -1,0 +1,478 @@
+{
+  "timestamp": "2025-08-15T19:26:37.426Z",
+  "totalUrls": 112,
+  "issues": {
+    "invalidUrls": [],
+    "slowPages": [],
+    "largeHtmlFiles": [
+      {
+        "url": "https://www.chawfoo.com/archive/",
+        "contentLength": 948769,
+        "responseTime": 240
+      }
+    ],
+    "missingMetaDescription": [
+      {
+        "url": "https://www.chawfoo.com/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/7/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/8/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/9/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/10/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/11/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/12/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/about/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/archive/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/friends/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/moments/my-moments/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/ai1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/ai2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/ai3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/ai4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/ai5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/ai6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/blog1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/blog2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/book1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/book2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design7/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design8/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design9/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design10/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design11/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/design12/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary7/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary8/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary9/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary10/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary11/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary12/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary13/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary14/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary15/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary16/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary17/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary18/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary19/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary20/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary21/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary22/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary23/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary24/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary25/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary26/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary27/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary28/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary29/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary30/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary31/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary32/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary33/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary34/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary35/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/diary36/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk7/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk8/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk9/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk10/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk11/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk12/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk13/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk14/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hk15/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hua1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hua2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hua3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/hua4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others7/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others8/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/others9/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/steam2022/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/think01/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/think02/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/think03/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/wen-1/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/wen-2/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/wen-3/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/wen-4/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/wen-5/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/posts/wen-6/",
+        "title": ""
+      },
+      {
+        "url": "https://www.chawfoo.com/projects/",
+        "title": ""
+      }
+    ],
+    "shortMetaDescription": [],
+    "timeoutUrls": [],
+    "redirectUrls": []
+  },
+  "statistics": {
+    "averageResponseTime": 238,
+    "averageContentLength": 41707,
+    "statusCodeDistribution": {
+      "200": 112
+    },
+    "contentTypeDistribution": {
+      "text/html": 112
+    }
+  }
+}
