@@ -10,6 +10,7 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "付之一笑",
 	subtitle: "阅读、思考、写作",
+	description: "CHACAT的个人博客，专注于阅读、思考、写作。分享技术见解、生活感悟和创作心得。", // 网站默认描述，用于SEO优化
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	themeColor: {
 		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345

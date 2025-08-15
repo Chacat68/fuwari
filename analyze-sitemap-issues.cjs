@@ -5,9 +5,9 @@
  * 基于用户提供的分析结果，检查特定的问题 URL
  */
 
-const fs = require('fs');
-const https = require('https');
-const http = require('http');
+const fs = require('node:fs');
+const https = require('node:https');
+const http = require('node:http');
 const { parseString } = require('xml2js');
 
 // 配置
@@ -152,7 +152,7 @@ function extractUrlsFromSitemap(xmlContent) {
       try {
         const urls = result.urlset.url.map(urlEntry => urlEntry.loc[0]);
         resolve(urls);
-      } catch (error) {
+      } catch {
         reject(new Error('无法解析 sitemap 结构'));
       }
     });
