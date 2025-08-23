@@ -1,7 +1,7 @@
 ---
 title: Qwen-Image-Edit：精确语义与外观编辑的双能手
-published: 2025-08-23 03:00:00
-updated: 2025-08-23 03:00:00
+published: 2025-08-23 23:00:00
+updated: 2025-08-23 23:00:00
 description: 'Qwen-Image-Edit 是基于 Qwen-Image 的图像编辑版本，兼顾语义与外观编辑，支持中英文文本精确编辑，并提供便捷的推理示例。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250823231937920.webp?imageSlim'
 tags: [AI, 图像编辑, Qwen, 模型, 开源, 工具, 本地]
