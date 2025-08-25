@@ -5,7 +5,7 @@ updated: 2024-12-11
 description: '即使身边世事再毫无道理，与你永远亦连在一起。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501171820658.png?imageSlim'
 tags: [粤语音乐, 陈小春, 情歌, 陪伴, 声生不息]
-category: '生活随笔'
+category: '音乐欣赏'
 draft: false
 ---
 

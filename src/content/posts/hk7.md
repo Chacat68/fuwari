@@ -5,7 +5,7 @@ updated: 2025-02-01
 description: '擁不擁有也會記住誰 快不快樂留在身體裡'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/2025-02-01-12-29-08.png?imageSlim'
 tags: [粤语音乐, 陈奕迅, 情歌, 失恋三部曲]
-category: '生活随笔'
+category: '音乐欣赏'
 draft: false
 ---
 

@@ -5,7 +5,7 @@ updated: 2023-09-11
 description: '分享了香港南区少年儿童合唱团翻唱的《幼稚园》这首歌,歌词讲述了从幼儿园到长大成人的心路历程,以及对父母呵护的不舍与对成长的迷茫。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501171953716.png?imageSlim'
 tags: [粤语音乐, 翻唱, 成长, 香港合唱团, 儿童合唱]
-category: '生活随笔'
+category: '音乐欣赏'
 draft: false
 ---
 

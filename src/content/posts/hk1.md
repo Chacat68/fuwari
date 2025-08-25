@@ -5,7 +5,7 @@ updated: 2020-02-17
 description: '介绍了香港音乐人C.Y.KONG和Jean Chien的作品和影响。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104154227788.png?imageSlim'
 tags: [港乐, 粤语, 作曲人, 音乐, CY Kong, Jean Chien]
-category: '生活随笔'
+category: '音乐欣赏'
 draft: false
 ---
 

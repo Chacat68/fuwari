@@ -5,7 +5,7 @@ updated: 2025-03-29 23:00:00
 description: '陈慧娴在《声生不息-大湾区》连唱《千千阙歌》《夕阳之歌》，两首同曲异词的经典对话，致敬梅艳芳与港乐黄金时代'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501171503685.png?imageSlim'
 tags: [粤语音乐, 陈慧娴, 梅艳芳, 港乐经典, 千千阙歌, 夕阳之歌, 声生不息]
-category: '生活随笔'
+category: '音乐欣赏'
 draft: false
 ---
 
