@@ -1,7 +1,7 @@
 ---
 title: 米津玄师《Lemon》粤语版：破地狱的音乐
-published: 2025-08-27 10:00:00
-updated: 2025-08-27 10:00:00
+published: 2025-08-27
+updated: 2025-08-27
 description: '"不是词神"重新填词的粤语版《Lemon》，结合黄子华《破地狱》片段，用音乐为朋友解咒，点亮希望明灯。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250826003909110.webp?imageSlim'
 tags: [粤语音乐，米津玄师，Lemon，粤语版，翻唱，治愈]
