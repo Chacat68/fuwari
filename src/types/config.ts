@@ -42,6 +42,12 @@ export type SiteConfig = {
 		websiteId: string;
 		src: string;
 	};
+	// 分类排序配置
+	categorySort?: {
+		enable: boolean; // 是否启用自定义分类排序
+		order: string[]; // 自定义分类顺序数组，按此顺序显示分类
+		fallbackSort?: "alphabetical" | "count"; // 未在order中指定的分类的排序方式：字母顺序或按文章数量
+	};
 
 	favicon: Favicon[];
 };

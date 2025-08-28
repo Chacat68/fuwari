@@ -10,7 +10,8 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "付之一笑",
 	subtitle: "阅读、思考、写作",
-	description: "CHACAT的个人博客，专注于阅读、思考、写作。分享技术见解、生活感悟和创作心得。", // 网站默认描述，用于SEO优化
+	description:
+		"CHACAT的个人博客，专注于阅读、思考、写作。分享技术见解、生活感悟和创作心得。", // 网站默认描述，用于SEO优化
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	themeColor: {
 		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
@@ -37,6 +38,12 @@ export const siteConfig: SiteConfig = {
 		enable: true, // 启用 Umami 统计
 		websiteId: "e49c70c3-26a8-46d9-b241-6a47a00574f2", // 您的 Umami 网站 ID
 		src: "https://umami.chawfoo.com/script.js", // 您的 Umami 服务器地址
+	},
+	// 分类排序配置
+	categorySort: {
+		enable: true, // 启用自定义分类排序
+		order: ["生活随笔", "音乐欣赏", "设计思考", "它山之石", "人工智能"], // 自定义分类显示顺序
+		fallbackSort: "count", // 未指定的分类按文章数量排序
 	},
 	favicon: [
 		// 将此数组留空以使用默认图标
