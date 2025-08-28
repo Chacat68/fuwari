@@ -4,7 +4,7 @@ published: 2025-06-25
 updated: 2025-06-25
 description: '我会好好的，即使分开也要好好的。那些深深爱过的人啊，纵然只能化作心底的秘密，但那份温柔的坚强，依然是我前行路上最珍贵的力量。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250625014851848.png?imageSlim'
-tags: [音乐，王心凌，我会好好的，国语，甜心教主]
+tags: [音乐, 王心凌, 我会好好的, 国语, 甜心教主]
 category: '音乐欣赏'
 draft: false
 ---

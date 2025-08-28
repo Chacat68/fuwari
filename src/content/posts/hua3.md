@@ -4,7 +4,7 @@ published: 2025-05-12
 updated: 2025-05-12
 description: '你眷戀的都已離去，你問過自己無數次。在必須發現我們終將一無所有前，至少你可以說，我愛你。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250512011933011.png?imageSlim'
-tags: [音乐，焦安溥，關於我愛你，国语]
+tags: [音乐, 焦安溥, 關於我愛你, 国语]
 category: '音乐欣赏'
 draft: false
 ---

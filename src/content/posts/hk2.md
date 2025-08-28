@@ -4,7 +4,7 @@ published: 2021-05-21
 updated: 2021-05-21
 description: '最近在《乘风破浪的姐姐3》里面看到薛凯琪，她是我最喜欢的粤语女歌手之一'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501191517005.png?imageSlim'
-tags: [生活, 粤语歌手, 薛凯琪, 音乐，粤语]
+tags: [生活, 粤语歌手, 薛凯琪, 音乐, 粤语]
 category: '音乐欣赏'
 draft: false
 ---

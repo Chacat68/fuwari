@@ -4,7 +4,7 @@ published: 2025-08-26
 updated: 2025-08-26
 description: '爱你越久我越被动。当伍佰的摇滚遇上徐佳莹的温柔，《被动》这首歌在现场绽放出别样的光芒，那是关于爱情最真实的告白，也是音乐最纯粹的力量。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250826002854060.webp?imageSlim'
-tags: [音乐，伍佰，徐佳莹，被动，现场，合作]
+tags: [音乐, 伍佰, 徐佳莹, 被动, 现场, 合作]
 category: '音乐欣赏'
 draft: false
 ---
