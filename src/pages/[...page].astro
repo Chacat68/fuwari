@@ -20,7 +20,9 @@ const len = page.data.length;
 
 // 为首页和分页页面生成SEO信息
 const isFirstPage = page.currentPage === 1;
-const pageTitle = isFirstPage ? siteConfig.title : `${siteConfig.title} - 第${page.currentPage}页`;
+// 首页不设置title，让Layout.astro使用默认的"网站名 - 副标题"格式
+// 分页页面设置为"网站名 - 第X页"
+const pageTitle = isFirstPage ? undefined : `${siteConfig.title} - 第${page.currentPage}页`;
 const pageDescription = isFirstPage 
 	? siteConfig.subtitle || `${siteConfig.title} - 分享技术、生活和思考` 
 	: `${siteConfig.title} 第${page.currentPage}页 - 更多精彩内容`;
