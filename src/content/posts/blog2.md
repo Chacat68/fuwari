@@ -4,7 +4,7 @@ published: 2023-11-08
 updated: 2023-11-08
 description: '数字化笔记系统的维护与拆解：云端笔记和本地笔记，P.A.R.A方法的应用，创作系统以及闪念笔记的重要性，创作路径和维护方式，云端笔记系统的扩展，AI模型的应用与知识探索。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501043318743.png?imageSlim'
-tags: [笔记, 数字化, 系统, 维护, 创作, 笔记系统]
+tags: [知识管理, 数字化, 系统, 维护, 创作]
 category: '设计思考'
 draft: false
 ---
