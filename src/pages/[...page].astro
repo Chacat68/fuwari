@@ -1,12 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { siteConfig } from "../config";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
+import StructuredData from "../components/seo/StructuredData.astro";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
-import { siteConfig } from "../config";
-import StructuredData from "../components/seo/StructuredData.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
