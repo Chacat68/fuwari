@@ -1,9 +1,9 @@
 ---
 title: 真正的平静不在远方，就在当下的每一刻
-published: 2025-09-11 01:00:00
-updated: 2025-09-11 01:00:00
+published: 2025-09-10 23:00:00
+updated: 2025-09-10 23:00:00
 description: '通过一个深刻的寓言故事，探讨如何在快节奏的现代生活中找到内心的平静与专注'
-image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250120100000001.png?imageSlim'
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250911021639881.webp?imageSlim'
 tags: [内心平静, 专注力, 当下意识, 心理健康, 生活哲学]
 category: '它山之石'
 draft: false
