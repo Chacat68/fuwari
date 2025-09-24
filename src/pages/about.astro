@@ -2,10 +2,10 @@
 
 import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
+import { siteConfig } from "../config";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { siteConfig } from "../config";
 
 const aboutPost = await getEntry("spec", "about");
 
@@ -16,10 +16,23 @@ if (!aboutPost) {
 const { Content } = await render(aboutPost);
 
 // About页面SEO信息
-const aboutTitle = `关于我 - ${siteConfig.title}`;
-const aboutDescription = "了解更多关于查猫CHACAT的信息，游戏开发者、内容创作者、手机摄影师";
-const aboutKeywords = ["关于", "个人简介", "游戏开发", "内容创作", "摄影", "查猫", "CHACAT"];
+const aboutTitle = aboutPost.data.title
+	? `${aboutPost.data.title} - ${siteConfig.title}`
+	: `关于我 - ${siteConfig.title}`;
+const aboutDescription =
+	aboutPost.data.description ||
+	"了解更多关于查猫CHACAT的信息，游戏开发者、内容创作者、手机摄影师";
+const aboutKeywords = [
+	"关于",
+	"个人简介",
+	"游戏开发",
+	"内容创作",
+	"摄影",
+	"查猫",
+	"CHACAT",
+];
 ---
+
 <MainGridLayout 
 	title={aboutTitle} 
 	description={aboutDescription}
@@ -28,64 +41,8 @@ const aboutKeywords = ["关于", "个人简介", "游戏开发", "内容创作",
 >
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
         <div class="card-base z-10 px-9 py-6 relative w-full">
-            <!-- 个人介绍部分 -->
-            <div class="mb-8">
-                <div class="prose dark:prose-invert prose-lg max-w-none">
-                    <h1>About</h1>
-                    <p>哈喽，我是查猫CHACAT，85后，从小是游戏迷，书迷，现在这两个内容是我生活的两大支柱。</p>
-                    <p>最近在读书、创作、跑步，过安静有趣的生活，喝茶吹水，不断创作一些新东西，源源不断给自己创造心流！</p>
-                    <p>🎮游戏开发者、 ✍️内容创作者、📱手机摄影师</p>
-                    <ul>
-                        <li>博客会记录 <strong>生活随笔</strong>、<strong>设计思考</strong>、<strong>它山之石</strong></li>
-                        <li>我喜欢建筑，把它们做了一个整理：<strong>建筑指南</strong></li>
-                        <li>喜欢的电影、音乐、游戏等，整理到：<strong>My-NeoDB</strong></li>
-                        <li>最后，把这些年做过的一些事情记录下来，汇总成：<strong>WorkPage</strong></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- 关于博客及后续内容：全宽布局 -->
-            <div class="border-t border-gray-200 dark:border-gray-700 pt-8">
-                <Markdown class="prose prose-lg max-w-none">
-                    <h2>关于博客</h2>
-                    
-                    <h3>博客历史</h3>
-                    <ul>
-                        <li>2008年 到 2013年 在网易平台上写博客，借着博客，认识了几个重要的好友。它帮我养成了记录生活的习惯</li>
-                        <li>2013年 转移到Lofter，持续创作到2016，这段时间我到了上海生活，工作越来越忙，暂停了创作</li>
-                        <li>2019年 重新把博客迁移到Typlog，并最终把博客名称改成《付之一笑》</li>
-                        <li>2023年 博客用Notion+Vercel+Github方案，免于托管，专心写作</li>
-                        <li>2024 年申请加入《<a href="https://foreverblog.cn/">十年之约</a>》项目，期望能持续更新10 年以上</li>
-                        <li>2025 年将博客用astro静态化，提高访问速度。</li>
-                    </ul>
-                    
-                    <h3>博客理念</h3>
-                    
-                    <h4>写出穿越时间的文字</h4>
-                    <img src="https://blog-1259751088.cos.ap-shanghai.myqcloud.com/uPic/DSC03299.jpg" alt="DSC03299" class="w-full rounded-lg shadow-md mb-4" />
-                    <p>博客中的文字一直是从我的视角出发，主观且片面！对读者来说，都是观点，且看且参考。我们应当多关注事实，对它进行全面的观察和全盘的思考，并以文字进行记录。</p>
-                    <p>当下所记录的文字，有它的局限性，只能代表这个瞬间的我。要勤于修剪和编辑，让部分值得回望的文字重新被大众所知。</p>
-                    <p>"数字花园"要养才能开满鲜花！</p>
-                    
-                    <h4>表达自由且克制</h4>
-                    <img src="https://blog-1259751088.cos.ap-shanghai.myqcloud.com/uPic/DSC04066.jpg" alt="DSC04066" class="w-full rounded-lg shadow-md mb-4" />
-                    <p>要保持对"自由"的向往，对整个世界保持好奇心，从自己的角度出发，稳定且克制地去探索世界的边界，并总结其中的规律，找到穿越历史周期中不变的因素。</p>
-                    <p>掌握多个学科的通用模型，并尝试用它们来增加生活中遇到问题的新解法，多种角度去分析事件本身的基本事实，才足以让自己相信。</p>
-                    <p>保持怀疑一切的观点，勤分析，多思辨！</p>
-                    
-                    <h4>记录简单的生活</h4>
-                    <img src="https://blog-1259751088.cos.ap-shanghai.myqcloud.com/uPic/DSC03225.jpg" alt="DSC03225" class="w-full rounded-lg shadow-md mb-4" />
-                    <p>保持生活上的简单，减少决策的心智成本，把精力花费在创作上。</p>
-                    <ul>
-                        <li>稳定且固定的运动习惯，有助于身体中的化学物质分泌</li>
-                        <li>每周稳定的阅读和写作，激活大脑神经的运转</li>
-                        <li>去观察社会多个面向的生活，不做同温层的"盲人"</li>
-                    </ul>
-                    
-                    <h2>与我联系</h2>
-                    <p>感谢你的喜欢，如有问题讨论，欢迎通过以下方式与我联系：</p>
-                    <p>邮件：<a href="mailto:chawf56@outlook.com">chawf56@outlook.com</a></p>
-                </Markdown>
+            <div class="prose dark:prose-invert prose-lg max-w-none">
+                <Content />
             </div>
         </div>
     </div>
