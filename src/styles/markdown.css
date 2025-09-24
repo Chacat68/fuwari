@@ -1,6 +1,35 @@
 .custom-md {
     h1 {
         @apply text-3xl;
+        /* 添加边框包围和外边距 */
+        @apply border border-[var(--line-divider)] rounded-lg px-4 py-3 mb-6 mt-8;
+        @apply bg-[var(--card-bg)] shadow-sm;
+    }
+
+    h2 {
+        /* 为二级标题也添加边框包围 */
+        @apply border border-[var(--line-divider)] rounded-md px-3 py-2 mb-4 mt-6;
+        @apply bg-[var(--card-bg)] shadow-sm;
+    }
+
+    h3, h4, h5, h6 {
+        /* 为其他标题添加适当的外边距 */
+        @apply mb-3 mt-5;
+    }
+
+    /* 调整段落的外边距对齐 */
+    p {
+        @apply mb-4 leading-relaxed;
+    }
+
+    /* 调整列表的外边距 */
+    ul, ol {
+        @apply mb-4 ml-6;
+    }
+
+    /* 调整引用块的外边距 */
+    blockquote {
+        @apply my-6 ml-4;
     }
 
     h1, h2, h3, h4, h5, h6 {
