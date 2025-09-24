@@ -59,28 +59,16 @@ function calculateRelevanceScore(post: CollectionEntry<"posts">): number {
 	return score;
 }
 
-// 获取相关文章
+// 获取相关文章（固定显示4篇）
 const relatedPosts = otherPosts
 	.map((post) => ({
 		...post,
 		relevanceScore: calculateRelevanceScore(post),
 	}))
 	.sort((a, b) => b.relevanceScore - a.relevanceScore)
-	.slice(0, maxLinks);
+	.slice(0, 4);
 
-// 如果没有足够的相关文章，补充最新文章
-if (relatedPosts.length < maxLinks) {
-	const additionalPosts = otherPosts
-		.filter((post) => !relatedPosts.find((rp) => rp.slug === post.slug))
-		.slice(0, maxLinks - relatedPosts.length);
 
-	relatedPosts.push(
-		...additionalPosts.map((post) => ({
-			...post,
-			relevanceScore: 0,
-		})),
-	);
-}
 ---
 
 {relatedPosts.length > 0 && (
@@ -113,42 +101,56 @@ if (relatedPosts.length < maxLinks) {
 
 <style>
 	.internal-links-container {
-		margin: 2rem 0;
-		padding: 1.5rem;
+		margin: 2.5rem 0;
+		padding: 2rem;
 		border-radius: var(--radius-large);
-		background: var(--card-bg);
-		transition: all 0.3s ease;
-		border: 1px solid transparent;
+		background: linear-gradient(135deg, var(--card-bg) 0%, rgba(var(--primary-rgb), 0.02) 100%);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		border: 1px solid rgba(var(--primary-rgb), 0.1);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.internal-links-container::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--primary), rgba(var(--primary-rgb), 0.3));
+		border-radius: var(--radius-large) var(--radius-large) 0 0;
 	}
 	
 	.internal-links-title {
-		margin: 0 0 1rem 0;
-		font-size: 1.2rem;
-		font-weight: 600;
+		margin: 0 0 1.5rem 0;
+		font-size: 1.3rem;
+		font-weight: 700;
 		color: var(--primary);
-		border-bottom: 1px dashed var(--line-divider);
-		padding-bottom: 0.5rem;
+		position: relative;
+		padding-left: 0;
 	}
+	
+
 	
 	.internal-links-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		display: flex;
-		flex-direction: row;
-		gap: 1rem;
-		overflow-x: auto;
-		scrollbar-width: thin;
-		scrollbar-color: var(--scrollbar-bg) transparent;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.25rem;
 	}
 	
 	.internal-link-item {
 		margin: 0;
-		flex: 0 0 auto;
-		min-width: 200px;
-		max-width: 280px;
-		height: 120px;
 		display: flex;
+		transition: transform 0.3s ease;
+	}
+	
+	.internal-link-item:hover {
+		transform: translateY(-2px);
 	}
 	
 	.internal-link {
@@ -157,102 +159,157 @@ if (relatedPosts.length < maxLinks) {
 		justify-content: space-between;
 		height: 100%;
 		min-height: 120px;
-		padding: 0.75rem 1rem;
-		border-radius: calc(var(--radius-large) * 0.6);
-		background: var(--btn-regular-bg);
-		border: 1px solid transparent;
+		padding: 1rem;
+		border-radius: calc(var(--radius-large) * 0.8);
+		background: var(--card-bg);
+		border: 1px solid var(--line-divider);
 		text-decoration: none;
 		color: var(--btn-content);
-		transition: all 0.3s ease;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		position: relative;
 		overflow: hidden;
+		width: 100%;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	}
+	
+	.internal-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05) 0%, transparent 50%);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
 	}
 	
 	.internal-link:hover {
 		background: var(--btn-regular-bg-hover);
-		transform: translateY(-1px);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		border-color: rgba(var(--primary-rgb), 0.3);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(var(--primary-rgb), 0.1);
+	}
+	
+	.internal-link:hover::before {
+		opacity: 1;
 	}
 	
 	.internal-link:active {
 		background: var(--btn-regular-bg-active);
-		transform: translateY(0);
+		transform: scale(0.98);
 	}
 	
 	.link-title {
 		display: block;
-		font-weight: 500;
-		margin-bottom: 0.25rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
 		line-height: 1.4;
 		color: inherit;
+		font-size: 1rem;
+		position: relative;
+		z-index: 1;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 	
 	.link-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem;
-		margin-top: 0.5rem;
+		gap: 0.4rem;
+		margin-top: auto;
+		position: relative;
+		z-index: 1;
 	}
 	
 	.tag {
 		font-size: 0.75rem;
-		padding: 0.125rem 0.5rem;
-		background: var(--primary);
+		padding: 0.25rem 0.6rem;
+		background: linear-gradient(135deg, var(--primary), rgba(var(--primary-rgb), 0.8));
 		color: white;
-		border-radius: calc(var(--radius-large) * 0.25);
+		border-radius: calc(var(--radius-large) * 0.4);
 		font-weight: 500;
-		opacity: 0.8;
+		transition: all 0.2s ease;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
 	
-	/* 自定义滚动条样式 */
-	.internal-links-list::-webkit-scrollbar {
-		height: 6px;
-	}
-	
-	.internal-links-list::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	
-	.internal-links-list::-webkit-scrollbar-thumb {
-		background: var(--scrollbar-bg);
-		border-radius: 3px;
-	}
-	
-	.internal-links-list::-webkit-scrollbar-thumb:hover {
-		background: var(--primary);
+	.tag:hover {
+		transform: scale(1.05);
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 	}
 	
 	/* 响应式设计 */
+	@media (max-width: 1024px) {
+		.internal-links-list {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
+		}
+	}
+	
 	@media (max-width: 768px) {
 		.internal-links-container {
-			margin: 1.5rem 0;
+			margin: 2rem 0;
+			padding: 1.5rem;
+		}
+		
+		.internal-links-title {
+			font-size: 1.2rem;
+			padding-left: 0;
+		}
+		
+		.internal-links-title::before {
+			font-size: 1rem;
+		}
+		
+		.internal-links-list {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+		
+		.internal-link {
+			min-height: 120px;
 			padding: 1rem;
+		}
+		
+		.link-title {
+			font-size: 0.95rem;
+			margin-bottom: 0.75rem;
+		}
+		
+		.tag {
+			font-size: 0.7rem;
+			padding: 0.2rem 0.5rem;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.internal-links-container {
+			margin: 1.5rem 0;
+			padding: 1.25rem;
 		}
 		
 		.internal-links-title {
 			font-size: 1.1rem;
 		}
 		
-		.internal-links-list {
-			gap: 0.75rem;
-		}
-		
-		.internal-link-item {
-			min-width: 180px;
-			max-width: 240px;
-		}
-		
 		.internal-link {
-			padding: 0.625rem 0.75rem;
+			min-height: 110px;
+			padding: 0.875rem;
 		}
 		
 		.link-title {
 			font-size: 0.9rem;
 		}
 		
+		.link-tags {
+			gap: 0.3rem;
+		}
+		
 		.tag {
-			font-size: 0.7rem;
-			padding: 0.1rem 0.4rem;
+			font-size: 0.65rem;
+			padding: 0.15rem 0.4rem;
 		}
 	}
 </style>
