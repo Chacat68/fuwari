@@ -148,3 +148,11 @@
     }
     
 }
+
+/* 全站统一隐藏标题右侧的锚点“#”图标，保留可访问语义与跳转功能（TOC 等锚点跳转仍可用） */
+.prose :is(h1,h2,h3,h4,h5,h6) .anchor,
+.prose :is(h1,h2,h3,h4,h5,h6) a.anchor,
+.custom-md :is(h1,h2,h3,h4,h5,h6) .anchor,
+.custom-md :is(h1,h2,h3,h4,h5,h6) a.anchor {
+  display: none !important; /* 视觉隐藏：不影响链接与片段标识 */
+}

@@ -106,13 +106,3 @@ const aboutKeywords = [
         </div>
     </div>
 </MainGridLayout>
-
-<style>
-  /* 移除 About 页面标题右侧的锚点链接“#” */
-  /* 仅针对本页面生效，避免影响站点其它页面 */
-  #about-container :is(h1,h2,h3,h4,h5,h6) .anchor,
-  #about-container :is(h1,h2,h3,h4,h5,h6) a.anchor {
-    /* 隐藏由 rehype-autolink-headings 注入的锚点链接 */
-    display: none !important;
-  }
-</style>
