@@ -100,7 +100,7 @@ const aboutKeywords = [
                 </div>
             </div>
             <!-- 原正文内容：保持在卡片区域之后 -->
-            <div class="prose prose-sm dark:prose-invert markdown-content max-w-none prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline"> <!-- 将正文排版从 prose-lg 调整为更小的 prose-sm -->
+            <div class="prose prose-sm dark:prose-invert markdown-content max-w-none prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline pl-6 md:pl-6 pr-0 -mr-6 md:-mr-10"> <!-- 新增 pr-0 与 -mr-6/md:-mr-10：抵消父容器 px-6/md:px-10，将右侧内容对齐到卡片边界；保留左侧 pl-6 保持与卡片内边距一致 -->
                 <Content />
             </div>
         </div>
