@@ -1,64 +1,79 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@layouts/MainGridLayout.astro';
+import { getCollection } from "astro:content";
+import Layout from "@layouts/MainGridLayout.astro";
 
 // 函数：从内容中提取时间戳并返回日期和清理后的内容
-function extractDateAndCleanContent(content: string): { date: Date | null, cleanedContent: string } {
-  const regex = /(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])\s*/;
-  const match = content.match(regex);
-  let date: Date | null = null;
-  let cleanedContent = content;
+function extractDateAndCleanContent(content: string): {
+	date: Date | null;
+	cleanedContent: string;
+} {
+	const regex = /(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])\s*/;
+	const match = content.match(regex);
+	let date: Date | null = null;
+	let cleanedContent = content;
 
-  if (match && match[1]) {
-    try {
-      // 提取并解析时间戳
-      const dateString = match[1].substring(1, match[1].length - 1); // 移除方括号
-      const parsedDate = new Date(dateString.replace(' ', 'T'));
-      date = isNaN(parsedDate.getTime()) ? null : parsedDate;
+	if (match && match[1]) {
+		try {
+			// 提取并解析时间戳
+			const dateString = match[1].substring(1, match[1].length - 1); // 移除方括号
+			const parsedDate = new Date(dateString.replace(" ", "T"));
+			date = isNaN(parsedDate.getTime()) ? null : parsedDate;
 
-      // 移除匹配到的时间戳（包括后面的空格）
-      cleanedContent = content.replace(regex, '').trim();
+			// 移除匹配到的时间戳（包括后面的空格）
+			cleanedContent = content.replace(regex, "").trim();
+		} catch (e) {
+			console.error(
+				"Failed to parse date from content:",
+				match ? match[1] : "No match",
+				e,
+			);
+		}
+	}
 
-    } catch (e) {
-      console.error('Failed to parse date from content:', match ? match[1] : 'No match', e);
-    }
-  }
-
-  return { date, cleanedContent };
+	return { date, cleanedContent };
 }
 
-
-
-const moments = await getCollection('moments');
+const moments = await getCollection("moments");
 
 // 获取用于排序和显示的时间，优先从内容提取，其次 fromtmatter，最后默认值
-const momentsWithDateAndContent = await Promise.all(moments.map(async moment => {
-  const { date: dateFromContent, cleanedContent } = extractDateAndCleanContent(moment.body);
-  const displayDate = dateFromContent || moment.data.updated || new Date(moment.slug.split('/').pop()?.split('.')[0] || 0);
-  const sortDate = dateFromContent || moment.data.updated || new Date(0); // 用于排序，没有日期沉底
-  
-  return { ...moment, displayDate, sortDate: sortDate.getTime(), rawContent: cleanedContent, type: 'moment' as const };
-}));
+const momentsWithDateAndContent = await Promise.all(
+	moments.map(async (moment) => {
+		const { date: dateFromContent, cleanedContent } =
+			extractDateAndCleanContent(moment.body);
+		const displayDate =
+			dateFromContent ||
+			moment.data.updated ||
+			new Date(moment.slug.split("/").pop()?.split(".")[0] || 0);
+		const sortDate = dateFromContent || moment.data.updated || new Date(0); // 用于排序，没有日期沉底
+
+		return {
+			...moment,
+			displayDate,
+			sortDate: sortDate.getTime(),
+			rawContent: cleanedContent,
+			type: "moment" as const,
+		};
+	}),
+);
 
 // 按时间排序
 const allItems = momentsWithDateAndContent.sort((a, b) => {
-  return b.sortDate - a.sortDate;
+	return b.sortDate - a.sortDate;
 });
 
 // 按年份分组
-const groups = allItems.reduce((
-  grouped: { year: number; items: typeof allItems }[],
-  item
-) => {
-  const year = item.displayDate.getFullYear();
-  let group = grouped.find(g => g.year === year);
-  if (!group) {
-    group = { year, items: [] };
-    grouped.push(group);
-  }
-  group.items.push(item);
-  return grouped;
-}, []).sort((a, b) => b.year - a.year); // 按年份降序排序
+const groups = allItems
+	.reduce((grouped: { year: number; items: typeof allItems }[], item) => {
+		const year = item.displayDate.getFullYear();
+		let group = grouped.find((g) => g.year === year);
+		if (!group) {
+			group = { year, items: [] };
+			grouped.push(group);
+		}
+		group.items.push(item);
+		return grouped;
+	}, [])
+	.sort((a, b) => b.year - a.year); // 按年份降序排序
 
 const pageTitle = "此刻";
 const pageDescription = "这里会记录一些我的日常思考和随笔。";
@@ -71,7 +86,7 @@ function formatDate(date: Date) {
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <div class="card-base px-8 py-6 max-w-4xl mx-auto">
+  <div class="card-base px-6 md:px-8 py-6 max-w-4xl mx-auto">
     <h1 class="text-3xl font-bold mb-6 text-black/90 dark:text-white/90">{pageTitle}</h1>
     <p class="text-neutral-500 dark:text-neutral-400 mb-8">{pageDescription}</p>
     

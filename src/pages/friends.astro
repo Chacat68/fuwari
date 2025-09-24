@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { siteConfig } from "@/config";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
+import { siteConfig } from "@/config";
 
 const title = "友链";
 const description = "我的小伙伴们和一些有趣的站点";
@@ -17,7 +17,7 @@ friends.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 
 <MainGridLayout title={title} description={description}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full">
+        <div class="card-base z-10 px-6 md:px-9 py-6 relative w-full">
             <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">{title}</h1>
             <p class="text-black/70 dark:text-white/70 mb-8 transition-colors duration-200">{description}</p>
 

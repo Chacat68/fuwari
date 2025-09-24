@@ -1,14 +1,15 @@
 ---
 import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
-import { siteConfig } from "@/config";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "@/config";
 
 // Projects页面SEO信息
 const projectsTitle = `项目展示 - ${siteConfig.title}`;
-const projectsDescription = "这些是我正在进行的项目，不断更新中，包括游戏开发、内容创作等各种有趣的项目";
+const projectsDescription =
+	"这些是我正在进行的项目，不断更新中，包括游戏开发、内容创作等各种有趣的项目";
 const projectsKeywords = ["项目", "作品集", "游戏开发", "创作项目", "开源项目"];
 
 // 从内容集合中获取项目数据
@@ -51,7 +52,7 @@ const dayProgressFormatted = dayProgress.toFixed(5);
 	keywords={projectsKeywords}
 >
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full">
+        <div class="card-base z-10 px-6 md:px-9 py-6 relative w-full">
             <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">项目</h1>
             <p class="text-black/70 dark:text-white/70 mb-8 transition-colors duration-200">这些是我正在进行的项目，不断更新中</p>
             
