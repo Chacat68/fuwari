@@ -67,8 +67,6 @@ const relatedPosts = otherPosts
 	}))
 	.sort((a, b) => b.relevanceScore - a.relevanceScore)
 	.slice(0, 4);
-
-
 ---
 
 {relatedPosts.length > 0 && (

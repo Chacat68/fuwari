@@ -1,21 +1,25 @@
 ---
 import path from "node:path";
-import License from "@components/misc/License.astro";
-import Markdown from "@components/misc/Markdown.astro";
-import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
-import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getSortedPosts } from "@utils/content-utils";
-import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
-import { licenseConfig } from "src/config";
+import { licenseConfig, profileConfig, siteConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
+import License from "../../components/misc/License.astro";
+import Markdown from "../../components/misc/Markdown.astro";
 import PostMetadata from "../../components/PostMeta.astro";
-import { profileConfig, siteConfig } from "../../config";
-import { formatDateToYYYYMMDD } from "../../utils/date-utils";
-import StructuredData from "../../components/seo/StructuredData.astro";
 import InternalLinks from "../../components/seo/InternalLinks.astro";
-import { optimizeTitle, generateDescription, extractKeywords, calculateReadingTime } from "@utils/seo-utils";
+import StructuredData from "../../components/seo/StructuredData.astro";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { getSortedPosts } from "../../utils/content-utils";
+import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+import {
+	calculateReadingTime,
+	extractKeywords,
+	generateDescription,
+	optimizeTitle,
+} from "../../utils/seo-utils";
+import { getDir, getPostUrlBySlug } from "../../utils/url-utils";
 
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
@@ -32,22 +36,26 @@ const { remarkPluginFrontmatter } = await entry.render();
 
 // 使用SEO工具优化标题和描述
 const originalTitle = entry.data.title;
-const originalDescription = entry.data.description || '';
+const originalDescription = entry.data.description || "";
 const tags = entry.data.tags || [];
-const lang = entry.data.lang || 'zh';
+const lang = entry.data.lang || "zh";
 
 // 计算阅读时间和字数
 const readingTime = calculateReadingTime(entry.body);
-const wordCount = entry.body.replace(/<[^>]*>/g, '').split(/\s+/).filter(word => word.length > 0).length;
+const wordCount = entry.body
+	.replace(/<[^>]*>/g, "")
+	.split(/\s+/)
+	.filter((word) => word.length > 0).length;
 
 // 提取关键词（如果没有标签）
-const extractedKeywords = tags.length > 0 ? tags : extractKeywords(entry.body, 5);
+const extractedKeywords =
+	tags.length > 0 ? tags : extractKeywords(entry.body, 5);
 
 // 优化标题
 const title = optimizeTitle(originalTitle, {
 	maxLength: 60,
 	addKeywords: extractedKeywords.slice(0, 2), // 只添加前2个关键词
-	addSiteTitle: true
+	addSiteTitle: true,
 });
 
 // 优化描述
@@ -56,9 +64,11 @@ const keywords = extractedKeywords;
 
 // 获取文章图片用于结构化数据和社交分享
 const articleImage = entry.data.image || siteConfig.defaultPostImage;
-const fullImageUrl = articleImage?.startsWith('http') 
-	? articleImage 
-	: articleImage ? new URL(articleImage, Astro.site).href : undefined;
+const fullImageUrl = articleImage?.startsWith("http")
+	? articleImage
+	: articleImage
+		? new URL(articleImage, Astro.site).href
+		: undefined;
 
 // 构建博客文章的结构化数据
 const blogPostingData = {
@@ -66,19 +76,21 @@ const blogPostingData = {
 	description: description,
 	keywords: keywords,
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
-	...(entry.data.updated && { dateModified: formatDateToYYYYMMDD(entry.data.updated) }),
+	...(entry.data.updated && {
+		dateModified: formatDateToYYYYMMDD(entry.data.updated),
+	}),
 	inLanguage: lang.replace("_", "-"),
-	...(fullImageUrl && { 
+	...(fullImageUrl && {
 		image: {
 			"@type": "ImageObject",
 			url: fullImageUrl,
 			width: 1200,
-			height: 630
-		}
+			height: 630,
+		},
 	}),
 	url: Astro.url.href,
 	wordCount: wordCount,
-	timeRequired: `PT${readingTime}M`
+	timeRequired: `PT${readingTime}M`,
 };
 ---
 <MainGridLayout 
