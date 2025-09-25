@@ -135,7 +135,8 @@ async function handleStaticAssetRequest(request) {
   
   try {
     const networkResponse = await fetch(request);
-    if (networkResponse.ok) {
+    // 只对GET请求进行缓存，HEAD请求不支持缓存
+    if (networkResponse.ok && request.method === 'GET') {
       const cache = await caches.open(STATIC_CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
