@@ -1,12 +1,13 @@
 ---
 
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import Markdown from "../components/misc/Markdown.astro"; // 使用通用 Markdown 组件，应用 custom-md 的排版样式
 import MBTIOverview from "../components/misc/MBTIOverview.astro";
-import { siteConfig } from "../config";
+import { profileConfig, siteConfig } from "../config";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const aboutPost = await getEntry("spec", "about");
+const allPosts = await getCollection("posts", (p) => !p.data.draft);
 
 if (!aboutPost) {
 	throw new Error("About page content not found");
@@ -30,6 +31,26 @@ const aboutKeywords = [
 	"查猫",
 	"CHACAT",
 ];
+
+// 头像：从 about frontmatter 读取，可选；若未设置则退回站点 logo
+type AboutFrontmatter = { avatar?: string; avatarAlt?: string };
+const fm = aboutPost.data as AboutFrontmatter;
+const avatarSrc = fm.avatar ?? profileConfig.avatar;
+const avatarAlt = fm.avatarAlt ?? "个人头像";
+
+// 统计全站标签，按出现次数降序取前 8 个
+const tagCountMap = new Map<string, number>();
+for (const p of allPosts) {
+	for (const t of p.data.tags || []) {
+		const key = t.trim();
+		if (!key) continue;
+		tagCountMap.set(key, (tagCountMap.get(key) || 0) + 1);
+	}
+}
+const topTags = Array.from(tagCountMap.entries())
+	.sort((a, b) => b[1] - a[1])
+	.slice(0, 8)
+	.map(([name]) => name);
 ---
 
 <MainGridLayout 
@@ -40,28 +61,44 @@ const aboutKeywords = [
 >
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4 md:mb-8">
         <div id="about-container" class="card-base z-10 px-6 md:px-10 pt-8 pb-8 relative w-full">
-            <!-- 个人名字展示：在标签上方显示作者姓名 -->
+            <!-- 头像与个人名字展示：在标签上方显示作者姓名 -->
+            <div class="mb-3 flex items-center justify-center">
+                <img src={avatarSrc} alt={avatarAlt} loading="lazy" decoding="async"
+                     class="h-24 w-24 md:h-28 md:w-28 rounded-full ring-1 ring-white/20 shadow-sm object-cover" />
+            </div>
             <div class="mb-3 text-center">
-                <h2 class="text-lg md:text-xl font-semibold tracking-wide text-[var(--title-active)]">查猫CHACAT</h2> <!-- 将关于页标题字体从 text-xl/md:text-2xl 下调为 text-lg/md:text-xl -->
+                <h2 class="text-lg md:text-xl font-semibold tracking-wide text-[#6E92C9] dark:text-[#86A3D5]">查猫CHACAT</h2> <!-- 将关于页标题字体从 text-xl/md:text-2xl 下调为 text-lg/md:text-xl，并采用图1相近的蓝色标题风格 -->
             </div>
             <!-- 角色标签展示（美化）：使用胶囊徽章风格，适配明暗主题变量 -->
-            <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
-                <!-- 单个徽章：游戏开发者 -->
-                <span class="inline-flex items-center gap-1 rounded-full bg-[var(--btn-regular-bg)] px-3 py-1 text-xs font-medium text-[var(--btn-content)] hover:bg-[var(--btn-regular-bg-hover)] transition-colors">
+            <div class="mb-3 flex flex-wrap items-center justify-center gap-2">
+                <!-- 单个徽章：游戏开发者（参考图1的胶囊+描边风格） -->
+                <span class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium text-[#86A3D5] dark:text-[#9DB5E3] bg-white/5 dark:bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
                     <span>🎮</span>
                     <span>游戏开发者</span>
                 </span>
                 <!-- 单个徽章：内容创作者 -->
-                <span class="inline-flex items-center gap-1 rounded-full bg-[var(--btn-regular-bg)] px-3 py-1 text-xs font-medium text-[var(--btn-content)] hover:bg-[var(--btn-regular-bg-hover)] transition-colors">
+                <span class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium text-[#86A3D5] dark:text-[#9DB5E3] bg-white/5 dark:bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
                     <span>✍️</span>
                     <span>内容创作者</span>
                 </span>
                 <!-- 单个徽章：手机摄影师 -->
-                <span class="inline-flex items-center gap-1 rounded-full bg-[var(--btn-regular-bg)] px-3 py-1 text-xs font-medium text-[var(--btn-content)] hover:bg-[var(--btn-regular-bg-hover)] transition-colors">
+                <span class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium text-[#86A3D5] dark:text-[#9DB5E3] bg-white/5 dark:bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
                     <span>📱</span>
                     <span>手机摄影师</span>
                 </span>
             </div>
+
+            <!-- 头像两侧：热门标签（前8） -->
+            {topTags.length > 0 && (
+            <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
+                {topTags.map(tag => (
+                    <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+                        <span>#</span>
+                        <span>{tag}</span>
+                    </a>
+                ))}
+            </div>
+            )}
             <!-- 三个主题卡片：阅读 / 创作 / 跑步 -->
             <div class="grid grid-cols-3 gap-3 md:gap-6 mb-6">
                 <!-- 卡片：阅读（纯文字布局，贴近图1） -->
