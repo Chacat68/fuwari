@@ -1,6 +1,7 @@
 ---
 
 import { getEntry, render } from "astro:content";
+import Markdown from "../components/misc/Markdown.astro"; // 使用通用 Markdown 组件，应用 custom-md 的排版样式
 import { siteConfig } from "../config";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
@@ -95,10 +96,10 @@ const aboutKeywords = [
                     </div>
                 </div>
             </div>
-            <!-- 原正文内容：保持在卡片区域之后 -->
-            <div class="prose prose-base dark:prose-invert markdown-content max-w-none prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline pl-6 md:pl-6 pr-0 -mr-6 md:-mr-10"> <!-- 将字体从 prose-sm 调整为 prose-base，使关于页正文与其他页面一致且更大 -->
+            <!-- 原正文内容：替换为 Markdown 组件渲染，应用 custom-md 的排版样式 -->
+            <Markdown class="markdown-content onload-animation prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline pl-6 md:pl-6 pr-0 -mr-6 md:-mr-10">
                 <Content />
-            </div>
+            </Markdown>
         </div>
     </div>
 </MainGridLayout>
