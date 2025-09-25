@@ -195,7 +195,77 @@ const arcOffsets = yPositions.map((y) => {
                 <BlogTimeline />
             </div>
             
-            <!-- 原正文内容：替换为 Markdown 组件渲染，应用 custom-md 的排版样式 -->
+			<!-- 原正文内容：替换为 Markdown 组件渲染，应用 custom-md 的排版样式 -->
+			<!-- 关于博客展示模块（重构布局：左侧纵排标题 + 右侧内容区） -->
+			<section class="mb-10">
+				<div class="btn-card p-6 md:p-8 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm dark:bg-gray-800/60">
+					<div class="grid grid-cols-1 md:grid-cols-[10rem_1fr] gap-6 md:gap-10 items-start">
+						<!-- 左侧纵排标题，提供留白与层次 -->
+						<aside class="hidden md:block md:sticky md:top-24 md:self-start">
+							<div style="writing-mode: vertical-rl;" class="text-xl md:text-2xl font-extrabold tracking-[0.2em] text-white/90">关于博客</div>
+						</aside>
+
+						<!-- 右侧内容区 -->
+						<div class="space-y-8">
+							<!-- 分类主题：竖向卡片列表，减少拥挤感 -->
+							<div>
+								<h4 class="text-sm font-medium text-[#86A3D5]">分类主题</h4>
+								<ul class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+									<li class="rounded-xl border border-white/10 bg-white/5 p-3 md:p-4">
+										<div class="text-sm md:text-base font-medium text-gray-900 dark:text-white">生活随笔</div>
+										<p class="mt-1 text-xs md:text-sm text-white/65">日常感悟与思考片段</p>
+									</li>
+									<li class="rounded-xl border border-white/10 bg-white/5 p-3 md:p-4">
+										<div class="text-sm md:text-base font-medium text-gray-900 dark:text-white">设计思考</div>
+										<p class="mt-1 text-xs md:text-sm text-white/65">创作过程中的灵感与方法</p>
+									</li>
+									<li class="rounded-xl border border-white/10 bg-white/5 p-3 md:p-4">
+										<div class="text-sm md:text-base font-medium text-gray-900 dark:text-white">人工智能</div>
+										<p class="mt-1 text-xs md:text-sm text-white/65">探索 AI 时代的可能性</p>
+									</li>
+									<li class="rounded-xl border border-white/10 bg-white/5 p-3 md:p-4">
+										<div class="text-sm md:text-base font-medium text-gray-900 dark:text-white">它山之石</div>
+										<p class="mt-1 text-xs md:text-sm text-white/65">从他人智慧中汲取养分</p>
+									</li>
+									<li class="rounded-xl border border-white/10 bg-white/5 p-3 md:p-4 sm:col-span-2">
+										<div class="text-sm md:text-base font-medium text-gray-900 dark:text-white">音乐欣赏</div>
+										<p class="mt-1 text-xs md:text-sm text-white/65">那些触动心灵的旋律</p>
+									</li>
+								</ul>
+							</div>
+
+							<!-- 写作缘起与更多页面：两列布局 -->
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div class="space-y-3">
+									<h4 class="text-sm font-medium text-[#86A3D5]">写作缘起</h4>
+									<p class="text-xs md:text-sm leading-7 text-gray-700 dark:text-white/80">
+										在这个数字花园里，我用文字记录着：生活随笔、设计思考、人工智能、它山之石与音乐欣赏。除此之外，我也整理了精心策划的建筑指南；把喜欢的电影、音乐、游戏珍藏在 Hobby；并在 WorkPage 呈现多年来的成长与作品。
+									</p>
+									<p class="text-xs md:text-sm text-white/60">
+										欢迎到 <a href="/archive/" class="underline hover:no-underline">归档</a> 浏览全部文章，或在首页的搜索栏快速抵达想去的地方。
+									</p>
+								</div>
+								<div>
+									<h4 class="text-sm font-medium text-[#86A3D5]">更多页面</h4>
+									<div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+										<a href="https://arch.chawfoo.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-xl px-4 py-3 bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+											<span class="text-xs md:text-sm text-gray-800 dark:text-white">建筑指南</span>
+											<span class="text-white/40 group-hover:text-white/70 transition-colors">↗</span>
+										</a>
+										<a href="https://neodb.social/users/Charliefoo/" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-xl px-4 py-3 bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+											<span class="text-xs md:text-sm text-gray-800 dark:text-white">Hobby</span>
+											<span class="text-white/40 group-hover:text-white/70 transition-colors">↗</span>
+										</a>
+										<a href="https://work.chawfoo.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-xl px-4 py-3 bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
+											<span class="text-xs md:text-sm text-gray-800 dark:text-white">WorkPage</span>
+											<span class="text-white/40 group-hover:text-white/70 transition-colors">↗</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</section>
             <Markdown class="markdown-content onload-animation prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline w-full">
                 <Content />
             </Markdown>
