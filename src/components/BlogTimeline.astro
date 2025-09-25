@@ -142,8 +142,15 @@ const timelineEvents: TimelineEvent[] = [
   
   /* 时间线节点悬停效果 */
   .timeline-node:hover {
-    transform: md:-translate-x-1.5 scale-110;
+    transform: scale-110;
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  }
+  
+  /* 桌面端时间线节点悬停效果 */
+  @media (min-width: 768px) {
+    .timeline-node:hover {
+      transform: translateX(-6px) scale(110%);
+    }
   }
   
   /* 内容卡片悬停效果增强 */
