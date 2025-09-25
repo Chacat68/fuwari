@@ -50,8 +50,22 @@ const phrases = [
 ];
 const leftTags = phrases.slice(0, 4);
 const rightTags = phrases.slice(4, 8);
-// 桌面端圆弧距离：上下更远离头像，中部更靠近
-const arcOffsets = [22, 12, 12, 22]; // px
+// 桌面端圆弧距离：按与头像圆周等距计算（上下更靠近头像，但整体同一圆弧）
+// 头像在桌面端为 md:h-32/w-32，即半径 64px；与圆周保持额外间距 padding
+const avatarRadius = 64; // px（桌面端）
+const padding = 12; // 与头像圆周的额外安全距离
+const arcRadius = avatarRadius + padding;
+// 估算每条短句中心的垂直位置（相对头像中心）。短句高度~32px，间距~8px，步长约 40px
+const yPositions = [-60, -20, 20, 60];
+const arcOffsets = yPositions.map((y) => {
+	const inside = Math.max(0, arcRadius * arcRadius - y * y);
+	const xOnArc = Math.sqrt(inside);
+	// 与头像边缘的水平差值（>=0）
+	const delta = Math.max(0, xOnArc - avatarRadius);
+	// 再加一个基础间距，避免过于贴近
+	const base = 4;
+	return Math.round(delta + base);
+});
 ---
 
 <MainGridLayout 
