@@ -94,7 +94,8 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "/logo/logo.png", // 使用网站默认头像（相对于/public 目录）
+	avatar:
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim", // 使用网站默认头像（相对于/public 目录）
 	name: "CHACAT",
 	bio: "日常在阅读、创作、跑步。",
 	links: [
