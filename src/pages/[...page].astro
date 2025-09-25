@@ -45,6 +45,7 @@ const shareImage = siteConfig.banner?.src;
 >
 	{isFirstPage && <StructuredData slot="head" type="WebSite" />}
 	{isFirstPage && <StructuredData slot="head" type="Person" />}
+	{isFirstPage && <h1 class="sr-only">{siteConfig.title} - {siteConfig.subtitle}</h1>}
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>
