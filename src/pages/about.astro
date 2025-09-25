@@ -51,6 +51,8 @@ const topTags = Array.from(tagCountMap.entries())
 	.sort((a, b) => b[1] - a[1])
 	.slice(0, 8)
 	.map(([name]) => name);
+const leftTags = topTags.slice(0, 4);
+const rightTags = topTags.slice(4, 8);
 ---
 
 <MainGridLayout 
@@ -61,10 +63,39 @@ const topTags = Array.from(tagCountMap.entries())
 >
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4 md:mb-8">
         <div id="about-container" class="card-base z-10 px-6 md:px-10 pt-8 pb-8 relative w-full">
-            <!-- 头像与个人名字展示：在标签上方显示作者姓名 -->
-            <div class="mb-3 flex items-center justify-center">
+            <!-- 头像与两侧热门标签（桌面端三列布局） -->
+            <div class="hidden md:grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-2">
+                <!-- 左列标签 -->
+                <div class="justify-self-end flex flex-col items-end gap-2 min-h-[8rem]">
+                    {leftTags.map((tag, i) => (
+                        <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left" style={`animation-delay: ${i * 80}ms`}>
+                            <span>#</span>
+                            <span>{tag}</span>
+                        </a>
+                    ))}
+                </div>
+
+                <!-- 中间头像 -->
+                <div class="justify-self-center">
+                    <img src={avatarSrc} alt={avatarAlt} loading="lazy" decoding="async"
+                         class="h-28 w-28 md:h-32 md:w-32 rounded-full ring-1 ring-white/20 shadow-sm object-cover" />
+                </div>
+
+                <!-- 右列标签 -->
+                <div class="justify-self-start flex flex-col items-start gap-2 min-h-[8rem]">
+                    {rightTags.map((tag, i) => (
+                        <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right" style={`animation-delay: ${i * 80}ms`}>
+                            <span>#</span>
+                            <span>{tag}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 移动端：头像与标签分两行居中显示 -->
+            <div class="md:hidden mb-2 flex items-center justify-center">
                 <img src={avatarSrc} alt={avatarAlt} loading="lazy" decoding="async"
-                     class="h-24 w-24 md:h-28 md:w-28 rounded-full ring-1 ring-white/20 shadow-sm object-cover" />
+                     class="h-24 w-24 rounded-full ring-1 ring-white/20 shadow-sm object-cover" />
             </div>
             <div class="mb-3 text-center">
                 <h2 class="text-lg md:text-xl font-semibold tracking-wide text-[#6E92C9] dark:text-[#86A3D5]">查猫CHACAT</h2> <!-- 将关于页标题字体从 text-xl/md:text-2xl 下调为 text-lg/md:text-xl，并采用图1相近的蓝色标题风格 -->
@@ -88,16 +119,16 @@ const topTags = Array.from(tagCountMap.entries())
                 </span>
             </div>
 
-            <!-- 头像两侧：热门标签（前8） -->
+            <!-- 移动端热门标签（前8，居中一行多行折叠） -->
             {topTags.length > 0 && (
-            <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
-                {topTags.map(tag => (
-                    <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
-                        <span>#</span>
-                        <span>{tag}</span>
-                    </a>
-                ))}
-            </div>
+                <div class="md:hidden mb-6 flex flex-wrap items-center justify-center gap-2">
+                    {topTags.map((tag, i) => (
+                        <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex h-7 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-up" style={`animation-delay: ${i * 60}ms`}>
+                            <span>#</span>
+                            <span>{tag}</span>
+                        </a>
+                    ))}
+                </div>
             )}
             <!-- 三个主题卡片：阅读 / 创作 / 跑步 -->
             <div class="grid grid-cols-3 gap-3 md:gap-6 mb-6">
@@ -154,3 +185,12 @@ const topTags = Array.from(tagCountMap.entries())
         </div>
     </div>
 </MainGridLayout>
+<style>
+@keyframes chipInLeft { from { transform: translateX(12px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
+@keyframes chipInRight { from { transform: translateX(-12px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
+@keyframes chipInUp { from { transform: translateY(6px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+
+.chip-left { animation: chipInLeft 320ms ease-out forwards }
+.chip-right { animation: chipInRight 320ms ease-out forwards }
+.chip-up { animation: chipInUp 280ms ease-out forwards }
+</style>
