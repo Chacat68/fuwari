@@ -1,14 +1,14 @@
 .custom-md {
     h1 {
         @apply text-3xl;
-        /* 添加边框包围和外边距 */
-        @apply border border-[var(--line-divider)] rounded-lg px-4 py-3 mb-6 mt-8;
+        /* 调整为无边框，仅保留圆角与间距 */
+        @apply rounded-lg px-4 py-3 mb-6 mt-8;
         @apply bg-[var(--card-bg)] shadow-sm;
     }
 
     h2 {
-        /* 为二级标题也添加边框包围 */
-        @apply border border-[var(--line-divider)] rounded-md px-3 py-2 mb-4 mt-6;
+        /* 二级标题去掉边框，仅保留圆角与间距 */
+        @apply rounded-md px-3 py-2 mb-4 mt-6;
         @apply bg-[var(--card-bg)] shadow-sm;
     }
 
