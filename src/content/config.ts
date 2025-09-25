@@ -47,20 +47,9 @@ const specCollection = defineCollection({
 	}),
 });
 
-const momentsCollection = defineCollection({
-	schema: z.object({
-		title: z.string().optional(),
-		description: z.string().optional(),
-		updated: z.date().optional(),
-		order: z.number().optional().default(0),
-		image: z.string().optional(),
-	}),
-});
-
 export const collections = {
 	posts: postsCollection,
 	friends: friendsCollection,
 	projects: projectsCollection,
 	spec: specCollection,
-	moments: momentsCollection,
 };
