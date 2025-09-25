@@ -2,6 +2,7 @@
 
 import { getEntry, render } from "astro:content";
 import Markdown from "../components/misc/Markdown.astro"; // 使用通用 Markdown 组件，应用 custom-md 的排版样式
+import MBTIOverview from "../components/misc/MBTIOverview.astro";
 import { siteConfig } from "../config";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
@@ -96,22 +97,19 @@ const aboutKeywords = [
                     </div>
                 </div>
             </div>
-			<!-- INTJ 介绍卡片 -->
-			<div class="btn-card p-3 md:p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60 mb-6">
-				<div class="flex items-start gap-3 md:gap-4">
-					<div class="text-xl md:text-2xl">🧠</div>
-					<div class="flex-1">
-						<div class="sr-only">MBTI</div>
-						<h3 class="text-base md:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white">INTJ</h3>
-						<p class="mt-1 md:mt-2 text-xs md:text-base leading-6 md:leading-7 text-gray-600 dark:text-white/75">
-							独立思考、结果导向、偏爱系统化与长期规划。喜欢把复杂问题拆解成可执行方案，对「更优」与「更简」保持执念；在人群中安静，在作品里表达。
-						</p>
-						<p class="mt-2 text-xs md:text-sm text-[var(--btn-content)]/80">
-							偏好工具：结构化笔记、任务清单、可复用模板；理想合作：目标清晰、边界明确、尊重深度工作。
-						</p>
-					</div>
-				</div>
-			</div>
+            <!-- MBTI 概览条 -->
+            <div class="mb-6">
+                <MBTIOverview
+                    typeBadge="INTJ-A"
+                    bars={[
+                        { leftLabel: 'INTROVERTED', rightLabel: 'EXTRAVERTED', leftPercent: 57, rightPercent: 43, barColor: 'from-sky-300 to-sky-500' },
+                        { leftLabel: 'INTUITIVE', rightLabel: 'OBSERVANT', leftPercent: 68, rightPercent: 32, barColor: 'from-amber-300 to-amber-500' },
+                        { leftLabel: 'THINKING', rightLabel: 'FEELING', leftPercent: 66, rightPercent: 34, barColor: 'from-emerald-300 to-emerald-500' },
+                        { leftLabel: 'JUDGING', rightLabel: 'PROSPECTING', leftPercent: 53, rightPercent: 47, barColor: 'from-violet-300 to-violet-500' },
+                        { leftLabel: 'ASSERTIVE', rightLabel: 'TURBULENT', leftPercent: 68, rightPercent: 32, barColor: 'from-rose-300 to-rose-500' },
+                    ]}
+                />
+            </div>
             <!-- 原正文内容：替换为 Markdown 组件渲染，应用 custom-md 的排版样式 -->
             <Markdown class="markdown-content onload-animation prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline w-full">
                 <Content />
