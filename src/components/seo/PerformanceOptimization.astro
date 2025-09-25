@@ -146,9 +146,9 @@ const {
 			if ('fonts' in document) {
 				// 预加载关键字体
 				const fontPromises = [
-					document.fonts.load('400 16px Inter'),
-					document.fonts.load('600 16px Inter'),
-					document.fonts.load('700 16px Inter')
+					document.fonts.load('400 16px Roboto'),
+					document.fonts.load('500 16px Roboto'),
+					document.fonts.load('700 16px Roboto')
 				];
 				
 				Promise.all(fontPromises).then(() => {

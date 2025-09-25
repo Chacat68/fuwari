@@ -33,6 +33,7 @@ const archiveKeywords = [
 	image={siteConfig.banner?.src}
 	keywords={archiveKeywords}
 >
+    <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">文章归档</h1>
     <HeatmapChart sortedPosts={sortedPosts} totalPostsCount={totalPostsCount} allPosts={allPosts} client:load></HeatmapChart>
 <ArchivePanel sortedPosts={sortedPosts} client:load></ArchivePanel>
 </MainGridLayout>
