@@ -315,8 +315,8 @@ const {
 					// 获取相对路径而不是完整的href
 					const pathname = link.getAttribute('href') || link.pathname;
 					
-					// 确保只预加载同源的相对路径
-					if (pathname && pathname.startsWith('/') && !preloadedUrls.has(pathname)) {
+					// 确保只预加载同源的相对路径，但排除根路径
+					if (pathname && pathname !== "/" && pathname.startsWith('/') && !preloadedUrls.has(pathname)) {
 						preloadedUrls.add(pathname);
 						
 						// 创建预加载链接，使用相对路径
