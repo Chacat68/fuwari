@@ -312,15 +312,17 @@ const {
 			entries.forEach(entry => {
 				if (entry.isIntersecting) {
 					const link = entry.target as HTMLAnchorElement;
-					const href = link.href;
+					// 获取相对路径而不是完整的href
+					const pathname = link.getAttribute('href') || link.pathname;
 					
-					if (!preloadedUrls.has(href)) {
-						preloadedUrls.add(href);
+					// 确保只预加载同源的相对路径
+					if (pathname && pathname.startsWith('/') && !preloadedUrls.has(pathname)) {
+						preloadedUrls.add(pathname);
 						
-						// 创建预加载链接
+						// 创建预加载链接，使用相对路径
 						const preloadLink = document.createElement('link');
 						preloadLink.rel = 'prefetch';
-						preloadLink.href = href;
+						preloadLink.href = pathname;
 						document.head.appendChild(preloadLink);
 					}
 					
