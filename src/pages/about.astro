@@ -37,7 +37,7 @@ const aboutKeywords = [
 	image={siteConfig.banner?.src}
 	keywords={aboutKeywords}
 >
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4 md:mb-8 mx-auto max-w-3xl md:max-w-4xl">
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4 md:mb-8">
         <div id="about-container" class="card-base z-10 px-6 md:px-10 pt-8 pb-8 relative w-full">
             <!-- 个人名字展示：在标签上方显示作者姓名 -->
             <div class="mb-3 text-center">
@@ -113,7 +113,7 @@ const aboutKeywords = [
 				</div>
 			</div>
             <!-- 原正文内容：替换为 Markdown 组件渲染，应用 custom-md 的排版样式 -->
-            <Markdown class="markdown-content onload-animation prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline pl-6 md:pl-6 pr-0 -mr-6 md:-mr-10">
+            <Markdown class="markdown-content onload-animation prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline w-full">
                 <Content />
             </Markdown>
         </div>
