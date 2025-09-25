@@ -50,6 +50,8 @@ const phrases = [
 ];
 const leftTags = phrases.slice(0, 4);
 const rightTags = phrases.slice(4, 8);
+// 桌面端圆弧距离：上下更远离头像，中部更靠近
+const arcOffsets = [22, 12, 12, 22]; // px
 ---
 
 <MainGridLayout 
@@ -65,7 +67,7 @@ const rightTags = phrases.slice(4, 8);
                 <!-- 左列标签 -->
                 <div class="justify-self-end flex flex-col items-end gap-2 min-h-[8rem]">
                     {leftTags.map((text, i) => (
-                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms`}>
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left chip-arc-left" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms; --arc: ${arcOffsets[i]}px`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -80,7 +82,7 @@ const rightTags = phrases.slice(4, 8);
                 <!-- 右列标签 -->
                 <div class="justify-self-start flex flex-col items-start gap-2 min-h-[8rem]">
                     {rightTags.map((text, i) => (
-                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms`}>
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right chip-arc-right" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms; --arc: ${arcOffsets[i]}px`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -199,5 +201,10 @@ const rightTags = phrases.slice(4, 8);
     will-change: transform, opacity; 
     animation: chipInUp 280ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
     animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 280ms);
+}
+/* 圆弧分布（仅桌面端生效） */
+@media (min-width: 768px) {
+    .chip-arc-left { margin-right: var(--arc, 0px); }
+    .chip-arc-right { margin-left: var(--arc, 0px); }
 }
 </style>
