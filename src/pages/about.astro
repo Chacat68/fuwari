@@ -1,13 +1,12 @@
 ---
 
-import { getCollection, getEntry, render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import Markdown from "../components/misc/Markdown.astro"; // 使用通用 Markdown 组件，应用 custom-md 的排版样式
 import MBTIOverview from "../components/misc/MBTIOverview.astro";
 import { profileConfig, siteConfig } from "../config";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const aboutPost = await getEntry("spec", "about");
-const allPosts = await getCollection("posts", (p) => !p.data.draft);
 
 if (!aboutPost) {
 	throw new Error("About page content not found");
@@ -38,21 +37,19 @@ const fm = aboutPost.data as AboutFrontmatter;
 const avatarSrc = fm.avatar ?? profileConfig.avatar;
 const avatarAlt = fm.avatarAlt ?? "个人头像";
 
-// 统计全站标签，按出现次数降序取前 8 个
-const tagCountMap = new Map<string, number>();
-for (const p of allPosts) {
-	for (const t of p.data.tags || []) {
-		const key = t.trim();
-		if (!key) continue;
-		tagCountMap.set(key, (tagCountMap.get(key) || 0) + 1);
-	}
-}
-const topTags = Array.from(tagCountMap.entries())
-	.sort((a, b) => b[1] - a[1])
-	.slice(0, 8)
-	.map(([name]) => name);
-const leftTags = topTags.slice(0, 4);
-const rightTags = topTags.slice(4, 8);
+// 头像两侧的固定短句（替代热门标签）
+const phrases = [
+	"记录生活里的小确幸",
+	"用粤语唱出日常的温度",
+	"打磨顺手可复用的小工具",
+	"与AI协作探索创作边界",
+	"以短诗捕捉转瞬的情绪",
+	"用英文拓展表达与视野",
+	"设计更高效的工作与学习流",
+	"在音乐里寻找灵感与慰藉",
+];
+const leftTags = phrases.slice(0, 4);
+const rightTags = phrases.slice(4, 8);
 ---
 
 <MainGridLayout 
@@ -67,11 +64,10 @@ const rightTags = topTags.slice(4, 8);
             <div class="hidden md:grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-2">
                 <!-- 左列标签 -->
                 <div class="justify-self-end flex flex-col items-end gap-2 min-h-[8rem]">
-                    {leftTags.map((tag, i) => (
-                        <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left" style={`animation-delay: ${i * 80}ms`}>
-                            <span>#</span>
-                            <span>{tag}</span>
-                        </a>
+                    {leftTags.map((text, i) => (
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left" style={`animation-delay: ${i * 80}ms`}>
+                            <span>{text}</span>
+                        </span>
                     ))}
                 </div>
 
@@ -83,11 +79,10 @@ const rightTags = topTags.slice(4, 8);
 
                 <!-- 右列标签 -->
                 <div class="justify-self-start flex flex-col items-start gap-2 min-h-[8rem]">
-                    {rightTags.map((tag, i) => (
-                        <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right" style={`animation-delay: ${i * 80}ms`}>
-                            <span>#</span>
-                            <span>{tag}</span>
-                        </a>
+                    {rightTags.map((text, i) => (
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right" style={`animation-delay: ${i * 80}ms`}>
+                            <span>{text}</span>
+                        </span>
                     ))}
                 </div>
             </div>
@@ -119,14 +114,13 @@ const rightTags = topTags.slice(4, 8);
                 </span>
             </div>
 
-            <!-- 移动端热门标签（前8，居中一行多行折叠） -->
-            {topTags.length > 0 && (
+            <!-- 移动端短句（与桌面端一致） -->
+            {phrases.length > 0 && (
                 <div class="md:hidden mb-6 flex flex-wrap items-center justify-center gap-2">
-                    {topTags.map((tag, i) => (
-                        <a href={`/tags/${encodeURIComponent(tag)}/`} class="inline-flex h-7 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-up" style={`animation-delay: ${i * 60}ms`}>
-                            <span>#</span>
-                            <span>{tag}</span>
-                        </a>
+                    {phrases.map((text, i) => (
+                        <span class="inline-flex h-7 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-up" style={`animation-delay: ${i * 60}ms`}>
+                            <span>{text}</span>
+                        </span>
                     ))}
                 </div>
             )}
