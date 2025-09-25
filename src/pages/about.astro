@@ -62,37 +62,37 @@ const aboutKeywords = [
                 </span>
             </div>
             <!-- 三个主题卡片：阅读 / 创作 / 跑步 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
+            <div class="grid grid-cols-3 gap-3 md:gap-6 mb-6">
                 <!-- 卡片：阅读（纯文字布局，贴近图1） -->
-                <div class="btn-card p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60">
+                <div class="btn-card p-3 md:p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60">
                     <!-- 纯文字布局：移除图标，仅保留标签、标题与描述 -->
                     <div class="w-full">
                         <!-- 顶部小标签：改为 sr-only，视觉隐藏但保留可访问语义 -->
                         <div class="sr-only">所爱</div> <!-- 阅读卡片小标签：读屏可见，视觉隐藏 -->
                         <!-- 大标题：加粗、紧致行距、纯白色；与图1一致 -->
-                        <h3 class="text-xl md:text-2xl font-black leading-tight tracking-tight text-white">阅读</h3> <!-- 将卡片标题字体从 text-2xl/md:text-3xl 下调为 text-xl/md:text-2xl -->
+                        <h3 class="text-base md:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white">阅读</h3> <!-- 窄屏缩小为 text-base；浅色/深色主题自适应颜色 -->
                         <!-- 描述文案：方案B -->
-                        <p class="mt-2 text-sm md:text-base leading-7 text-white/75">与好书相遇，和自己对话</p> <!-- 将描述字体从 text-base/md:text-lg 下调为 text-sm/md:text-base -->
+                        <p class="mt-1 md:mt-2 text-xs md:text-base leading-6 md:leading-7 text-gray-600 dark:text-white/75">与好书相遇，和自己对话</p> <!-- 窄屏缩小描述字号与行高，并自适应主题颜色 -->
                     </div>
                 </div>
                 <!-- 卡片：创作（纯文字布局，贴近图1） -->
-                <div class="btn-card p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60">
+                <div class="btn-card p-3 md:p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60">
                     <div class="w-full">
                         <!-- 顶部小标签：改为 sr-only，视觉隐藏但保留可访问语义 -->
                         <div class="sr-only">专注</div> <!-- 创作卡片小标签：读屏可见，视觉隐藏 -->
-                        <h3 class="text-xl md:text-2xl font-black leading-tight tracking-tight text-white">创作</h3> <!-- 将卡片标题字体从 text-2xl/md:text-3xl 下调为 text-xl/md:text-2xl -->
+                        <h3 class="text-base md:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white">创作</h3> <!-- 窄屏缩小为 text-base；浅色/深色主题自适应颜色 -->
                         <!-- 描述文案：方案B -->
-                        <p class="mt-2 text-sm md:text-base leading-7 text-white/75">把灵感落地成作品</p> <!-- 将描述字体从 text-base/md:text-lg 下调为 text-sm/md:text-base -->
+                        <p class="mt-1 md:mt-2 text-xs md:text-base leading-6 md:leading-7 text-gray-600 dark:text-white/75">把灵感落地成作品</p> <!-- 窄屏缩小描述字号与行高，并自适应主题颜色 -->
                     </div>
                 </div>
                 <!-- 卡片：跑步（纯文字布局，贴近图1） -->
-                <div class="btn-card p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60">
+                <div class="btn-card p-3 md:p-6 rounded-[var(--radius-large)] shadow-md border border-white/15 hover:border-white/25 transition-all duration-300 bg-white/[0.06] backdrop-blur-sm hover:shadow-lg hover:translate-y-[-1px] dark:bg-gray-800/60">
                     <div class="w-full">
                         <!-- 顶部小标签：改为 sr-only，视觉隐藏但保留可访问语义 -->
                         <div class="sr-only">日常</div> <!-- 跑步卡片小标签：读屏可见，视觉隐藏 -->
-                        <h3 class="text-xl md:text-2xl font-black leading-tight tracking-tight text-white">跑步</h3> <!-- 将卡片标题字体从 text-2xl/md:text-3xl 下调为 text-xl/md:text-2xl -->
+                        <h3 class="text-base md:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white">跑步</h3> <!-- 窄屏缩小为 text-base；浅色/深色主题自适应颜色 -->
                         <!-- 描述文案：方案B -->
-                        <p class="mt-2 text-sm md:text-base leading-7 text-white/75">用脚步丈量日常</p> <!-- 将描述字体从 text-base/md:text-lg 下调为 text-sm/md:text-base -->
+                        <p class="mt-1 md:mt-2 text-xs md:text-base leading-6 md:leading-7 text-gray-600 dark:text-white/75">用脚步丈量日常</p> <!-- 窄屏缩小描述字号与行高，并自适应主题颜色 -->
                     </div>
                 </div>
             </div>
