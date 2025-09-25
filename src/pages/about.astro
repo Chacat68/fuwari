@@ -1,6 +1,7 @@
 ---
 
 import { getEntry, render } from "astro:content";
+import BlogTimeline from "../components/BlogTimeline.astro";
 import Markdown from "../components/misc/Markdown.astro"; // 使用通用 Markdown 组件，应用 custom-md 的排版样式
 import MBTIOverview from "../components/misc/MBTIOverview.astro";
 import { profileConfig, siteConfig } from "../config";
@@ -188,6 +189,12 @@ const arcOffsets = yPositions.map((y) => {
                     ]}
                 />
             </div>
+            
+            <!-- 博客历程时间线 -->
+            <div class="mb-8">
+                <BlogTimeline />
+            </div>
+            
             <!-- 原正文内容：替换为 Markdown 组件渲染，应用 custom-md 的排版样式 -->
             <Markdown class="markdown-content onload-animation prose-headings:scroll-mt-24 prose-img:rounded-xl prose-pre:rounded-lg prose-a:no-underline hover:prose-a:underline w-full">
                 <Content />
