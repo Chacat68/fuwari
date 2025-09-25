@@ -65,7 +65,7 @@ const rightTags = phrases.slice(4, 8);
                 <!-- 左列标签 -->
                 <div class="justify-self-end flex flex-col items-end gap-2 min-h-[8rem]">
                     {leftTags.map((text, i) => (
-                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left" style={`animation-delay: ${i * 80}ms`}>
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -80,7 +80,7 @@ const rightTags = phrases.slice(4, 8);
                 <!-- 右列标签 -->
                 <div class="justify-self-start flex flex-col items-start gap-2 min-h-[8rem]">
                     {rightTags.map((text, i) => (
-                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right" style={`animation-delay: ${i * 80}ms`}>
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -118,7 +118,7 @@ const rightTags = phrases.slice(4, 8);
             {phrases.length > 0 && (
                 <div class="md:hidden mb-6 flex flex-wrap items-center justify-center gap-2">
                     {phrases.map((text, i) => (
-                        <span class="inline-flex h-7 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-up" style={`animation-delay: ${i * 60}ms`}>
+                        <span class="inline-flex h-7 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-up" style={`--delay: ${i * 60}ms; --float-duration: ${5200 + i * 240}ms`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -183,8 +183,21 @@ const rightTags = phrases.slice(4, 8);
 @keyframes chipInLeft { from { transform: translateX(12px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
 @keyframes chipInRight { from { transform: translateX(-12px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
 @keyframes chipInUp { from { transform: translateY(6px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+@keyframes floatY { 0% { transform: translateY(0) } 50% { transform: translateY(-3px) } 100% { transform: translateY(0) } }
 
-.chip-left { animation: chipInLeft 320ms ease-out forwards }
-.chip-right { animation: chipInRight 320ms ease-out forwards }
-.chip-up { animation: chipInUp 280ms ease-out forwards }
+.chip-left { 
+    will-change: transform, opacity; 
+    animation: chipInLeft 320ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
+    animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 320ms);
+}
+.chip-right { 
+    will-change: transform, opacity; 
+    animation: chipInRight 320ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
+    animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 320ms);
+}
+.chip-up { 
+    will-change: transform, opacity; 
+    animation: chipInUp 280ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
+    animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 280ms);
+}
 </style>
