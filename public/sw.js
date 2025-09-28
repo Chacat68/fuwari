@@ -1,9 +1,12 @@
 // Service Worker for Fuwari Blog
 // 提供离线支持、缓存优化和性能提升
 
-const CACHE_NAME = "fuwari-blog-v1.0.1";
-const STATIC_CACHE_NAME = "fuwari-static-v1.0.1";
-const DYNAMIC_CACHE_NAME = "fuwari-dynamic-v1.0.1";
+const CACHE_NAME = "fuwari-blog-v1.0.2";
+const STATIC_CACHE_NAME = "fuwari-static-v1.0.2";
+const DYNAMIC_CACHE_NAME = "fuwari-dynamic-v1.0.2";
+
+// 请求去重映射，避免并发请求
+const pendingRequests = new Map();
 
 // 需要缓存的静态资源
 const STATIC_ASSETS = [
@@ -110,8 +113,8 @@ self.addEventListener("fetch", (event) => {
 		return;
 	}
 
-	// 处理其他请求
-	event.respondWith(handleOtherRequest(request));
+	// 处理其他请求，使用去重机制
+	event.respondWith(handleRequestWithDeduplication(request));
 });
 
 // 处理导航请求（页面请求）
@@ -193,10 +196,37 @@ async function handleApiRequest(request) {
 	}
 }
 
+// 请求去重处理
+async function handleRequestWithDeduplication(request) {
+	const requestKey = request.url + request.method;
+
+	// 如果相同的请求正在进行中，等待它完成
+	if (pendingRequests.has(requestKey)) {
+		console.log("[SW] 请求去重，等待进行中的请求:", request.url);
+		return pendingRequests.get(requestKey);
+	}
+
+	// 创建新的请求处理
+	const requestPromise = handleOtherRequest(request);
+	pendingRequests.set(requestKey, requestPromise);
+
+	try {
+		const response = await requestPromise;
+		return response;
+	} finally {
+		// 清理完成的请求
+		pendingRequests.delete(requestKey);
+	}
+}
+
 // 处理其他请求
 async function handleOtherRequest(request) {
 	try {
-		const networkResponse = await fetch(request);
+		// 添加重试机制和更好的错误处理
+		const networkResponse = await fetch(request, {
+			// 添加超时和重试机制
+			signal: AbortSignal.timeout(10000), // 10秒超时
+		});
 
 		// 只缓存成功的响应（200-299状态码）
 		if (networkResponse.ok && shouldCache(request)) {
@@ -208,6 +238,15 @@ async function handleOtherRequest(request) {
 				networkResponse.status,
 				request.url,
 			);
+
+			// 对于503错误，尝试从缓存获取
+			if (networkResponse.status === 503) {
+				const cachedResponse = await caches.match(request);
+				if (cachedResponse) {
+					console.log("[SW] 503错误，使用缓存内容:", request.url);
+					return cachedResponse;
+				}
+			}
 		}
 
 		return networkResponse;
@@ -233,6 +272,12 @@ function shouldCache(request) {
 
 	// 不缓存POST请求
 	if (request.method !== "GET") {
+		return false;
+	}
+
+	// 不缓存可能返回503的查询参数请求
+	if (url.includes("?category=") || url.includes("?tag=")) {
+		console.log("[SW] 跳过缓存查询参数请求:", url);
 		return false;
 	}
 
