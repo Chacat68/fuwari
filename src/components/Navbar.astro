@@ -197,7 +197,18 @@ loadButtonScript();
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
+// 防止重复初始化Pagefind
+let pagefindInitialized = false;
+let pagefindLoading = false;
+
 async function loadPagefind() {
+    // 如果已经初始化或正在加载，直接返回
+    if (pagefindInitialized || pagefindLoading) {
+        return;
+    }
+    
+    pagefindLoading = true;
+    
     try {
         // 延迟加载，避免阻塞首屏渲染
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -214,6 +225,7 @@ async function loadPagefind() {
         });
 
         window.pagefind = pagefind;
+        pagefindInitialized = true;
 
         document.dispatchEvent(new CustomEvent('pagefindready'));
         console.log('Pagefind loaded and initialized successfully, event dispatched.');
@@ -223,8 +235,11 @@ async function loadPagefind() {
             search: () => Promise.resolve({ results: [] }),
             options: () => Promise.resolve(),
         };
+        pagefindInitialized = true;
         document.dispatchEvent(new CustomEvent('pagefindloaderror'));
         console.log('Pagefind load error, event dispatched.');
+    } finally {
+        pagefindLoading = false;
     }
 }
 
