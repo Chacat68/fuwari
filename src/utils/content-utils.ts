@@ -5,14 +5,14 @@ import { getCategoryUrl } from "@utils/url-utils.ts";
 import { siteConfig } from "../config";
 
 // // Retrieve posts and sort them by publication date
-async function getRawSortedPosts() {
+async function getRawSortedPosts(limit?: number) {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		const isDraftFilter = import.meta.env.PROD ? data.draft !== true : true;
 		// 过滤未来日期的文章
 		const today = new Date();
 		today.setHours(23, 59, 59, 999); // 设置为今天的最后一刻
 		const isFutureDate = new Date(data.published) > today;
-		
+
 		return isDraftFilter && !isFutureDate;
 	});
 
@@ -21,11 +21,13 @@ async function getRawSortedPosts() {
 		const dateB = new Date(b.data.published);
 		return dateA > dateB ? -1 : 1;
 	});
-	return sorted;
+
+	// 如果指定了限制，只返回前N篇文章
+	return limit ? sorted.slice(0, limit) : sorted;
 }
 
-export async function getSortedPosts() {
-	const sorted = await getRawSortedPosts();
+export async function getSortedPosts(limit?: number) {
+	const sorted = await getRawSortedPosts(limit);
 
 	for (let i = 1; i < sorted.length; i++) {
 		sorted[i].data.nextSlug = sorted[i - 1].slug;
@@ -125,16 +127,19 @@ export async function getCategoryList(): Promise<Category[]> {
 
 	// 根据配置决定排序方式
 	let lst: string[];
-	
-	if (siteConfig.categorySort?.enable && siteConfig.categorySort.order.length > 0) {
+
+	if (
+		siteConfig.categorySort?.enable &&
+		siteConfig.categorySort.order.length > 0
+	) {
 		// 使用自定义排序
 		const customOrder = siteConfig.categorySort.order;
 		const fallbackSort = siteConfig.categorySort.fallbackSort || "count";
-		
+
 		lst = Object.keys(count).sort((a, b) => {
 			const indexA = customOrder.indexOf(a);
 			const indexB = customOrder.indexOf(b);
-			
+
 			if (indexA !== -1 && indexB !== -1) {
 				return indexA - indexB; // 按自定义顺序
 			}

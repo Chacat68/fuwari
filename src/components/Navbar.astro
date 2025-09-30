@@ -199,6 +199,9 @@ loadButtonScript();
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
 async function loadPagefind() {
     try {
+        // 延迟加载，避免阻塞首屏渲染
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
         const response = await fetch(scriptUrl, { method: 'HEAD' });
         if (!response.ok) {
             throw new Error(`Pagefind script not found: ${response.status}`);
@@ -225,9 +228,13 @@ async function loadPagefind() {
     }
 }
 
+// 延迟加载Pagefind，提升首屏性能
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadPagefind);
+    document.addEventListener('DOMContentLoaded', () => {
+        // 延迟3秒加载，确保首屏渲染完成
+        setTimeout(loadPagefind, 3000);
+    });
 } else {
-    loadPagefind();
+    setTimeout(loadPagefind, 3000);
 }
 </script>}

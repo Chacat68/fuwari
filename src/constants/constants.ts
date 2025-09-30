@@ -1,4 +1,4 @@
-export const PAGE_SIZE = 8;
+export const PAGE_SIZE = 6; // 减少首页文章数量，提升加载性能
 
 export const LIGHT_MODE = "light",
 	DARK_MODE = "dark",

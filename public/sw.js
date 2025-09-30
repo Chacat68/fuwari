@@ -8,22 +8,18 @@ const DYNAMIC_CACHE_NAME = "fuwari-dynamic-v1.0.2";
 // 请求去重映射，避免并发请求
 const pendingRequests = new Map();
 
-// 需要缓存的静态资源
+// 需要缓存的静态资源 - 只缓存关键资源
 const STATIC_ASSETS = [
 	"/",
-	"/about/",
-	"/archive/",
-	"/projects/",
-	"/friends/",
 	"/manifest.json",
-	// 添加关键CSS和JS文件
+	// 移除其他页面的预缓存，减少首次加载时间
 ];
 
-// 需要缓存的动态内容模式
+// 需要缓存的动态内容模式 - 优化缓存策略
 const CACHE_PATTERNS = [
-	/\/posts\/.*/,
 	/\/api\/.*/,
 	/\.(css|js|woff2?|png|jpg|jpeg|webp|svg)$/,
+	// 移除 /posts/.* 模式，避免缓存过多文章页面
 ];
 
 // 安装事件 - 预缓存静态资源
@@ -117,16 +113,22 @@ self.addEventListener("fetch", (event) => {
 	event.respondWith(handleRequestWithDeduplication(request));
 });
 
-// 处理导航请求（页面请求）
+// 处理导航请求（页面请求）- 优化为网络优先策略
 async function handleNavigationRequest(request) {
 	try {
-		// 尝试从网络获取
-		const networkResponse = await fetch(request);
+		// 优先从网络获取最新内容
+		const networkResponse = await fetch(request, {
+			// 添加超时控制
+			signal: AbortSignal.timeout(5000), // 5秒超时
+		});
 
 		// 如果成功，缓存响应并返回
 		if (networkResponse.ok) {
-			const cache = await caches.open(DYNAMIC_CACHE_NAME);
-			cache.put(request, networkResponse.clone());
+			// 只缓存首页，其他页面不缓存以减少内存占用
+			if (request.url.endsWith("/") || request.url.endsWith("/index.html")) {
+				const cache = await caches.open(DYNAMIC_CACHE_NAME);
+				cache.put(request, networkResponse.clone());
+			}
 			return networkResponse;
 		}
 

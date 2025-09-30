@@ -37,21 +37,12 @@ export default defineConfig({
 		swup({
 			theme: false,
 			animationClass: "transition-", // see https://swup.js.org/options/#animationselector
-			// 使用默认值以避免404错误
-			containers: ["main", "#toc"],
-			smoothScrolling: true,
-			cache: true,
+			// 简化容器配置，减少DOM操作
+			containers: ["main"],
+			smoothScrolling: false, // 禁用平滑滚动，提升性能
+			cache: false, // 禁用缓存，减少内存占用
 			preload: {
-				enabled: true,
-				customFetch: (url) => {
-					return fetch(url, {
-						credentials: "same-origin", // 设置凭证模式
-						mode: "cors",
-						headers: {
-							"X-Requested-With": "XMLHttpRequest",
-						},
-					});
-				},
+				enabled: false, // 禁用预加载，减少网络请求
 			},
 			accessibility: true,
 			updateHead: true,
