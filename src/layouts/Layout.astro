@@ -199,10 +199,10 @@ const bannerOffset =
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
-		<!-- Umami 统计脚本 -->
+		<!-- Umami 统计脚本 - 延迟加载减少对首屏影响 -->
 		{siteConfig.umami?.enable && (
 			<script
-				async
+				defer
 				src={siteConfig.umami.src}
 				data-website-id={siteConfig.umami.websiteId}
 			></script>
@@ -210,11 +210,11 @@ const bannerOffset =
 
 		<MobileOptimization />
 		<PerformanceOptimization 
-			enablePreload={true}
+			enablePreload={false}
 			enableCompression={true}
 			enableCaching={true}
-			enableCriticalCSS={true}
-			enableResourceHints={true}
+			enableCriticalCSS={false}
+			enableResourceHints={false}
 			preloadFonts={[]}
 		/>
 
@@ -546,12 +546,29 @@ let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
 
+// 缓存计算结果，减少重复计算
+let cachedBannerHeight = 0;
+let cachedThreshold = 0;
+let lastScrollTop = 0;
+
 function scrollFunction() {
+    const currentScrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+    
+    // 如果滚动距离变化很小，跳过处理
+    if (Math.abs(currentScrollTop - lastScrollTop) < 5) {
+        return;
+    }
+    
+    lastScrollTop = currentScrollTop;
+    
     requestAnimationFrame(() => {
-        let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
+        // 缓存banner高度计算
+        if (cachedBannerHeight === 0) {
+            cachedBannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
+        }
 
         if (backToTopBtn) {
-            if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
+            if (currentScrollTop > cachedBannerHeight) {
                 backToTopBtn.classList.remove('hide')
             } else {
                 backToTopBtn.classList.add('hide')
@@ -559,34 +576,36 @@ function scrollFunction() {
         }
 
         if (bannerEnabled && toc) {
-            if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
+            if (currentScrollTop > cachedBannerHeight) {
                 toc.classList.remove('toc-hide')
             } else {
                 toc.classList.add('toc-hide')
             }
         }
 
-        if (!bannerEnabled) return
-        if (navbar) {
+        if (!bannerEnabled || !navbar) return;
+        
+        // 缓存threshold计算
+        if (cachedThreshold === 0) {
             const NAVBAR_HEIGHT = 72
             const MAIN_PANEL_EXCESS_HEIGHT = MAIN_PANEL_OVERLAPS_BANNER_HEIGHT * 16
-
             let bannerHeight = BANNER_HEIGHT
             if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
                 bannerHeight = BANNER_HEIGHT_HOME
             }
-            let threshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16
-            if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
-                navbar.classList.add('navbar-hidden')
-            } else {
-                navbar.classList.remove('navbar-hidden')
-            }
+            cachedThreshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16;
+        }
+        
+        if (currentScrollTop >= cachedThreshold) {
+            navbar.classList.add('navbar-hidden')
+        } else {
+            navbar.classList.remove('navbar-hidden')
         }
     });
 }
 
 // 使用节流优化滚动事件，减少频率提升性能
-window.onscroll = throttle(scrollFunction, 32); // 从16ms增加到32ms，减少执行频率
+window.onscroll = throttle(scrollFunction, 64); // 进一步减少执行频率，提升性能
 
 window.onresize = () => {
 	// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
