@@ -126,8 +126,16 @@ async function handleNavigationRequest(request) {
 		if (networkResponse.ok) {
 			// 只缓存首页，其他页面不缓存以减少内存占用
 			if (request.url.endsWith("/") || request.url.endsWith("/index.html")) {
-				const cache = await caches.open(DYNAMIC_CACHE_NAME);
-				cache.put(request, networkResponse.clone());
+				try {
+					const cache = await caches.open(DYNAMIC_CACHE_NAME);
+					// 确保在缓存之前克隆响应，避免body被锁定
+					const responseClone = networkResponse.clone();
+					await cache.put(request, responseClone);
+					console.log("[SW] 成功缓存导航请求:", request.url);
+				} catch (cacheError) {
+					console.warn("[SW] 缓存导航请求失败:", cacheError, request.url);
+					// 缓存失败不应该影响响应返回
+				}
 			}
 			return networkResponse;
 		}
@@ -139,33 +147,60 @@ async function handleNavigationRequest(request) {
 	}
 
 	// 网络失败或响应不成功，尝试从缓存获取
-	const cachedResponse = await caches.match(request);
-	if (cachedResponse) {
-		return cachedResponse;
+	try {
+		const cachedResponse = await caches.match(request);
+		if (cachedResponse) {
+			console.log("[SW] 使用缓存的导航请求:", request.url);
+			return cachedResponse;
+		}
+	} catch (cacheError) {
+		console.warn("[SW] 获取缓存失败:", cacheError, request.url);
 	}
 
 	// 缓存也没有，返回离线页面
-	return caches.match("/");
+	try {
+		const offlineResponse = await caches.match("/");
+		if (offlineResponse) {
+			console.log("[SW] 返回离线页面:", request.url);
+			return offlineResponse;
+		}
+	} catch (offlineError) {
+		console.warn("[SW] 获取离线页面失败:", offlineError);
+	}
+
+	// 最后的兜底方案
+	console.error("[SW] 无法处理导航请求:", request.url);
+	throw new Error("Service Worker无法处理请求");
 }
 
 // 处理静态资源请求
 async function handleStaticAssetRequest(request) {
 	// 缓存优先策略
-	const cachedResponse = await caches.match(request);
-	if (cachedResponse) {
-		return cachedResponse;
+	try {
+		const cachedResponse = await caches.match(request);
+		if (cachedResponse) {
+			return cachedResponse;
+		}
+	} catch (cacheError) {
+		console.warn("[SW] 获取静态资源缓存失败:", cacheError, request.url);
 	}
 
 	try {
 		const networkResponse = await fetch(request);
 		// 只对GET请求进行缓存，HEAD请求不支持缓存
 		if (networkResponse.ok && request.method === "GET") {
-			const cache = await caches.open(STATIC_CACHE_NAME);
-			cache.put(request, networkResponse.clone());
+			try {
+				const cache = await caches.open(STATIC_CACHE_NAME);
+				await cache.put(request, networkResponse.clone());
+				console.log("[SW] 成功缓存静态资源:", request.url);
+			} catch (cacheError) {
+				console.warn("[SW] 缓存静态资源失败:", cacheError, request.url);
+				// 缓存失败不应该影响响应返回
+			}
 		}
 		return networkResponse;
 	} catch (error) {
-		console.error("[SW] 静态资源请求失败:", error);
+		console.error("[SW] 静态资源请求失败:", error, request.url);
 		throw error;
 	}
 }
@@ -179,18 +214,30 @@ async function handleApiRequest(request) {
 		if (networkResponse.ok) {
 			// 缓存GET请求的响应
 			if (request.method === "GET") {
-				const cache = await caches.open(DYNAMIC_CACHE_NAME);
-				cache.put(request, networkResponse.clone());
+				try {
+					const cache = await caches.open(DYNAMIC_CACHE_NAME);
+					await cache.put(request, networkResponse.clone());
+					console.log("[SW] 成功缓存API请求:", request.url);
+				} catch (cacheError) {
+					console.warn("[SW] 缓存API请求失败:", cacheError, request.url);
+					// 缓存失败不应该影响响应返回
+				}
 			}
 		}
 
 		return networkResponse;
 	} catch (error) {
+		console.error("[SW] API请求失败:", error, request.url);
 		// 网络失败时，尝试从缓存获取GET请求
 		if (request.method === "GET") {
-			const cachedResponse = await caches.match(request);
-			if (cachedResponse) {
-				return cachedResponse;
+			try {
+				const cachedResponse = await caches.match(request);
+				if (cachedResponse) {
+					console.log("[SW] 使用缓存的API请求:", request.url);
+					return cachedResponse;
+				}
+			} catch (cacheError) {
+				console.warn("[SW] 获取API缓存失败:", cacheError, request.url);
 			}
 		}
 
@@ -205,7 +252,9 @@ async function handleRequestWithDeduplication(request) {
 	// 如果相同的请求正在进行中，等待它完成
 	if (pendingRequests.has(requestKey)) {
 		console.log("[SW] 请求去重，等待进行中的请求:", request.url);
-		return pendingRequests.get(requestKey);
+		const originalResponse = await pendingRequests.get(requestKey);
+		// 克隆响应以避免body被锁定
+		return originalResponse.clone();
 	}
 
 	// 创建新的请求处理
