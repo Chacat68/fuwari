@@ -498,6 +498,15 @@ const setup = () => {
 		// 立即优化页面切换性能，减少动画延迟
 		document.documentElement.style.setProperty('--content-delay', '0ms');
 		
+		// 重置导航栏隐藏状态和缓存
+		const navbar = document.getElementById('navbar-wrapper');
+		if (navbar) {
+			navbar.classList.remove('navbar-hidden');
+		}
+		// 重置缓存，确保阈值重新计算
+		cachedBannerHeight = 0;
+		cachedThreshold = 0;
+		
 		// 针对主页访问的特殊优化
 		if (pathsEqual(visit.to.url, url('/'))) {
 			// 主页访问时进一步减少动画延迟
@@ -525,6 +534,12 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('page:view', () => {
+		// 确保导航栏在新页面加载后正确显示
+		const navbar = document.getElementById('navbar-wrapper');
+		if (navbar) {
+			navbar.classList.remove('navbar-hidden');
+		}
+		
 		// hide the temp high element when the transition is done
 		const heightExtend = document.getElementById('page-height-extend')
 		if (heightExtend) {
@@ -618,7 +633,10 @@ function scrollFunction() {
             cachedThreshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16;
         }
         
-        if (currentScrollTop >= cachedThreshold) {
+        // 确保在页面顶部时导航栏总是显示
+        if (currentScrollTop <= 10) {
+            navbar.classList.remove('navbar-hidden')
+        } else if (currentScrollTop >= cachedThreshold) {
             navbar.classList.add('navbar-hidden')
         } else {
             navbar.classList.remove('navbar-hidden')
