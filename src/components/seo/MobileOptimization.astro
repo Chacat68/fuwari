@@ -20,7 +20,8 @@
 <!-- 关键CSS内联优化 -->
 <style>
 	/* 关键路径CSS - 首屏渲染优化 */
-	body {
+	html, body {
+		overflow-x: hidden; /* 防止横向滚动 */
 		font-display: swap; /* 字体加载优化 */
 	}
 	
@@ -33,6 +34,13 @@
 	/* 移动端滚动优化 */
 	* {
 		-webkit-overflow-scrolling: touch;
+		max-width: 100%; /* 防止元素超出容器宽度 */
+	}
+	
+	/* 防止横向滚动的额外保护 */
+	.container, .wrapper, .grid, .flex {
+		overflow-x: hidden;
+		max-width: 100%;
 	}
 	
 	/* 防止移动端缩放导致的布局问题 */

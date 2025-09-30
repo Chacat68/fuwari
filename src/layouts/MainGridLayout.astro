@@ -60,7 +60,7 @@ const mainPanelTop = siteConfig.banner.enable
 <!-- Banner -->
 {siteConfig.banner.enable && <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
     <div class="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-transparent to-black/70"></div>
-    <div class="absolute inset-0 w-[120%] h-[120%] -left-[10%] -top-[10%] blur-[100px] opacity-50 bg-[var(--page-bg)] pointer-events-none"></div>
+    <div class="absolute inset-0 w-[120%] h-[120%] -left-[10%] -top-[10%] blur-[100px] opacity-50 bg-[var(--page-bg)] pointer-events-none max-w-none"></div>
     <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
@@ -72,7 +72,7 @@ const mainPanelTop = siteConfig.banner.enable
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
         <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
-    mx-auto gap-4 px-0 md:px-4"
+    mx-auto gap-4 px-0 md:px-4 max-w-full overflow-x-hidden"
         >
             <!-- Banner image credit -->
             {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener" aria-label="Visit image source"
