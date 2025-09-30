@@ -469,8 +469,16 @@ const setup = () => {
 	})
 */
 	window.swup.hooks.on('link:click', () => {
-		// 减少动画延迟，提升页面切换性能
+		// 立即减少动画延迟，提升页面切换性能
 		document.documentElement.style.setProperty('--content-delay', '0ms');
+		
+		// 预优化：立即隐藏复杂动画元素
+		const complexElements = document.querySelectorAll('.chip-left, .chip-right, .timeline-item');
+		complexElements.forEach(el => {
+			if (el instanceof HTMLElement) {
+				el.style.animationPlayState = 'paused';
+			}
+		});
 
 		// prevent elements from overlapping the navbar
 		if (!bannerEnabled) {
@@ -487,14 +495,18 @@ const setup = () => {
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
-		// 优化页面切换性能，减少动画延迟
+		// 立即优化页面切换性能，减少动画延迟
 		document.documentElement.style.setProperty('--content-delay', '0ms');
-
-		// change banner height immediately when a link is clicked
-		const bodyElement = document.querySelector('body')
+		
+		// 针对主页访问的特殊优化
 		if (pathsEqual(visit.to.url, url('/'))) {
+			// 主页访问时进一步减少动画延迟
+			document.documentElement.style.setProperty('--content-delay', '0ms');
+			// 立即设置主页样式
+			const bodyElement = document.querySelector('body')
 			bodyElement!.classList.add('lg:is-home');
 		} else {
+			const bodyElement = document.querySelector('body')
 			bodyElement!.classList.remove('lg:is-home');
 		}
 

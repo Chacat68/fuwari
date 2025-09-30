@@ -117,18 +117,20 @@ const timelineEvents: TimelineEvent[] = [
 </div>
 
 <style>
+  /* 优化动画性能，减少动画延迟 */
   .timeline-item {
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.4s ease-out forwards;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
+    will-change: opacity, transform;
   }
   
-  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
-  .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+  .timeline-item:nth-child(1) { animation-delay: 0ms; }
+  .timeline-item:nth-child(2) { animation-delay: 50ms; }
+  .timeline-item:nth-child(3) { animation-delay: 100ms; }
+  .timeline-item:nth-child(4) { animation-delay: 150ms; }
+  .timeline-item:nth-child(5) { animation-delay: 200ms; }
+  .timeline-item:nth-child(6) { animation-delay: 250ms; }
   
   @keyframes fadeInUp {
     to {
@@ -161,9 +163,14 @@ const timelineEvents: TimelineEvent[] = [
     }
   }
   
-  /* 内容卡片悬停效果增强 */
+  /* 内容卡片悬停效果增强 - 优化性能 */
+  .timeline-content .bg-white\/5 {
+    transition: all 0.2s ease-out;
+    will-change: transform, box-shadow;
+  }
+  
   .timeline-content .bg-white\/5:hover {
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04);
   }
 </style>

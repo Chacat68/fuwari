@@ -82,7 +82,7 @@ const arcOffsets = yPositions.map((y) => {
                 <!-- 左列标签 -->
                 <div class="justify-self-end flex flex-col items-end gap-2 min-h-[8rem]">
                     {leftTags.map((text, i) => (
-                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left chip-arc-left" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms; --arc: ${arcOffsets[i]}px`}>
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-left chip-arc-left" style={`--delay: ${i * 40}ms; --float-duration: ${3200 + i * 120}ms; --arc: ${arcOffsets[i]}px`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -97,7 +97,7 @@ const arcOffsets = yPositions.map((y) => {
                 <!-- 右列标签 -->
                 <div class="justify-self-start flex flex-col items-start gap-2 min-h-[8rem]">
                     {rightTags.map((text, i) => (
-                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right chip-arc-right" style={`--delay: ${i * 80}ms; --float-duration: ${5200 + i * 240}ms; --arc: ${arcOffsets[i]}px`}>
+                        <span class="inline-flex h-7 md:h-8 items-center gap-1 rounded-full px-3 text-xs font-medium text-white/80 bg-white/5 border border-white/10 hover:border-white/20 transition-colors whitespace-nowrap opacity-0 chip-right chip-arc-right" style={`--delay: ${i * 40}ms; --float-duration: ${3200 + i * 120}ms; --arc: ${arcOffsets[i]}px`}>
                             <span>{text}</span>
                         </span>
                     ))}
@@ -177,7 +177,7 @@ const arcOffsets = yPositions.map((y) => {
                 </div>
             </div>
             <!-- MBTI 概览条 -->
-            <div class="mb-6">
+            <div class="mb-6 onload-animation" style="animation-delay: 100ms;">
                 <MBTIOverview
                     typeBadge="INTJ-A"
                     bars={[
@@ -191,7 +191,7 @@ const arcOffsets = yPositions.map((y) => {
             </div>
             
             <!-- 博客历程时间线 -->
-            <div class="mb-8">
+            <div class="mb-8 onload-animation" style="animation-delay: 150ms;">
                 <BlogTimeline />
             </div>
             
@@ -269,6 +269,26 @@ const arcOffsets = yPositions.map((y) => {
         </div>
     </div>
 </MainGridLayout>
+
+<!-- 预加载主页资源，提升返回主页时的性能 -->
+<script>
+// 延迟预加载主页，避免影响当前页面性能
+setTimeout(() => {
+    // 预加载主页HTML
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = '/';
+    document.head.appendChild(link);
+    
+    // 预加载主页的关键CSS（如果有的话）
+    const cssLink = document.createElement('link');
+    cssLink.rel = 'prefetch';
+    cssLink.href = '/_astro/';
+    cssLink.as = 'style';
+    document.head.appendChild(cssLink);
+}, 2000); // 2秒后开始预加载
+</script>
+
 <style>
 @keyframes chipInLeft { from { transform: translateX(12px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
 @keyframes chipInRight { from { transform: translateX(-12px); opacity: 0 } to { transform: translateX(0); opacity: 1 } }

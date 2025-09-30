@@ -48,6 +48,10 @@ export default defineConfig({
 			updateHead: true,
 			updateBodyClass: false,
 			globalInstance: true,
+			// 优化页面切换性能
+			skipPopStateHandling: false,
+			animateHistoryBrowsing: false, // 禁用历史记录浏览动画
+			parallelRequests: true, // 启用并行请求
 		}),
 		icon({
 			include: {
