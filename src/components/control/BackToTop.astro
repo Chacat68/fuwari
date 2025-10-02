@@ -45,6 +45,27 @@ import { Icon } from "astro-icon/components";
 
 <script is:raw is:inline>
 function backToTop() {
+    // 关闭所有打开的浮动面板
+    if (typeof window.closeAllFloatPanels === 'function') {
+        window.closeAllFloatPanels();
+    } else {
+        // 降级方案：直接操作面板
+        const panels = [
+            'nav-menu-panel',
+            'search-panel', 
+            'display-setting',
+            'light-dark-panel'
+        ];
+        
+        panels.forEach(panelId => {
+            const panel = document.getElementById(panelId);
+            if (panel && !panel.classList.contains('float-panel-closed')) {
+                panel.classList.add('float-panel-closed');
+            }
+        });
+    }
+    
+    // 平滑滚动到顶部
     window.scroll({ top: 0, behavior: 'smooth' });
 }
 </script>

@@ -339,6 +339,26 @@ function disableAnimation() {
 
 const bannerEnabled = !!document.getElementById('banner-wrapper')
 
+// 统一管理浮动面板状态的工具函数
+function closeAllFloatPanels() {
+	const panels = [
+		'nav-menu-panel',
+		'search-panel', 
+		'display-setting',
+		'light-dark-panel'
+	];
+	
+	panels.forEach(panelId => {
+		const panel = document.getElementById(panelId);
+		if (panel && !panel.classList.contains('float-panel-closed')) {
+			panel.classList.add('float-panel-closed');
+		}
+	});
+}
+
+// 将函数暴露到全局作用域，供其他组件使用
+(window as any).closeAllFloatPanels = closeAllFloatPanels;
+
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
@@ -356,6 +376,13 @@ function setClickOutsideToClose(panel: string, ignores: string[]) {
 setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
 setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
 setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+
+// 全局ESC键处理 - 关闭所有浮动面板
+document.addEventListener('keydown', (event: KeyboardEvent) => {
+	if (event.key === 'Escape') {
+		closeAllFloatPanels();
+	}
+});
 
 
 function loadTheme() {
@@ -507,6 +534,9 @@ const setup = () => {
 		cachedBannerHeight = 0;
 		cachedThreshold = 0;
 		
+		// 页面切换时关闭所有浮动面板，避免状态不一致
+		closeAllFloatPanels();
+		
 		// 针对主页访问的特殊优化
 		if (pathsEqual(visit.to.url, url('/'))) {
 			// 主页访问时进一步减少动画延迟
@@ -636,6 +666,9 @@ function scrollFunction() {
         // 确保在页面顶部时导航栏总是显示
         if (currentScrollTop <= 10) {
             navbar.classList.remove('navbar-hidden')
+            
+            // 当滚动到页面顶部时，自动关闭所有浮动面板
+            closeAllFloatPanels();
         } else if (currentScrollTop >= cachedThreshold) {
             navbar.classList.add('navbar-hidden')
         } else {
