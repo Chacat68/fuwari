@@ -1,7 +1,7 @@
 ---
 title: 《如愿》粤语版：盛世小团圆的深情告白
-published: 2025-01-27
-updated: 2025-01-27
+published: 2025-10-02
+updated: 2025-10-02
 description: '"不是词神"与糖糖YuzeTang共同献上的《如愿》粤语版，用深情的旋律表达对祖国的热爱，致敬先烈，歌颂盛世小团圆。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250127000000000.webp?imageSlim'
 tags: [粤语音乐, 如愿, 粤语版, 翻唱, 爱国, 盛世]
