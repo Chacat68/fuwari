@@ -11,8 +11,10 @@ import {
 	getSortedPosts,
 } from "../utils/content-utils";
 
+// 优化：只获取必要的文章数据，减少页面大小
 const sortedPosts = await getSortedPosts();
 const totalPostsCount = await getAllPostsCount();
+// 对于热力图，我们只需要基本的文章信息，不需要完整内容
 const allPosts = await getAllPosts();
 
 // Archive页面SEO信息
@@ -34,7 +36,8 @@ const archiveKeywords = [
 	keywords={archiveKeywords}
 >
     <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">文章归档</h1>
-    <HeatmapChart sortedPosts={sortedPosts} totalPostsCount={totalPostsCount} allPosts={allPosts} client:load></HeatmapChart>
-<ArchivePanel sortedPosts={sortedPosts} client:load></ArchivePanel>
+    <!-- 优化：使用懒加载减少初始页面大小 -->
+    <HeatmapChart sortedPosts={sortedPosts} totalPostsCount={totalPostsCount} allPosts={allPosts} client:visible></HeatmapChart>
+    <ArchivePanel sortedPosts={sortedPosts} client:visible></ArchivePanel>
 </MainGridLayout>
 

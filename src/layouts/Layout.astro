@@ -47,7 +47,7 @@ if (!banner || typeof banner !== "string" || banner.trim() === "") {
 	banner = siteConfig.banner.src;
 }
 
-// TODO don't use post cover as banner for now
+// 使用网站横幅作为默认横幅
 banner = siteConfig.banner.src;
 
 const enableBanner = siteConfig.banner.enable;
@@ -306,9 +306,8 @@ import { siteConfig } from '../config';
 // 	}
 // })();
 
-/* TODO This is a temporary solution for style flicker issue when the transition is activated */
-/* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
-/* update: fixed in Astro 3.2.4 */
+/* 样式闪烁问题已在 Astro 3.2.4 中修复 */
+/* 相关issue: https://github.com/withastro/astro/issues/8711 */
 /*
 function disableAnimation() {
 	const css = document.createElement('style')
@@ -472,7 +471,7 @@ function showBanner() {
 }
 
 function init() {
-	// disableAnimation()()		// TODO
+	// 动画禁用功能已移除，因为样式闪烁问题已在 Astro 3.2.4 中修复
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
@@ -483,7 +482,7 @@ function init() {
 init();
 
 const setup = () => {
-	// TODO: temp solution to change the height of the banner
+	// 横幅高度调整的临时解决方案
 /*
 	window.swup.hooks.on('animation:out:start', () => {
 		const path = window.location.pathname
