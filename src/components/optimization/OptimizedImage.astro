@@ -1,0 +1,148 @@
+---
+// 优化的图片组件，支持懒加载和WebP格式
+export interface Props {
+	src: string;
+	alt: string;
+	width?: number;
+	height?: number;
+	loading?: "lazy" | "eager";
+	priority?: boolean;
+	className?: string;
+	placeholder?: string;
+	sizes?: string;
+}
+
+const {
+	src,
+	alt,
+	width,
+	height,
+	loading = "lazy",
+	priority = false,
+	className = "",
+	placeholder,
+	sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+} = Astro.props;
+
+// 生成WebP版本URL
+const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+const isExternal = src.startsWith("http");
+const optimizedSrc = isExternal
+	? src
+	: `/api/image?src=${encodeURIComponent(src)}&format=webp&quality=85`;
+---
+
+<picture class={`optimized-image ${className}`}>
+	<!-- WebP格式，现代浏览器优先 -->
+	<source 
+		srcset={webpSrc} 
+		type="image/webp"
+		sizes={sizes}
+	>
+	
+	<!-- 原格式作为降级 -->
+	<img
+		src={src}
+		alt={alt}
+		width={width}
+		height={height}
+		loading={priority ? 'eager' : loading}
+		decoding="async"
+		sizes={sizes}
+		class={`transition-opacity duration-300 ${loading === 'lazy' ? 'opacity-0' : 'opacity-100'}`}
+		onload="this.classList.add('opacity-100')"
+		onerror="this.classList.add('opacity-100'); this.src=this.dataset.fallback || ''"
+		data-fallback={src}
+		style={placeholder ? `background-image: url('${placeholder}'); background-size: cover;` : ''}
+	>
+</picture>
+
+<style>
+	.optimized-image {
+		display: block;
+		position: relative;
+	}
+	
+	.optimized-image img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+	
+	/* 懒加载占位符 */
+	.optimized-image img[loading="lazy"] {
+		background-color: #f3f4f6;
+		background-image: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+		background-size: 200% 100%;
+		animation: shimmer 1.5s infinite;
+	}
+	
+	@keyframes shimmer {
+		0% {
+			background-position: -200% 0;
+		}
+		100% {
+			background-position: 200% 0;
+		}
+	}
+	
+	/* 加载完成后的过渡效果 */
+	.optimized-image img.loaded {
+		animation: fadeIn 0.3s ease-in-out;
+	}
+	
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
+<script>
+	// 图片懒加载优化
+	function initImageOptimization() {
+		const images = document.querySelectorAll('img[loading="lazy"]');
+		
+		if ('IntersectionObserver' in window) {
+			const imageObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						
+						// 预加载图片
+						const tempImg = new Image();
+						tempImg.onload = () => {
+							img.src = img.src;
+							img.classList.add('loaded');
+						};
+						tempImg.src = img.src;
+						
+						// 停止观察已加载的图片
+						observer.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.01
+			});
+			
+			images.forEach(img => imageObserver.observe(img));
+		} else {
+			// 降级处理：直接加载所有图片
+			images.forEach(img => {
+				const imgElement = img as HTMLImageElement;
+				imgElement.src = imgElement.src;
+			});
+		}
+	}
+	
+	// DOM加载完成后初始化
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initImageOptimization);
+	} else {
+		initImageOptimization();
+	}
+</script>

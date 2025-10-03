@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>离线 - 付之一笑</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .retry-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .retry-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        .tips {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .tips ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+        .tips li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .tips li::before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="offline-icon">📡</div>
+        <h1>网络连接中断</h1>
+        <p>抱歉，您当前处于离线状态。请检查您的网络连接后重试。</p>
+        <button class="retry-btn" onclick="window.location.reload()">重新连接</button>
+        <div class="tips">
+            <p>温馨提示：</p>
+            <ul>
+                <li>检查您的网络连接</li>
+                <li>尝试刷新页面</li>
+                <li>稍后再试</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // 检测网络状态
+        function updateOnlineStatus() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }
+        
+        // 监听网络状态变化
+        window.addEventListener('online', updateOnlineStatus);
+        
+        // 定期检查网络状态
+        setInterval(() => {
+            if (navigator.onLine) {
+                updateOnlineStatus();
+            }
+        }, 5000);
+        
+        // 自动重试机制
+        let retryCount = 0;
+        const maxRetries = 3;
+        
+        function autoRetry() {
+            if (retryCount < maxRetries && navigator.onLine) {
+                retryCount++;
+                setTimeout(() => {
+                    fetch('/', { method: 'HEAD' })
+                        .then(() => window.location.reload())
+                        .catch(() => autoRetry());
+                }, 2000 * retryCount);
+            }
+        }
+        
+        // 页面加载后开始自动重试
+        window.addEventListener('load', () => {
+            setTimeout(autoRetry, 1000);
+        });
+    </script>
+</body>
+</html>

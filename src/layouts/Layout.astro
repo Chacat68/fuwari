@@ -199,6 +199,16 @@ const bannerOffset =
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
+		<!-- 关键资源预加载 -->
+		<link rel="preload" href="/archive/" as="document" />
+		<link rel="preload" href="/projects/" as="document" />
+		<link rel="preload" href="/friends/" as="document" />
+		<link rel="preload" href="/pagefind/pagefind.js" as="script" />
+		
+		<!-- 预加载关键字体 -->
+		<link rel="preload" href="/_astro/roboto-latin-400-normal.CNwBRw8h.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/_astro/roboto-latin-500-normal.CkrA1NAy.woff2" as="font" type="font/woff2" crossorigin />
+
 		<!-- Umami 统计脚本 - 延迟加载减少对首屏影响 -->
 		{siteConfig.umami?.enable && (
 			<script
@@ -210,12 +220,12 @@ const bannerOffset =
 
 		<MobileOptimization />
 		<PerformanceOptimization 
-			enablePreload={false}
+			enablePreload={true}
 			enableCompression={true}
 			enableCaching={true}
-			enableCriticalCSS={false}
-			enableResourceHints={false}
-			preloadFonts={[]}
+			enableCriticalCSS={true}
+			enableResourceHints={true}
+			preloadFonts={['roboto']}
 		/>
 
 	</head>
@@ -498,24 +508,27 @@ const setup = () => {
 		// 立即减少动画延迟，提升页面切换性能
 		document.documentElement.style.setProperty('--content-delay', '0ms');
 		
-		// 预优化：立即暂停所有复杂动画元素
-		const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
-		complexElements.forEach(el => {
-			if (el instanceof HTMLElement) {
-				el.style.animationPlayState = 'paused';
-				el.style.willChange = 'auto';
-			}
+		// 优化：使用 requestAnimationFrame 批量处理DOM操作
+		requestAnimationFrame(() => {
+			// 预优化：立即暂停所有复杂动画元素
+			const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+			complexElements.forEach(el => {
+				if (el instanceof HTMLElement) {
+					el.style.animationPlayState = 'paused';
+					el.style.willChange = 'auto';
+				}
+			});
+			
+			// 暂停所有CSS动画
+			const style = document.createElement('style');
+			style.textContent = `
+				* {
+					animation-play-state: paused !important;
+				}
+			`;
+			style.id = 'swup-pause-animations';
+			document.head.appendChild(style);
 		});
-		
-		// 暂停所有CSS动画
-		const style = document.createElement('style');
-		style.textContent = `
-			* {
-				animation-play-state: paused !important;
-			}
-		`;
-		style.id = 'swup-pause-animations';
-		document.head.appendChild(style);
 
 		// prevent elements from overlapping the navbar
 		if (!bannerEnabled) {
@@ -703,7 +716,7 @@ function scrollFunction() {
 }
 
 // 使用节流优化滚动事件，减少频率提升性能
-window.onscroll = throttle(scrollFunction, 64); // 进一步减少执行频率，提升性能
+window.onscroll = throttle(scrollFunction, 16); // 使用16ms节流，与60fps匹配
 
 window.onresize = () => {
 	// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text

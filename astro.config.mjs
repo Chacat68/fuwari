@@ -40,9 +40,10 @@ export default defineConfig({
 			// 简化容器配置，减少DOM操作
 			containers: ["main"],
 			smoothScrolling: false, // 禁用平滑滚动，提升性能
-			cache: false, // 禁用缓存，减少内存占用
+			cache: true, // 启用缓存，减少重复请求
 			preload: {
-				enabled: false, // 禁用预加载，减少网络请求
+				enabled: true, // 启用预加载，提升用户体验
+				throttle: 300, // 限制预加载频率
 			},
 			accessibility: true,
 			updateHead: true,
@@ -52,6 +53,10 @@ export default defineConfig({
 			skipPopStateHandling: false,
 			animateHistoryBrowsing: false, // 禁用历史记录浏览动画
 			parallelRequests: true, // 启用并行请求
+			// 新增性能优化配置
+			requestTimeout: 10000, // 设置请求超时
+			progress: false, // 禁用进度条，减少DOM操作
+			debug: false, // 禁用调试模式
 		}),
 		icon({
 			include: {
