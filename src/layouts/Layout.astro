@@ -498,13 +498,24 @@ const setup = () => {
 		// 立即减少动画延迟，提升页面切换性能
 		document.documentElement.style.setProperty('--content-delay', '0ms');
 		
-		// 预优化：立即隐藏复杂动画元素
-		const complexElements = document.querySelectorAll('.chip-left, .chip-right, .timeline-item');
+		// 预优化：立即暂停所有复杂动画元素
+		const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
 		complexElements.forEach(el => {
 			if (el instanceof HTMLElement) {
 				el.style.animationPlayState = 'paused';
+				el.style.willChange = 'auto';
 			}
 		});
+		
+		// 暂停所有CSS动画
+		const style = document.createElement('style');
+		style.textContent = `
+			* {
+				animation-play-state: paused !important;
+			}
+		`;
+		style.id = 'swup-pause-animations';
+		document.head.appendChild(style);
 
 		// prevent elements from overlapping the navbar
 		if (!bannerEnabled) {
@@ -576,6 +587,21 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('visit:end', (_visit: {to: {url: string}}) => {
+		// 恢复动画状态
+		const pauseStyle = document.getElementById('swup-pause-animations');
+		if (pauseStyle) {
+			pauseStyle.remove();
+		}
+		
+		// 恢复复杂动画元素的状态
+		const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+		complexElements.forEach(el => {
+			if (el instanceof HTMLElement) {
+				el.style.animationPlayState = '';
+				el.style.willChange = '';
+			}
+		});
+		
 		setTimeout(() => {
 			const heightExtend = document.getElementById('page-height-extend')
 			if (heightExtend) {

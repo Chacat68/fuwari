@@ -272,21 +272,47 @@ const arcOffsets = yPositions.map((y) => {
 
 <!-- 预加载主页资源，提升返回主页时的性能 -->
 <script>
-// 延迟预加载主页，避免影响当前页面性能
-setTimeout(() => {
-    // 预加载主页HTML
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.href = '/';
-    document.head.appendChild(link);
+// 优化预加载策略，减少对页面切换的影响
+let preloadTimeout: ReturnType<typeof setTimeout> | null = null;
+
+// 使用 requestIdleCallback 或 setTimeout 进行智能预加载
+function schedulePreload() {
+    if (preloadTimeout) {
+        clearTimeout(preloadTimeout);
+    }
     
-    // 预加载主页的关键CSS（如果有的话）
-    const cssLink = document.createElement('link');
-    cssLink.rel = 'prefetch';
-    cssLink.href = '/_astro/';
-    cssLink.as = 'style';
-    document.head.appendChild(cssLink);
-}, 2000); // 2秒后开始预加载
+    // 延迟更长时间，避免影响页面切换性能
+    preloadTimeout = setTimeout(() => {
+        // 检查页面是否仍然可见，避免在后台页面进行预加载
+        if (document.visibilityState === 'visible') {
+            // 预加载主页HTML
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = '/';
+            document.head.appendChild(link);
+        }
+    }, 5000); // 延长到5秒，减少对页面切换的影响
+}
+
+// 页面可见性变化时重新调度预加载
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        schedulePreload();
+    } else if (preloadTimeout) {
+        clearTimeout(preloadTimeout);
+        preloadTimeout = null;
+    }
+});
+
+// 页面卸载时清理定时器
+window.addEventListener('beforeunload', () => {
+    if (preloadTimeout) {
+        clearTimeout(preloadTimeout);
+    }
+});
+
+// 初始调度
+schedulePreload();
 </script>
 
 <style>
@@ -310,6 +336,34 @@ setTimeout(() => {
     animation: chipInUp 280ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
     animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 280ms);
 }
+
+/* 性能优化：页面切换时暂停动画 */
+html.is-changing .chip-left,
+html.is-changing .chip-right,
+html.is-changing .chip-up {
+    animation-play-state: paused !important;
+    will-change: auto;
+}
+
+/* 移动端性能优化：减少动画复杂度 */
+@media (max-width: 768px) {
+    .chip-left,
+    .chip-right,
+    .chip-up {
+        will-change: auto;
+        animation-duration: 200ms, 3000ms; /* 缩短动画时间 */
+    }
+    
+    /* 移动端禁用浮动动画，只保留淡入效果 */
+    @media (prefers-reduced-motion: reduce) {
+        .chip-left,
+        .chip-right,
+        .chip-up {
+            animation: chipInUp 200ms ease-out forwards;
+        }
+    }
+}
+
 /* 圆弧分布（仅桌面端生效） */
 @media (min-width: 768px) {
     .chip-arc-left { margin-right: var(--arc, 0px); }
