@@ -48,6 +48,7 @@ const links = Astro.props.links;
                                        class="group flex items-center py-2 pl-3 pr-1 rounded-lg gap-2
                                            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition"
                                        target={child.external ? "_blank" : null}
+                                       onclick={!child.external ? "handleNavigationClick(event, this.href)" : null}
                                     >
                                         {childIconName && <Icon name={childIconName} class="text-[1rem] text-[var(--primary)]" />}
                                         <div class="transition text-black/60 dark:text-white/60 text-sm group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
@@ -70,6 +71,7 @@ const links = Astro.props.links;
                     hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
                 "
                    target={link.external ? "_blank" : null}
+                   onclick={!link.external ? "handleNavigationClick(event, this.href)" : null}
                 >
                     <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
                         {link.name}
