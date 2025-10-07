@@ -1,0 +1,277 @@
+---
+// 关于页面性能优化组件
+// 专门用于管理关于页面的动画和性能优化
+---
+
+<script>
+// 关于页面性能优化管理器
+class AboutPageOptimizer {
+    private preloadTimeout: ReturnType<typeof setTimeout> | null = null;
+    private isPageVisible = true;
+    private animationPaused = false;
+    private observer: IntersectionObserver | null = null;
+    private performanceMode: 'high' | 'medium' | 'low' = 'high';
+
+    constructor() {
+        this.detectPerformanceMode();
+        this.init();
+    }
+
+    // 检测设备性能模式
+    private detectPerformanceMode() {
+        // 检测设备性能
+        const connection = (navigator as any).connection;
+        const memory = (performance as any).memory;
+        
+        // 基于网络连接和内存判断性能模式
+        if (connection) {
+            if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                this.performanceMode = 'low';
+            } else if (connection.effectiveType === '3g' || connection.saveData) {
+                this.performanceMode = 'medium';
+            }
+        }
+        
+        // 基于内存判断
+        if (memory && memory.usedJSHeapSize > 50 * 1024 * 1024) { // 50MB
+            this.performanceMode = 'low';
+        }
+        
+        // 基于用户偏好
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            this.performanceMode = 'low';
+        }
+    }
+
+    private init() {
+        this.setupIntersectionObserver();
+        this.setupEventListeners();
+        this.optimizeAnimations();
+        this.schedulePreload();
+    }
+
+    // 设置交叉观察器，实现动画懒加载
+    private setupIntersectionObserver() {
+        if (!('IntersectionObserver' in window)) return;
+
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target as HTMLElement;
+                    element.classList.add('animating');
+                    
+                    // 根据性能模式调整动画
+                    if (this.performanceMode === 'low') {
+                        element.style.animationDuration = '0.2s';
+                    } else if (this.performanceMode === 'medium') {
+                        element.style.animationDuration = '0.3s';
+                    }
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        });
+
+        // 观察所有动画元素
+        const animatedElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+        animatedElements.forEach(el => this.observer?.observe(el));
+    }
+
+    // 设置事件监听器
+    private setupEventListeners() {
+        // 页面可见性变化
+        document.addEventListener('visibilitychange', () => {
+            this.isPageVisible = document.visibilityState === 'visible';
+            
+            if (this.isPageVisible) {
+                this.resumeAnimations();
+                this.schedulePreload();
+            } else {
+                this.pauseAnimations();
+                this.cancelPreload();
+            }
+        });
+
+        // 页面切换事件
+        document.addEventListener('swup:link:click', () => {
+            this.pauseAnimations();
+        });
+
+        document.addEventListener('swup:visit:end', () => {
+            this.resumeAnimations();
+        });
+
+        // 页面卸载
+        window.addEventListener('beforeunload', () => {
+            this.cleanup();
+        });
+
+        // 网络状态变化
+        if ('connection' in navigator) {
+            (navigator as any).connection.addEventListener('change', () => {
+                this.detectPerformanceMode();
+                this.optimizeAnimations();
+            });
+        }
+    }
+
+    // 优化动画设置
+    private optimizeAnimations() {
+        const animatedElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item');
+        
+        animatedElements.forEach(el => {
+            const element = el as HTMLElement;
+            
+            switch (this.performanceMode) {
+                case 'low':
+                    // 低性能模式：禁用复杂动画
+                    element.style.animationDuration = '0.2s';
+                    element.style.willChange = 'auto';
+                    break;
+                case 'medium':
+                    // 中等性能模式：减少动画复杂度
+                    element.style.animationDuration = '0.3s';
+                    break;
+                case 'high':
+                    // 高性能模式：保持原有动画
+                    break;
+            }
+        });
+    }
+
+    // 智能预加载
+    private schedulePreload() {
+        this.cancelPreload();
+        
+        if (this.performanceMode === 'low') {
+            // 低性能模式不进行预加载
+            return;
+        }
+
+        const delay = this.performanceMode === 'medium' ? 10000 : 8000;
+        
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                if (this.isPageVisible && document.visibilityState === 'visible') {
+                    this.preloadTimeout = setTimeout(() => {
+                        if (document.visibilityState === 'visible' && !this.animationPaused) {
+                            this.preloadHomePage();
+                        }
+                    }, delay);
+                }
+            }, { timeout: 15000 });
+        } else {
+            this.preloadTimeout = setTimeout(() => {
+                if (this.isPageVisible && document.visibilityState === 'visible' && !this.animationPaused) {
+                    this.preloadHomePage();
+                }
+            }, delay);
+        }
+    }
+
+    private preloadHomePage() {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = '/';
+        document.head.appendChild(link);
+    }
+
+    private cancelPreload() {
+        if (this.preloadTimeout) {
+            clearTimeout(this.preloadTimeout);
+            this.preloadTimeout = null;
+        }
+    }
+
+    // 暂停动画
+    private pauseAnimations() {
+        if (this.animationPaused) return;
+        this.animationPaused = true;
+        
+        const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+        complexElements.forEach(el => {
+            const element = el as HTMLElement;
+            element.style.animationPlayState = 'paused';
+            element.style.willChange = 'auto';
+        });
+    }
+
+    // 恢复动画
+    private resumeAnimations() {
+        if (!this.animationPaused) return;
+        this.animationPaused = false;
+        
+        const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+        complexElements.forEach(el => {
+            const element = el as HTMLElement;
+            element.style.animationPlayState = '';
+            element.style.willChange = '';
+        });
+    }
+
+    // 清理资源
+    private cleanup() {
+        this.cancelPreload();
+        this.pauseAnimations();
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+    }
+}
+
+// 初始化性能优化器
+document.addEventListener('DOMContentLoaded', () => {
+    new AboutPageOptimizer();
+});
+</script>
+
+<style>
+/* 关于页面专用性能优化样式 */
+
+/* 根据性能模式调整动画 */
+.performance-low .chip-left,
+.performance-low .chip-right,
+.performance-low .chip-up {
+    animation-duration: 0.2s !important;
+    will-change: auto !important;
+}
+
+.performance-medium .chip-left,
+.performance-medium .chip-right,
+.performance-medium .chip-up {
+    animation-duration: 0.3s !important;
+}
+
+/* 动画懒加载 */
+.chip-left:not(.animating),
+.chip-right:not(.animating),
+.chip-up:not(.animating) {
+    will-change: auto;
+}
+
+/* 页面切换时的全局优化 */
+html.is-changing .about-page * {
+    animation-play-state: paused !important;
+    will-change: auto !important;
+}
+
+/* 低端设备优化 */
+@media (max-width: 480px) {
+    .chip-left,
+    .chip-right,
+    .chip-up {
+        animation-duration: 0.15s !important;
+    }
+}
+
+/* 电池优化 */
+@media (prefers-reduced-motion: reduce) {
+    .chip-left,
+    .chip-right,
+    .chip-up {
+        animation: chipInUp 0.2s ease-out forwards !important;
+        will-change: auto !important;
+    }
+}
+</style>

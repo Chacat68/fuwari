@@ -121,8 +121,9 @@ const timelineEvents: TimelineEvent[] = [
   .timeline-item {
     animation: fadeInUp 0.4s ease-out forwards;
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(10px) translateZ(0); /* 强制硬件加速 */
     will-change: opacity, transform;
+    backface-visibility: hidden; /* 减少重绘 */
   }
   
   .timeline-item:nth-child(1) { animation-delay: 0ms; }
@@ -167,10 +168,29 @@ const timelineEvents: TimelineEvent[] = [
   .timeline-content .bg-white\/5 {
     transition: all 0.2s ease-out;
     will-change: transform, box-shadow;
+    transform: translateZ(0); /* 强制硬件加速 */
+    backface-visibility: hidden; /* 减少重绘 */
   }
   
   .timeline-content .bg-white\/5:hover {
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* 移动端性能优化 */
+  @media (max-width: 768px) {
+    .timeline-item {
+      animation-duration: 0.3s; /* 缩短动画时间 */
+    }
+    
+    .timeline-content .bg-white\/5 {
+      will-change: auto; /* 移动端减少will-change使用 */
+    }
+  }
+  
+  /* 页面切换时暂停动画 */
+  html.is-changing .timeline-item {
+    animation-play-state: paused !important;
+    will-change: auto !important;
   }
 </style>

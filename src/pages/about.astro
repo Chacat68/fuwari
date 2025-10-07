@@ -1,6 +1,7 @@
 ---
 
 import { getEntry, render } from "astro:content";
+import AboutPageOptimization from "../components/AboutPageOptimization.astro";
 import BlogTimeline from "../components/BlogTimeline.astro";
 import Markdown from "../components/misc/Markdown.astro"; // 使用通用 Markdown 组件，应用 custom-md 的排版样式
 import MBTIOverview from "../components/misc/MBTIOverview.astro";
@@ -75,7 +76,7 @@ const arcOffsets = yPositions.map((y) => {
 	image={siteConfig.banner?.src}
 	keywords={aboutKeywords}
 >
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4 md:mb-8">
+    <div class="about-page flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4 md:mb-8">
         <div id="about-container" class="card-base z-10 px-6 md:px-10 pt-8 pb-8 relative w-full">
             <!-- 头像与两侧热门标签（桌面端三列布局） -->
             <div class="hidden md:grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-2">
@@ -270,46 +271,103 @@ const arcOffsets = yPositions.map((y) => {
     </div>
 </MainGridLayout>
 
-<!-- 预加载主页资源，提升返回主页时的性能 -->
-<script>
-// 优化预加载策略，减少对页面切换的影响
-let preloadTimeout: ReturnType<typeof setTimeout> | null = null;
+<!-- 引入性能优化组件 -->
+<AboutPageOptimization />
 
-// 使用 requestIdleCallback 或 setTimeout 进行智能预加载
+<!-- 优化的预加载和性能管理脚本 -->
+<script>
+// 性能优化：智能预加载和动画管理
+let preloadTimeout: ReturnType<typeof setTimeout> | null = null;
+let isPageVisible = true;
+let animationPaused = false;
+
+// 智能预加载策略
 function schedulePreload() {
     if (preloadTimeout) {
         clearTimeout(preloadTimeout);
     }
     
-    // 延迟更长时间，避免影响页面切换性能
-    preloadTimeout = setTimeout(() => {
-        // 检查页面是否仍然可见，避免在后台页面进行预加载
-        if (document.visibilityState === 'visible') {
-            // 预加载主页HTML
-            const link = document.createElement('link');
-            link.rel = 'prefetch';
-            link.href = '/';
-            document.head.appendChild(link);
-        }
-    }, 5000); // 延长到5秒，减少对页面切换的影响
+    // 使用 requestIdleCallback 进行更智能的预加载
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            if (isPageVisible && document.visibilityState === 'visible') {
+                preloadTimeout = setTimeout(() => {
+                    if (document.visibilityState === 'visible' && !animationPaused) {
+                        const link = document.createElement('link');
+                        link.rel = 'prefetch';
+                        link.href = '/';
+                        document.head.appendChild(link);
+                    }
+                }, 8000); // 进一步延长到8秒
+            }
+        }, { timeout: 10000 });
+    } else {
+        // 降级方案
+        preloadTimeout = setTimeout(() => {
+            if (isPageVisible && document.visibilityState === 'visible' && !animationPaused) {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = '/';
+                document.head.appendChild(link);
+            }
+        }, 8000);
+    }
 }
 
-// 页面可见性变化时重新调度预加载
+// 动画性能管理
+function pauseAnimations() {
+    if (animationPaused) return;
+    animationPaused = true;
+    
+    const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+    complexElements.forEach(el => {
+        if (el instanceof HTMLElement) {
+            el.style.animationPlayState = 'paused';
+            el.style.willChange = 'auto';
+        }
+    });
+}
+
+function resumeAnimations() {
+    if (!animationPaused) return;
+    animationPaused = false;
+    
+    const complexElements = document.querySelectorAll('.chip-left, .chip-right, .chip-up, .timeline-item, .onload-animation');
+    complexElements.forEach(el => {
+        if (el instanceof HTMLElement) {
+            el.style.animationPlayState = '';
+            el.style.willChange = '';
+        }
+    });
+}
+
+// 页面可见性管理
 document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
+    isPageVisible = document.visibilityState === 'visible';
+    
+    if (isPageVisible) {
         schedulePreload();
-    } else if (preloadTimeout) {
-        clearTimeout(preloadTimeout);
-        preloadTimeout = null;
+        resumeAnimations();
+    } else {
+        if (preloadTimeout) {
+            clearTimeout(preloadTimeout);
+            preloadTimeout = null;
+        }
+        pauseAnimations();
     }
 });
 
-// 页面卸载时清理定时器
+// 页面卸载时清理
 window.addEventListener('beforeunload', () => {
     if (preloadTimeout) {
         clearTimeout(preloadTimeout);
     }
+    pauseAnimations();
 });
+
+// 监听页面切换事件
+document.addEventListener('swup:link:click', pauseAnimations);
+document.addEventListener('swup:visit:end', resumeAnimations);
 
 // 初始调度
 schedulePreload();
@@ -325,16 +383,22 @@ schedulePreload();
     will-change: transform, opacity; 
     animation: chipInLeft 320ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
     animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 320ms);
+    transform: translateZ(0); /* 强制硬件加速 */
+    backface-visibility: hidden; /* 减少重绘 */
 }
 .chip-right { 
     will-change: transform, opacity; 
     animation: chipInRight 320ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
     animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 320ms);
+    transform: translateZ(0); /* 强制硬件加速 */
+    backface-visibility: hidden; /* 减少重绘 */
 }
 .chip-up { 
     will-change: transform, opacity; 
     animation: chipInUp 280ms ease-out forwards, floatY var(--float-duration, 5200ms) ease-in-out infinite; 
     animation-delay: var(--delay, 0ms), calc(var(--delay, 0ms) + 280ms);
+    transform: translateZ(0); /* 强制硬件加速 */
+    backface-visibility: hidden; /* 减少重绘 */
 }
 
 /* 性能优化：页面切换时暂停动画 */
@@ -352,6 +416,7 @@ html.is-changing .chip-up {
     .chip-up {
         will-change: auto;
         animation-duration: 200ms, 3000ms; /* 缩短动画时间 */
+        transform: translateZ(0); /* 保持硬件加速 */
     }
     
     /* 移动端禁用浮动动画，只保留淡入效果 */
@@ -360,8 +425,45 @@ html.is-changing .chip-up {
         .chip-right,
         .chip-up {
             animation: chipInUp 200ms ease-out forwards;
+            will-change: auto;
         }
     }
+}
+
+/* 低端设备性能优化 */
+@media (max-width: 480px) {
+    .chip-left,
+    .chip-right,
+    .chip-up {
+        animation-duration: 150ms, 2000ms; /* 进一步缩短动画时间 */
+    }
+}
+
+/* 电池优化：低电量时减少动画 */
+@media (prefers-reduced-motion: reduce) {
+    .chip-left,
+    .chip-right,
+    .chip-up {
+        animation: chipInUp 200ms ease-out forwards;
+        will-change: auto;
+    }
+    
+    .floatY {
+        animation: none !important;
+    }
+}
+
+/* 页面切换时的全局动画暂停 */
+html.is-changing * {
+    animation-play-state: paused !important;
+    will-change: auto !important;
+}
+
+/* 优化will-change属性的使用 */
+.chip-left:not(.animating),
+.chip-right:not(.animating),
+.chip-up:not(.animating) {
+    will-change: auto;
 }
 
 /* 圆弧分布（仅桌面端生效） */
