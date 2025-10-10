@@ -1,0 +1,234 @@
+---
+// 页面性能优化组件
+// 用于提升页面加载速度和用户体验
+
+interface Props {
+	enableLazyLoading?: boolean;
+	enablePreloading?: boolean;
+	enableCompression?: boolean;
+	enableCriticalCSS?: boolean;
+	enableResourceHints?: boolean;
+	preloadPages?: string[];
+}
+
+const {
+	enableLazyLoading = true,
+	enablePreloading = true,
+	enableCompression = true,
+	enableCriticalCSS = true,
+	enableResourceHints = true,
+	preloadPages = ["/about/", "/archive/", "/projects/"],
+} = Astro.props;
+---
+
+<!-- 关键资源预加载 -->
+{enableResourceHints && (
+	<>
+		<!-- DNS预解析 -->
+		<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+		<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+		
+		<!-- 预连接重要域名 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		
+		<!-- 预加载关键字体 -->
+		<link 
+			rel="preload" 
+			href="/_astro/roboto-latin-400-normal.CNwBRw8h.woff2" 
+			as="font" 
+			type="font/woff2" 
+			crossorigin 
+		/>
+		<link 
+			rel="preload" 
+			href="/_astro/roboto-latin-500-normal.CkrA1NAy.woff2" 
+			as="font" 
+			type="font/woff2" 
+			crossorigin 
+		/>
+		
+		<!-- 预加载关键脚本 -->
+		<link rel="preload" href="/pagefind/pagefind.js" as="script" />
+	</>
+)}
+
+<!-- 预加载重要页面 -->
+{enablePreloading && preloadPages.map(page => (
+	<link rel="prefetch" href={page} as="document" />
+))}
+
+<!-- 关键CSS内联 -->
+{enableCriticalCSS && (
+	<style>
+		/* 关键渲染路径CSS */
+		html, body {
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+		}
+		
+		/* 防止布局偏移 */
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		
+		/* 关键动画性能优化 */
+		.chip-left, .chip-right, .chip-up {
+			will-change: transform, opacity;
+			transform: translateZ(0);
+			backface-visibility: hidden;
+		}
+		
+		/* 页面切换优化 */
+		html.is-changing * {
+			animation-play-state: paused !important;
+			will-change: auto !important;
+		}
+		
+		/* 移动端性能优化 */
+		@media (max-width: 768px) {
+			.chip-left, .chip-right, .chip-up {
+				will-change: auto;
+				animation-duration: 200ms, 3000ms;
+			}
+		}
+		
+		/* 电池优化 */
+		@media (prefers-reduced-motion: reduce) {
+			.chip-left, .chip-right, .chip-up {
+				animation: chipInUp 200ms ease-out forwards;
+				will-change: auto;
+			}
+		}
+	</style>
+)}
+
+<!-- 性能监控和优化脚本 -->
+<script>
+	// 性能监控
+	if ('performance' in window) {
+		window.addEventListener('load', () => {
+			// 测量关键性能指标
+			const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+			
+			// 记录关键指标
+			const metrics = {
+				domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
+				loadComplete: navigation.loadEventEnd - navigation.loadEventStart,
+				firstPaint: performance.getEntriesByName('first-paint')[0]?.startTime || 0,
+				firstContentfulPaint: performance.getEntriesByName('first-contentful-paint')[0]?.startTime || 0,
+			};
+			
+			// 在开发环境下输出性能指标
+			if (import.meta.env.DEV) {
+				console.log('页面性能指标:', metrics);
+			}
+			
+			// 发送性能数据到分析服务（如果需要）
+			if ((window as any).gtag) {
+				(window as any).gtag('event', 'page_performance', {
+					event_category: 'Performance',
+					event_label: window.location.pathname,
+					custom_map: metrics
+				});
+			}
+		});
+	}
+	
+	// 图片懒加载优化
+	if (true) {
+		// 使用Intersection Observer实现图片懒加载
+		if ('IntersectionObserver' in window) {
+			const imageObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						if (img.dataset.src) {
+							img.src = img.dataset.src;
+							img.removeAttribute('data-src');
+							observer.unobserve(img);
+						}
+					}
+				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.01
+			});
+			
+			// 观察所有懒加载图片
+			document.addEventListener('DOMContentLoaded', () => {
+				const lazyImages = document.querySelectorAll('img[data-src]');
+				lazyImages.forEach(img => imageObserver.observe(img));
+			});
+		}
+	}
+	
+	// 资源压缩优化
+	if (true) {
+		// 压缩CSS和JS
+		const compressResources = () => {
+			const styles = document.querySelectorAll('style');
+			const scripts = document.querySelectorAll('script:not([src])');
+			
+			// 移除不必要的空白字符
+			styles.forEach(style => {
+				style.textContent = style.textContent?.replace(/\s+/g, ' ').trim();
+			});
+		};
+		
+		// 在页面加载完成后执行压缩
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', compressResources);
+		} else {
+			compressResources();
+		}
+	}
+	
+	// 智能预加载策略
+	if (true) {
+		let preloadTimeout: ReturnType<typeof setTimeout> | null = null;
+		
+		const schedulePreload = () => {
+			if (preloadTimeout) {
+				clearTimeout(preloadTimeout);
+			}
+			
+			// 使用requestIdleCallback进行智能预加载
+			if ('requestIdleCallback' in window) {
+				requestIdleCallback(() => {
+					if (document.visibilityState === 'visible') {
+						preloadTimeout = setTimeout(() => {
+							// 预加载用户可能访问的页面
+							const links = document.querySelectorAll('a[href^="/"]:not([href^="/posts/"])');
+							const linkHrefs = Array.from(links).map(link => link.getAttribute('href')).slice(0, 3);
+							
+							linkHrefs.forEach(href => {
+								if (href && !document.querySelector(`link[href="${href}"]`)) {
+									const link = document.createElement('link');
+									link.rel = 'prefetch';
+									link.href = href;
+									document.head.appendChild(link);
+								}
+							});
+						}, 3000); // 3秒后开始预加载
+					}
+				}, { timeout: 5000 });
+			}
+		};
+		
+		// 页面可见性管理
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'visible') {
+				schedulePreload();
+			} else if (preloadTimeout) {
+				clearTimeout(preloadTimeout);
+				preloadTimeout = null;
+			}
+		});
+		
+		// 初始调度
+		schedulePreload();
+	}
+</script>

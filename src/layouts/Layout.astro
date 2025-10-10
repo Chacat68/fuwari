@@ -6,6 +6,7 @@ import "@fontsource/roboto/700.css";
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
 import MobileOptimization from "../components/seo/MobileOptimization.astro";
+import PagePerformanceOptimization from "../components/seo/PagePerformanceOptimization.astro";
 import PerformanceOptimization from "../components/seo/PerformanceOptimization.astro";
 import {
 	AUTO_MODE,
@@ -117,7 +118,7 @@ const bannerOffset =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || siteConfig.description || siteConfig.subtitle}>
+		<meta name="description" content={description || siteConfig.description || siteConfig.subtitle || "查猫CHACAT的个人博客，分享技术、生活和思考"}>
 		<meta name="author" content={profileConfig.name}>
 		<meta name="keywords" content={keywordsString}>
 		<meta name="theme-color" content={`hsl(${siteConfig.themeColor.hue}, 75%, 60%)`}>
@@ -240,6 +241,14 @@ const bannerOffset =
 			enableCriticalCSS={true}
 			enableResourceHints={true}
 			preloadFonts={['roboto']}
+		/>
+		<PagePerformanceOptimization 
+			enableLazyLoading={true}
+			enablePreloading={true}
+			enableCompression={true}
+			enableCriticalCSS={true}
+			enableResourceHints={true}
+			preloadPages={['/about/', '/archive/', '/projects/', '/friends/']}
 		/>
 
 	</head>

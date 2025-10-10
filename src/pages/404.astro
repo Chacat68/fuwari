@@ -1,0 +1,253 @@
+---
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "../config";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+// 404页面SEO信息
+const errorTitle = `页面未找到 - ${siteConfig.title}`;
+const errorDescription =
+	"抱歉，您访问的页面不存在或已被移除。请检查URL是否正确，或返回首页继续浏览。";
+const errorKeywords = ["404", "页面未找到", "错误页面", "网站导航", "首页"];
+
+// 获取当前URL用于分析
+const currentUrl = Astro.url.href;
+const urlPath = Astro.url.pathname;
+
+// 分析可能的正确路径
+function getSuggestedPaths(pathname: string) {
+	const suggestions = [];
+
+	// 如果是文章路径错误
+	if (pathname.includes("/article/") || pathname.includes("/posts/")) {
+		const slug = pathname.split("/").pop();
+		if (slug) {
+			suggestions.push({
+				title: "查看文章列表",
+				url: "/archive/",
+				description: "浏览所有文章",
+			});
+			suggestions.push({
+				title: "搜索相关文章",
+				url: "/#search",
+				description: "搜索您要找的内容",
+			});
+		}
+	}
+
+	// 如果是根路径下的数字页面
+	if (/^\/\d+\/?$/.test(pathname)) {
+		suggestions.push({
+			title: "返回首页",
+			url: "/",
+			description: "回到网站首页",
+		});
+		suggestions.push({
+			title: "查看文章",
+			url: "/archive/",
+			description: "浏览所有文章",
+		});
+	}
+
+	// 默认建议
+	if (suggestions.length === 0) {
+		suggestions.push(
+			{
+				title: "返回首页",
+				url: "/",
+				description: "回到网站首页",
+			},
+			{
+				title: "关于我",
+				url: "/about/",
+				description: "了解网站作者",
+			},
+			{
+				title: "项目展示",
+				url: "/projects/",
+				description: "查看我的项目",
+			},
+			{
+				title: "友情链接",
+				url: "/friends/",
+				description: "发现更多精彩网站",
+			},
+		);
+	}
+
+	return suggestions;
+}
+
+const suggestions = getSuggestedPaths(urlPath);
+---
+
+<MainGridLayout 
+	title={errorTitle}
+	description={errorDescription}
+	keywords={errorKeywords}
+>
+	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+		<div class="card-base z-10 px-6 md:px-10 pt-8 pb-8 relative w-full text-center">
+			<!-- 404 图标和标题 -->
+			<div class="mb-8">
+				<div class="inline-flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400">
+					<Icon name="material-symbols:error-outline-rounded" class="text-4xl" />
+				</div>
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+					404
+				</h1>
+				<h2 class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
+					页面未找到
+				</h2>
+				<p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto leading-relaxed">
+					抱歉，您访问的页面不存在或已被移除。请检查URL是否正确，或选择下面的选项继续浏览。
+				</p>
+			</div>
+
+			<!-- 当前访问的URL信息 -->
+			<div class="mb-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+				<p class="text-sm text-gray-500 dark:text-gray-400 mb-2">您访问的页面：</p>
+				<code class="text-sm text-red-600 dark:text-red-400 break-all">{currentUrl}</code>
+			</div>
+
+			<!-- 建议的导航选项 -->
+			<div class="mb-8">
+				<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+					您可以尝试：
+				</h3>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+					{suggestions.map((suggestion) => (
+						<a 
+							href={suggestion.url}
+							class="group p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+						>
+							<div class="flex items-center gap-3">
+								<div class="flex-shrink-0">
+									<Icon name="material-symbols:arrow-forward-rounded" class="text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform" />
+								</div>
+								<div class="text-left">
+									<div class="font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+										{suggestion.title}
+									</div>
+									<div class="text-sm text-gray-500 dark:text-gray-400">
+										{suggestion.description}
+									</div>
+								</div>
+							</div>
+						</a>
+					))}
+				</div>
+			</div>
+
+			<!-- 搜索功能 -->
+			<div class="mb-8">
+				<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+					或者搜索您要找的内容：
+				</h3>
+				<div class="max-w-md mx-auto">
+					<div class="relative">
+						<input 
+							type="text" 
+							placeholder="输入关键词搜索..." 
+							class="w-full px-4 py-3 pl-10 pr-4 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+							id="search-input"
+						/>
+						<Icon name="material-symbols:search-rounded" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+						<button 
+							class="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+							onclick="performSearch()"
+						>
+							搜索
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- 返回按钮 -->
+			<div class="flex justify-center">
+				<button 
+					onclick="history.back()"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+				>
+					<Icon name="material-symbols:arrow-back-rounded" />
+					返回上一页
+				</button>
+			</div>
+		</div>
+	</div>
+</MainGridLayout>
+
+<script>
+	// 搜索功能
+	function performSearch() {
+		const input = document.getElementById('search-input') as HTMLInputElement;
+		const query = input.value.trim();
+		
+		if (query) {
+			// 使用Pagefind搜索
+			if (window.pagefind) {
+				window.pagefind.search(query).then((results: any) => {
+					if (results.results && results.results.length > 0) {
+						// 跳转到搜索结果页面
+						window.location.href = `/?search=${encodeURIComponent(query)}`;
+					} else {
+						// 没有搜索结果，跳转到首页
+						window.location.href = '/';
+					}
+				});
+			} else {
+				// 降级到首页搜索
+				window.location.href = `/?search=${encodeURIComponent(query)}`;
+			}
+		}
+	}
+
+	// 回车键搜索
+	document.addEventListener('DOMContentLoaded', () => {
+		const searchInput = document.getElementById('search-input') as HTMLInputElement;
+		if (searchInput) {
+			searchInput.addEventListener('keypress', (e) => {
+				if (e.key === 'Enter') {
+					performSearch();
+				}
+			});
+		}
+	});
+</script>
+
+<style>
+	/* 404页面特定样式 */
+	.card-base {
+		min-height: 60vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	/* 响应式优化 */
+	@media (max-width: 768px) {
+		.card-base {
+			padding: 2rem 1rem;
+		}
+	}
+
+	/* 动画效果 */
+	.card-base > * {
+		animation: fadeInUp 0.6s ease-out forwards;
+	}
+
+	.card-base > *:nth-child(1) { animation-delay: 0.1s; }
+	.card-base > *:nth-child(2) { animation-delay: 0.2s; }
+	.card-base > *:nth-child(3) { animation-delay: 0.3s; }
+	.card-base > *:nth-child(4) { animation-delay: 0.4s; }
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>
