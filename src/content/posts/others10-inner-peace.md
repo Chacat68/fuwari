@@ -9,7 +9,7 @@ category: '它山之石'
 draft: false
 ---
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=115169112104907&bvid=BV1TLaZzuE1P&cid=32252166747&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=115169112104907&bvid=BV1TLaZzuE1P&cid=32252166747&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ## 前言
 

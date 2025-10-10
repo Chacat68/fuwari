@@ -17,7 +17,7 @@ draft: false
 
 正如创作者所愿："粤歌山河愿，盛世小团圆！"这首粤语版《如愿》承载着对祖国的热爱，为每一个在和平年代生活的我们，点亮一盏感恩的明灯。
 
-<iframe width="750" height="420" src="https://player.bilibili.com/player.html?bvid=BV1r8HjzpESV" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://player.bilibili.com/player.html?bvid=BV1r8HjzpESV&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 歌词
 

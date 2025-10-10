@@ -19,7 +19,7 @@ draft: false
 
 推荐《被动》，因为它用最朴实的语言诠释了复杂的情感，在这个充满变化的世界里，能找到一首真正触动内心的歌曲，本身就是一种幸福。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=321875534&bvid=BV1mw411a7io&cid=1292905626&p=1" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=321875534&bvid=BV1mw411a7io&cid=1292905626&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 歌词
 

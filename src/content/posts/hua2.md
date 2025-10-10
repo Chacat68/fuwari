@@ -15,7 +15,7 @@ draft: false
 
 王菲首次负责专辑封面概念，并第一次执笔谱写了她第一首国语歌〈执迷不悔〉的歌词，此歌成为她音乐生涯最知名的代表作之一！
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=332197385&bvid=BV1GA411N7uY&cid=311795289&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=332197385&bvid=BV1GA411N7uY&cid=311795289&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ## 歌词：
 

@@ -13,7 +13,7 @@ draft: false
 
 在人生的道路上，有一种神奇的力量能够悄无声息地改变我们的命运。这种力量不需要魔法，不需要超能力，它就隐藏在我们日常的期望和信念中。当别人对你说"你一定可以"时，你是否感受到了内心的力量在涌动？这就是**期望效应**的魅力所在。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=1tjaZzzEWu&bvid=BV1tjaZzzEWu&cid=1&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=1tjaZzzEWu&bvid=BV1tjaZzzEWu&cid=1&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ## 一个改变命运的心理现象
 
