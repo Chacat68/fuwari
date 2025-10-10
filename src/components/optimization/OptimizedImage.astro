@@ -77,6 +77,12 @@ const optimizedSrc = isExternal
 		animation: shimmer 1.5s infinite;
 	}
 	
+	/* 暗色模式下的懒加载占位符 */
+	.dark .optimized-image img[loading="lazy"] {
+		background-color: #374151;
+		background-image: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+	}
+	
 	@keyframes shimmer {
 		0% {
 			background-position: -200% 0;

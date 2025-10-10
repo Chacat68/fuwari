@@ -7,6 +7,7 @@ import {
 	applyThemeToDocument,
 	getStoredTheme,
 	setTheme,
+	getTimeBasedTheme,
 } from "@utils/setting-utils.ts";
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
@@ -16,6 +17,8 @@ let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
 
 onMount(() => {
 	mode = getStoredTheme();
+	
+	// 监听系统主题变化
 	const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
 	const changeThemeWhenSchemeChanged: Parameters<
 		typeof darkModePreference.addEventListener<"change">
@@ -23,11 +26,73 @@ onMount(() => {
 		applyThemeToDocument(mode);
 	};
 	darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
+	
+	// 设置定时器，在固定时间点（6:00和18:00）检查并切换主题
+	let timeCheckTimeout: number | undefined;
+	
+	const getNextSwitchTime = () => {
+		const now = new Date();
+		const currentHour = now.getHours();
+		const currentMinute = now.getMinutes();
+		const currentSeconds = now.getSeconds();
+		
+		// 计算下一个切换时间点
+		let nextSwitchHour: number;
+		if (currentHour < 6 || currentHour >= 18) {
+			// 当前是暗色时间，下次切换到亮色（6:00）
+			nextSwitchHour = 6;
+		} else {
+			// 当前是亮色时间，下次切换到暗色（18:00）
+			nextSwitchHour = 18;
+		}
+		
+		// 计算距离下次切换的毫秒数
+		const nextSwitchTime = new Date(now);
+		nextSwitchTime.setHours(nextSwitchHour, 0, 0, 0);
+		
+		// 如果下次切换时间已过，则设置为明天
+		if (nextSwitchTime <= now) {
+			nextSwitchTime.setDate(nextSwitchTime.getDate() + 1);
+		}
+		
+		return nextSwitchTime.getTime() - now.getTime();
+	};
+	
+	const scheduleNextSwitch = () => {
+		if (mode === AUTO_MODE) {
+			const delay = getNextSwitchTime();
+			timeCheckTimeout = window.setTimeout(() => {
+				applyThemeToDocument(AUTO_MODE);
+				scheduleNextSwitch(); // 重新调度下次切换
+			}, delay);
+		}
+	};
+	
+	const stopTimeCheck = () => {
+		if (timeCheckTimeout) {
+			clearTimeout(timeCheckTimeout);
+			timeCheckTimeout = undefined;
+		}
+	};
+	
+	// 初始启动时间检查
+	scheduleNextSwitch();
+	
+	// 监听模式变化，如果切换到AUTO_MODE则启动时间检查，否则停止
+	$effect(() => {
+		if (mode === AUTO_MODE) {
+			scheduleNextSwitch();
+		} else {
+			stopTimeCheck();
+		}
+	});
+	
 	return () => {
 		darkModePreference.removeEventListener(
 			"change",
 			changeThemeWhenSchemeChanged,
 		);
+		stopTimeCheck();
 	};
 });
 

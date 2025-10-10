@@ -3,8 +3,8 @@ export const PAGE_SIZE = 6; // 减少首页文章数量，提升加载性能
 export const LIGHT_MODE = "light",
 	DARK_MODE = "dark",
 	AUTO_MODE = "auto";
-// 设置默认主题为暗色模式，不随时间自动切换
-export const DEFAULT_THEME = DARK_MODE;
+// 设置默认主题为自动模式，根据时间自动切换
+export const DEFAULT_THEME = AUTO_MODE;
 
 // Banner height unit: vh
 export const BANNER_HEIGHT = 35;
