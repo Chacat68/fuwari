@@ -1,10 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
-import { navBarConfig, profileConfig, siteConfig } from "../config";
+import { navBarConfig, siteConfig } from "../config";
 import { LinkPresets } from "../constants/link-presets";
 import { LinkPreset, type NavBarLink } from "../types/config";
 import { url } from "../utils/url-utils";
-import LightDarkSwitch from "./LightDarkSwitch.svelte";
 import Search from "./Search.svelte";
 import DisplaySettings from "./widget/DisplaySettings.svelte";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
@@ -134,7 +133,7 @@ function switchTheme() {
 }
 
 // 处理导航点击事件，在跳转前刷新页面
-window.handleNavigationClick = function(event: Event, href: string) {
+(window as any).handleNavigationClick = function(event: Event, href: string) {
     // 检查是否是当前页面
     if (window.location.pathname === href || window.location.href === href) {
         // 如果是当前页面，直接刷新

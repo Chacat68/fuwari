@@ -1,8 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import { profileConfig } from "../config";
-import I18nKey from "../i18n/i18nKey";
-import { i18n } from "../i18n/translation";
 import { getSortedPosts } from "../utils/content-utils";
 import { url } from "../utils/url-utils";
 
@@ -11,7 +9,9 @@ const currentYear = new Date().getFullYear();
 // 计算网站运行天数
 const startDate = new Date("2020-01-01"); // 设置网站开始运行的日期
 const today = new Date();
-const runningDays = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+const runningDays = Math.floor(
+	(today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
+);
 
 // 获取所有文章并计算总字数
 const posts = await getSortedPosts();
@@ -19,18 +19,18 @@ let totalWords = 0;
 
 // 遍历所有文章，累加字数
 for (const post of posts) {
-    const { remarkPluginFrontmatter } = await post.render();
-    if (remarkPluginFrontmatter?.words) {
-        totalWords += remarkPluginFrontmatter.words;
-    }
+	const { remarkPluginFrontmatter } = await post.render();
+	if (remarkPluginFrontmatter?.words) {
+		totalWords += remarkPluginFrontmatter.words;
+	}
 }
 
 // 格式化总字数，使用 k 单位表示千位数
 const formatToK = (num: number) => {
-    if (num >= 1000) {
-        return `${(Math.floor(num / 100) / 10).toFixed(1)}k`;
-    }
-    return num.toString();
+	if (num >= 1000) {
+		return `${(Math.floor(num / 100) / 10).toFixed(1)}k`;
+	}
+	return num.toString();
 };
 const formattedTotalWords = formatToK(totalWords);
 ---

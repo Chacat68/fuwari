@@ -26,7 +26,9 @@ async function getRawSortedPosts(limit?: number) {
 	return limit ? sorted.slice(0, limit) : sorted;
 }
 
-export async function getSortedPosts(limit?: number) {
+export async function getSortedPosts(
+	limit?: number,
+): Promise<CollectionEntry<"posts">[]> {
 	const sorted = await getRawSortedPosts(limit);
 
 	for (let i = 1; i < sorted.length; i++) {
@@ -66,7 +68,7 @@ export async function getAllPostsCount(): Promise<number> {
 }
 
 // 获取所有文章（包括未来日期的文章，但不包括草稿）
-export async function getAllPosts() {
+export async function getAllPosts(): Promise<CollectionEntry<"posts">[]> {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		// 只过滤草稿文章，不过滤未来日期的文章
 		return import.meta.env.PROD ? data.draft !== true : true;

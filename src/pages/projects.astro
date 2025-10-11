@@ -1,7 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/config";
@@ -106,7 +104,7 @@ const dayProgressFormatted = dayProgress.toFixed(5);
 }
 </style>
 
-<script define:vars={{ yearProgressFormatted, dayProgressFormatted }}>
+<script is:inline define:vars={{ yearProgressFormatted, dayProgressFormatted }}>
 // 数字滚动动画函数
 function animateValue(element, start, end, duration) {
     let startTimestamp = null;

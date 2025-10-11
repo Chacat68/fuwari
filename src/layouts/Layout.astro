@@ -227,6 +227,7 @@ const bannerOffset =
 		<!-- Umami 统计脚本 - 延迟加载减少对首屏影响 -->
 		{siteConfig.umami?.enable && (
 			<script
+				is:inline
 				defer
 				src={siteConfig.umami.src}
 				data-website-id={siteConfig.umami.websiteId}

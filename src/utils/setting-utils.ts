@@ -51,7 +51,7 @@ export function getTimeBasedTheme(): LIGHT_DARK_MODE {
 	return DARK_MODE;
 }
 
-export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
+export function applyThemeToDocument(theme: LIGHT_DARK_MODE): void {
 	if (typeof document === "undefined") {
 		return;
 	}

@@ -1,6 +1,5 @@
 ---
 // 增强导航结构组件 - 提升SEO和用户体验
-import { siteConfig } from "../../config";
 
 interface BreadcrumbItem {
 	name: string;
@@ -22,26 +21,29 @@ interface Props {
 const {
 	breadcrumbs = [],
 	showSearch = true,
-	currentPageTitle = '',
-	showMobileMenu = true
+	currentPageTitle = "",
+	showMobileMenu = true,
 } = Astro.props;
 
 // 生成面包屑结构化数据
-const breadcrumbStructuredData = breadcrumbs.length > 0 ? {
-	"@context": "https://schema.org",
-	"@type": "BreadcrumbList",
-	itemListElement: breadcrumbs.map((item, index) => ({
-		"@type": "ListItem",
-		position: index + 1,
-		name: item.name,
-		item: new URL(item.url, Astro.site).href
-	}))
-} : null;
+const breadcrumbStructuredData =
+	breadcrumbs.length > 0
+		? {
+				"@context": "https://schema.org",
+				"@type": "BreadcrumbList",
+				itemListElement: breadcrumbs.map((item, index) => ({
+					"@type": "ListItem",
+					position: index + 1,
+					name: item.name,
+					item: new URL(item.url, Astro.site).href,
+				})),
+			}
+		: null;
 ---
 
 <!-- 面包屑导航结构化数据 -->
 {breadcrumbStructuredData && (
-	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
 )}
 
 <!-- 增强导航结构 -->

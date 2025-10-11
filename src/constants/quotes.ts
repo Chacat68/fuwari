@@ -1,4 +1,9 @@
-export const quotes = [
+interface Quote {
+	text: string;
+	author: string;
+}
+
+export const quotes: Quote[] = [
 	{
 		text: "成就伟业的唯一途径是热爱自己的事业。",
 		author: "史蒂夫·乔布斯",

@@ -11,25 +11,25 @@ export const GET: APIRoute = async ({ request, redirect }) => {
 		{
 			from: /^\/article\/(.+)$/,
 			to: "/posts/$1/",
-			status: 301,
+			status: 301 as const,
 		},
 		// 处理缺失的 /look 页面
 		{
 			from: /^\/look\/?$/,
 			to: "/",
-			status: 301,
+			status: 301 as const,
 		},
 		// 处理 /cdn-cgi/l/email-protection 路径
 		{
 			from: /^\/cdn-cgi\/l\/email-protection\/?$/,
 			to: "/",
-			status: 301,
+			status: 301 as const,
 		},
 		// 处理其他可能的错误路径
 		{
 			from: /^\/posts\/(ai3|diary9|design2|design6)\/?$/,
 			to: "/archive/",
-			status: 301,
+			status: 301 as const,
 		},
 	];
 

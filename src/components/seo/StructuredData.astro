@@ -1,9 +1,14 @@
 ---
 // 结构化数据组件，用于生成JSON-LD
-import { siteConfig, profileConfig } from "../../config";
+import { profileConfig, siteConfig } from "../../config";
 
 interface Props {
-	type: 'WebSite' | 'BlogPosting' | 'Person' | 'Organization' | 'BreadcrumbList';
+	type:
+		| "WebSite"
+		| "BlogPosting"
+		| "Person"
+		| "Organization"
+		| "BreadcrumbList";
 	data?: Record<string, any>;
 }
 
@@ -20,16 +25,16 @@ const baseWebSite = {
 	author: {
 		"@type": "Person",
 		name: profileConfig.name,
-		url: Astro.site?.href
+		url: Astro.site?.href,
 	},
 	potentialAction: {
 		"@type": "SearchAction",
 		target: {
 			"@type": "EntryPoint",
-			urlTemplate: `${Astro.site?.href}search?q={search_term_string}`
+			urlTemplate: `${Astro.site?.href}search?q={search_term_string}`,
 		},
-		"query-input": "required name=search_term_string"
-	}
+		"query-input": "required name=search_term_string",
+	},
 };
 
 // 个人信息
@@ -43,7 +48,7 @@ const basePerson = {
 	knowsAbout: ["游戏开发", "前端开发", "内容创作", "摄影"],
 	sameAs: [
 		// 可以添加社交媒体链接
-	]
+	],
 };
 
 // 组织信息
@@ -54,12 +59,12 @@ const baseOrganization = {
 	url: Astro.site?.href,
 	logo: {
 		"@type": "ImageObject",
-		url: `${Astro.site?.href}favicon.ico`
+		url: `${Astro.site?.href}favicon.ico`,
 	},
 	founder: {
 		"@type": "Person",
-		name: profileConfig.name
-	}
+		name: profileConfig.name,
+	},
 };
 
 // 博客文章结构化数据
@@ -68,12 +73,12 @@ const baseBlogPosting = {
 	"@type": "BlogPosting",
 	mainEntityOfPage: {
 		"@type": "WebPage",
-		"@id": Astro.url.href
+		"@id": Astro.url.href,
 	},
 	author: {
 		"@type": "Person",
 		name: profileConfig.name,
-		url: Astro.site?.href
+		url: Astro.site?.href,
 	},
 	publisher: {
 		"@type": "Organization",
@@ -81,35 +86,35 @@ const baseBlogPosting = {
 		url: Astro.site?.href,
 		logo: {
 			"@type": "ImageObject",
-			url: `${Astro.site?.href}favicon.ico`
-		}
+			url: `${Astro.site?.href}favicon.ico`,
+		},
 	},
-	inLanguage: siteConfig.lang
+	inLanguage: siteConfig.lang,
 };
 
 // 面包屑导航
 const baseBreadcrumbList = {
 	"@context": "https://schema.org",
 	"@type": "BreadcrumbList",
-	itemListElement: []
+	itemListElement: [],
 };
 
 // 根据类型生成对应的结构化数据
 let structuredData: Record<string, any>;
 switch (type) {
-	case 'WebSite':
+	case "WebSite":
 		structuredData = { ...baseWebSite, ...data };
 		break;
-	case 'BlogPosting':
+	case "BlogPosting":
 		structuredData = { ...baseBlogPosting, ...data };
 		break;
-	case 'Person':
+	case "Person":
 		structuredData = { ...basePerson, ...data };
 		break;
-	case 'Organization':
+	case "Organization":
 		structuredData = { ...baseOrganization, ...data };
 		break;
-	case 'BreadcrumbList':
+	case "BreadcrumbList":
 		structuredData = { ...baseBreadcrumbList, ...data };
 		break;
 	default:
@@ -117,4 +122,4 @@ switch (type) {
 }
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>

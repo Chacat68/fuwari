@@ -68,7 +68,7 @@ draft: false
 
 以下是一个简化的游戏循环伪代码示例，展示了其基本结构：
 
-```pseudocode
+```text
 while (game_is_running) {
     handle_input();              // 处理用户输入
     update_game_state(delta_time); // 根据时间差更新游戏状态

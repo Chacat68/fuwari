@@ -6,6 +6,7 @@ export const es: Translation = {
 	[Key.about]: "Sobre mí",
 	[Key.archive]: "Archivo",
 	[Key.search]: "Buscar",
+	[Key.friends]: "Amigos",
 
 	[Key.tags]: "Etiquetas",
 	[Key.categories]: "Categorías",
@@ -35,4 +36,5 @@ export const es: Translation = {
 	[Key.author]: "Autor",
 	[Key.publishedAt]: "Publicado el",
 	[Key.license]: "Licencia",
+	[Key.quote]: "Cita",
 };
