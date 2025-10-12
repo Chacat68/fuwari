@@ -38,9 +38,11 @@ const {
 )}
 
 <!-- 字体预加载 -->
-{enablePreload && preloadFonts.map(font => (
-	<link rel="preload" href={`/_astro/${font}-latin-400-normal.CNwBRw8h.woff2`} as="font" type="font/woff2" crossorigin>
-))}
+{enablePreload && preloadFonts.map(font => {
+	// 根据字体名称生成正确的路径
+	const fontPath = `/_astro/${font}-latin-400-normal.CNwBRw8h.woff2`;
+	return <link rel="preload" href={fontPath} as="font" type="font/woff2" crossorigin />;
+})}
 
 <!-- 关键图片预加载 -->
 {enablePreload && preloadImages.map(image => (
