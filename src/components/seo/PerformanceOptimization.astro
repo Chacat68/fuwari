@@ -239,12 +239,34 @@ const {
 			
 			// 定期清理DOM中的无用元素
 			setInterval(() => {
-				const hiddenElements = document.querySelectorAll('[style*="display: none"]');
-				hiddenElements.forEach(element => {
-					if (element.getAttribute('data-keep') !== 'true') {
-						element.remove();
-					}
-				});
+				try {
+					const hiddenElements = document.querySelectorAll('[style*="display: none"]');
+					hiddenElements.forEach(element => {
+						// 更严格的安全检查
+						if (element && 
+							element.getAttribute && 
+							element.getAttribute('data-keep') !== 'true' && 
+							element.parentNode && 
+							element.parentNode.nodeType === Node.ELEMENT_NODE) {
+							
+							try {
+								// 检查元素是否仍在DOM中
+								if (document.contains(element)) {
+									if (typeof element.remove === 'function') {
+										element.remove();
+									} else if (element.parentNode && typeof element.parentNode.removeChild === 'function') {
+										element.parentNode.removeChild(element);
+									}
+								}
+							} catch (removeError) {
+								console.warn('Failed to remove element:', removeError);
+								// 静默处理，不影响其他元素的清理
+							}
+						}
+					});
+				} catch (error) {
+					console.warn('DOM cleanup error:', error);
+				}
 			}, 30000); // 每30秒清理一次
 		}
 		

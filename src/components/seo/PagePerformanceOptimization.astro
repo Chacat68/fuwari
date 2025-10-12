@@ -32,30 +32,16 @@ const {
 		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		
-		<!-- 预加载关键字体 -->
-		<link 
-			rel="preload" 
-			href="/_astro/roboto-latin-400-normal.CNwBRw8h.woff2" 
-			as="font" 
-			type="font/woff2" 
-			crossorigin 
-		/>
-		<link 
-			rel="preload" 
-			href="/_astro/roboto-latin-500-normal.CkrA1NAy.woff2" 
-			as="font" 
-			type="font/woff2" 
-			crossorigin 
-		/>
+		<!-- 字体预加载 - 在生产环境中由构建工具自动处理 -->
 		
 		<!-- 预加载关键脚本 -->
-		<link rel="preload" href="/pagefind/pagefind.js" as="script" crossorigin />
+		<link rel="preload" href="/pagefind/pagefind.js" as="script" />
 	</>
 )}
 
 <!-- 预加载重要页面 -->
 {enablePreloading && preloadPages.map(page => (
-	<link rel="prefetch" href={page} as="document" />
+	<link rel="prefetch" href={page} />
 ))}
 
 <!-- 关键CSS内联 -->
@@ -174,7 +160,9 @@ const {
 			
 			// 移除不必要的空白字符
 			styles.forEach(style => {
-				style.textContent = style.textContent?.replace(/\s+/g, ' ').trim();
+				if (style.textContent) {
+					style.textContent = style.textContent.replace(/\s+/g, ' ').trim();
+				}
 			});
 		};
 		
