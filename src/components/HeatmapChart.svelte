@@ -105,6 +105,11 @@ onMount(() => {
 
 	// 按日期分组文章（用于热力图显示）
 	sortedPosts.forEach((post) => {
+		// 安全检查：确保 post 和 post.data 存在，且 published 属性存在
+		if (!post || !post.data || !post.data.published) {
+			console.warn('Invalid post data structure:', post);
+			return;
+		}
 		const dateStr = formatDate(post.data.published);
 		if (!postsByDate.has(dateStr)) {
 			postsByDate.set(dateStr, []);
@@ -118,6 +123,11 @@ onMount(() => {
 	// 计算所有文章的活跃天数和最大文章数（包括未来日期的文章）
 	const allPostsByDate = new Map<string, Post[]>();
 	allPosts.forEach((post) => {
+		// 安全检查：确保 post 和 post.data 存在，且 published 属性存在
+		if (!post || !post.data || !post.data.published) {
+			console.warn('Invalid post data structure in allPosts:', post);
+			return;
+		}
 		const dateStr = formatDate(post.data.published);
 		if (!allPostsByDate.has(dateStr)) {
 			allPostsByDate.set(dateStr, []);

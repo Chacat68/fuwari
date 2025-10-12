@@ -218,7 +218,7 @@ const bannerOffset =
 		<link rel="preload" href="/archive/" as="document" />
 		<link rel="preload" href="/projects/" as="document" />
 		<link rel="preload" href="/friends/" as="document" />
-		<link rel="preload" href="/pagefind/pagefind.js" as="script" />
+		<link rel="preload" href="/pagefind/pagefind.js" as="script" crossorigin />
 		
 		<!-- 预加载关键字体 -->
 		<link rel="preload" href="/_astro/roboto-latin-400-normal.CNwBRw8h.woff2" as="font" type="font/woff2" crossorigin />
@@ -241,7 +241,7 @@ const bannerOffset =
 			enableCaching={true}
 			enableCriticalCSS={true}
 			enableResourceHints={true}
-			preloadFonts={['roboto']}
+			preloadFonts={[]}
 		/>
 		<PagePerformanceOptimization 
 			enableLazyLoading={true}

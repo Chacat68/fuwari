@@ -19,7 +19,7 @@ const {
 	enableResourceHints = true,
 	criticalResources = [],
 	preloadFonts = [],
-	preloadImages = []
+	preloadImages = [],
 } = Astro.props;
 ---
 
@@ -39,7 +39,7 @@ const {
 
 <!-- 字体预加载 -->
 {enablePreload && preloadFonts.map(font => (
-	<link rel="preload" href={font} as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href={`/_astro/${font}-latin-400-normal.CNwBRw8h.woff2`} as="font" type="font/woff2" crossorigin>
 ))}
 
 <!-- 关键图片预加载 -->
