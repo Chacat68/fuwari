@@ -17,11 +17,13 @@ const sortedPosts = await getSortedPosts();
 const allPosts = await getAllPosts();
 const optimizedPosts = allPosts.map((post) => ({
 	slug: post.slug,
-	published: post.data.published,
-	title: post.data.title,
-	category: post.data.category,
-	tags: post.data.tags,
-	// 不包含完整内容，只保留必要字段
+	data: {
+		published: post.data.published,
+		title: post.data.title,
+		category: post.data.category,
+		tags: post.data.tags,
+	},
+	// 保持与HeatmapChart组件期望的Post接口一致
 }));
 
 // Archive页面SEO信息
