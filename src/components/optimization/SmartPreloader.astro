@@ -1,0 +1,265 @@
+---
+// 智能预加载组件
+// 基于 Intersection Observer API 和用户行为分析
+---
+
+<script>
+class SmartPreloader {
+  public preloadedUrls = new Set<string>();
+  private preloadQueue = new Set<string>();
+  private isPreloading = false;
+  public intersectionObserver: IntersectionObserver | null = null;
+  private visibilityTimeout: ReturnType<typeof setTimeout> | null = null;
+  private readonly maxConcurrentPreloads = 3;
+  private readonly preloadDelay = 1000; // 1秒延迟
+  private readonly throttleDelay = 2000; // 2秒节流
+
+  constructor() {
+    this.init();
+  }
+
+  private init() {
+    // 监听页面可见性变化
+    document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+    
+    // 监听页面卸载
+    window.addEventListener('beforeunload', this.cleanup.bind(this));
+    
+    // 初始化 Intersection Observer
+    this.initIntersectionObserver();
+    
+    // 监听链接悬停事件
+    this.initHoverPreloading();
+    
+    // 智能预加载关键页面
+    this.scheduleCriticalPreload();
+  }
+
+  private initIntersectionObserver() {
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const link = entry.target as HTMLAnchorElement;
+            this.schedulePreload(link.href);
+          }
+        });
+      },
+      {
+        rootMargin: '50px', // 提前50px开始预加载
+        threshold: 0.1
+      }
+    );
+
+    // 观察所有内部链接
+    this.observeLinks();
+  }
+
+  private observeLinks() {
+    const links = document.querySelectorAll('a[href^="/"], a[href^="./"]');
+    links.forEach(link => {
+      if (link instanceof HTMLAnchorElement && !this.preloadedUrls.has(link.href)) {
+        this.intersectionObserver?.observe(link);
+      }
+    });
+  }
+
+  private initHoverPreloading() {
+    let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    document.addEventListener('mouseover', (event) => {
+      const target = event.target as HTMLElement;
+      const link = target.closest('a[href^="/"], a[href^="./"]') as HTMLAnchorElement;
+      
+      if (link && !this.preloadedUrls.has(link.href)) {
+        // 清除之前的定时器
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+        }
+        
+        // 延迟预加载，避免快速悬停时的无效请求
+        hoverTimeout = setTimeout(() => {
+          this.schedulePreload(link.href);
+        }, 300);
+      }
+    });
+
+    document.addEventListener('mouseout', () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+    });
+  }
+
+  private schedulePreload(url: string) {
+    // 避免重复预加载
+    if (this.preloadedUrls.has(url) || this.preloadQueue.has(url)) {
+      return;
+    }
+
+    // 检查页面可见性
+    if (document.visibilityState !== 'visible') {
+      return;
+    }
+
+    // 检查网络状态
+    if ('connection' in navigator) {
+      const connection = (navigator as any).connection;
+      if (connection && connection.saveData) {
+        return; // 用户启用了数据节省模式
+      }
+    }
+
+    this.preloadQueue.add(url);
+    this.processPreloadQueue();
+  }
+
+  private async processPreloadQueue() {
+    if (this.isPreloading || this.preloadQueue.size === 0) {
+      return;
+    }
+
+    this.isPreloading = true;
+    const urls = Array.from(this.preloadQueue).slice(0, this.maxConcurrentPreloads);
+    
+    try {
+      await Promise.allSettled(
+        urls.map(url => this.preloadPage(url))
+      );
+    } catch (error) {
+      console.warn('预加载失败:', error);
+    } finally {
+      this.isPreloading = false;
+      
+      // 处理剩余的预加载任务
+      if (this.preloadQueue.size > 0) {
+        setTimeout(() => this.processPreloadQueue(), this.throttleDelay);
+      }
+    }
+  }
+
+  private async preloadPage(url: string): Promise<void> {
+    try {
+      // 使用 fetch 预加载页面
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'text/html',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        signal: AbortSignal.timeout(5000) // 5秒超时
+      });
+
+      if (response.ok) {
+        // 预加载成功，添加到缓存
+        this.preloadedUrls.add(url);
+        this.preloadQueue.delete(url);
+        
+        // 可选：将响应存储到缓存中
+        if ('caches' in window) {
+          const cache = await caches.open('preload-cache');
+          await cache.put(url, response.clone());
+        }
+      }
+    } catch (error) {
+      // 预加载失败，从队列中移除
+      this.preloadQueue.delete(url);
+      console.warn(`预加载失败: ${url}`, error);
+    }
+  }
+
+  private scheduleCriticalPreload() {
+    // 延迟预加载关键页面
+    setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        const criticalPages = ['/', '/about/', '/archive/', '/projects/'];
+        criticalPages.forEach(page => {
+          if (!this.preloadedUrls.has(page)) {
+            this.schedulePreload(page);
+          }
+        });
+      }
+    }, this.preloadDelay);
+  }
+
+  private handleVisibilityChange() {
+    if (document.visibilityState === 'visible') {
+      // 页面变为可见时，重新开始预加载
+      this.processPreloadQueue();
+    } else {
+      // 页面不可见时，清理预加载任务
+      this.preloadQueue.clear();
+      if (this.visibilityTimeout) {
+        clearTimeout(this.visibilityTimeout);
+      }
+    }
+  }
+
+  private cleanup() {
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+    
+    if (this.visibilityTimeout) {
+      clearTimeout(this.visibilityTimeout);
+    }
+    
+    this.preloadQueue.clear();
+  }
+
+  // 公共方法：手动预加载特定URL
+  public preloadUrl(url: string) {
+    this.schedulePreload(url);
+  }
+
+  // 公共方法：获取预加载统计
+  public getStats() {
+    return {
+      preloadedCount: this.preloadedUrls.size,
+      queueSize: this.preloadQueue.size,
+      isPreloading: this.isPreloading
+    };
+  }
+}
+
+// 初始化智能预加载器
+let smartPreloader: SmartPreloader | null = null;
+
+function initSmartPreloader() {
+  if (!smartPreloader) {
+    smartPreloader = new SmartPreloader();
+  }
+}
+
+  // 在 Swup 页面切换后重新初始化
+if (window.swup) {
+  window.swup.hooks.on('content:replace', () => {
+    setTimeout(() => {
+      if (smartPreloader && smartPreloader.intersectionObserver) {
+        // 重新观察页面中的链接
+        const links = document.querySelectorAll('a[href^="/"], a[href^="./"]');
+        links.forEach(link => {
+          if (link instanceof HTMLAnchorElement && !smartPreloader!.preloadedUrls.has(link.href)) {
+            smartPreloader!.intersectionObserver?.observe(link);
+          }
+        });
+      }
+    }, 100);
+  });
+  
+  initSmartPreloader();
+} else {
+  document.addEventListener('swup:enable', initSmartPreloader);
+}
+
+// 页面加载完成后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSmartPreloader);
+} else {
+  initSmartPreloader();
+}
+
+// 导出到全局，便于调试
+(window as any).smartPreloader = smartPreloader;
+</script>

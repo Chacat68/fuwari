@@ -1,0 +1,254 @@
+---
+// 预加载性能监控组件
+// 用于监控和调试智能预加载的性能表现
+---
+
+<script>
+class PreloadPerformanceMonitor {
+  private metrics = {
+    preloadCount: 0,
+    successfulPreloads: 0,
+    failedPreloads: 0,
+    averagePreloadTime: 0,
+    totalPreloadTime: 0,
+    cacheHits: 0,
+    networkRequests: 0
+  };
+
+  private startTimes = new Map<string, number>();
+
+  constructor() {
+    this.init();
+  }
+
+  private init() {
+    // 监听预加载事件
+    this.setupEventListeners();
+    
+    // 定期输出性能报告
+    this.setupPerformanceReporting();
+  }
+
+  private setupEventListeners() {
+    // 监听 fetch 请求
+    const originalFetch = window.fetch;
+    window.fetch = async (...args) => {
+      const url = args[0] as string;
+      
+      if (typeof url === 'string' && this.isPreloadRequest(url)) {
+        this.metrics.networkRequests++;
+        this.startTimes.set(url, performance.now());
+      }
+      
+      try {
+        const response = await originalFetch(...args);
+        
+        if (typeof url === 'string' && this.isPreloadRequest(url)) {
+          this.recordPreloadSuccess(url);
+        }
+        
+        return response;
+      } catch (error) {
+        if (typeof url === 'string' && this.isPreloadRequest(url)) {
+          this.recordPreloadFailure(url);
+        }
+        throw error;
+      }
+    };
+  }
+
+  private isPreloadRequest(url: string): boolean {
+    // 检查是否是预加载请求
+    return url.startsWith('/') && !url.includes('_astro') && !url.includes('pagefind');
+  }
+
+  private recordPreloadSuccess(url: string) {
+    const startTime = this.startTimes.get(url);
+    if (startTime) {
+      const duration = performance.now() - startTime;
+      this.metrics.successfulPreloads++;
+      this.metrics.totalPreloadTime += duration;
+      this.metrics.averagePreloadTime = this.metrics.totalPreloadTime / this.metrics.successfulPreloads;
+      this.startTimes.delete(url);
+    }
+  }
+
+  private recordPreloadFailure(url: string) {
+    this.metrics.failedPreloads++;
+    this.startTimes.delete(url);
+  }
+
+  private setupPerformanceReporting() {
+    // 每30秒输出一次性能报告
+    setInterval(() => {
+      this.logPerformanceReport();
+    }, 30000);
+
+    // 页面卸载时输出最终报告
+    window.addEventListener('beforeunload', () => {
+      this.logPerformanceReport();
+    });
+  }
+
+  private logPerformanceReport() {
+    const report = {
+      timestamp: new Date().toISOString(),
+      metrics: { ...this.metrics },
+      performance: {
+        memoryUsage: (performance as any).memory ? {
+          used: Math.round((performance as any).memory.usedJSHeapSize / 1024 / 1024),
+          total: Math.round((performance as any).memory.totalJSHeapSize / 1024 / 1024),
+          limit: Math.round((performance as any).memory.jsHeapSizeLimit / 1024 / 1024)
+        } : null,
+        navigationTiming: this.getNavigationTiming()
+      }
+    };
+
+    console.group('🚀 智能预加载性能报告');
+    console.log('📊 预加载统计:', report.metrics);
+    console.log('💾 内存使用:', report.performance.memoryUsage);
+    console.log('⏱️ 导航时间:', report.performance.navigationTiming);
+    console.groupEnd();
+
+    // 发送到分析服务（可选）
+    this.sendToAnalytics(report);
+  }
+
+  private getNavigationTiming() {
+    const timing = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+    if (!timing) return null;
+
+    return {
+      domContentLoaded: Math.round(timing.domContentLoadedEventEnd - timing.domContentLoadedEventStart),
+      loadComplete: Math.round(timing.loadEventEnd - timing.loadEventStart),
+      firstPaint: this.getFirstPaint(),
+      firstContentfulPaint: this.getFirstContentfulPaint()
+    };
+  }
+
+  private getFirstPaint(): number | null {
+    const paintEntries = performance.getEntriesByType('paint');
+    const fpEntry = paintEntries.find(entry => entry.name === 'first-paint');
+    return fpEntry ? Math.round(fpEntry.startTime) : null;
+  }
+
+  private getFirstContentfulPaint(): number | null {
+    const paintEntries = performance.getEntriesByType('paint');
+    const fcpEntry = paintEntries.find(entry => entry.name === 'first-contentful-paint');
+    return fcpEntry ? Math.round(fcpEntry.startTime) : null;
+  }
+
+  private sendToAnalytics(report: any) {
+    // 这里可以集成 Google Analytics、Umami 或其他分析服务
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'preload_performance', {
+        custom_parameter_1: report.metrics.successfulPreloads,
+        custom_parameter_2: report.metrics.averagePreloadTime,
+        custom_parameter_3: report.metrics.cacheHits
+      });
+    }
+  }
+
+  // 公共方法：获取当前指标
+  public getMetrics() {
+    return { ...this.metrics };
+  }
+
+  // 公共方法：重置指标
+  public resetMetrics() {
+    this.metrics = {
+      preloadCount: 0,
+      successfulPreloads: 0,
+      failedPreloads: 0,
+      averagePreloadTime: 0,
+      totalPreloadTime: 0,
+      cacheHits: 0,
+      networkRequests: 0
+    };
+    this.startTimes.clear();
+  }
+}
+
+// 初始化性能监控器
+let performanceMonitor: PreloadPerformanceMonitor | null = null;
+
+function initPerformanceMonitor() {
+  if (!performanceMonitor) {
+    performanceMonitor = new PreloadPerformanceMonitor();
+  }
+}
+
+// 页面加载完成后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPerformanceMonitor);
+} else {
+  initPerformanceMonitor();
+}
+
+// 导出到全局，便于调试
+(window as any).preloadPerformanceMonitor = performanceMonitor;
+</script>
+
+<!-- 开发环境下的性能监控面板 -->
+{import.meta.env.DEV && (
+<div id="preload-monitor-panel" style="
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 12px;
+  z-index: 9999;
+  max-width: 300px;
+  display: none;
+">
+  <div style="margin-bottom: 5px; font-weight: bold;">🚀 预加载监控</div>
+  <div id="preload-stats"></div>
+  <button onclick="toggleMonitorPanel()" style="
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+  ">关闭</button>
+</div>
+
+<script>
+function toggleMonitorPanel() {
+  const panel = document.getElementById('preload-monitor-panel');
+  if (panel) {
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+function updateMonitorPanel() {
+  const panel = document.getElementById('preload-stats');
+  if (panel && (window as any).preloadPerformanceMonitor) {
+    const metrics = (window as any).preloadPerformanceMonitor.getMetrics();
+    panel.innerHTML = `
+      <div>成功预加载: ${metrics.successfulPreloads}</div>
+      <div>失败预加载: ${metrics.failedPreloads}</div>
+      <div>平均时间: ${Math.round(metrics.averagePreloadTime)}ms</div>
+      <div>网络请求: ${metrics.networkRequests}</div>
+    `;
+  }
+}
+
+// 每5秒更新一次监控面板
+setInterval(updateMonitorPanel, 5000);
+
+// 添加键盘快捷键显示/隐藏监控面板
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+    e.preventDefault();
+    toggleMonitorPanel();
+  }
+});
+</script>
+)}

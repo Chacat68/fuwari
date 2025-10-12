@@ -5,6 +5,8 @@ import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
+import PreloadPerformanceMonitor from "../components/optimization/PreloadPerformanceMonitor.astro";
+import SmartPreloader from "../components/optimization/SmartPreloader.astro";
 import MobileOptimization from "../components/seo/MobileOptimization.astro";
 import PagePerformanceOptimization from "../components/seo/PagePerformanceOptimization.astro";
 import PerformanceOptimization from "../components/seo/PerformanceOptimization.astro";
@@ -256,6 +258,12 @@ const bannerOffset =
 	>
 		<ConfigCarrier></ConfigCarrier>
 		<slot />
+
+		<!-- 智能预加载组件 -->
+		<SmartPreloader />
+		
+		<!-- 预加载性能监控组件 -->
+		<PreloadPerformanceMonitor />
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>

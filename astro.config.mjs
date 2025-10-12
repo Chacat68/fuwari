@@ -45,8 +45,8 @@ export default defineConfig({
 			smoothScrolling: false, // 禁用平滑滚动，提升性能
 			cache: true, // 启用缓存，减少重复请求
 			preload: {
-				enabled: true, // 启用预加载，提升用户体验
-				throttle: 300, // 限制预加载频率
+				enabled: false, // 禁用 Swup 内置预加载，使用自定义智能预加载
+				throttle: 1000, // 增加节流时间，减少资源消耗
 			},
 			accessibility: true,
 			updateHead: true,
