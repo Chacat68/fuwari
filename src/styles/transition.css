@@ -6,13 +6,13 @@ html.is-changing .transition-fade {
     backface-visibility: hidden;
 }
 html.is-animating .transition-fade {
-    @apply opacity-0 translate-y-0 scale-100
+    @apply opacity-0 translate-y-3 scale-[0.98]
 }
 
 /* Fade-in animations for components */
 @keyframes fade-in-up {
     0% {
-        transform: translateY(0) scale(1);
+        transform: translateY(1.5rem) scale(0.98);
         opacity: 0;
     }
     100% {
@@ -21,10 +21,10 @@ html.is-animating .transition-fade {
     }
 }
 
-/* Main components - 优化动画性能 */
+/* Main components */
 .onload-animation {
     opacity: 0;
-    animation: 300ms cubic-bezier(0.16, 1, 0.3, 1) fade-in-up;
+    animation: 400ms cubic-bezier(0.16, 1, 0.3, 1) fade-in-up;
     animation-fill-mode: forwards;
     will-change: transform, opacity;
     transform: translateZ(0);
@@ -34,7 +34,7 @@ html.is-animating .transition-fade {
 /* 移动端优化 */
 @media (max-width: 768px) {
     .onload-animation {
-        animation-duration: 150ms;
+        animation-duration: 200ms;
     }
     
     #post-container :nth-child(n) {
@@ -46,7 +46,7 @@ html.is-animating .transition-fade {
     animation-delay: 0ms
 }
 #sidebar {
-    animation-delay: 50ms
+    animation-delay: 100ms
 }
 #swup-container {
     outline: none;
@@ -55,10 +55,10 @@ html.is-animating .transition-fade {
     animation-delay: var(--content-delay);
 }
 .footer {
-    animation-delay: 150ms;
+    animation-delay: 250ms;
 }
 #banner-credit {
-    animation-delay: 200ms;
+    animation-delay: 400ms;
 }
 
 /* Post content */

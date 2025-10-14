@@ -3,19 +3,8 @@ import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
 export type SiteConfig = {
 	title: string;
 	subtitle: string;
-	description?: string; // 网站默认描述，用于SEO优化
 
-	lang:
-		| "en"
-		| "zh_CN"
-		| "zh_TW"
-		| "ja"
-		| "ko"
-		| "es"
-		| "th"
-		| "vi"
-		| "tr"
-		| "id";
+	lang: string;
 
 	themeColor: {
 		hue: number;
@@ -35,18 +24,6 @@ export type SiteConfig = {
 	toc: {
 		enable: boolean;
 		depth: 1 | 2 | 3;
-	};
-	// Umami 统计配置
-	umami?: {
-		enable: boolean;
-		websiteId: string;
-		src: string;
-	};
-	// 分类排序配置
-	categorySort?: {
-		enable: boolean; // 是否启用自定义分类排序
-		order: string[]; // 自定义分类顺序数组，按此顺序显示分类
-		fallbackSort?: "alphabetical" | "count"; // 未在order中指定的分类的排序方式：字母顺序或按文章数量
 	};
 
 	favicon: Favicon[];
@@ -68,8 +45,6 @@ export type NavBarLink = {
 	name: string;
 	url: string;
 	external?: boolean;
-	// 二级菜单配置
-	children?: NavBarLink[];
 };
 
 export type NavBarConfig = {

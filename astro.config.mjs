@@ -4,9 +4,9 @@ import tailwind from "@astrojs/tailwind";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
-import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeExternalLinks from "rehype-external-links";
@@ -17,20 +17,17 @@ import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-di
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig } from "./src/config.ts";
-import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
+import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
 // https://astro.build/config
 export default defineConfig({
-	site:
-		process.env.NODE_ENV === "development"
-			? "http://localhost:4321/"
-			: "https://www.chawfoo.com/",
+	site: "https://www.chawfoo.com/",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
@@ -40,47 +37,48 @@ export default defineConfig({
 		swup({
 			theme: false,
 			animationClass: "transition-", // see https://swup.js.org/options/#animationselector
-			// 简化容器配置，减少DOM操作
-			containers: ["main"],
-			smoothScrolling: false, // 禁用平滑滚动，提升性能
-			cache: true, // 启用缓存，减少重复请求
+			// 使用默认值以避免404错误
+			containers: ["main", "#toc"],
+			smoothScrolling: true,
+			cache: true,
 			preload: {
-				enabled: false, // 禁用 Swup 内置预加载，使用自定义智能预加载
-				throttle: 1000, // 增加节流时间，减少资源消耗
+				enabled: true,
+				customFetch: (url) => {
+					return fetch(url, {
+						credentials: "same-origin", // 设置凭证模式
+						mode: "cors",
+						headers: {
+							"X-Requested-With": "XMLHttpRequest",
+						},
+					});
+				},
 			},
 			accessibility: true,
 			updateHead: true,
 			updateBodyClass: false,
 			globalInstance: true,
-			// 优化页面切换性能
-			skipPopStateHandling: false,
-			animateHistoryBrowsing: false, // 禁用历史记录浏览动画
-			parallelRequests: true, // 启用并行请求
-			// 新增性能优化配置
-			requestTimeout: 10000, // 设置请求超时
-			progress: false, // 禁用进度条，减少DOM操作
-			debug: false, // 禁用调试模式
 		}),
 		icon({
 			include: {
+				"preprocess: vitePreprocess(),": ["*"],
 				"fa6-brands": ["*"],
 				"fa6-regular": ["*"],
 				"fa6-solid": ["*"],
 			},
 		}),
-
+    
 		expressiveCode({
 			themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
 			plugins: [
 				pluginCollapsibleSections(),
 				pluginLineNumbers(),
 				pluginLanguageBadge(),
-				pluginCustomCopyButton(),
+				pluginCustomCopyButton()
 			],
 			defaultProps: {
 				wrap: true,
 				overridesByLang: {
-					shellsession: {
+					'shellsession': {
 						showLineNumbers: false,
 					},
 				},
@@ -90,8 +88,7 @@ export default defineConfig({
 				borderRadius: "0.75rem",
 				borderColor: "none",
 				codeFontSize: "0.875rem",
-				codeFontFamily:
-					"'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeFontFamily: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
 				codeLineHeight: "1.5rem",
 				frames: {
 					editorBackground: "var(--codeblock-bg)",
@@ -102,34 +99,20 @@ export default defineConfig({
 					editorActiveTabIndicatorBottomColor: "var(--primary)",
 					editorActiveTabIndicatorTopColor: "none",
 					editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
-					terminalTitlebarBorderBottomColor: "none",
+					terminalTitlebarBorderBottomColor: "none"
 				},
 				textMarkers: {
 					delHue: 0,
 					insHue: 180,
-					markHue: 250,
-				},
+					markHue: 250
+				}
 			},
 			frames: {
 				showCopyToClipboardButton: false,
-			},
+			}
 		}),
-		svelte(),
-		sitemap({
-			filter: (page) => {
-				// 排除草稿页面和特殊页面
-				return !page.includes("/draft/") && !page.includes("/404");
-			},
-			changefreq: "weekly",
-			priority: 0.7,
-			lastmod: new Date(),
-			customPages: [
-				"https://www.chawfoo.com/",
-				"https://www.chawfoo.com/about/",
-				"https://www.chawfoo.com/archive/",
-				"https://www.chawfoo.com/projects/",
-			],
-		}),
+        svelte(),
+		sitemap(),
 	],
 	markdown: {
 		remarkPlugins: [

@@ -24,8 +24,8 @@ const isLocal = !(
 );
 const isPublic = src.startsWith("/");
 
-// 图片动态导入的临时解决方案
-// 相关issue: https://github.com/withastro/astro/issues/3373
+// TODO temporary workaround for images dynamic import
+// https://github.com/withastro/astro/issues/3373
 // biome-ignore lint/suspicious/noImplicitAnyLet: <check later>
 let img;
 if (isLocal) {

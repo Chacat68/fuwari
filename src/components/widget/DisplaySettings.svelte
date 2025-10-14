@@ -1,35 +1,21 @@
 <script lang="ts">
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
+import Icon from "@iconify/svelte";
 import { getDefaultHue, getHue, setHue } from "@utils/setting-utils";
-import { onMount } from "svelte";
 
 let hue = getHue();
 const defaultHue = getDefaultHue();
-let initialized = false; // 添加初始化状态标志
 
 function resetHue() {
 	hue = getDefaultHue();
 }
 
-// 使用onMount确保在浏览器环境中初始化
-onMount(() => {
-	// 添加浏览器环境检查
-	if (typeof window !== "undefined" && typeof document !== "undefined") {
-		// 延迟初始化以避免水合错误
-		setTimeout(() => {
-			initialized = true;
-		}, 100);
-	}
-});
-
-// 只在初始化后更新hue
-$: if (initialized && (hue || hue === 0)) {
+$: if (hue || hue === 0) {
 	setHue(hue);
 }
 </script>
 
-{#if initialized}
 <div id="display-setting" class="float-panel float-panel-closed absolute transition-all w-80 right-4 px-4 py-4">
     <div class="flex flex-row gap-2 mb-3 items-center justify-between">
         <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
@@ -37,10 +23,10 @@ $: if (initialized && (hue || hue === 0)) {
             before:absolute before:-left-3 before:top-[0.33rem]"
         >
             {i18n(I18nKey.themeColor)}
-            <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90 will-change-transform"
+            <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} on:click={resetHue}>
                 <div class="text-[var(--btn-content)]">
-                    <iconify-icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></iconify-icon>
+                    <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                 </div>
             </button>
         </div>
@@ -56,7 +42,6 @@ $: if (initialized && (hue || hue === 0)) {
                class="slider" id="colorSlider" step="5" style="width: 100%">
     </div>
 </div>
-{/if}
 
 
 <style lang="stylus">

@@ -1,17 +1,17 @@
 ---
-import { Icon } from "astro-icon/components";
 import { profileConfig } from "../config";
-import { getSortedPosts } from "../utils/content-utils";
 import { url } from "../utils/url-utils";
+import { getSortedPosts } from "../utils/content-utils";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+import { Icon } from "astro-icon/components";
 
 const currentYear = new Date().getFullYear();
 
 // 计算网站运行天数
 const startDate = new Date("2020-01-01"); // 设置网站开始运行的日期
 const today = new Date();
-const runningDays = Math.floor(
-	(today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
-);
+const runningDays = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
 
 // 获取所有文章并计算总字数
 const posts = await getSortedPosts();
@@ -19,18 +19,18 @@ let totalWords = 0;
 
 // 遍历所有文章，累加字数
 for (const post of posts) {
-	const { remarkPluginFrontmatter } = await post.render();
-	if (remarkPluginFrontmatter?.words) {
-		totalWords += remarkPluginFrontmatter.words;
-	}
+    const { remarkPluginFrontmatter } = await post.render();
+    if (remarkPluginFrontmatter && remarkPluginFrontmatter.words) {
+        totalWords += remarkPluginFrontmatter.words;
+    }
 }
 
 // 格式化总字数，使用 k 单位表示千位数
 const formatToK = (num: number) => {
-	if (num >= 1000) {
-		return `${(Math.floor(num / 100) / 10).toFixed(1)}k`;
-	}
-	return num.toString();
+    if (num >= 1000) {
+        return (Math.floor(num / 100) / 10).toFixed(1) + 'k';
+    }
+    return num.toString();
 };
 const formattedTotalWords = formatToK(totalWords);
 ---
@@ -40,7 +40,7 @@ const formattedTotalWords = formatToK(totalWords);
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
-        2020-{currentYear} {profileConfig.name}. <a class="transition link text-[var(--primary)] font-medium inline-flex items-center gap-1" target="_blank" href={url('rss.xml')}><Icon name="fa6-solid:rss" class="w-3 h-3" />RSS</a> <a class="transition link text-[var(--primary)] font-medium inline-flex items-center gap-1" target="_blank" href={url('sitemap-index.xml')}><Icon name="material-symbols:map-outline" class="w-3 h-3" />站点地图</a><br>
+        2020-{currentYear} {profileConfig.name}. <a class="transition link text-[var(--primary)] font-medium flex items-center inline-flex gap-1" target="_blank" href={url('rss.xml')}><Icon name="fa6-solid:rss" class="w-3 h-3" />RSS</a> <a class="transition link text-[var(--primary)] font-medium flex items-center inline-flex gap-1" target="_blank" href={url('sitemap-index.xml')}><Icon name="material-symbols:map-outline" class="w-3 h-3" />站点地图</a><br>
         已经运行了{runningDays}天 | 共嘚嘚了{formattedTotalWords}字<br>
         Powered by <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> & <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
     </div>

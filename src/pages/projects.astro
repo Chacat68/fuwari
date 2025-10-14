@@ -1,14 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+import { siteConfig } from "@/config";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
-import { siteConfig } from "@/config";
 
-// Projects页面SEO信息
-const projectsTitle = `项目展示 - ${siteConfig.title}`;
-const projectsDescription =
-	"这些是我正在进行的项目，不断更新中，包括游戏开发、内容创作等各种有趣的项目";
-const projectsKeywords = ["项目", "作品集", "游戏开发", "创作项目", "开源项目"];
+const title = "项目";
+const description = "这些是我正在进行的项目，不断更新中";
 
 // 从内容集合中获取项目数据
 const projects = await getCollection("projects");
@@ -43,16 +42,11 @@ const yearProgressFormatted = yearProgress.toFixed(5);
 const dayProgressFormatted = dayProgress.toFixed(5);
 ---
 
-<MainGridLayout 
-	title={projectsTitle}
-	description={projectsDescription}
-	image={siteConfig.banner?.src}
-	keywords={projectsKeywords}
->
+<MainGridLayout title={title} description={description}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-6 md:px-9 py-6 relative w-full">
-            <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">项目</h1>
-            <p class="text-black/70 dark:text-white/70 mb-8 transition-colors duration-200">这些是我正在进行的项目，不断更新中</p>
+        <div class="card-base z-10 px-9 py-6 relative w-full">
+            <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">{title}</h1>
+            <p class="text-black/70 dark:text-white/70 mb-8 transition-colors duration-200">{description}</p>
             
             <!-- 添加时间显示 -->
             <div class="mb-8 p-4 rounded-xl bg-white/10 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-md transition-colors duration-200">
@@ -104,7 +98,7 @@ const dayProgressFormatted = dayProgress.toFixed(5);
 }
 </style>
 
-<script is:inline define:vars={{ yearProgressFormatted, dayProgressFormatted }}>
+<script define:vars={{ yearProgressFormatted, dayProgressFormatted }}>
 // 数字滚动动画函数
 function animateValue(element, start, end, duration) {
     let startTimestamp = null;
@@ -156,17 +150,13 @@ function updateProgress() {
     dayProgressElement.textContent = dayProgress.toFixed(5); // 当天进度保持小数
 }
 
-// 初始化动画的函数
-function initializeAnimation() {
+// 页面加载后执行初始动画
+document.addEventListener('DOMContentLoaded', () => {
     // 获取元素
     const yearProgressElement = document.querySelector('.year-progress');
     const dayProgressElement = document.querySelector('.day-progress');
     
-    if (!yearProgressElement || !dayProgressElement) {
-        // 如果元素还没有加载，稍后重试
-        setTimeout(initializeAnimation, 100);
-        return;
-    }
+    if (!yearProgressElement || !dayProgressElement) return;
     
     // 获取初始进度值
     const yearProgress = parseFloat(yearProgressFormatted);
@@ -180,23 +170,5 @@ function initializeAnimation() {
         // 设置定时器，每10毫秒更新一次进度
         setInterval(updateProgress, 10);
     }, 300); // 减少初始延迟从500ms到300ms
-}
-
-// 页面加载后执行初始动画
-document.addEventListener('DOMContentLoaded', initializeAnimation);
-
-// 为了确保在所有情况下都能触发动画，添加额外的触发方式
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeAnimation);
-} else {
-    // 如果文档已经加载完成，直接执行
-    initializeAnimation();
-}
-
-// 监听页面可见性变化，当页面重新变为可见时重新初始化动画
-document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        setTimeout(initializeAnimation, 100);
-    }
 });
 </script>

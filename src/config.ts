@@ -10,21 +10,19 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "付之一笑",
 	subtitle: "阅读、思考、写作",
-	description:
-		"CHACAT的个人博客，专注于阅读、思考、写作。分享技术见解、生活感悟和创作心得。", // 网站默认描述，用于SEO优化
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	themeColor: {
 		hue: 250, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
 		fixed: true, // 对访问者隐藏主题颜色选择器
 	},
 	defaultPostImage:
-		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250808112503891.webp?imageSlim", // 没有图片的文章将使用此默认网络图片
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250501123146419.png?imageSlim", // 没有图片的文章将使用此默认网络图片
 	banner: {
 		enable: true,
-		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250808112503891.webp?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
+		src: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250510164049488.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
 		position: "center", // 等同于object-position，仅支持'top'、'center'、'bottom'。默认为'center'
 		credit: {
-			enable: false, // 显示横幅图片的署名文本
+			enable: true, // 显示横幅图片的署名文本
 			text: "CHACAT绘制", // 要显示的署名文本
 			url: "", // （可选）原始作品或艺术家页面的URL链接
 		},
@@ -32,18 +30,6 @@ export const siteConfig: SiteConfig = {
 	toc: {
 		enable: true, // 在文章右侧显示目录
 		depth: 3, // 在目录中显示的最大标题深度，范围从1到3
-	},
-	// Umami 统计配置
-	umami: {
-		enable: true, // 启用 Umami 统计
-		websiteId: "e49c70c3-26a8-46d9-b241-6a47a00574f2", // 您的 Umami 网站 ID
-		src: "https://umami.chawfoo.com/script.js", // 您的 Umami 服务器地址
-	},
-	// 分类排序配置
-	categorySort: {
-		enable: true, // 启用自定义分类排序
-		order: ["生活随笔", "音乐欣赏", "设计思考", "它山之石", "人工智能"], // 自定义分类显示顺序
-		fallbackSort: "count", // 未指定的分类按文章数量排序
 	},
 	favicon: [
 		// 将此数组留空以使用默认图标
@@ -60,6 +46,10 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		{
+			name: "此刻",
+			url: "/moments/my-moments/",
+		},
+		{
 			name: "项目",
 			url: "/projects/",
 		},
@@ -68,12 +58,17 @@ export const navBarConfig: NavBarConfig = {
 			url: "/friends/",
 		},
 		LinkPreset.About,
+		{
+			name: "Hobby",
+			url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加
+			external: true, // 显示外部链接图标并在新标签页中打开
+		},
 	],
 };
 
 export const profileConfig: ProfileConfig = {
 	avatar:
-		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250927011612358.webp?imageSlim", // 使用网站默认头像（相对于/public 目录）
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250330115218086.png?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
 	name: "CHACAT",
 	bio: "日常在阅读、创作、跑步。",
 	links: [
@@ -83,11 +78,6 @@ export const profileConfig: ProfileConfig = {
 			// 如果尚未包含相应的图标集，您需要安装它
 			// `pnpm add @iconify-json/<图标集名称>`
 			url: "https://x.com/Chacat68",
-		},
-		{
-			name: "Threads",
-			icon: "fa6-brands:threads",
-			url: "https://www.threads.com/@chacat68",
 		},
 		{
 			name: "Bluesky",

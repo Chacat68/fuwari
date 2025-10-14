@@ -4,26 +4,15 @@ import { onMount } from "svelte";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getPostUrlBySlug } from "../utils/url-utils";
-// 移除热力图组件导入，因为已在 archive.astro 中单独使用
 
 export let tags: string[];
 export let categories: string[];
 export let sortedPosts: Post[] = [];
 
-let params: URLSearchParams;
-let uncategorized: string | null = null;
-
-// 在浏览器环境中初始化 URL 参数
-if (typeof window !== "undefined") {
-	params = new URLSearchParams(window.location.search);
-	tags = params.has("tag") ? params.getAll("tag") : [];
-	categories = params.has("category") ? params.getAll("category") : [];
-	uncategorized = params.get("uncategorized");
-} else {
-	// 服务器端渲染时的默认值
-	tags = [];
-	categories = [];
-}
+const params = new URLSearchParams(window.location.search);
+tags = params.has("tag") ? params.getAll("tag") : [];
+categories = params.has("category") ? params.getAll("category") : [];
+const uncategorized = params.get("uncategorized");
 
 interface Post {
 	slug: string;
@@ -86,8 +75,8 @@ onMount(async () => {
 	);
 
 	const groupedPostsArray = Object.keys(grouped).map((yearStr) => ({
-		year: Number.parseInt(yearStr, 10),
-		posts: grouped[Number.parseInt(yearStr, 10)],
+		year: Number.parseInt(yearStr),
+		posts: grouped[Number.parseInt(yearStr)],
 	}));
 
 	groupedPostsArray.sort((a, b) => b.year - a.year);
@@ -95,8 +84,6 @@ onMount(async () => {
 	groups = groupedPostsArray;
 });
 </script>
-
-<!-- 热力图组件已移至 archive.astro 页面 -->
 
 <div class="card-base px-8 py-6">
     {#each groups as group}

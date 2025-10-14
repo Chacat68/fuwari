@@ -2,10 +2,10 @@
 import { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants.ts";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
+import Icon from "@iconify/svelte";
 import {
 	applyThemeToDocument,
 	getStoredTheme,
-	getTimeBasedTheme,
 	setTheme,
 } from "@utils/setting-utils.ts";
 import { onMount } from "svelte";
@@ -16,8 +16,6 @@ let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
 
 onMount(() => {
 	mode = getStoredTheme();
-
-	// 监听系统主题变化
 	const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
 	const changeThemeWhenSchemeChanged: Parameters<
 		typeof darkModePreference.addEventListener<"change">
@@ -25,73 +23,11 @@ onMount(() => {
 		applyThemeToDocument(mode);
 	};
 	darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
-
-	// 设置定时器，在固定时间点（6:00和18:00）检查并切换主题
-	let timeCheckTimeout: number | undefined;
-
-	const getNextSwitchTime = () => {
-		const now = new Date();
-		const currentHour = now.getHours();
-		const currentMinute = now.getMinutes();
-		const currentSeconds = now.getSeconds();
-
-		// 计算下一个切换时间点
-		let nextSwitchHour: number;
-		if (currentHour < 6 || currentHour >= 18) {
-			// 当前是暗色时间，下次切换到亮色（6:00）
-			nextSwitchHour = 6;
-		} else {
-			// 当前是亮色时间，下次切换到暗色（18:00）
-			nextSwitchHour = 18;
-		}
-
-		// 计算距离下次切换的毫秒数
-		const nextSwitchTime = new Date(now);
-		nextSwitchTime.setHours(nextSwitchHour, 0, 0, 0);
-
-		// 如果下次切换时间已过，则设置为明天
-		if (nextSwitchTime <= now) {
-			nextSwitchTime.setDate(nextSwitchTime.getDate() + 1);
-		}
-
-		return nextSwitchTime.getTime() - now.getTime();
-	};
-
-	const scheduleNextSwitch = () => {
-		if (mode === AUTO_MODE) {
-			const delay = getNextSwitchTime();
-			timeCheckTimeout = window.setTimeout(() => {
-				applyThemeToDocument(AUTO_MODE);
-				scheduleNextSwitch(); // 重新调度下次切换
-			}, delay);
-		}
-	};
-
-	const stopTimeCheck = () => {
-		if (timeCheckTimeout) {
-			clearTimeout(timeCheckTimeout);
-			timeCheckTimeout = undefined;
-		}
-	};
-
-	// 初始启动时间检查
-	scheduleNextSwitch();
-
-	// 监听模式变化，如果切换到AUTO_MODE则启动时间检查，否则停止
-	$effect(() => {
-		if (mode === AUTO_MODE) {
-			scheduleNextSwitch();
-		} else {
-			stopTimeCheck();
-		}
-	});
-
 	return () => {
 		darkModePreference.removeEventListener(
 			"change",
 			changeThemeWhenSchemeChanged,
 		);
-		stopTimeCheck();
 	};
 });
 
@@ -111,15 +47,13 @@ function toggleScheme() {
 }
 
 function showPanel() {
-	if (typeof document === "undefined") return;
 	const panel = document.querySelector("#light-dark-panel");
-	panel?.classList.remove("float-panel-closed");
+	panel.classList.remove("float-panel-closed");
 }
 
 function hidePanel() {
-	if (typeof document === "undefined") return;
 	const panel = document.querySelector("#light-dark-panel");
-	panel?.classList.add("float-panel-closed");
+	panel.classList.add("float-panel-closed");
 }
 </script>
 
@@ -127,13 +61,13 @@ function hidePanel() {
 <div class="relative z-50" role="menu" tabindex="-1" onmouseleave={hidePanel}>
     <button aria-label="Light/Dark Mode" role="menuitem" class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="scheme-switch" onclick={toggleScheme} onmouseenter={showPanel}>
         <div class="absolute" class:opacity-0={mode !== LIGHT_MODE}>
-            <iconify-icon icon="material-symbols:wb-sunny-outline-rounded" class="text-[1.25rem]"></iconify-icon>
+            <Icon icon="material-symbols:wb-sunny-outline-rounded" class="text-[1.25rem]"></Icon>
         </div>
         <div class="absolute" class:opacity-0={mode !== DARK_MODE}>
-            <iconify-icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem]"></iconify-icon>
+            <Icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem]"></Icon>
         </div>
         <div class="absolute" class:opacity-0={mode !== AUTO_MODE}>
-            <iconify-icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem]"></iconify-icon>
+            <Icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem]"></Icon>
         </div>
     </button>
 
@@ -143,29 +77,23 @@ function hidePanel() {
                     class:current-theme-btn={mode === LIGHT_MODE}
                     onclick={() => switchScheme(LIGHT_MODE)}
             >
-                <iconify-icon icon="material-symbols:wb-sunny-outline-rounded" class="text-[1.25rem] mr-3"></iconify-icon>
+                <Icon icon="material-symbols:wb-sunny-outline-rounded" class="text-[1.25rem] mr-3"></Icon>
                 {i18n(I18nKey.lightMode)}
             </button>
             <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95 mb-0.5"
                     class:current-theme-btn={mode === DARK_MODE}
                     onclick={() => switchScheme(DARK_MODE)}
             >
-                <iconify-icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem] mr-3"></iconify-icon>
+                <Icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem] mr-3"></Icon>
                 {i18n(I18nKey.darkMode)}
             </button>
             <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95"
                     class:current-theme-btn={mode === AUTO_MODE}
                     onclick={() => switchScheme(AUTO_MODE)}
             >
-                <iconify-icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem] mr-3"></iconify-icon>
+                <Icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem] mr-3"></Icon>
                 {i18n(I18nKey.systemMode)}
             </button>
         </div>
     </div>
 </div>
-
-<style>
-.current-theme-btn {
-    background-color: var(--btn-plain-bg-hover);
-}
-</style>

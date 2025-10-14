@@ -1,35 +1,6 @@
 .custom-md {
     h1 {
         @apply text-3xl;
-        /* 调整为无边框，仅保留圆角与间距 */
-        @apply rounded-lg px-4 py-3 mb-6 mt-8;
-        @apply bg-[var(--card-bg)] shadow-sm;
-    }
-
-    h2 {
-        /* 二级标题去掉边框，仅保留圆角与间距 */
-        @apply rounded-md px-3 py-2 mb-4 mt-6;
-        @apply bg-[var(--card-bg)] shadow-sm;
-    }
-
-    h3, h4, h5, h6 {
-        /* 为其他标题添加适当的外边距 */
-        @apply mb-3 mt-5;
-    }
-
-    /* 调整段落的外边距对齐 */
-    p {
-        @apply mb-4 leading-relaxed;
-    }
-
-    /* 调整列表的外边距 */
-    ul, ol {
-        @apply mb-4 ml-6;
-    }
-
-    /* 调整引用块的外边距 */
-    blockquote {
-        @apply my-6 ml-4;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -49,11 +20,10 @@
     }
 
     a:not(.no-styling) {
-        @apply relative bg-none font-medium text-[var(--primary)]
+        @apply relative bg-none link font-medium text-[var(--primary)]
         underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
-        display: inline-block;
     
         &:hover, &:active {
             @apply decoration-transparent;
@@ -90,10 +60,7 @@
 
     .copy-btn {
         all: initial;
-        @apply flex items-center justify-center
-        bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
-        dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
-        opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3 text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
+        @apply btn-regular-dark opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3 text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
     }
     .frame:hover .copy-btn {
         opacity: 1;
@@ -150,12 +117,4 @@
         margin: 1em 0;
     }
     
-}
-
-/* 全站统一隐藏标题右侧的锚点“#”图标，保留可访问语义与跳转功能（TOC 等锚点跳转仍可用） */
-.prose :is(h1,h2,h3,h4,h5,h6) .anchor,
-.prose :is(h1,h2,h3,h4,h5,h6) a.anchor,
-.custom-md :is(h1,h2,h3,h4,h5,h6) .anchor,
-.custom-md :is(h1,h2,h3,h4,h5,h6) a.anchor {
-  display: none !important; /* 视觉隐藏：不影响链接与片段标识 */
 }

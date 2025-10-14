@@ -2,8 +2,6 @@
 import type { GetStaticPaths } from "astro";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
-import StructuredData from "../components/seo/StructuredData.astro";
-import { siteConfig } from "../config";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
@@ -17,43 +15,9 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
-
-// 为首页和分页页面生成SEO信息
-const isFirstPage = page.currentPage === 1;
-// 首页不设置title，让Layout.astro使用默认的"网站名 - 副标题"格式
-// 分页页面设置为"网站名 - 第X页"
-const pageTitle = isFirstPage
-	? undefined
-	: `${siteConfig.title} - 第${page.currentPage}页`;
-const pageDescription = isFirstPage
-	? siteConfig.subtitle || `${siteConfig.title} - 分享技术、生活和思考`
-	: `${siteConfig.title} 第${page.currentPage}页 - 更多精彩内容`;
-
-// 首页关键词
-const homeKeywords = [
-	"博客",
-	"技术分享",
-	"生活记录",
-	"个人网站",
-	"前端开发",
-	"编程",
-	"思考",
-	"创作",
-];
-
-// 使用网站横幅作为分享图片
-const shareImage = siteConfig.banner?.src;
 ---
 
-<MainGridLayout 
-	title={pageTitle}
-	description={pageDescription}
-	image={shareImage}
-	keywords={homeKeywords}
->
-	{isFirstPage && <StructuredData slot="head" type="WebSite" />}
-	{isFirstPage && <StructuredData slot="head" type="Person" />}
-	{isFirstPage && <h1 class="sr-only">{siteConfig.title} - {siteConfig.subtitle}</h1>}
+<MainGridLayout>
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>

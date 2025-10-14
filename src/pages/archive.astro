@@ -1,74 +1,14 @@
 ---
 import ArchivePanel from "@components/ArchivePanel.svelte";
-import HeatmapChart from "@components/HeatmapChart.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { siteConfig } from "../config";
-import {
-	getAllPosts,
-	getAllPostsCount,
-	getSortedPosts,
-} from "../utils/content-utils";
+import { getSortedPosts } from "../utils/content-utils";
 
-// 性能优化：分页加载和懒加载策略
-const totalPostsCount = await getAllPostsCount();
 const sortedPosts = await getSortedPosts();
-
-// 优化：只获取热力图需要的基本数据，减少内存使用
-const allPosts = await getAllPosts();
-const optimizedPosts = allPosts.map((post) => ({
-	slug: post.slug,
-	data: {
-		published: post.data.published,
-		title: post.data.title,
-		category: post.data.category,
-		tags: post.data.tags,
-	},
-	// 保持与HeatmapChart组件期望的Post接口一致
-}));
-
-// Archive页面SEO信息
-const archiveTitle = `文章归档 - ${siteConfig.title}`;
-const archiveDescription = `浏览所有${totalPostsCount}篇文章的归档，按时间和热力图展示内容创作历程。包含生活随笔、设计思考、人工智能等多个分类。`;
-const archiveKeywords = [
-	"文章归档",
-	"博客归档",
-	"时间线",
-	"热力图",
-	"内容创作",
-	"查猫博客",
-	"技术分享",
-];
 ---
 
-<MainGridLayout 
-	title={archiveTitle}
-	description={archiveDescription}
-	image={siteConfig.banner?.src}
-	keywords={archiveKeywords}
->
-    <h1 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-6 transition-colors duration-200">文章归档</h1>
-    
-    <!-- 性能优化：使用懒加载和优化的数据 -->
-    <div class="space-y-8">
-        <!-- 热力图组件：使用优化的数据，减少内存使用 -->
-        <div class="card-base p-6">
-            <h2 class="text-lg font-semibold text-black/90 dark:text-white/90 mb-4">创作热力图</h2>
-            <HeatmapChart 
-                sortedPosts={sortedPosts} 
-                totalPostsCount={totalPostsCount} 
-                allPosts={optimizedPosts} 
-                client:visible
-            />
-        </div>
-        
-        <!-- 归档面板：懒加载，减少初始页面大小 -->
-        <div class="card-base p-6">
-            <h2 class="text-lg font-semibold text-black/90 dark:text-white/90 mb-4">文章列表</h2>
-            <ArchivePanel 
-                sortedPosts={sortedPosts} 
-                client:visible
-            />
-        </div>
-    </div>
+<MainGridLayout title={i18n(I18nKey.archive)}>
+    <ArchivePanel sortedPosts={sortedPosts} client:only="svelte"></ArchivePanel>
 </MainGridLayout>
 
