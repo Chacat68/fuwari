@@ -37,13 +37,4 @@ export const zh_CN: Translation = {
 	[Key.publishedAt]: "发布于",
 	[Key.license]: "许可协议",
 	[Key.quote]: "日签",
-
-	// Statistics widget
-	[Key.statistics]: "统计",
-	[Key.runningDays]: "运行天数",
-	[Key.totalWords]: "总字数",
-	[Key.totalPosts]: "文章总数",
-	[Key.days]: "天",
-	[Key.years]: "年",
-	[Key.months]: "月",
 };

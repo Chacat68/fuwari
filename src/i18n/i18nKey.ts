@@ -34,15 +34,6 @@ enum I18nKey {
 	publishedAt = "publishedAt",
 	license = "license",
 	quote = "quote",
-
-	// Statistics widget
-	statistics = "statistics",
-	runningDays = "runningDays",
-	totalWords = "totalWords",
-	totalPosts = "totalPosts",
-	days = "days",
-	years = "years",
-	months = "months",
 }
 
 export default I18nKey;
