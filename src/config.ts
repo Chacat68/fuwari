@@ -54,11 +54,6 @@ export const navBarConfig: NavBarConfig = {
 			url: "/friends/",
 		},
 		LinkPreset.About,
-		{
-			name: "Hobby",
-			url: "https://neodb.social/users/Charliefoo/", // 内部链接不应包含基本路径，因为它会自动添加
-			external: true, // 显示外部链接图标并在新标签页中打开
-		},
 	],
 };
 
