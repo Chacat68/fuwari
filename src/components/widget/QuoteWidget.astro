@@ -4,9 +4,14 @@ import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import WidgetLayout from "./WidgetLayout.astro";
 
-// Select a random quote
-const randomIndex = Math.floor(Math.random() * quotes.length);
-const randomQuote = quotes[randomIndex];
+// Select a quote based on the current date (true daily quote)
+const today = new Date();
+const dayOfYear = Math.floor(
+	(today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) /
+		(1000 * 60 * 60 * 24),
+);
+const dailyIndex = dayOfYear % quotes.length;
+const dailyQuote = quotes[dailyIndex];
 
 interface Props {
 	class?: string;
@@ -16,12 +21,197 @@ const className = Astro.props.class;
 const style = Astro.props.style;
 ---
 <WidgetLayout name={i18n(I18nKey.quote)} id="quote-widget" class={className} style={style}>
-    <div class="text-sm italic text-neutral-800 dark:text-neutral-200">
-        <p>"{randomQuote.text}"</p>
-        <p class="text-right mt-1 text-neutral-600 dark:text-neutral-400">- {randomQuote.author}</p>
+    <div class="quote-container relative group">
+        <!-- 装饰性引号 -->
+        <div class="quote-mark quote-mark-left text-6xl text-[var(--primary)]/20 absolute -top-2 -left-1 font-serif transition-all duration-500 group-hover:text-[var(--primary)]/30">"</div>
+        <div class="quote-mark quote-mark-right text-6xl text-[var(--primary)]/20 absolute -bottom-4 -right-1 font-serif transition-all duration-500 group-hover:text-[var(--primary)]/30">"</div>
+        
+        <!-- 主要内容 -->
+        <div class="quote-content relative z-10">
+            <p class="quote-text text-base leading-relaxed text-neutral-800 dark:text-neutral-200 font-medium mb-4 px-2 transition-all duration-300 group-hover:text-neutral-900 dark:group-hover:text-neutral-100">
+                {dailyQuote.text}
+            </p>
+            <div class="quote-author flex items-center justify-end">
+                <div class="w-8 h-px bg-gradient-to-r from-transparent to-[var(--primary)] mr-3 transition-all duration-300 group-hover:w-12 group-hover:to-[var(--primary)]/80"></div>
+                <span class="text-sm text-neutral-600 dark:text-neutral-400 font-medium transition-colors duration-300 group-hover:text-neutral-700 dark:group-hover:text-neutral-300">
+                    {dailyQuote.author}
+                </span>
+            </div>
+        </div>
+        
+        <!-- 日期标识 -->
+        <div class="quote-date absolute top-2 right-2 text-xs text-neutral-400 dark:text-neutral-500 bg-white/50 dark:bg-black/20 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-white/70 dark:group-hover:bg-black/30 group-hover:text-neutral-600 dark:group-hover:text-neutral-400">
+            {today.getMonth() + 1}.{today.getDate()}
+        </div>
+        
+        <!-- 刷新按钮（悬停时显示） -->
+        <div class="quote-refresh absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer" title="点击刷新日签">
+            <div class="w-6 h-6 rounded-full bg-[var(--primary)]/10 hover:bg-[var(--primary)]/20 flex items-center justify-center transition-colors duration-200">
+                <svg class="w-3 h-3 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+            </div>
+        </div>
     </div>
 </WidgetLayout>
 
+<style>
+    .quote-container {
+        min-height: 120px;
+        padding: 1rem;
+        background: linear-gradient(135deg, 
+            rgba(var(--primary-rgb), 0.03) 0%, 
+            rgba(var(--primary-rgb), 0.01) 100%);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(var(--primary-rgb), 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .quote-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(var(--primary-rgb), 0.3) 50%, 
+            transparent 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .quote-container:hover::before {
+        opacity: 1;
+    }
+    
+    .quote-container:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(var(--primary-rgb), 0.2);
+        border-color: rgba(var(--primary-rgb), 0.3);
+    }
+    
+    .quote-text {
+        position: relative;
+        line-height: 1.7;
+        animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .quote-mark {
+        user-select: none;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+    
+    .quote-container:hover .quote-mark {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+    
+    .quote-author {
+        margin-top: 0.75rem;
+        animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+    
+    .quote-date {
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(var(--primary-rgb), 0.1);
+        animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+    
+    .quote-refresh {
+        animation: fadeInUp 0.6s ease-out 0.6s both;
+    }
+    
+    .quote-refresh:hover {
+        transform: scale(1.1);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .quote-container {
+            padding: 0.75rem;
+            min-height: 100px;
+        }
+        
+        .quote-mark {
+            font-size: 3rem;
+        }
+        
+        .quote-mark-left {
+            top: -0.5rem;
+            left: 0;
+        }
+        
+        .quote-mark-right {
+            bottom: -1rem;
+            right: 0;
+        }
+        
+        .quote-text {
+            font-size: 0.875rem;
+        }
+    }
+    
+    /* 暗色模式优化 */
+    .dark .quote-container {
+        background: linear-gradient(135deg, 
+            rgba(var(--primary-rgb), 0.05) 0%, 
+            rgba(var(--primary-rgb), 0.02) 100%);
+    }
+    
+    .dark .quote-date {
+        background: rgba(0, 0, 0, 0.3);
+        border-color: rgba(var(--primary-rgb), 0.2);
+    }
+</style>
+
 <script>
-    // Optional: Add client-side logic if needed, e.g., refresh quote on click
+    // 添加点击刷新功能
+    document.addEventListener('DOMContentLoaded', function() {
+        const quoteContainer = document.querySelector('#quote-widget .quote-container') as HTMLElement;
+        const refreshButton = document.querySelector('#quote-widget .quote-refresh') as HTMLElement;
+        
+        if (quoteContainer) {
+            // 点击整个容器时的动画效果
+            quoteContainer.addEventListener('click', function(this: HTMLElement) {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        }
+        
+        if (refreshButton) {
+            // 点击刷新按钮时重新加载页面（简单实现）
+            refreshButton.addEventListener('click', function(e) {
+                e.stopPropagation(); // 阻止事件冒泡
+                
+                // 添加旋转动画
+                const icon = this.querySelector('svg');
+                if (icon) {
+                    icon.style.transform = 'rotate(360deg)';
+                    icon.style.transition = 'transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                }
+            });
+        }
+    });
 </script>
