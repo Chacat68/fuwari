@@ -14,7 +14,7 @@ let params: URLSearchParams;
 let uncategorized: string | null = null;
 
 // 在浏览器环境中初始化 URL 参数
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
 	params = new URLSearchParams(window.location.search);
 	tags = params.has("tag") ? params.getAll("tag") : [];
 	categories = params.has("category") ? params.getAll("category") : [];

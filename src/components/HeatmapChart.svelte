@@ -35,31 +35,33 @@ let monthLabels: { label: string; span: number }[] = [];
 
 // 响应式计算周数据和月份标签
 $: {
-	console.log('Reactive update: heatmapData.length =', heatmapData.length);
+	console.log("Reactive update: heatmapData.length =", heatmapData.length);
 	weeklyData = getWeeklyData();
 	monthLabels = getMonthLabels();
-	console.log('weeklyData.length =', weeklyData.length);
-	console.log('monthLabels.length =', monthLabels.length);
+	console.log("weeklyData.length =", weeklyData.length);
+	console.log("monthLabels.length =", monthLabels.length);
 }
 
 // 获取文章发布的日期范围（显示最近一年的数据，确保最后一个格子是今天）
 function getDateRange(): { start: Date; end: Date } {
 	// 获取今天的日期字符串，然后创建对应的Date对象
 	// 这样可以避免时区问题
-	const todayStr = new Date().toISOString().split('T')[0];
-	const today = new Date(todayStr + 'T00:00:00.000Z');
-	
+	const todayStr = new Date().toISOString().split("T")[0];
+	const today = new Date(todayStr + "T00:00:00.000Z");
+
 	// 计算开始日期：往前推364天（总共365天，包含今天）
 	const start = new Date(today);
 	start.setUTCDate(today.getUTCDate() - 364);
-	
-	console.log('Date range calculation:', {
+
+	console.log("Date range calculation:", {
 		todayStr,
 		start: formatDate(start),
 		end: formatDate(today),
-		totalDays: Math.floor((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1
+		totalDays:
+			Math.floor((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) +
+			1,
 	});
-	
+
 	return { start, end: today };
 }
 
@@ -107,7 +109,7 @@ onMount(() => {
 	sortedPosts.forEach((post) => {
 		// 安全检查：确保 post 和 post.data 存在，且 published 属性存在
 		if (!post || !post.data || !post.data.published) {
-			console.warn('Invalid post data structure:', post);
+			console.warn("Invalid post data structure:", post);
 			return;
 		}
 		const dateStr = formatDate(post.data.published);
@@ -125,7 +127,7 @@ onMount(() => {
 	allPosts.forEach((post) => {
 		// 安全检查：确保 post 和 post.data 存在，且 published 属性存在
 		if (!post || !post.data || !post.data.published) {
-			console.warn('Invalid post data structure in allPosts:', post);
+			console.warn("Invalid post data structure in allPosts:", post);
 			return;
 		}
 		const dateStr = formatDate(post.data.published);
@@ -147,8 +149,8 @@ onMount(() => {
 	});
 
 	// 调试信息
-	console.log('Total posts:', sortedPosts.length);
-	console.log('Posts by date:', postsByDate);
+	console.log("Total posts:", sortedPosts.length);
+	console.log("Posts by date:", postsByDate);
 
 	// 生成所有日期的数据
 	const data: DayData[] = [];
@@ -182,10 +184,10 @@ onMount(() => {
 	}
 
 	// 调试信息：检查生成的数据
-	console.log('Generated data length:', data.length);
-	console.log('First date:', data[0]?.date);
-	console.log('Last date:', data[data.length - 1]?.date);
-	console.log('End date should be:', formatDate(end));
+	console.log("Generated data length:", data.length);
+	console.log("First date:", data[0]?.date);
+	console.log("Last date:", data[data.length - 1]?.date);
+	console.log("End date should be:", formatDate(end));
 
 	// 计算活跃度等级和统计信息
 	let postsCount = 0;
@@ -200,10 +202,13 @@ onMount(() => {
 	});
 
 	// 调试信息
-	console.log('Max count:', maxCount);
-	console.log('Total posts count:', postsCount);
-	console.log('Active days:', activeDaysCount);
-	console.log('Sample data with levels:', data.filter(d => d.count > 0).slice(0, 5));
+	console.log("Max count:", maxCount);
+	console.log("Total posts count:", postsCount);
+	console.log("Active days:", activeDaysCount);
+	console.log(
+		"Sample data with levels:",
+		data.filter((d) => d.count > 0).slice(0, 5),
+	);
 
 	heatmapData = data;
 	totalPosts = postsCount;
@@ -268,9 +273,9 @@ function getMonthLabels(): { label: string; span: number }[] {
 
 // 按周分组数据，确保最后一个格子是今天
 function getWeeklyData(): DayData[][] {
-	console.log('getWeeklyData called, heatmapData.length:', heatmapData.length);
+	console.log("getWeeklyData called, heatmapData.length:", heatmapData.length);
 	if (heatmapData.length === 0) {
-		console.log('Returning empty array because heatmapData is empty');
+		console.log("Returning empty array because heatmapData is empty");
 		return [];
 	}
 

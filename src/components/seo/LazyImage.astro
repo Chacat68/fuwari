@@ -6,9 +6,9 @@ interface Props {
 	width?: number;
 	height?: number;
 	class?: string;
-	loading?: 'lazy' | 'eager';
-	decoding?: 'async' | 'sync' | 'auto';
-	fetchpriority?: 'high' | 'low' | 'auto';
+	loading?: "lazy" | "eager";
+	decoding?: "async" | "sync" | "auto";
+	fetchpriority?: "high" | "low" | "auto";
 }
 
 const {
@@ -17,14 +17,14 @@ const {
 	width,
 	height,
 	class: className,
-	loading = 'lazy',
-	decoding = 'async',
-	fetchpriority = 'auto'
+	loading = "lazy",
+	decoding = "async",
+	fetchpriority = "auto",
 } = Astro.props;
 
 // 生成响应式图片的srcset（如果需要）
 const generateSrcSet = (baseSrc: string) => {
-	if (baseSrc.startsWith('http')) {
+	if (baseSrc.startsWith("http")) {
 		// 外部图片，返回原始src
 		return baseSrc;
 	}

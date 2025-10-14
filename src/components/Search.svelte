@@ -92,15 +92,15 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 onMount(() => {
 	// 确保只在浏览器环境中运行
 	if (typeof window === "undefined" || typeof document === "undefined") return;
-	
+
 	// 延迟初始化以避免水合错误
 	setTimeout(async () => {
 		initialized = true;
-		
+
 		try {
 			await initializeSearch();
 		} catch (error) {
-			console.error('搜索初始化失败:', error);
+			console.error("搜索初始化失败:", error);
 		}
 	}, 100);
 
@@ -112,7 +112,7 @@ onMount(() => {
 				!!window.pagefind &&
 				typeof window.pagefind.search === "function";
 			console.log("Pagefind status on init:", pagefindLoaded);
-			
+
 			// 安全检查搜索关键词
 			if (keywordDesktop && typeof search === "function") {
 				search(keywordDesktop, true);
@@ -128,29 +128,29 @@ onMount(() => {
 
 	// 监听 pagefind 加载完成事件
 	const handlePagefindReady = () => {
-		console.log('Pagefind 已准备就绪');
+		console.log("Pagefind 已准备就绪");
 	};
 
 	const handlePagefindError = (error: Error | Event) => {
-		console.error('Pagefind 加载错误:', error);
+		console.error("Pagefind 加载错误:", error);
 	};
 
 	// 添加事件监听器
 	if (window.addEventListener) {
-		window.addEventListener('pagefindready', handlePagefindReady);
-		window.addEventListener('pagefindloaderror', handlePagefindError);
+		window.addEventListener("pagefindready", handlePagefindReady);
+		window.addEventListener("pagefindloaderror", handlePagefindError);
 	}
 
 	// 设置超时以防 pagefind 加载失败
 	const timeout = setTimeout(() => {
-		console.warn('Pagefind 加载超时');
+		console.warn("Pagefind 加载超时");
 	}, 10000);
 
 	// 清理函数
 	return () => {
 		if (window.removeEventListener) {
-			window.removeEventListener('pagefindready', handlePagefindReady);
-			window.removeEventListener('pagefindloaderror', handlePagefindError);
+			window.removeEventListener("pagefindready", handlePagefindReady);
+			window.removeEventListener("pagefindloaderror", handlePagefindError);
 		}
 		if (timeout) {
 			clearTimeout(timeout);

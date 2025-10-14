@@ -15,7 +15,7 @@ function resetHue() {
 // 使用onMount确保在浏览器环境中初始化
 onMount(() => {
 	// 添加浏览器环境检查
-	if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+	if (typeof window !== "undefined" && typeof document !== "undefined") {
 		// 延迟初始化以避免水合错误
 		setTimeout(() => {
 			initialized = true;
