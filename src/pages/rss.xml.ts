@@ -21,7 +21,11 @@ export async function GET(context: APIContext) {
 	return rss({
 		title: siteConfig.title,
 		description: siteConfig.subtitle || "No description",
-		site: context.site ?? "https://www.chawfoo.com",
+		site:
+			context.site ??
+			(process.env.NODE_ENV === "development"
+				? "http://localhost:4321"
+				: "https://www.chawfoo.com"),
 		items: blog.map((post) => {
 			const content =
 				typeof post.body === "string" ? post.body : String(post.body || "");

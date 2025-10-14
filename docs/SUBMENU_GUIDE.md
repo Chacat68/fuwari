@@ -83,7 +83,6 @@ export const navBarConfig: NavBarConfig = {
 - `/archive/` → 归档图标
 - `/projects/` → 项目图标
 - `/friends/` → 朋友图标
-- `/moments/` → 时刻图标
 - `/about/` → 关于图标
 - 包含 `neodb` → 兴趣图标
 

@@ -143,24 +143,18 @@ const {
 			images.forEach(img => imageObserver.observe(img));
 		}
 		
-		// 3. 字体加载优化
-		function optimizeFontLoading() {
-			if ('fonts' in document) {
-				// 预加载关键字体
-				const fontPromises = [
-					document.fonts.load('400 16px Roboto'),
-					document.fonts.load('500 16px Roboto'),
-					document.fonts.load('700 16px Roboto')
-				];
-				
-				Promise.all(fontPromises).then(() => {
-					document.documentElement.classList.add('fonts-loaded');
-				}).catch(() => {
-					// 字体加载失败时的降级处理
-					console.warn('Font loading failed, using fallback fonts');
-				});
-			}
+	// 3. 字体加载优化
+	function optimizeFontLoading() {
+		if ('fonts' in document && document.fonts.ready) {
+			// 等待字体加载完成
+			document.fonts.ready.then(() => {
+				document.documentElement.classList.add('fonts-loaded');
+			}).catch(() => {
+				// 字体加载失败时的降级处理
+				console.warn('Font loading failed, using fallback fonts');
+			});
 		}
+	}
 		
 		// 4. 代码分割和动态导入
 		function enableCodeSplitting() {
