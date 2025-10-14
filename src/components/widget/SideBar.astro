@@ -3,6 +3,7 @@ import type { MarkdownHeading } from "astro";
 import Categories from "./Categories.astro";
 import Profile from "./Profile.astro";
 import QuoteWidget from "./QuoteWidget.astro";
+import StatisticsWidget from "./StatisticsWidget.astro";
 import Tag from "./Tags.astro";
 
 interface Props {
@@ -20,5 +21,6 @@ const className = Astro.props.class;
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
         <QuoteWidget class="onload-animation" style="animation-delay: 250ms"></QuoteWidget>
+        <StatisticsWidget class="onload-animation" style="animation-delay: 300ms"></StatisticsWidget>
     </div>
 </div>
