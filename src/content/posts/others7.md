@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ## 前言
 
 在视频游戏开发中，游戏循环是游戏引擎的核心部分。它负责协调和管理游戏的各个方面，包括画面渲染、用户输入处理、物理模拟和人工智能等。本文将详细介绍游戏循环的概念、它在游戏开发中的重要性，以及如何设计一个高效的游戏循环。
@@ -96,6 +94,8 @@ while (game_is_running) {
 
 **引用地址**  
 原文链接：https://www.nightquestgames.com/the-game-loop-video-game-code-architecture/
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

@@ -9,8 +9,6 @@ category: '生活随笔'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 华语集：记录那些陪伴成长的华语音乐，分享打动内心的旋律与词句。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x-pCAngjeOw?si=dI89CNeMDEJDZl89" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -62,3 +60,5 @@ draft: false
 啦啦啦啦 啦啦啦啦啦啦啦
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

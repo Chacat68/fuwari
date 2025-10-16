@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ::bilibili{#BV1Ai4y1F7NE}
 
 - 狄兰·托马斯
@@ -93,4 +91,4 @@ Rage, rage against the dying of the light.
 
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
-
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

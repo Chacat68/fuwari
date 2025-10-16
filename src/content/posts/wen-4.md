@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ::bilibili{#BV1ni4y1b7f9}
 
 ---
@@ -109,4 +107,4 @@ You are very much ON TIME, and in your TIME ZONE Destiny set up for you.
 
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
-
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

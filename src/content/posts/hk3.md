@@ -9,8 +9,6 @@ category: '音乐欣赏'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 港乐集：细数那些光影交织的粤语歌年代，记录心中难忘的旋律，分享或流行或小众的港乐故事。
 
 麦浚龙，在整个香港乐坛里，算是特立独行的歌手之一。因家世较好，初期发展上反而成为了阻碍，甚至上台表演时遭观众喝倒彩。04年加入新公司后，做歌的曲风和调性都往独立音乐领域去探索，他的歌里面有很多特立独行的故事
@@ -72,3 +70,5 @@ draft: false
 <iframe width="750" height="420" src="https://www.youtube.com/embed/xc6vJ6T1N3o?si=nZ90xeUP3cCCST-H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

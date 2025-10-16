@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104160029110.png?imageSlim)
 
 ---
@@ -110,6 +108,8 @@ draft: false
 "这里有一个幸福的灵魂，
 
 它曾经是一艘前进着的航船……"
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

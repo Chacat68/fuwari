@@ -9,8 +9,6 @@ category: '设计思考'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 # 前言
 
 在2023年初，我决定更换博客的托管方式，想找一个更加方便的方式。由于我是Notion的重度用户，于是我找到了[NotionNext](https://github.com/Chacat68/NotionNext)。
@@ -125,3 +123,5 @@ https://github.com/tangly1024/NotionNext
 点击更新之后，可以在Vercel后台看到正在编译这次更新的操作，等待编译完成即可。
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

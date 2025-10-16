@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250109224602951.png?imageSlim)
 
 ---
@@ -268,6 +266,8 @@ That is LIFE!
 今天我明白，这就是
 
 『生命』
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

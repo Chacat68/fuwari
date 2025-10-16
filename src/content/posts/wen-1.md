@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 这首英诗是我在看《我董你》采访周玉琴小姐所知道的，上网搜索了一下，《三感》Blog上翻译的版本不错，借此与诸位分享。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ryIsDgj7OXg?si=GPCCsJo-v_WuZzmx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -96,3 +94,4 @@ And—which is more—you’ll be a Man, my son!
 来源：[三感](https://threesentiments.com/2018/10/29/poetry-if/)
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

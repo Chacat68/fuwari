@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104155810611.png?imageSlim)
 
 ---
@@ -134,6 +132,8 @@ Prajna Paramita, soon as soon as life be beautiful like summer flowers and death
 Also care about what has
 
 还在乎拥有什么
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

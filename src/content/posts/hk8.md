@@ -9,8 +9,6 @@ category: '音乐欣赏'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 港乐集：细数那些光影交织的粤语歌年代，记录心中难忘的旋律，分享或流行或小众的港乐故事。
 
 ## 前言
@@ -74,6 +72,8 @@ draft: false
 <iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=883398079&bvid=BV1gK4y1b7vr&cid=198444519&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ::bilibili{#BV1gK4y1b7vr}
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

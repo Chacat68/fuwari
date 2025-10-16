@@ -9,8 +9,6 @@ category: '设计思考'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ## 前言
 
 2023 年的一天，我在社交媒体上偶然看到了Airbnb联合创始人Brian Chesky发现迪士尼故事板的文章，恰好与我那时思考的故事范式命题契合，于是就收藏了下来。
@@ -174,6 +172,8 @@ Brian在内部创建了名为“白雪公主”的项目，并聘请了皮克斯
 
 - 动画制作教科书 | 迪士尼动画工作室Pipeline大揭秘（上） https://www.renderbus.com/news/post-id-1138/
 - 动画制作教科书 | 迪士尼动画工作室Pipeline大揭秘（下） https://www.renderbus.com/news/post-id-1139/
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

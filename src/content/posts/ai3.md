@@ -9,8 +9,6 @@ category: '人工智能'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 由于OpenAI服务不稳定，我打算不再续费。我将寻找其它替代产品，例如，用NotionAI处理文档，用GitHub Copilot写代码，对于一些翻译和文本处理工作，我选择Ollama。
 
 ## Ollama 本地大模型
@@ -208,3 +206,5 @@ https://github.com/longy2k/obsidian-bmo-chatbot
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104002557076.png?imageSlim)
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

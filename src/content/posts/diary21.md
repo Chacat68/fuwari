@@ -9,8 +9,6 @@ category: '生活随笔'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ## 误区
 
 这几年，我一直陷入了一个思维陷阱：追求多而全的价值，什么都要最多最好的。如果达不到这个标准，就觉得不值得追求，总是把目标放在80-100的区间里。
@@ -58,6 +56,8 @@ draft: false
 ### 延伸阅读
 
 和菜头：[加个群交流学习经验](https://www.hecaitou.com/2024/06/Join-a-group-to-exchange-learning-experiences.html?m=1)
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

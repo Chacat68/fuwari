@@ -9,8 +9,6 @@ category: '音乐欣赏'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 港乐集：细数那些光影交织的粤语歌年代，记录心中难忘的旋律，分享或流行或小众的港乐故事。
 
 <iframe width="750" height="420" src="https://www.youtube.com/embed/7cW2NlDlyWg?si=73yrK14r3eS7Z8X7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -65,6 +63,8 @@ draft: false
 我已试够别离并不很凄美
 见尽了 云涌风起
 还怎么舍得放下你
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

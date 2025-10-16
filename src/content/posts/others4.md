@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20250104172011526.png?imageSlim)
 
 ---
@@ -472,6 +470,8 @@ draft: false
 [29] 始终走同一条路线可能会有所帮助，因为这样可以将注意力从思考中释放出来。对我来说是这样的感觉，并且有一些历史证据支持这一观点。
 
 原文：http://paulgraham.com/greatwork.html
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
 
 ---
 

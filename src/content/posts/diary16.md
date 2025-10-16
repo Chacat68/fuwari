@@ -9,8 +9,6 @@ category: '生活随笔'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ## 往年推荐：
 
 ### [**1Password - 密碼管理器**](https://chromewebstore.google.com/detail/1password-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
@@ -86,3 +84,5 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 此插件可以屏蔽恶意用户（如色情、诈骗等）并优化界面。还能自动展开二级列表、提供搜索助手、视频下载和用户备注!
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

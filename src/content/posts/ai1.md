@@ -9,8 +9,6 @@ category: '人工智能'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 ## 一、OpenAI与ChatGPT
 
 ### 1.1 介绍ChatGPT
@@ -162,3 +160,5 @@ Civitai（AI社区）， 可以找到其他人制作的模型
 - Stable Diffusion：[Stable Diffusion](https://www.stable-diffusion.com/)
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

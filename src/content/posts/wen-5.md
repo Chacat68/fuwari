@@ -9,8 +9,6 @@ category: '它山之石'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pXFrdV3Vd5k?si=gBlTaVHW9m7GLSzc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
@@ -48,4 +46,4 @@ And the seventh time when she sanga song of praise，and deemed it avirtue.
 第七次，当她唱诵赞歌，并视之为美德
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
-
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！

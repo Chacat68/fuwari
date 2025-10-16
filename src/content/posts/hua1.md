@@ -9,8 +9,6 @@ category: '音乐欣赏'
 draft: false
 ---
 
-> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
-
 > 华语集：记录那些陪伴成长的华语音乐，分享打动内心的旋律与词句。
 
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/2025-02-03-12-12-01.png?imageSlim)
@@ -56,3 +54,5 @@ draft: false
 <iframe width="750" height="420" src="https://www.youtube.com/embed/s-6bZX1OUj8?si=8MN0PfsLq6CjPFAT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 > 💡 感谢您的观看！欢迎分享文章，或是来信与我交流。
+
+> 本站 RSS地址已更新，麻烦读者朋友们重新订阅一次喔！
