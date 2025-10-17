@@ -1,7 +1,7 @@
 ---
 title: 在现实与理想的交叉口，交换勇气与爱
-published: 2025-10-17
-updated: 2025-10-17
+published: 2025-10-16
+updated: 2025-10-16
 description: '《交换余生》是林俊杰 2020 年发行的一首代表作。MV 由阮经天出演，以温柔却克制的叙事，讲述在取舍之间对爱的选择与守护。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20251017025836936.webp?imageSlim'
 tags: [音乐, 林俊杰, 交换余生, MV, 华语]
