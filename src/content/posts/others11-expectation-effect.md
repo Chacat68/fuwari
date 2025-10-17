@@ -11,9 +11,9 @@ draft: false
 
 ## 前言
 
-在人生的道路上，有一种无形的力量能够悄然改变我们的命运。它不需要魔法，也无需超能力，它就隐藏在我们看待世界与他人的方式里，藏在我们对自己和他人发出的那一句“我相信你”的背后。当你听见“你一定可以”时，是否感到心里涌起一股不易察觉却实实在在的能量？这就是期望效应的魅力——一种被心理学反复证明、能够改变行为与结果的朴素规律。
+在人生的道路上，有一种无形的力量能够悄然改变我们的命运。它不需要魔法，也无需超能力，它就隐藏在我们看待世界与他人的方式里，藏在我们对自己和他人发出的那一句"我相信你"的背后。当你听见"你一定可以"时，是否感到心里涌起一股不易察觉却实实在在的能量？这就是期望效应的魅力——一种被心理学反复证明、能够改变行为与结果的朴素规律。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=1tjaZzzEWu&bvid=BV1tjaZzzEWu&cid=1&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+<iframe width="750" height="420" src="https://player.bilibili.com/player.html?isOutside=true&aid=1tjaZzzEWu&bvid=BV1tjaZzzEWu&cid=1&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ## 一个改变命运的心理现象
 

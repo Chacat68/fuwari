@@ -16,9 +16,9 @@ lang: 'zh-CN'
 
 这支官方 MV 用“从冷到暖”的色调转换，讲述了自我表达的困难、与家人之间的误解与修复。理发店的职业细节，人与人的疏离与靠近，都以克制的镜头语言呈现出来：画面先有距离感，再在和解中逐渐拉近，让人看见温柔的力量并非喧嚣，而是选择与信任。
 
-从歌曲结构看，副歌的情绪推进并不急促，旋律将“慢冷”的主题与“慢暖”的希望并置，让听者在低处被托起。姚若龙的词与萧煌奇的曲一向善于让日常情绪有诗意的出口，这次亦不例外——你能在唱词里清晰地看到“沉默、误会、和解”的路径。
+从歌曲结构看,副歌的情绪推进并不急促,旋律将"慢冷"的主题与"慢暖"的希望并置,让听者在低处被托起。姚若龙的词与萧煌奇的曲一向善于让日常情绪有诗意的出口,这次亦不例外——你能在唱词里清晰地看到"沉默、误会、和解"的路径。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1a2pFzhEB1&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1a2pFzhEB1&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 推荐理由
 
