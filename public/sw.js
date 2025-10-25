@@ -58,6 +58,7 @@ self.addEventListener("activate", (event) => {
 							console.log("Deleting old cache:", cacheName);
 							return caches.delete(cacheName);
 						}
+						return Promise.resolve();
 					}),
 				);
 			})
