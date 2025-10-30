@@ -18,6 +18,7 @@ lang: 'zh-CN'
 
 <iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=422009870&bvid=BV1p3411b7UT&cid=452189953&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
 
+<iframe width="750" height="420" src="https://www.youtube.com/embed/bhsI71XAWMo?si=A8su8s3EXSsscvSr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 歌词
 
