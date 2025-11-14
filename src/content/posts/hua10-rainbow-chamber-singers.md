@@ -3,7 +3,7 @@ title: 我喜欢《彩虹合唱团》的歌
 published: 2025-11-15
 updated: 2025-11-15
 description: '彩虹合唱团以真诚、善良与幽默，唱响生活的琐碎与美好，我也到了开始能听懂歌词里故事的年纪'
-image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/rainbow-chamber-singers.webp?imageSlim'
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20251115024230341.webp?imageSlim'
 tags: [音乐, 彩虹合唱团, 合唱, 华语, 神曲]
 category: '音乐欣赏'
 draft: false
@@ -32,7 +32,7 @@ lang: 'zh-CN'
 
 **这份真诚，来自于他们对生命与情感最质朴的表达。**
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=113651003938497&bvid=BV15LCKBUE9z&cid=27319015259&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=115546095886133&bvid=BV15LCKBUE9z&cid=33992147835&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
 
 ### 《道别是一件难事》
 
@@ -42,7 +42,7 @@ lang: 'zh-CN'
 
 彩虹合唱团的**善良**，体现在他们理解每个人心中都有难以言说的思念，他们用音乐告诉我们：忘不掉，就不必强求忘记，不如把它好好装着。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=380619729&bvid=BV1E34y1679J&cid=460913949&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=807414608&bvid=BV1E34y1679J&cid=465631883&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
 
 ### 《醉鬼的敬酒曲》
 
@@ -52,7 +52,7 @@ lang: 'zh-CN'
 
 彩虹合唱团的**有趣**与**真诚**，在这首歌里达到了完美的平衡——既有举杯共饮的豪迈，也有相互理解的温柔。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=207186605&bvid=BV1qL4y1a7uK&cid=400124868&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=847536531&bvid=BV1qL4y1a7uK&cid=397134607&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
 
 ## 整活歌曲
 
