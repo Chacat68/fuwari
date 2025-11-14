@@ -32,7 +32,7 @@ lang: 'zh-CN'
 
 **这份真诚，来自于他们对生命与情感最质朴的表达。**
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=115546095886133&bvid=BV15LCKBUE9z&cid=33992147835&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/W4TPawcpfHs?si=-4R_HJacGkZjNVg4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《道别是一件难事》
 
@@ -42,7 +42,7 @@ lang: 'zh-CN'
 
 彩虹合唱团的**善良**，体现在他们理解每个人心中都有难以言说的思念，他们用音乐告诉我们：忘不掉，就不必强求忘记，不如把它好好装着。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=807414608&bvid=BV1E34y1679J&cid=465631883&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/3CXkXt2yj-A?si=_yRdBltPChEu05Ul" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《醉鬼的敬酒曲》
 
@@ -52,7 +52,7 @@ lang: 'zh-CN'
 
 彩虹合唱团的**有趣**与**真诚**，在这首歌里达到了完美的平衡——既有举杯共饮的豪迈，也有相互理解的温柔。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=847536531&bvid=BV1qL4y1a7uK&cid=397134607&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/bf1q16s_AiM?si=v9nmhXBeTfzjNDU2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 整活歌曲
 
@@ -60,13 +60,13 @@ lang: 'zh-CN'
 
 "春节自救指南"是一首充满幽默与智慧的歌曲，专为那些在春节期间感到压力山大的年轻人而作。歌词中调侃了各种春节常见的尴尬场景，如被亲戚催婚、被问及工作情况等，同时也提供了一些"自救"的小妙招。这首歌不仅让人捧腹大笑，更让人在笑声中找到共鸣与安慰。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=8182811&bvid=BV1Wx411q73k&cid=13458903&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/nvdXowqlv5U?si=gjb2w0VEC0GqTS51" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《张士超你到底把我家钥匙放在哪里了》（唢呐版）
 
 这是彩虹合唱团的超级经典，在2020年12月31日跨年音乐会上以全新的唢呐版再现江湖！这首让彩虹合唱团"一夜成名"的作品，如今加入了唢呐这一中国传统乐器，整首歌变得更加喜庆热闹，真是差点送走张老师。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=551672635&bvid=BV1tq4y1h7og&cid=491051970&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/ti4TmgyeeJc?si=0c9VAdwA-peaWSXX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### 《想要的一定实现》
 
@@ -76,7 +76,7 @@ lang: 'zh-CN'
 
 彩虹合唱团用这首歌告诉我们：生活很难，但依然要保持对美好的期待；想要的不一定马上实现，但至少可以大声唱出来！
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=478104098&bvid=BV1K8411w7Qp&cid=985854313&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/rG7NeNwKbVA?si=pi2MeoKbSwwcGD6O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 作品专辑
 
