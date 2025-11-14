@@ -9,6 +9,9 @@ const sortedPosts = await getSortedPosts();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)}>
+    <div class="w-full mb-4">
+        <h1 class="sr-only">{i18n(I18nKey.archive)}</h1>
+    </div>
     <ArchivePanel sortedPosts={sortedPosts} client:only="svelte"></ArchivePanel>
 </MainGridLayout>
 

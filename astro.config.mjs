@@ -33,6 +33,10 @@ export default defineConfig({
 			: "https://www.chawfoo.com/",
 	base: "/",
 	trailingSlash: "always",
+	compressHTML: true,
+	build: {
+		inlineStylesheets: "auto",
+	},
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -179,6 +183,8 @@ export default defineConfig({
 	},
 	vite: {
 		build: {
+			cssCodeSplit: true,
+			minify: "esbuild",
 			rollupOptions: {
 				onwarn(warning, warn) {
 					// temporarily suppress this warning
@@ -189,6 +195,23 @@ export default defineConfig({
 						return;
 					}
 					warn(warning);
+				},
+				output: {
+					manualChunks: (id) => {
+						// 将大型依赖分离到单独的chunk
+						if (id.includes("overlayscrollbars")) {
+							return "overlayscrollbars";
+						}
+						if (id.includes("photoswipe")) {
+							return "photoswipe";
+						}
+						if (id.includes("katex")) {
+							return "katex";
+						}
+						if (id.includes("swup")) {
+							return "swup";
+						}
+					},
 				},
 			},
 		},
