@@ -4,6 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
+import StructuredData from "@components/seo/StructuredData.astro";
 import { profileConfig, siteConfig } from "@/config";
 import {
 	AUTO_MODE,
@@ -176,6 +177,8 @@ const bannerOffset =
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
+
+		{isHomePage && <StructuredData type="WebSite" />}
 
 		<!-- Umami Analytics -->
 		<script defer src="https://umami.chawfoo.com/script.js" data-website-id="e49c70c3-26a8-46d9-b241-6a47a00574f2"></script>
