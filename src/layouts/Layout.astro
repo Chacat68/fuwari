@@ -308,7 +308,10 @@ function disableAnimation() {
 }
 */
 
-const bannerEnabled = !!document.getElementById('banner-wrapper')
+// 动态检测当前页面是否有 banner（修复 swup 页面切换时 bannerEnabled 不更新的问题）
+function isBannerEnabled() {
+	return !!document.getElementById('banner-wrapper')
+}
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
@@ -498,8 +501,9 @@ const setup = () => {
 
 			// 页面切换完成后，重新检查并设置导航栏状态
 			const navbar = document.getElementById('navbar-wrapper')
+			const currentBannerEnabled = isBannerEnabled()
 			if (navbar) {
-				if (!bannerEnabled) {
+				if (!currentBannerEnabled) {
 					// 如果没有 banner，确保导航栏始终显示
 					navbar.classList.remove('navbar-hidden')
 				} else {
@@ -556,7 +560,8 @@ function scrollFunction() {
             }
         }
 
-        if (bannerEnabled && toc) {
+        const currentBannerEnabled = isBannerEnabled()
+        if (currentBannerEnabled && toc) {
             if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
                 toc.classList.remove('toc-hide')
             } else {
@@ -565,7 +570,7 @@ function scrollFunction() {
         }
 
         if (navbar) {
-            if (!bannerEnabled) {
+            if (!currentBannerEnabled) {
                 // 如果没有 banner，确保导航栏始终显示
                 navbar.classList.remove('navbar-hidden')
             } else {
