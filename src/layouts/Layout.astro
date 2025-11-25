@@ -129,6 +129,22 @@ const bannerOffset =
 		<!-- Canonical URL to prevent duplicate content issues -->
 		<link rel="canonical" href={Astro.url.href} />
 
+		<!-- AI 爬虫控制 Meta 标签 -->
+		<!-- 禁止 AI 训练使用内容 -->
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+		<!-- 禁止 GPTBot 和其他 AI 训练爬虫 -->
+		<meta name="GPTBot" content="noindex, nofollow">
+		<meta name="Google-Extended" content="noindex, nofollow">
+		<meta name="CCBot" content="noindex, nofollow">
+		<meta name="anthropic-ai" content="noindex, nofollow">
+		<meta name="PerplexityBot" content="noindex, nofollow">
+		<meta name="Bytespider" content="noindex, nofollow">
+		<meta name="Amazonbot" content="noindex, nofollow">
+		<meta name="Diffbot" content="noindex, nofollow">
+		<meta name="FacebookBot" content="noindex, nofollow">
+		<meta name="omgilibot" content="noindex, nofollow">
+		<meta name="cohere-ai" content="noindex, nofollow">
+
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
