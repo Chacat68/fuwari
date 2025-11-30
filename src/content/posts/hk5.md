@@ -21,7 +21,7 @@ draft: false
 
 > 😀 来自香港南区少年儿童合唱团翻唱Twins的《幼稚园》
 
-::bilibili{#BV1Cp4y1K7k1}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Cp4y1K7k1&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ---
 

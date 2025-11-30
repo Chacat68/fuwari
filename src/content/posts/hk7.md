@@ -23,7 +23,7 @@ draft: false
 
 ## 《人来人往》
 
-::bilibili{#BV1kT4y1L7vZ}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1kT4y1L7vZ&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 > 第一重痛觉：进行时的《人来人往》
 > 在便利店霓虹与地铁报站声交织的现代丛林，林夕用蒙太奇笔法切割着都市速食爱情的横截面。"闭起双眼你最挂念谁"的诘问刺破所有自欺欺人的伪装，Eason在副歌部分喉结滚动的哽咽，恰似自动扶梯上逆向奔跑的徒劳。那些借朋友之名滋长的暧昧，在便利店塑料袋的窸窣声里碎成过期食品，教会我们都市爱情的残酷语法——所有"暂借的温暖"终究要物归原主。
@@ -52,7 +52,7 @@ draft: false
 
 ## 《明年今日》
 
-::bilibili{#BV1fv411y7BV}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1fv411y7BV&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 > 第二重阵痛：完成时的《明天今日》
 > 当分手成为既定事实的现在完成时，林夕在六十年周期里丈量着情感的半衰期。"离开你六十年/但愿能认得出你的子女"这样跨时空的荒诞想象，被Eason用克制的颤音演绎成带血的创可贴。副歌部分层层递进的"离开"二字，是往记忆博物馆投掷的延时炸弹，在未来的某个失眠夜突然引爆所有被克制的悲伤。这哪是情歌，分明是显微镜下被放大的情感纤维震颤。
@@ -95,7 +95,7 @@ draft: false
 
 ## 《富士山下》
 
-::bilibili{#BV1WT4y1L78i}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1WT4y1L78i&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 > 第三重顿悟：将来时的《富士山下》
 > 当东京樱花成为形而上的爱情符号，林夕用东方禅意解构现代执念。"要拥有必先懂失去怎接受"的悖论，在Eason举重若轻的气声演绎下，化作穿透晨雾的富士山雪线。那些在KTV里被嘶吼的"谁能凭爱意要富士山私有"，终将在岁月流转中沉淀为哲学命题——原来最高明的止痛药，是把伤口绣成看破的红叶标本。

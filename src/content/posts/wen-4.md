@@ -9,7 +9,7 @@ category: '它山之石'
 draft: false
 ---
 
-::bilibili{#BV1ni4y1b7f9}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1ni4y1b7f9&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ---
 

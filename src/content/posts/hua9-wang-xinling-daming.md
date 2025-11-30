@@ -16,7 +16,7 @@ lang: 'zh-CN'
 
 歌词用"大眠"这个富有诗意的意象——既是字面上的深度睡眠，也是比喻意义上的麻木、遗忘与心灵的休憩——来探讨人生中那些被遗漏的细节、被忽视的声音，以及在重重生活的压力下，我们如何才能重新找到属于自己的清醒与力量。这首歌因此也成为了一场与内心的对话：在大眠的梦呓里，有多少真实的自己在呼唤我们回归。
 
-<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=422009870&bvid=BV1p3411b7UT&cid=452189953&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allow="autoplay=false"></iframe>
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&aid=422009870&bvid=BV1p3411b7UT&cid=452189953&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ## 歌词
 

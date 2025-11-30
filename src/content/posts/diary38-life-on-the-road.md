@@ -3,7 +3,7 @@ title: 生活小记：在路上的日常
 published: 2025-11-28
 updated: 2025-11-28
 description: '与老友相聚，在骑行中寻找生活的节奏，于山野间感受自然的馈赠。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20251130135456866.webp?imageSlim'
 tags: [骑行, 徒步, 友情, 日常]
 category: '生活随笔'
 draft: false

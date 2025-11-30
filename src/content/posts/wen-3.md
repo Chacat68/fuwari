@@ -9,7 +9,7 @@ category: '它山之石'
 draft: false
 ---
 
-::bilibili{#BV1Ai4y1F7NE}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Ai4y1F7NE&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 - 狄兰·托马斯
 

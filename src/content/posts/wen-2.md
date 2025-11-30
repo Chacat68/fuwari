@@ -9,7 +9,7 @@ category: '它山之石'
 draft: false
 ---
 
-::bilibili{#BV1Sy4y1e7Ub}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Sy4y1e7Ub&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 来源：Oriah Mountain Dreamer（节选）
 

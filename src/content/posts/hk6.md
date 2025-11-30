@@ -21,7 +21,7 @@ draft: false
 
 ---
 
-::bilibili{#BV1UR4y1c7nt}
+<iframe width="750" height="420" src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1UR4y1c7nt&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 ---
 
