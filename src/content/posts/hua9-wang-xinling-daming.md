@@ -1,5 +1,5 @@
 ---
-title: 王心凌《大眠》：甜蜜催眠术下的清醒独白
+title: 王心凌《大眠》：心甘情愿的沉溺与觉醒
 published: 2025-10-31
 updated: 2025-10-31
 description: '《大眠》以深邃的嗓音与诗意的意象，带你进入一场关于成长、遗忘与重新出发的内心对话。'
@@ -66,13 +66,15 @@ lang: 'zh-CN'
 ## 歌曲信息
 
 - **演唱者**：王心凌（Cyndi Wang）
-- **作词 / 作曲**：待补充*
-- **编曲**：待补充*
-- **发行时间**：待补充*
-- **音乐风格**：R&B / 华语流行
+- **作词**：施人诚
+- **作曲**：张简君伟
+- **编曲**：游政豪
+- **制作人**：张简君伟
+- **发行时间**：2018年12月7日
+- **所属专辑**：《CYNDILOVES2SING 愛。心凌》
+- **唱片公司**：环球唱片
+- **音乐风格**：华语流行
 - **官方视频**：https://www.youtube.com/watch?v=VS1lvYuW3LQ
-
-*注：由于此为较新作品或特定版本，部分信息还需从官方渠道确认。欢迎读者补充！
 
 ## 关于这首歌
 
@@ -85,7 +87,9 @@ lang: 'zh-CN'
 ## 参考资源
 
 - 王心凌《大眠》官方 YouTube：https://www.youtube.com/watch?v=VS1lvYuW3LQ
-- 王心凌官方微博 / 音乐平台：待补充
+- 王心凌官方 Instagram：https://www.instagram.com/cyndiloves2sing/
+- 王心凌官方 Facebook：https://www.facebook.com/0905CyndiWang
+- 王心凌官方微博：https://weibo.com/u/1504965390
 
 ---
 
