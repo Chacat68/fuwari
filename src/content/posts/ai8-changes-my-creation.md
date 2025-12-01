@@ -3,7 +3,7 @@ title: 人工智能对我创作的改变
 published: 2025-12-01
 updated: 2025-12-01
 description: '从写作到游戏开发，AI正在悄然改变我的创作方式，也让我重新思考人与工具的关系。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20251201132147061.webp?imageSlim'
 tags: [人工智能, 创作, 写作, 游戏开发]
 category: '生活随笔'
 draft: false
