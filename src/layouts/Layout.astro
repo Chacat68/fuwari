@@ -70,6 +70,9 @@ if (optimizedDescription) {
 	optimizedDescription = generateDescription(optimizedDescription, 155);
 }
 
+// 关键词优化
+const metaKeywords = keywords || siteConfig.keywords?.join(", ");
+
 // Open Graph图片
 const ogImage =
 	image ||
@@ -105,7 +108,10 @@ const bannerOffset =
 		<meta charset="UTF-8" />
 		<meta name="description" content={optimizedDescription}>
 		<meta name="author" content={profileConfig.name}>
-		{keywords && <meta name="keywords" content={keywords}>}
+		{metaKeywords && <meta name="keywords" content={metaKeywords}>}
+
+		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+		<meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
 
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
@@ -194,7 +200,12 @@ const bannerOffset =
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
-		{isHomePage && <StructuredData type="WebSite" />}
+		{isHomePage && (
+			<>
+				<StructuredData type="WebSite" />
+				<StructuredData type="Organization" />
+			</>
+		)}
 
 		<!-- Umami Analytics -->
 		<script defer src="https://umami.chawfoo.com/script.js" data-website-id="e49c70c3-26a8-46d9-b241-6a47a00574f2"></script>

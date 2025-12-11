@@ -39,9 +39,27 @@ const jsonLd = {
 		? entry.data.lang.replace("_", "-")
 		: siteConfig.lang.replace("_", "-"),
 };
+
+const breadcrumbData = {
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "首页",
+			item: Astro.site?.href,
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: entry.data.title,
+			item: Astro.url.href,
+		},
+	],
+};
 ---
-<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
+<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings} keywords={entry.data.tags.join(", ")}>
     <StructuredData slot="head" type="BlogPosting" data={jsonLd} />
+    <StructuredData slot="head" type="BreadcrumbList" data={breadcrumbData} />
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
             {}
@@ -98,7 +116,8 @@ const jsonLd = {
             <ImageWrapper 
                 id="post-cover" 
                 src={(entry.data.image || siteConfig.defaultPostImage) as string}
-                basePath={entry.data.image ? path.join("content/posts/", getDir(entry.id)) : ""} 
+                basePath={entry.data.image ? path.join("content/posts/", getDir(entry.id)) : ""}
+                alt={entry.data.title}
                 class="mb-8 rounded-xl banner-container onload-animation"
             />
 

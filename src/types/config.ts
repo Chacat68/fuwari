@@ -6,6 +6,8 @@ export type SiteConfig = {
 
 	lang: string;
 
+	keywords?: string[]; // 网站关键词
+
 	themeColor: {
 		hue: number;
 		fixed: boolean;

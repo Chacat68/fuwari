@@ -46,9 +46,7 @@ const basePerson = {
 	image: profileConfig.avatar,
 	jobTitle: "游戏开发者、内容创作者、手机摄影师",
 	knowsAbout: ["游戏开发", "前端开发", "内容创作", "摄影"],
-	sameAs: [
-		// 可以添加社交媒体链接
-	],
+	sameAs: profileConfig.links.map((link) => link.url),
 };
 
 // 组织信息
@@ -100,13 +98,17 @@ const baseBreadcrumbList = {
 };
 
 // 根据类型生成对应的结构化数据
-let structuredData: Record<string, any>;
+let structuredData: Record<string, unknown>;
 switch (type) {
 	case "WebSite":
 		structuredData = { ...baseWebSite, ...data };
 		break;
 	case "BlogPosting":
 		structuredData = { ...baseBlogPosting, ...data };
+		// 确保有图片
+		if (!structuredData.image && siteConfig.defaultPostImage) {
+			structuredData.image = siteConfig.defaultPostImage;
+		}
 		break;
 	case "Person":
 		structuredData = { ...basePerson, ...data };
