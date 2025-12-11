@@ -34,6 +34,9 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	compressHTML: true,
+	image: {
+		domains: ["blog-1259751088.cos.ap-shanghai.myqcloud.com"],
+	},
 	build: {
 		inlineStylesheets: "auto",
 	},
