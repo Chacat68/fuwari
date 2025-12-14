@@ -20,12 +20,12 @@ const posts = await getSortedPosts();
 let totalWords = 0;
 
 // 遍历所有文章，累加字数
-for (const post of posts) {
-	const { remarkPluginFrontmatter } = await post.render();
-	if (remarkPluginFrontmatter?.words) {
-		totalWords += remarkPluginFrontmatter.words;
-	}
-}
+// for (const post of posts) {
+// 	const { remarkPluginFrontmatter } = await post.render();
+// 	if (remarkPluginFrontmatter?.words) {
+// 		totalWords += remarkPluginFrontmatter.words;
+// 	}
+// }
 
 // 格式化总字数，使用 k 单位表示千位数
 const formatToK = (num: number) => {
