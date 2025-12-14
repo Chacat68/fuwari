@@ -34,6 +34,9 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	compressHTML: true,
+	experimental: {
+		contentCollectionCache: true, // 启用内容缓存，加速构建
+	},
 	image: {
 		domains: ["blog-1259751088.cos.ap-shanghai.myqcloud.com"],
 		remotePatterns: [
@@ -179,6 +182,10 @@ export default defineConfig({
 			remarkSectionize,
 			parseDirectiveNode,
 		],
+		// 禁用 Markdown 中的图片优化，避免构建时处理远程图片
+		shikiConfig: {
+			wrap: true,
+		},
 		rehypePlugins: [
 			rehypeKatex,
 			rehypeSlug,
