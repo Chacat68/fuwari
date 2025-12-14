@@ -36,6 +36,17 @@ export default defineConfig({
 	compressHTML: true,
 	image: {
 		domains: ["blog-1259751088.cos.ap-shanghai.myqcloud.com"],
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "blog-1259751088.cos.ap-shanghai.myqcloud.com",
+			},
+		],
+		// 使用 noop 服务跳过远程图片优化，避免构建时网络超时
+		service:
+			process.env.NODE_ENV === "production"
+				? { entrypoint: "astro/assets/services/noop" }
+				: { entrypoint: "astro/assets/services/sharp" },
 	},
 	build: {
 		inlineStylesheets: "auto",
@@ -221,6 +232,12 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		// 配置远程资源请求超时
+		server: {
+			fs: {
+				strict: false,
+			},
+		},
 		build: {
 			cssCodeSplit: true,
 			minify: "esbuild",
