@@ -34,9 +34,6 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	compressHTML: true,
-	experimental: {
-		contentCollectionCache: true, // 启用内容缓存，加速构建
-	},
 	image: {
 		domains: ["blog-1259751088.cos.ap-shanghai.myqcloud.com"],
 		remotePatterns: [
