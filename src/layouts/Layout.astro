@@ -1,8 +1,4 @@
 ---
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import StructuredData from "@components/seo/StructuredData.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -108,6 +104,23 @@ const bannerOffset =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
+		
+		<!-- 字体优化：预连接字体 CDN -->
+		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+		
+		<!-- 预加载关键字体文件 -->
+		<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/files/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/files/roboto-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+		
+		<!-- 异步加载字体 CSS，避免阻塞渲染 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/400.css" media="print" onload="this.media='all'; this.onload=null;">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/500.css" media="print" onload="this.media='all'; this.onload=null;">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/700.css" media="print" onload="this.media='all'; this.onload=null;">
+		<noscript>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/400.css">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/500.css">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/700.css">
+		</noscript>
 		<meta name="description" content={optimizedDescription}>
 		<meta name="author" content={profileConfig.name}>
 		{metaKeywords && <meta name="keywords" content={metaKeywords}>}
@@ -195,7 +208,33 @@ const bannerOffset =
 		<style define:vars={{
 			configHue,
 			'page-width': `${PAGE_WIDTH}rem`,
-		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
+		}}>
+			/* 字体优化：font-display swap 防止 FOIT */
+			@font-face {
+				font-family: 'Roboto';
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: local('Roboto'), local('Roboto-Regular');
+			}
+			@font-face {
+				font-family: 'Roboto';
+				font-style: normal;
+				font-weight: 500;
+				font-display: swap;
+				src: local('Roboto Medium'), local('Roboto-Medium');
+			}
+			@font-face {
+				font-family: 'Roboto';
+				font-style: normal;
+				font-weight: 700;
+				font-display: swap;
+				src: local('Roboto Bold'), local('Roboto-Bold');
+			}
+			body {
+				font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+			}
+		</style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 
 		<slot name="head"></slot>
