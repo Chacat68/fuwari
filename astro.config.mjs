@@ -42,11 +42,8 @@ export default defineConfig({
 				hostname: "blog-1259751088.cos.ap-shanghai.myqcloud.com",
 			},
 		],
-		// 使用 noop 服务跳过远程图片优化，避免构建时网络超时
-		service:
-			process.env.NODE_ENV === "production"
-				? { entrypoint: "astro/assets/services/noop" }
-				: { entrypoint: "astro/assets/services/sharp" },
+		// 完全禁用远程图片优化，避免构建时网络超时
+		service: { entrypoint: "astro/assets/services/noop" },
 	},
 	build: {
 		inlineStylesheets: "auto",
