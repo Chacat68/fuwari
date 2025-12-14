@@ -20,8 +20,11 @@ const runningDays = Math.floor(
 const stats: BlogStats = blogStatsData as BlogStats;
 const totalWords = stats.totalWords;
 
-// 格式化总字数，使用千位分隔符
-const formattedTotalWords = totalWords.toLocaleString("zh-CN");
+// 格式化总字数，超过10万时显示为"XX.X万"格式
+const formattedTotalWords =
+	totalWords >= 100000
+		? `${(totalWords / 10000).toFixed(1)}万`
+		: totalWords.toLocaleString("zh-CN");
 ---
 
 <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
