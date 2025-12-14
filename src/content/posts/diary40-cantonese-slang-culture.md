@@ -5,7 +5,7 @@ updated: 2025-12-14
 description: '粤语的魅力不仅在于其九声六调的抑扬顿挫，更在于那些生动鬼马的俚语。本文将带你从饮食、数字、外来词等角度，探索粤语俚语背后深厚的岭南文化底蕴。'
 image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20251214203056926.webp?imageSlim'
 tags: [粤语, 文化, 语言, 岭南, 俚语]
-category: '文化杂谈'
+category: '生活随笔'
 draft: false
 ---
 
