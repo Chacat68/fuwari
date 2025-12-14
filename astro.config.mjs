@@ -57,7 +57,7 @@ export default defineConfig({
 			animationClass: "transition-", // see https://swup.js.org/options/#animationselector
 			// 使用默认值以避免404错误
 			containers: ["main", "#toc"],
-			smoothScrolling: true,
+			smoothScrolling: false,
 			cache: true,
 			preload: {
 				enabled: true,
