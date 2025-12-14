@@ -1,0 +1,73 @@
+---
+import { Icon } from "astro-icon/components";
+import blogStatsData from "../../data/blog-stats.json";
+import type { BlogStats } from "../../types/blog-stats";
+
+const stats: BlogStats = blogStatsData as BlogStats;
+
+interface StatItem {
+	icon: string;
+	label: string;
+	value: string | number;
+	unit?: string;
+}
+
+const statItems: StatItem[] = [
+	{
+		icon: "material-symbols:article-outline",
+		label: "文章总数",
+		value: stats.publishedPosts,
+		unit: "篇",
+	},
+	{
+		icon: "material-symbols:notes-rounded",
+		label: "总字数",
+		value: stats.totalWords.toLocaleString(),
+		unit: "字",
+	},
+	{
+		icon: "material-symbols:schedule-outline-rounded",
+		label: "总阅读时长",
+		value: stats.totalMinutes,
+		unit: "分钟",
+	},
+	{
+		icon: "material-symbols:bar-chart-rounded",
+		label: "平均字数",
+		value: stats.averageWords.toLocaleString(),
+		unit: "字/篇",
+	},
+];
+---
+
+<div class="card-base px-6 py-5 onload-animation">
+	<div class="flex items-center justify-between mb-4">
+		<h2 class="text-lg font-bold text-black/90 dark:text-white/90 flex items-center gap-2">
+			<Icon name="material-symbols:analytics-outline" class="text-[var(--primary)] w-5 h-5" />
+			博客统计
+		</h2>
+	</div>
+	
+	<div class="grid grid-cols-2 gap-4">
+		{statItems.map((item) => (
+			<div class="flex flex-col gap-2 p-3 rounded-lg bg-black/5 dark:bg-white/5 transition hover:bg-black/10 dark:hover:bg-white/10">
+				<div class="flex items-center gap-2 text-xs text-black/50 dark:text-white/50">
+					<Icon name={item.icon} class="w-4 h-4" />
+					<span>{item.label}</span>
+				</div>
+				<div class="text-xl font-bold text-black/80 dark:text-white/80">
+					{item.value}
+					{item.unit && (
+						<span class="text-sm font-normal text-black/50 dark:text-white/50 ml-1">
+							{item.unit}
+						</span>
+					)}
+				</div>
+			</div>
+		))}
+	</div>
+	
+	<div class="mt-4 text-xs text-black/30 dark:text-white/30 text-center">
+		最后更新: {new Date(stats.lastUpdated).toLocaleDateString("zh-CN")}
+	</div>
+</div>
