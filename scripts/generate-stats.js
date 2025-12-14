@@ -101,7 +101,7 @@ async function generateStats() {
 	// 确保输出目录存在
 	try {
 		await mkdir(OUTPUT_DIR, { recursive: true });
-	} catch (error) {
+	} catch (_) {
 		// 目录可能已存在，忽略错误
 	}
 
