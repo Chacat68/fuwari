@@ -3,7 +3,7 @@ title: 改善之道：每天只做一点点，但永不停止
 published: 2025-12-17
 updated: 2025-12-17
 description: '一个 6 分多钟的视频提醒我：别把能量花在“谈梦想”上，把它用在每天一点点的行动里。'
-image: ''
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20251217012602366.webp?imageSlim'
 tags: [自我提升, 行动, 习惯养成, 复利, 拖延, 心理学]
 category: '它山之石'
 draft: false
