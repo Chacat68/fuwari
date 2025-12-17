@@ -58,7 +58,7 @@ const mainPanelTop = siteConfig.banner.enable
     <div class="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-transparent to-black/70"></div>
     <div class="absolute inset-0 w-[120%] h-[120%] -left-[10%] -top-[10%] blur-[100px] opacity-50 bg-[var(--page-bg)] pointer-events-none"></div>
     <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
-                  src={siteConfig.banner.src} position={siteConfig.banner.position}
+                  src={siteConfig.banner.src} position={siteConfig.banner.position} loading="eager" fetchpriority="high"
     >
     </ImageWrapper>
 </div>}
