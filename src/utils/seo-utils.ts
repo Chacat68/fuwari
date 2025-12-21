@@ -162,7 +162,7 @@ export function extractKeywords(content: string, maxKeywords = 10): string[] {
  */
 export function generateBreadcrumbStructuredData(
 	items: Array<{ name: string; url: string }>,
-): Record<string, any> {
+): Record<string, unknown> {
 	return {
 		"@context": "https://schema.org" as const,
 		"@type": "BreadcrumbList" as const,
@@ -199,8 +199,8 @@ export function generateArticleStructuredData(article: {
 	tags?: string[];
 	url: string;
 	wordCount?: number;
-}): Record<string, any> {
-	const structuredData: Record<string, any> = {
+}): Record<string, unknown> {
+	const structuredData: Record<string, unknown> = {
 		"@context": "https://schema.org",
 		"@type": "BlogPosting",
 		headline: article.title,
