@@ -10,6 +10,8 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "付之一笑",
 	subtitle: "阅读、思考、写作",
+	metaDescription:
+		"CHACAT 的个人博客，记录游戏开发与前端开发实践，分享阅读思考、摄影与内容创作笔记，持续写作与复盘。",
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	keywords: [
 		"游戏开发",

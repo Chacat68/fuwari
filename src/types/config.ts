@@ -3,6 +3,11 @@ import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
 export type SiteConfig = {
 	title: string;
 	subtitle: string;
+	/**
+	 * SEO-only description used for meta tags.
+	 * Keep `subtitle` short for UI, and put a longer site summary here.
+	 */
+	metaDescription?: string;
 
 	lang: string;
 

@@ -99,6 +99,7 @@ export function generateMetaDescription(options: {
 	profileBio?: string;
 	siteTitle?: string;
 	pageTitle?: string;
+	keywords?: string[] | string;
 }): string {
 	const {
 		description,
@@ -108,6 +109,7 @@ export function generateMetaDescription(options: {
 		profileBio,
 		siteTitle,
 		pageTitle,
+		keywords,
 	} = options;
 
 	let result = normalizeText(description || "");
@@ -123,6 +125,16 @@ export function generateMetaDescription(options: {
 		if (normalizeText(result).length >= minLength) break;
 		if (result.includes(part)) continue;
 		result = joinDescriptionParts(result, part);
+	}
+
+	if (normalizeText(result).length < minLength && keywords) {
+		const keywordsText = Array.isArray(keywords)
+			? keywords.filter(Boolean).join("、")
+			: keywords;
+		const normalizedKeywords = normalizeText(keywordsText);
+		if (normalizedKeywords) {
+			result = joinDescriptionParts(result, `主题：${normalizedKeywords}`);
+		}
 	}
 
 	return generateDescription(result || "", maxLength);

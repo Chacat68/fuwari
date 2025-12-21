@@ -67,10 +67,11 @@ const optimizedDescription = generateMetaDescription({
 	description,
 	minLength: 60,
 	maxLength: 155,
-	siteSubtitle: siteConfig.subtitle,
+	siteSubtitle: siteConfig.metaDescription || siteConfig.subtitle,
 	profileBio: profileConfig.bio,
 	siteTitle: siteConfig.title,
 	pageTitle: title,
+	keywords: siteConfig.keywords,
 });
 
 // 关键词优化
