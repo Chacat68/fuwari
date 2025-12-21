@@ -72,6 +72,62 @@ export function generateDescription(content: string, maxLength = 160): string {
 	return `${truncated}...`;
 }
 
+function normalizeText(input: string): string {
+	return input
+		.replace(/<[^>]*>/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+}
+
+function joinDescriptionParts(a: string, b: string): string {
+	const left = normalizeText(a);
+	const right = normalizeText(b);
+	if (!left) return right;
+	if (!right) return left;
+
+	// Prefer sentence-like joining for CJK, fall back to a middle dot.
+	const endsWithPunctuation = /[。！？.!?]$/.test(left);
+	return endsWithPunctuation ? `${left} ${right}` : `${left} · ${right}`;
+}
+
+export function generateMetaDescription(options: {
+	description?: string;
+	minLength?: number;
+	maxLength?: number;
+	// Fallback parts used only when description is missing/too short.
+	siteSubtitle?: string;
+	profileBio?: string;
+	siteTitle?: string;
+	pageTitle?: string;
+}): string {
+	const {
+		description,
+		minLength = 60,
+		maxLength = 155,
+		siteSubtitle,
+		profileBio,
+		siteTitle,
+		pageTitle,
+	} = options;
+
+	let result = normalizeText(description || "");
+	if (!result) {
+		result = normalizeText(siteSubtitle || "");
+	}
+
+	const fallbackParts = [profileBio, siteSubtitle, siteTitle, pageTitle]
+		.map((p) => normalizeText(p || ""))
+		.filter(Boolean);
+
+	for (const part of fallbackParts) {
+		if (normalizeText(result).length >= minLength) break;
+		if (result.includes(part)) continue;
+		result = joinDescriptionParts(result, part);
+	}
+
+	return generateDescription(result || "", maxLength);
+}
+
 /**
  * 提取内容中的关键词
  * @param content 内容

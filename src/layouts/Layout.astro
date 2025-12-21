@@ -14,7 +14,7 @@ import {
 } from "../constants/constants";
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
-import { generateDescription } from "../utils/seo-utils";
+import { generateMetaDescription } from "../utils/seo-utils";
 import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
 import "../styles/main.css";
@@ -63,10 +63,15 @@ if (pageTitle.length > 60) {
 }
 
 // 优化描述长度（Google推荐50-160字符）
-let optimizedDescription = description || siteConfig.subtitle;
-if (optimizedDescription) {
-	optimizedDescription = generateDescription(optimizedDescription, 155);
-}
+const optimizedDescription = generateMetaDescription({
+	description,
+	minLength: 60,
+	maxLength: 155,
+	siteSubtitle: siteConfig.subtitle,
+	profileBio: profileConfig.bio,
+	siteTitle: siteConfig.title,
+	pageTitle: title,
+});
 
 // 关键词优化
 const metaKeywords = keywords || siteConfig.keywords?.join(", ");

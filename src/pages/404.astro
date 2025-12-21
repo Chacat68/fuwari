@@ -83,7 +83,7 @@ const suggestions = getSuggestedPaths(urlPath);
 <MainGridLayout 
 	title={errorTitle}
 	description={errorDescription}
-	keywords={errorKeywords}
+	keywords={errorKeywords.join(", ")}
 >
 	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
 		<div class="card-base z-10 px-6 md:px-10 pt-8 pb-8 relative w-full text-center">
