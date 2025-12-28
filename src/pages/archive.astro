@@ -1,17 +1,20 @@
 ---
 import ArchivePanel from "@components/ArchivePanel.svelte";
+import HeatmapChart from "@components/HeatmapChart.svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
 
 const sortedPosts = await getSortedPosts();
+const currentYear = new Date().getUTCFullYear();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} description="查看所有文章归档，按年份和月份浏览博客文章。">
     <div class="w-full mb-4">
         <h1 class="sr-only">{i18n(I18nKey.archive)}</h1>
     </div>
+	<HeatmapChart sortedPosts={sortedPosts} year={currentYear} client:only="svelte"></HeatmapChart>
     <ArchivePanel sortedPosts={sortedPosts} client:only="svelte"></ArchivePanel>
 </MainGridLayout>
 
