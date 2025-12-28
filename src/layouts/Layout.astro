@@ -190,8 +190,16 @@ const bannerOffset =
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
-			// Load the theme from local storage
-			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			const safeGetItem = (key) => {
+				try {
+					return localStorage.getItem(key);
+				} catch {
+					return null;
+				}
+			};
+
+			// Load the theme from local storage (some browsers/private modes may block storage)
+			const theme = safeGetItem('theme') || DEFAULT_THEME;
 			switch (theme) {
 				case LIGHT_MODE:
 					document.documentElement.classList.remove('dark');
@@ -199,16 +207,21 @@ const bannerOffset =
 				case DARK_MODE:
 					document.documentElement.classList.add('dark');
 					break
-				case AUTO_MODE:
-					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				case AUTO_MODE: {
+					const prefersDark =
+						typeof window.matchMedia === 'function' &&
+						window.matchMedia('(prefers-color-scheme: dark)').matches;
+					if (prefersDark) {
 						document.documentElement.classList.add('dark');
 					} else {
 						document.documentElement.classList.remove('dark');
 					}
+					break;
+				}
 			}
 
 			// Load the hue from local storage
-			const hue = localStorage.getItem('hue') || configHue;
+			const hue = safeGetItem('hue') || configHue;
 			document.documentElement.style.setProperty('--hue', hue);
 
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text

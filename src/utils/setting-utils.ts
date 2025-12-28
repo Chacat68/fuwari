@@ -10,16 +10,25 @@ import type { LIGHT_DARK_MODE } from "@/types/config";
 export function getDefaultHue(): number {
 	const fallback = "250";
 	const configCarrier = document.getElementById("config-carrier");
-	return Number.parseInt(configCarrier?.dataset.hue || fallback);
+	return Number.parseInt(configCarrier?.dataset.hue || fallback, 10);
 }
 
 export function getHue(): number {
-	const stored = localStorage.getItem("hue");
-	return stored ? Number.parseInt(stored) : getDefaultHue();
+	let stored: string | null = null;
+	try {
+		stored = localStorage.getItem("hue");
+	} catch {
+		stored = null;
+	}
+	return stored ? Number.parseInt(stored, 10) : getDefaultHue();
 }
 
 export function setHue(hue: number): void {
-	localStorage.setItem("hue", String(hue));
+	try {
+		localStorage.setItem("hue", String(hue));
+	} catch {
+		// ignore storage write failures (private mode / blocked storage)
+	}
 	const r = document.querySelector(":root") as HTMLElement;
 	if (!r) {
 		return;
@@ -27,7 +36,7 @@ export function setHue(hue: number): void {
 	r.style.setProperty("--hue", String(hue));
 }
 
-export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
+export function applyThemeToDocument(theme: LIGHT_DARK_MODE): void {
 	switch (theme) {
 		case LIGHT_MODE:
 			document.documentElement.classList.remove("dark");
@@ -52,10 +61,20 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 }
 
 export function setTheme(theme: LIGHT_DARK_MODE): void {
-	localStorage.setItem("theme", theme);
+	try {
+		localStorage.setItem("theme", theme);
+	} catch {
+		// ignore storage write failures (private mode / blocked storage)
+	}
 	applyThemeToDocument(theme);
 }
 
 export function getStoredTheme(): LIGHT_DARK_MODE {
-	return (localStorage.getItem("theme") as LIGHT_DARK_MODE) || DEFAULT_THEME;
+	let stored: string | null = null;
+	try {
+		stored = localStorage.getItem("theme");
+	} catch {
+		stored = null;
+	}
+	return (stored as LIGHT_DARK_MODE) || DEFAULT_THEME;
 }
