@@ -20,7 +20,7 @@ draft: false
 ### DeepSeek
 杭州深度求索人工智能公司开发的开源大语言模型，擅长复杂推理，能处理高难度语言任务，在学术和商业分析中表现出色，可在[官网](https://chat.deepseek.com)体验。
 
-![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/CleanShot%202025-02-14%20at%2014.55.05%402x.png?imageSlim)
+![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/CleanShot%25202025-02-14%2520at%252014.55.05%402x.png?imageSlim)
 
 ### 豆包
 字节跳动推出的多功能 AI 助手，能聊天、辅助写作、学习和生成图片，所有功能免费，在[官网](https://www.doubao.com/chat/)即可使用。
