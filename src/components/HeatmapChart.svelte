@@ -23,20 +23,37 @@ interface DayData {
 	posts: Post[];
 }
 
+interface MonthLabel {
+	label: string;
+	start: number; // 1-based grid column start
+	span: number; // how many week columns
+}
+
 let heatmapData: DayData[] = [];
 let hoveredDay: DayData | null = null;
 let tooltipPosition = { x: 0, y: 0 };
 let activeDays = 0;
 let maxPostsInDay = 0;
 let weeklyData: DayData[][] = [];
-let monthLabels: { label: string; span: number }[] = [];
+let monthLabels: MonthLabel[] = [];
 
 let totalPostsCount = 0;
 
+let currentStreak = 0;
+let longestStreak = 0;
+let avgPerActiveDay = 0;
+let avgPerDay = 0;
+
 // 响应式计算周数据和月份标签
 // 注意：Svelte 的依赖追踪是静态的，需要显式引用 heatmapData
-$: heatmapData.length, (weeklyData = getWeeklyData());
-$: heatmapData.length, (monthLabels = getMonthLabels());
+$: {
+	heatmapData.length;
+	weeklyData = getWeeklyData();
+}
+$: {
+	heatmapData.length;
+	monthLabels = getMonthLabels();
+}
 
 function parseDate(dateStr: string): Date {
 	return new Date(`${dateStr}T00:00:00.000Z`);
@@ -81,16 +98,53 @@ function getActivityLevel(count: number, maxCount: number): number {
 	return 1;
 }
 
+function clamp(value: number, min: number, max: number): number {
+	return Math.min(max, Math.max(min, value));
+}
+
+function setTooltipPosition(clientX: number, clientY: number) {
+	const margin = 8;
+	const estimatedWidth = 240;
+	const estimatedHeight = 160;
+
+	const x = clamp(
+		clientX + 12,
+		margin,
+		window.innerWidth - estimatedWidth - margin,
+	);
+	const y = clamp(
+		clientY - 12,
+		margin,
+		window.innerHeight - estimatedHeight - margin,
+	);
+
+	tooltipPosition = { x, y };
+}
+
 // 处理鼠标悬停
 function handleMouseEnter(event: MouseEvent, day: DayData) {
 	hoveredDay = day;
-	tooltipPosition = {
-		x: event.clientX,
-		y: event.clientY,
-	};
+	setTooltipPosition(event.clientX, event.clientY);
+}
+
+function handleMouseMove(event: MouseEvent) {
+	if (!hoveredDay) return;
+	setTooltipPosition(event.clientX, event.clientY);
 }
 
 function handleMouseLeave() {
+	hoveredDay = null;
+}
+
+function handleFocus(event: FocusEvent, day: DayData) {
+	hoveredDay = day;
+	const el = event.currentTarget;
+	if (!(el instanceof HTMLElement)) return;
+	const rect = el.getBoundingClientRect();
+	setTooltipPosition(rect.left + rect.width / 2, rect.top);
+}
+
+function handleBlur() {
 	hoveredDay = null;
 }
 
@@ -165,14 +219,31 @@ onMount(() => {
 		}
 	});
 
+	// streak 计算：以 date 数组为序（连续自然日）
+	let current = 0;
+	let longest = 0;
+	for (const day of data) {
+		if (day.count > 0) {
+			current++;
+			if (current > longest) longest = current;
+		} else {
+			current = 0;
+		}
+	}
+
 	heatmapData = data;
 	totalPostsCount = postsCount;
 	activeDays = activeDaysCount;
 	maxPostsInDay = maxPostsInDayYear;
+	longestStreak = longest;
+	currentStreak =
+		data.length > 0 && data[data.length - 1].count > 0 ? current : 0;
+	avgPerActiveDay = activeDaysCount > 0 ? postsCount / activeDaysCount : 0;
+	avgPerDay = data.length > 0 ? postsCount / data.length : 0;
 });
 
 // 获取月份标签，基于实际的周数分布
-function getMonthLabels(): { label: string; span: number }[] {
+function getMonthLabels(): MonthLabel[] {
 	if (heatmapData.length === 0) return [];
 
 	const months = [
@@ -190,12 +261,11 @@ function getMonthLabels(): { label: string; span: number }[] {
 		"Dec",
 	];
 	const weeklyData = getWeeklyData();
-	const monthLabels: { label: string; span: number }[] = [];
+	const monthLabels: MonthLabel[] = [];
 
 	let currentMonth = -1;
-	let weekCount = 0;
 
-	weeklyData.forEach((week, _weekIndex) => {
+	weeklyData.forEach((week, weekIndex) => {
 		// 找到这一周中第一个有效日期
 		const firstValidDay = week.find((day) => day.date);
 		if (firstValidDay) {
@@ -203,25 +273,18 @@ function getMonthLabels(): { label: string; span: number }[] {
 			const month = date.getUTCMonth();
 
 			if (month !== currentMonth) {
-				if (weekCount > 0) {
-					monthLabels[monthLabels.length - 1].span = weekCount;
-				}
 				monthLabels.push({
 					label: months[month],
-					span: 0,
+					start: weekIndex + 2,
+					span: 1,
 				});
 				currentMonth = month;
-				weekCount = 1;
 			} else {
-				weekCount++;
+				const last = monthLabels[monthLabels.length - 1];
+				if (last) last.span++;
 			}
 		}
 	});
-
-	// 设置最后一个月的跨度
-	if (monthLabels.length > 0 && weekCount > 0) {
-		monthLabels[monthLabels.length - 1].span = weekCount;
-	}
 
 	return monthLabels;
 }
@@ -286,47 +349,57 @@ function getWeeklyData(): DayData[][] {
 			<span class="stat-item text-50">总计 <strong class="text-75">{totalPostsCount}</strong> 篇文章</span>
 			<span class="stat-item text-50">更新 <strong class="text-75">{activeDays}</strong> 天</span>
 			<span class="stat-item text-50">最多 <strong class="text-75">{maxPostsInDay}</strong> 篇/天</span>
+			<span class="stat-item text-50">连续 <strong class="text-75">{currentStreak}</strong> 天</span>
+			<span class="stat-item text-50">最长连续 <strong class="text-75">{longestStreak}</strong> 天</span>
+			<span class="stat-item text-50">平均 <strong class="text-75">{avgPerDay.toFixed(2)}</strong> 篇/天</span>
 		</div>
 	</div>
 	
-	<!-- 月份标签 -->
-	<div class="month-labels">
-		{#each monthLabels as month}
-			<span class="month-label text-50" style="flex: {month.span}">{month.label}</span>
-		{/each}
-	</div>
-	
-	<!-- 热力图网格 -->
-	<div class="heatmap-grid">
-		<!-- 星期标签 -->
-		<div class="weekday-labels">
-			<span class="weekday-label text-50"></span>
-			<span class="weekday-label text-50">Mon</span>
-			<span class="weekday-label text-50"></span>
-			<span class="weekday-label text-50">Wed</span>
-			<span class="weekday-label text-50"></span>
-			<span class="weekday-label text-50">Fri</span>
-			<span class="weekday-label text-50"></span>
-		</div>
-		
-		<!-- 热力图方块 -->
-		<div class="heatmap-weeks">
-			{#each weeklyData as week}
-				<div class="heatmap-week">
-					{#each week as day}
-						<div
-						class="heatmap-day level-{day.level}"
-						class:empty={!day.date}
-						data-date={day.date}
-						on:mouseenter={(e) => day.date && handleMouseEnter(e, day)}
-					on:mouseleave={handleMouseLeave}
-					role="button"
-					tabindex="0"
-							title={day.date ? `${day.date}: ${day.count} 篇文章` : ""}
-					></div>
-					{/each}
-				</div>
+	<div class="heatmap-scroll">
+		<!-- 月份标签 -->
+		<div class="month-labels" style="--week-count: {weeklyData.length}">
+			{#each monthLabels as month}
+				{#if month.span > 1}
+					<span class="month-label text-50" style="grid-column: {month.start} / span {month.span}">{month.label}</span>
+				{/if}
 			{/each}
+		</div>
+
+		<!-- 热力图网格 -->
+		<div class="heatmap-grid" style="--week-count: {weeklyData.length}">
+			<!-- 星期标签 -->
+			<div class="weekday-labels" aria-hidden="true">
+				<span class="weekday-label text-50"></span>
+				<span class="weekday-label text-50">Mon</span>
+				<span class="weekday-label text-50"></span>
+				<span class="weekday-label text-50">Wed</span>
+				<span class="weekday-label text-50"></span>
+				<span class="weekday-label text-50">Fri</span>
+				<span class="weekday-label text-50"></span>
+			</div>
+
+			<!-- 热力图方块 -->
+			<div class="heatmap-weeks" role="grid" aria-label={`${year} 年文章更新热力图`} tabindex="0" on:mousemove={handleMouseMove}>
+				{#each weeklyData as week}
+					<div class="heatmap-week" role="presentation">
+						{#each week as day}
+							<div
+								class="heatmap-day level-{day.level}"
+								class:empty={!day.date}
+								data-date={day.date}
+								on:mouseenter={(e) => day.date && handleMouseEnter(e, day)}
+								on:mouseleave={handleMouseLeave}
+								on:focus={(e) => day.date && handleFocus(e, day)}
+								on:blur={handleBlur}
+								role="gridcell"
+								tabindex={day.date ? 0 : -1}
+								aria-label={day.date ? `${day.date}，${day.count} 篇文章` : ""}
+								title={day.date ? `${day.date}: ${day.count} 篇文章` : ""}
+							></div>
+						{/each}
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 	
@@ -348,7 +421,7 @@ function getWeeklyData(): DayData[][] {
 {#if hoveredDay}
 	<div 
 		class="tooltip"
-		style="left: {tooltipPosition.x + 10}px; top: {tooltipPosition.y - 10}px;"
+		style="left: {tooltipPosition.x}px; top: {tooltipPosition.y}px;"
 	>
 		<div class="tooltip-date">{hoveredDay.date}</div>
 		<div class="tooltip-count">
@@ -369,6 +442,8 @@ function getWeeklyData(): DayData[][] {
 
 <style>
 	.heatmap-container {
+		--cell: 10px;
+		--gap: 2px;
 		padding: 1rem;
 		border-radius: var(--radius-large);
 		background: var(--card-bg);
@@ -386,40 +461,53 @@ function getWeeklyData(): DayData[][] {
 	
 	.heatmap-stats {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
 		font-size: 0.875rem;
+		flex-wrap: wrap;
 	}
 	
 	.stat-item {
 		white-space: nowrap;
 	}
 	
+	.heatmap-scroll {
+		overflow-x: auto;
+		overflow-y: hidden;
+		padding-bottom: 0.25rem;
+		-webkit-overflow-scrolling: touch;
+	}
+
 	.month-labels {
-		display: flex;
+		display: grid;
+		grid-template-columns: 1.5rem repeat(var(--week-count), var(--cell));
+		column-gap: var(--gap);
+		align-items: center;
 		margin-bottom: 0.5rem;
-		padding-left: 2rem;
+		min-width: calc(1.5rem + (var(--week-count) * var(--cell)) + ((var(--week-count) - 1) * var(--gap)));
 	}
 	
 	.month-label {
-		flex: 1;
 		font-size: 0.75rem;
-		text-align: center;
+		text-align: left;
+		padding-left: 2px;
+		white-space: nowrap;
 	}
 	
 	.heatmap-grid {
 		display: flex;
 		gap: 0.5rem;
+		min-width: calc(1.5rem + (var(--week-count) * var(--cell)) + ((var(--week-count) - 1) * var(--gap)));
 	}
 	
 	.weekday-labels {
 		display: flex;
 		flex-direction: column;
-		gap: 2px;
+		gap: var(--gap);
 		width: 1.5rem;
 	}
 	
 	.weekday-label {
-		height: 10px;
+		height: var(--cell);
 		font-size: 0.6rem;
 		display: flex;
 		align-items: center;
@@ -428,22 +516,32 @@ function getWeeklyData(): DayData[][] {
 	
 	.heatmap-weeks {
 		display: flex;
-		gap: 2px;
+		gap: var(--gap);
 		flex: 1;
 	}
 	
 	.heatmap-week {
 		display: flex;
 		flex-direction: column;
-		gap: 2px;
-		flex: 1;
+		gap: var(--gap);
 	}
 	
 	.heatmap-day {
-		width: 10px;
-		height: 10px;
+		width: var(--cell);
+		height: var(--cell);
 		border-radius: 2px;
 		cursor: pointer;
+		outline: none;
+		transition: transform 120ms ease, box-shadow 120ms ease;
+	}
+
+	.heatmap-day:not(.empty):hover {
+		transform: translateY(-1px);
+		box-shadow: 0 0 0 2px oklch(0.82 0.06 var(--hue) / 0.35);
+	}
+
+	.heatmap-day:not(.empty):focus-visible {
+		box-shadow: 0 0 0 2px var(--primary);
 	}
 	
 	.heatmap-day.empty {
@@ -486,8 +584,8 @@ function getWeeklyData(): DayData[][] {
 	}
 	
 	.legend-level {
-		width: 10px;
-		height: 10px;
+		width: var(--cell);
+		height: var(--cell);
 		border-radius: 2px;
 	}
 	
@@ -544,23 +642,19 @@ function getWeeklyData(): DayData[][] {
 			font-size: 0.75rem;
 		}
 		
-		.heatmap-day {
-			width: 8px;
-			height: 8px;
-		}
-		
-		.legend-level {
-			width: 8px;
-			height: 8px;
-		}
-		
 		.weekday-label {
-			height: 8px;
 			font-size: 0.5rem;
 		}
 		
 		.month-label {
 			font-size: 0.6rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.heatmap-container {
+			--cell: 8px;
+			--gap: 2px;
 		}
 	}
 </style>

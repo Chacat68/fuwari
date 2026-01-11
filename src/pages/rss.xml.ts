@@ -15,7 +15,7 @@ function stripInvalidXmlChars(str: string): string {
 	);
 }
 
-export async function GET(context: APIContext) {
+export async function GET(context: APIContext): Promise<Response> {
 	const blog = await getSortedPosts();
 
 	return rss({

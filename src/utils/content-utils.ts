@@ -1,9 +1,10 @@
+import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
 
-export async function getSortedPosts() {
+export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
