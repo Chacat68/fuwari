@@ -7,6 +7,7 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
+import { renderPostEntry } from "@utils/post-render-cache";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import { licenseConfig } from "src/config";
@@ -24,9 +25,16 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
-
-const { remarkPluginFrontmatter } = await entry.render();
+const {
+	Content,
+	headings,
+	remarkPluginFrontmatter: remarkPluginFrontmatterRaw,
+} = await renderPostEntry(entry);
+const remarkPluginFrontmatter = remarkPluginFrontmatterRaw ?? {
+	words: 0,
+	minutes: 0,
+	excerpt: "",
+};
 
 const finalDescription =
 	entry.data.description || remarkPluginFrontmatter.excerpt || entry.data.title;

@@ -1,0 +1,523 @@
+🔍 开始扫描文章...
+📝 找到 121 篇文章
+
+✅ 统计完成!
+📊 总文章数: 121
+📝 已发布: 121
+✏️  草稿: 0
+📈 总字数: 158,956
+⏱️  总阅读时间: 795 分钟
+📏 平均字数: 1,314
+🕐 平均阅读时间: 7 分钟
+💾 数据已保存至: /Users/charliefoo/Dev/Web/fuwari/src/data/blog-stats.json
+
+(node:73158) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+13:16:53 [content] Syncing content
+13:16:53 [content] Astro config changed
+13:16:53 [content] Clearing content store
+13:16:54 [content] Synced content
+13:16:54 [types] Generated 1.03s
+13:16:54 [build] output: "static"
+13:16:54 [build] mode: "static"
+13:16:54 [build] directory: /Users/charliefoo/Dev/Web/fuwari/dist/
+13:16:54 [build] Collecting build info...
+13:16:54 [build] ✓ Completed in 1.08s.
+13:16:54 [build] Building static entrypoints...
+Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+13:16:57 [WARN] [vite] src/components/HeatmapChart.svelte (294:3): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+13:16:57 [WARN] [vite] src/components/HeatmapChart.svelte (294:3): A comment
+
+"/* @__PURE__ */"
+
+in "src/components/HeatmapChart.svelte" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+13:16:57 [WARN] [vite] src/components/HeatmapChart.svelte (295:3): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+13:16:57 [WARN] [vite] src/components/HeatmapChart.svelte (295:3): A comment
+
+"/* @__PURE__ */"
+
+in "src/components/HeatmapChart.svelte" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+13:16:57 [WARN] [vite] src/components/HeatmapChart.svelte (296:3): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+13:16:57 [WARN] [vite] src/components/HeatmapChart.svelte (296:3): A comment
+
+"/* @__PURE__ */"
+
+in "src/components/HeatmapChart.svelte" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+13:16:58 [vite] ✓ built in 4.04s
+13:16:58 [build] ✓ Completed in 4.08s.
+
+ building client (vite) 
+13:16:58 [vite] transforming...
+13:16:58 [vite] ✓ 170 modules transformed.
+13:16:58 [WARN] [vite] Generated an empty chunk: "QuoteWidget.astro_astro_type_script_index_0_lang".
+13:16:58 [vite] rendering chunks...
+13:16:59 [vite] computing gzip size...
+13:16:59 [vite] dist/_astro/photoswipe.DSulWsr7.css                                   4.42 kB │ gzip:  1.43 kB
+13:16:59 [vite] dist/_astro/_page_.tHeFS5sc.css                                       5.01 kB │ gzip:  1.25 kB
+13:16:59 [vite] dist/_astro/overlayscrollbars.y4KPJ9hc.css                           14.04 kB │ gzip:  2.62 kB
+13:16:59 [vite] dist/_astro/translation.DGFhVViq.js                                   0.29 kB │ gzip:  0.22 kB
+13:16:59 [vite] dist/_astro/url-utils.Bw7Z8hgG.js                                     0.30 kB │ gzip:  0.21 kB
+13:16:59 [vite] dist/_astro/if.H7T4xDUu.js                                            0.79 kB │ gzip:  0.51 kB
+13:16:59 [vite] dist/_astro/page.BCsNpbld.js                                          1.04 kB │ gzip:  0.49 kB
+13:16:59 [vite] dist/_astro/setting-utils.D6dS_xnI.js                                 1.06 kB │ gzip:  0.51 kB
+13:16:59 [vite] dist/_astro/preload-helper.BlTxHScW.js                                1.11 kB │ gzip:  0.65 kB
+13:16:59 [vite] dist/_astro/client.svelte.BjRmdK4c.js                                 1.13 kB │ gzip:  0.64 kB
+13:16:59 [vite] dist/_astro/Layout.astro_astro_type_script_index_0_lang.BkgBXjnY.js   1.96 kB │ gzip:  1.00 kB
+13:16:59 [vite] dist/_astro/DisplaySettings.CEVFeoFA.js                               2.17 kB │ gzip:  1.17 kB
+13:16:59 [vite] dist/_astro/ArchivePanel.DVGxwx0e.js                                  3.66 kB │ gzip:  1.59 kB
+13:16:59 [vite] dist/_astro/each.BnCuamew.js                                          3.75 kB │ gzip:  1.89 kB
+13:16:59 [vite] dist/_astro/Layout.astro_astro_type_script_index_1_lang.C4lh8f2A.js   4.39 kB │ gzip:  1.58 kB
+13:16:59 [vite] dist/_astro/Search.DWfvgLjW.js                                        4.69 kB │ gzip:  2.06 kB
+13:16:59 [vite] dist/_astro/zh_TW.Dp70JyTO.js                                         5.87 kB │ gzip:  1.99 kB
+13:16:59 [vite] dist/_astro/HeatmapChart.15DiTRJD.js                                  7.83 kB │ gzip:  3.03 kB
+13:16:59 [vite] dist/_astro/props.AJjsOkxX.js                                         9.23 kB │ gzip:  4.20 kB
+13:16:59 [vite] dist/_astro/Icon.Dlg4T5rS.js                                         20.41 kB │ gzip:  8.18 kB
+13:16:59 [vite] dist/_astro/render.CYLncBig.js                                       27.50 kB │ gzip: 10.87 kB
+13:16:59 [vite] dist/_astro/overlayscrollbars.BhSIpBnt.js                            28.05 kB │ gzip: 14.06 kB
+13:16:59 [vite] dist/_astro/swup.WmmPyfWA.js                                         39.18 kB │ gzip: 12.72 kB
+13:16:59 [vite] dist/_astro/photoswipe.Ddp38G6C.js                                   75.54 kB │ gzip: 20.80 kB
+13:16:59 [vite] ✓ built in 566ms
+
+ generating static routes 
+13:16:59 ▶ src/pages/404.astro
+13:16:59   └─ /404.html (+37ms) 
+13:16:59 ▶ src/pages/about.astro
+13:16:59   └─ /about/index.html (+1.03s) 
+13:17:00 ▶ src/pages/archive.astro
+13:17:00   └─ /archive/index.html (+92ms) 
+13:17:00 ▶ src/pages/friends.astro
+13:17:00   └─ /friends/index.html (+5ms) 
+13:17:00 ▶ src/pages/posts/[...slug].astro
+13:17:00   ├─ /posts/others14-sdl-3-4-bilibili-intro/index.html (+8ms) 
+13:17:00   ├─ /posts/others13-stoicism-introduction/index.html (+6ms) 
+13:17:00   ├─ /posts/hk19-kiri-t-outrageous-thing-cover/index.html (+6ms) 
+13:17:00   ├─ /posts/2025-year-end-summary/index.html (+9ms) 
+13:17:00   ├─ /posts/others12-small-steps-never-stop/index.html (+7ms) 
+13:17:00   ├─ /posts/diary40-cantonese-slang-culture/index.html (+7ms) 
+13:17:00   ├─ /posts/ai9-gemini-creation-tool/index.html (+4ms) 
+13:17:00   ├─ /posts/diary39-back-to-billiards/index.html (+4ms) 
+13:17:00   ├─ /posts/hk18-wuchang-hk-fire/index.html (+6ms) 
+13:17:00   ├─ /posts/ai8-changes-my-creation/index.html (+4ms) 
+13:17:00   ├─ /posts/diary38-life-on-the-road/index.html (+688ms) 
+13:17:00   ├─ /posts/hua10-rainbow-chamber-singers/index.html (+6ms) 
+13:17:00   ├─ /posts/hua9-wang-xinling-daming/index.html (+8ms) 
+13:17:00   ├─ /posts/en1-yanni-el-morro-2011/index.html (+14ms) 
+13:17:00   ├─ /posts/think05-habit-breaking-myth/index.html (+9ms) 
+13:17:01   ├─ /posts/hua7-liang-jingru-manleng-mv/index.html (+7ms) 
+13:17:01   ├─ /posts/hua6-lin-junjie-jiaohuan-yusheng-mv/index.html (+5ms) 
+13:17:01   ├─ /posts/think04-feynman-learning-technique/index.html (+4ms) 
+13:17:01   ├─ /posts/hk17-ruyuan-cantonese/index.html (+7ms) 
+13:17:01   ├─ /posts/others11-expectation-effect/index.html (+4ms) 
+13:17:01   ├─ /posts/others10-inner-peace/index.html (+4ms) 
+13:17:01   ├─ /posts/diary37/index.html (+6ms) 
+13:17:01   ├─ /posts/hk16-lemon-cantonese/index.html (+4ms) 
+13:17:01   ├─ /posts/hua5/index.html (+3ms) 
+13:17:01   ├─ /posts/ai7-qwen-image-edit/index.html (+6ms) 
+13:17:01   ├─ /posts/ai6/index.html (+4ms) 
+13:17:01   ├─ /posts/others9/index.html (+5ms) 
+13:17:01   ├─ /posts/hk15/index.html (+6ms) 
+13:17:01   ├─ /posts/hk14/index.html (+4ms) 
+13:17:01   ├─ /posts/hk13/index.html (+5ms) 
+13:17:01   ├─ /posts/diary36/index.html (+5ms) 
+13:17:01   ├─ /posts/hk12/index.html (+4ms) 
+13:17:01   ├─ /posts/ai5/index.html (+4ms) 
+13:17:01   ├─ /posts/diary35/index.html (+6ms) 
+13:17:01   ├─ /posts/diary34/index.html (+4ms) 
+13:17:01   ├─ /posts/hua4/index.html (+5ms) 
+13:17:01   ├─ /posts/diary33/index.html (+4ms) 
+13:17:01   ├─ /posts/ai4/index.html (+523ms) 
+13:17:01   ├─ /posts/diary32/index.html (+496ms) 
+13:17:02   ├─ /posts/hua3/index.html (+8ms) 
+13:17:02   ├─ /posts/diary31/index.html (+878ms) 
+13:17:03   ├─ /posts/diary30/index.html (+1.77s) 
+13:17:04   ├─ /posts/hk11/index.html (+5ms) 
+13:17:04   ├─ /posts/hk10/index.html (+7ms) 
+13:17:04   ├─ /posts/diary29/index.html (+274ms) 
+13:17:05   ├─ /posts/think03/index.html (+12ms) 
+13:17:05   ├─ /posts/hk9/index.html (+6ms) 
+13:17:05   ├─ /posts/others8/index.html (+5ms) 
+13:17:05   ├─ /posts/diary28/index.html (+8ms) 
+13:17:05   ├─ /posts/others7/index.html (+5ms) 
+13:17:05   ├─ /posts/hk8/index.html (+4ms) 
+13:17:05   ├─ /posts/diary27/index.html (+2.09s) 
+13:17:07   ├─ /posts/design11/index.html (+175ms) 
+13:17:07   ├─ /posts/hk7/index.html (+146ms) 
+13:17:07   ├─ /posts/hua1/index.html (+128ms) 
+13:17:07   ├─ /posts/others6/index.html (+135ms) 
+13:17:07   ├─ /posts/others5/index.html (+130ms) 
+13:17:07   ├─ /posts/diary26/index.html (+126ms) 
+13:17:08   ├─ /posts/hk6/index.html (+9ms) 
+13:17:08   ├─ /posts/others4/index.html (+213ms) 
+13:17:08   ├─ /posts/diary24/index.html (+152ms) 
+13:17:08   ├─ /posts/diary25/index.html (+141ms) 
+13:17:08   ├─ /posts/hua8-yang-naiwen-tuikai-shijie-de-men-mv/index.html (+5ms) 
+13:17:08   ├─ /posts/design10/index.html (+1.49s) 
+13:17:10   ├─ /posts/think02/index.html (+670ms) 
+13:17:10   ├─ /posts/think01/index.html (+158ms) 
+13:17:10   ├─ /posts/others3/index.html (+302ms) 
+13:17:11   ├─ /posts/others2/index.html (+310ms) 
+13:17:11   ├─ /posts/diary23/index.html (+427ms) 
+13:17:11   ├─ /posts/diary22/index.html (+5ms) 
+13:17:11   ├─ /posts/diary21/index.html (+5ms) 
+13:17:11   ├─ /posts/diary20/index.html (+204ms) 
+13:17:12   ├─ /posts/diary19/index.html (+625ms) 
+13:17:12   ├─ /posts/wen-6/index.html (+8ms) 
+13:17:12   ├─ /posts/diary18/index.html (+806ms) 
+13:17:13   ├─ /posts/diary17/index.html (+507ms) 
+13:17:14   ├─ /posts/design9/index.html (+1.32s) 
+13:17:15   ├─ /posts/design8/index.html (+3.64s) 
+13:17:19   ├─ /posts/others1/index.html (+6ms) 
+13:17:19   ├─ /posts/diary16/index.html (+5ms) 
+13:17:19   ├─ /posts/ai3/index.html (+1.57s) 
+13:17:20   ├─ /posts/design7/index.html (+1.42s) 
+13:17:22   ├─ /posts/hua2/index.html (+6ms) 
+13:17:22   ├─ /posts/diary14/index.html (+6ms) 
+13:17:22   ├─ /posts/diary13/index.html (+7ms) 
+13:17:22   ├─ /posts/ai2/index.html (+154ms) 
+13:17:22   ├─ /posts/wen-5/index.html (+7ms) 
+13:17:22   ├─ /posts/blog2/index.html (+9ms) 
+13:17:22   ├─ /posts/diary12/index.html (+105ms) 
+13:17:22   ├─ /posts/hk5/index.html (+6ms) 
+13:17:22   ├─ /posts/diary10/index.html (+870ms) 
+13:17:23   ├─ /posts/blog1/index.html (+1.91s) 
+13:17:25   ├─ /posts/design5/index.html (+263ms) 
+13:17:25   ├─ /posts/wen-4/index.html (+7ms) 
+13:17:25   ├─ /posts/diary15/index.html (+5ms) 
+13:17:25   ├─ /posts/wen-3/index.html (+8ms) 
+13:17:25   ├─ /posts/wen-2/index.html (+7ms) 
+13:17:25   ├─ /posts/hk4/index.html (+135ms) 
+13:17:25   ├─ /posts/ai1/index.html (+732ms) 
+13:17:26   ├─ /posts/design4/index.html (+263ms) 
+13:17:26   ├─ /posts/design3/index.html (+697ms) 
+13:17:27   ├─ /posts/diary9/index.html (+1.33s) 
+13:17:28   ├─ /posts/diary5/index.html (+7ms) 
+13:17:28   ├─ /posts/steam2022/index.html (+349ms) 
+13:17:28   ├─ /posts/diary8/index.html (+4.84s) 
+13:17:33   ├─ /posts/design2/index.html (+1.34s) 
+13:17:35   ├─ /posts/hk3/index.html (+390ms) 
+13:17:35   ├─ /posts/diary7/index.html (+6ms) 
+13:17:35   ├─ /posts/diary6/index.html (+10ms) 
+13:17:35   ├─ /posts/design12/index.html (+850ms) 
+13:17:36   ├─ /posts/diary1/index.html (+5.51s) 
+13:17:41   ├─ /posts/diary11/index.html (+4ms) 
+13:17:41   ├─ /posts/book2/index.html (+140ms) 
+13:17:42   ├─ /posts/design1/index.html (+871ms) 
+13:17:42   ├─ /posts/hk2/index.html (+5ms) 
+13:17:42   ├─ /posts/diary3/index.html (+9ms) 
+13:17:42   ├─ /posts/design6/index.html (+658ms) 
+13:17:43   ├─ /posts/book1/index.html (+380ms) 
+13:17:43   ├─ /posts/diary2/index.html (+6ms) 
+13:17:43   ├─ /posts/hk1/index.html (+556ms) 
+13:17:44   └─ /posts/wen-1/index.html (+10ms) 
+13:17:44 ▶ src/pages/projects.astro
+13:17:44   └─ /projects/index.html (+6ms) 
+13:17:44 λ src/pages/robots.txt.ts
+13:17:44   └─ /robots.txt (+1ms) 
+13:17:44 λ src/pages/rss.xml.ts
+13:17:44   └─ /rss.xml (+67ms) 
+13:17:44 ▶ src/pages/[...page].astro
+13:17:44   ├─ /index.html (+8ms) 
+13:17:44   ├─ /2/index.html (+7ms) 
+13:17:44   ├─ /3/index.html (+8ms) 
+13:17:44   ├─ /4/index.html (+6ms) 
+13:17:44   ├─ /5/index.html (+10ms) 
+13:17:44   ├─ /6/index.html (+13ms) 
+13:17:44   └─ /7/index.html (+6ms) 
+13:17:44 ✓ Completed in 45.65s.
+
+ generating optimized images 
+13:17:44   ▶ /_astro/20251130134415748_i02Tm.webp (reused cache entry) (+4ms) (1/268)
+13:17:44   ▶ /_astro/20251130134304463_2sAGF3.webp (reused cache entry) (+4ms) (2/268)
+13:17:44   ▶ /_astro/20251130134206202_Z1GN7m9.webp (reused cache entry) (+5ms) (3/268)
+13:17:44   ▶ /_astro/20251130134751536_1eXwJ.webp (reused cache entry) (+6ms) (4/268)
+13:17:44   ▶ /_astro/20251130134127173_z37iu.webp (reused cache entry) (+7ms) (5/268)
+13:17:44   ▶ /_astro/DSC04066_2wXsiR.webp (reused cache entry) (+8ms) (6/268)
+13:17:44   ▶ /_astro/DSC03299_1c54rQ.webp (reused cache entry) (+9ms) (7/268)
+13:17:44   ▶ /_astro/DSC03225_1KIWpw.webp (reused cache entry) (+37ms) (8/268)
+13:17:44   ▶ /_astro/20250611001314160_5skqD.webp (reused cache entry) (+37ms) (9/268)
+13:17:44   ▶ /_astro/20250611001352442_Z1HsG9I.webp (reused cache entry) (+37ms) (10/268)
+13:17:44   ▶ /_astro/20250611001429813_zqbcM.webp (reused cache entry) (+33ms) (11/268)
+13:17:44   ▶ /_astro/20250602160056648_WyEwm.webp (reused cache entry) (+33ms) (12/268)
+13:17:44   ▶ /_astro/20250602134914997_Z241Ta3.webp (reused cache entry) (+33ms) (13/268)
+13:17:44   ▶ /_astro/20250602160339890_Z1wXrJH.webp (reused cache entry) (+32ms) (14/268)
+13:17:44   ▶ /_astro/20250506061436583_Z1bRWCJ.webp (reused cache entry) (+30ms) (15/268)
+13:17:44   ▶ /_astro/20250506062513008_Z212iRR.webp (reused cache entry) (+34ms) (16/268)
+13:17:44   ▶ /_astro/20250506062528195_ZqUgtN.webp (reused cache entry) (+33ms) (17/268)
+13:17:44   ▶ /_astro/20250506063007246_Z12qsDo.webp (reused cache entry) (+5ms) (18/268)
+13:17:44   ▶ /_astro/20250506063123906_ZSnq9E.webp (reused cache entry) (+5ms) (19/268)
+13:17:44   ▶ /_astro/20250506064339106_PR7G5.webp (reused cache entry) (+5ms) (20/268)
+13:17:44   ▶ /_astro/20250502234237550_dDBy1.webp (reused cache entry) (+5ms) (21/268)
+13:17:44   ▶ /_astro/20250502234327982_Z1Qb6t2.webp (reused cache entry) (+5ms) (22/268)
+13:17:44   ▶ /_astro/20250502234432832_Zqhe7G.webp (reused cache entry) (+5ms) (23/268)
+13:17:44   ▶ /_astro/20250506064459320_Z2jTLsM.webp (reused cache entry) (+5ms) (24/268)
+13:17:44   ▶ /_astro/20250502234451092_Z1AuBda.webp (reused cache entry) (+5ms) (25/268)
+13:17:44   ▶ /_astro/20250503030217022_1OWo1X.webp (reused cache entry) (+6ms) (26/268)
+13:17:44   ▶ /_astro/20250503030317637_Z2111WJ.webp (reused cache entry) (+6ms) (27/268)
+13:17:44   ▶ /_astro/20250502234738212_ZeStWy.webp (reused cache entry) (+6ms) (28/268)
+13:17:44   ▶ /_astro/20250503030027875_2pV35Y.webp (reused cache entry) (+6ms) (29/268)
+13:17:44   ▶ /_astro/20250421003532093_1Gg10D.webp (reused cache entry) (+7ms) (30/268)
+13:17:44   ▶ /_astro/20250421003501899_26aTuY.webp (reused cache entry) (+8ms) (31/268)
+13:17:44   ▶ /_astro/20250503135534706_VtNVk.webp (reused cache entry) (+8ms) (32/268)
+13:17:44   ▶ /_astro/20250503025806690_Z1ALidR.webp (reused cache entry) (+9ms) (33/268)
+13:17:44   ▶ /_astro/CleanShot 2025-02-14 at 14.55.05@2x_26HPNK.webp (reused cache entry) (+13ms) (34/268)
+13:17:44   ▶ /_astro/CleanShot 2025-02-14 at 14.54.13@2x_1CV0Fz.webp (reused cache entry) (+13ms) (35/268)
+13:17:44   ▶ /_astro/20250220084752449_1XSksT.webp (reused cache entry) (+7ms) (36/268)
+13:17:44   ▶ /_astro/20250220104224103_1VpsxJ.webp (reused cache entry) (+11ms) (37/268)
+13:17:44   ▶ /_astro/20250220103355358_ZdX55D.webp (reused cache entry) (+11ms) (38/268)
+13:17:44   ▶ /_astro/20250220103152666_ZEGvp8.webp (reused cache entry) (+11ms) (39/268)
+13:17:44   ▶ /_astro/20250220103852982_Z2l1ie8.webp (reused cache entry) (+10ms) (40/268)
+13:17:44   ▶ /_astro/20250220110123440_ZQU7zu.webp (reused cache entry) (+10ms) (41/268)
+13:17:44   ▶ /_astro/20250220104824364_Z1ms9si.webp (reused cache entry) (+11ms) (42/268)
+13:17:44   ▶ /_astro/20250220104427897_7yQAj.webp (reused cache entry) (+13ms) (43/268)
+13:17:44   ▶ /_astro/20250220105551517_Z13sCQc.webp (reused cache entry) (+8ms) (44/268)
+13:17:44   ▶ /_astro/20250220105350570_2bJWkQ.webp (reused cache entry) (+15ms) (45/268)
+13:17:44   ▶ /_astro/20250220111025713_dnoE7.webp (reused cache entry) (+11ms) (46/268)
+13:17:44   ▶ /_astro/20250220110636572_Z1hecCb.webp (reused cache entry) (+15ms) (47/268)
+13:17:44   ▶ /_astro/20250220111721566_24wUdL.webp (reused cache entry) (+11ms) (48/268)
+13:17:44   ▶ /_astro/20250220112018986_e2SIy.webp (reused cache entry) (+11ms) (49/268)
+13:17:44   ▶ /_astro/20250203120229500_A0hcf.webp (reused cache entry) (+10ms) (50/268)
+13:17:44   ▶ /_astro/20250108091020774_ZKWh9F.webp (reused cache entry) (+9ms) (51/268)
+13:17:44   ▶ /_astro/2025-02-03-12-12-01_1JXXkp.webp (reused cache entry) (+12ms) (52/268)
+13:17:44   ▶ /_astro/2025-02-01-12-29-08_1RrwIF.webp (reused cache entry) (+12ms) (53/268)
+13:17:44   ▶ /_astro/20250109224602951_1tQsch.webp (reused cache entry) (+12ms) (54/268)
+13:17:44   ▶ /_astro/20250104172842744_1bRT4i.webp (reused cache entry) (+7ms) (55/268)
+13:17:44   ▶ /_astro/20250104170958677_Z122o5L.webp (reused cache entry) (+10ms) (56/268)
+13:17:44   ▶ /_astro/20250104173015759_Z21Okhr.webp (reused cache entry) (+10ms) (57/268)
+13:17:44   ▶ /_astro/CleanShot 2024-10-03 at 15.56.10@2x_2uOrOX.webp (reused cache entry) (+16ms) (58/268)
+13:17:44   ▶ /_astro/20250104172011526_Z2qu3Pm.webp (reused cache entry) (+17ms) (59/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-12 at 09.09.43_Z2cE3bd.webp (reused cache entry) (+18ms) (60/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-12 at 09.30.00_Z1Pai4a.webp (reused cache entry) (+19ms) (61/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-12 at 09.19.30_1bG95.webp (reused cache entry) (+20ms) (62/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-27 at 17.08.27@2x_nhket.webp (reused cache entry) (+20ms) (63/268)
+13:17:44   ▶ /_astro/CleanShot 2024-10-03 at 15.54.48@2x_ZQu4On.webp (reused cache entry) (+20ms) (64/268)
+13:17:44   ▶ /_astro/CleanShot 2024-10-03 at 16.12.15@2x_QB4up.webp (reused cache entry) (+16ms) (65/268)
+13:17:44   ▶ /_astro/CleanShot 2024-10-03 at 16.19.01@2x_Z1ndJg0.webp (reused cache entry) (+14ms) (66/268)
+13:17:44   ▶ /_astro/CleanShot 2024-10-03 at 16.14.44@2x_Z1MtHSD.webp (reused cache entry) (+14ms) (67/268)
+13:17:44   ▶ /_astro/CleanShot 2024-10-03 at 16.19.45@2x_Z4Po5K.webp (reused cache entry) (+8ms) (68/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-25 at 18.04.35@2x_1IuyI6.webp (reused cache entry) (+12ms) (69/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-26 at 06.20.24@2x_Z1PINGM.webp (reused cache entry) (+8ms) (70/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-25 at 18.09.58@2x_1xIYGD.webp (reused cache entry) (+12ms) (71/268)
+13:17:44   ▶ /_astro/CleanShot 2024-09-25 at 18.00.11@2x_1DzwPb.webp (reused cache entry) (+13ms) (72/268)
+13:17:44   ▶ /_astro/v4SSm4_Z13EnQu.webp (reused cache entry) (+13ms) (73/268)
+13:17:44   ▶ /_astro/1291723111260_.pic_Z2oIqYF.webp (reused cache entry) (+16ms) (74/268)
+13:17:44   ▶ /_astro/1301723111306_.pic_6AznC.webp (reused cache entry) (+18ms) (75/268)
+13:17:44   ▶ /_astro/CleanShot 2024-06-25 at 20.50.45_Z2ryHPC.webp (reused cache entry) (+16ms) (76/268)
+13:17:44   ▶ /_astro/20250104160029110_1OSuo.webp (reused cache entry) (+22ms) (77/268)
+13:17:44   ▶ /_astro/20250104155810611_ZyAAsT.webp (reused cache entry) (+23ms) (78/268)
+13:17:44   ▶ /_astro/20250104154227788_Z3bpm.webp (reused cache entry) (+29ms) (79/268)
+13:17:44   ▶ /_astro/20250104011427584_Z2vItKl.webp (reused cache entry) (+21ms) (80/268)
+13:17:44   ▶ /_astro/CleanShot 2024-06-25 at 21.03.47_Z1yONqC.webp (reused cache entry) (+27ms) (81/268)
+13:17:44   ▶ /_astro/CleanShot 2024-06-25 at 21.05.52_1QaaEV.webp (reused cache entry) (+24ms) (82/268)
+13:17:44   ▶ /_astro/20250104011500234_11gW7y.webp (reused cache entry) (+17ms) (83/268)
+13:17:44   ▶ /_astro/20250104011445664_1Cs7HD.webp (reused cache entry) (+19ms) (84/268)
+13:17:44   ▶ /_astro/20250104011637394_Z2qWxmk.webp (reused cache entry) (+16ms) (85/268)
+13:17:44   ▶ /_astro/CleanShot 2024-06-25 at 21.03.04_Z2wvMwS.webp (reused cache entry) (+33ms) (86/268)
+13:17:44   ▶ /_astro/20250104011612723_Ze6hXG.webp (reused cache entry) (+25ms) (87/268)
+13:17:44   ▶ /_astro/20250104011543823_136zcF.webp (reused cache entry) (+26ms) (88/268)
+13:17:44   ▶ /_astro/20250104011655048_Z1uhimX.webp (reused cache entry) (+16ms) (89/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.24.56_Z1la5mc.webp (reused cache entry) (+13ms) (90/268)
+13:17:44   ▶ /_astro/nyFavE_Z1SF9Fz.webp (reused cache entry) (+13ms) (91/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.33.44_YFvwA.webp (reused cache entry) (+14ms) (92/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.34.10_Z2cM4Ka.webp (reused cache entry) (+11ms) (93/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.47.45_Z1dM682.webp (reused cache entry) (+6ms) (94/268)
+13:17:44   ▶ /_astro/20250104010152140_Z2mtM0G.webp (reused cache entry) (+19ms) (95/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.31.36_Z1IJ9wm.webp (reused cache entry) (+13ms) (96/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.40.48_uX0RS.webp (reused cache entry) (+7ms) (97/268)
+13:17:44   ▶ /_astro/20250104010045379_1eVgkk.webp (reused cache entry) (+22ms) (98/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.41.16_1Uj1nk.webp (reused cache entry) (+8ms) (99/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.44.41_JxREw.webp (reused cache entry) (+10ms) (100/268)
+13:17:44   ▶ /_astro/CleanShot 2024-05-24 at 23.38.41_Z2GkjB.webp (reused cache entry) (+12ms) (101/268)
+13:17:44   ▶ /_astro/7EztNP_Z1y2mPo.webp (reused cache entry) (+14ms) (102/268)
+13:17:44   ▶ /_astro/eaBepY_1qoT0S.webp (reused cache entry) (+13ms) (103/268)
+13:17:44   ▶ /_astro/hLCXVo_16WLe8.webp (reused cache entry) (+13ms) (104/268)
+13:17:44   ▶ /_astro/0vYb0E_1cwfhX.webp (reused cache entry) (+15ms) (105/268)
+13:17:44   ▶ /_astro/Z7l8fh_Z1Ow5tG.webp (reused cache entry) (+12ms) (106/268)
+13:17:44   ▶ /_astro/I7TfBF_1A4rGK.webp (reused cache entry) (+14ms) (107/268)
+13:17:44   ▶ /_astro/CZoyd2_Z2vXayv.webp (reused cache entry) (+11ms) (108/268)
+13:17:44   ▶ /_astro/bZhP81_quLXd.webp (reused cache entry) (+13ms) (109/268)
+13:17:44   ▶ /_astro/1jUOsi_7nkWj.webp (reused cache entry) (+11ms) (110/268)
+13:17:44   ▶ /_astro/RtjtL4_ZKJJAg.webp (reused cache entry) (+11ms) (111/268)
+13:17:44   ▶ /_astro/zpTVqZ_Z1iOUhn.webp (reused cache entry) (+6ms) (112/268)
+13:17:44   ▶ /_astro/KMviXh_2ce4DI.webp (reused cache entry) (+4ms) (113/268)
+13:17:44   ▶ /_astro/OwYPjN_Z16Ougc.webp (reused cache entry) (+5ms) (114/268)
+13:17:44   ▶ /_astro/qTU0Vu_Z1mHJAe.webp (reused cache entry) (+4ms) (115/268)
+13:17:44   ▶ /_astro/6LhOyg_Z248CDU.webp (reused cache entry) (+5ms) (116/268)
+13:17:44   ▶ /_astro/mG9zoE_Z1mPH13.webp (reused cache entry) (+6ms) (117/268)
+13:17:44   ▶ /_astro/LQoulR_Z13VNVq.webp (reused cache entry) (+6ms) (118/268)
+13:17:44   ▶ /_astro/T9uCpZ_2og1fh.webp (reused cache entry) (+5ms) (119/268)
+13:17:44   ▶ /_astro/bekSIN_1ckQJi.webp (reused cache entry) (+7ms) (120/268)
+13:17:44   ▶ /_astro/TJVib8_IqXVT.webp (reused cache entry) (+7ms) (121/268)
+13:17:44   ▶ /_astro/xnzOaU_1YNGHS.webp (reused cache entry) (+9ms) (122/268)
+13:17:44   ▶ /_astro/nuWwsv_Z1XEJVQ.webp (reused cache entry) (+13ms) (123/268)
+13:17:44   ▶ /_astro/aeaf40f11f97cb33a76438383b0b48e8_Z1fq10l.webp (reused cache entry) (+12ms) (124/268)
+13:17:44   ▶ /_astro/9cc5b3de4b657cd4a21d00304f42a485_2hIhQw.webp (reused cache entry) (+13ms) (125/268)
+13:17:44   ▶ /_astro/20250104002031815_Z20EseV.webp (reused cache entry) (+10ms) (126/268)
+13:17:44   ▶ /_astro/20250104001833151_13f3Cp.webp (reused cache entry) (+13ms) (127/268)
+13:17:44   ▶ /_astro/080040385a974dbd29ec444d8e6a29bb_OLPF6.webp (reused cache entry) (+13ms) (128/268)
+13:17:44   ▶ /_astro/5Qna6L_g9Aoe.webp (reused cache entry) (+15ms) (129/268)
+13:17:44   ▶ /_astro/20250104002250447_Red2t.webp (reused cache entry) (+10ms) (130/268)
+13:17:44   ▶ /_astro/20250104002316462_jJh5X.webp (reused cache entry) (+5ms) (131/268)
+13:17:44   ▶ /_astro/20250104002213532_hgu4K.webp (reused cache entry) (+12ms) (132/268)
+13:17:44   ▶ /_astro/20250104002417153_Kdj2U.webp (reused cache entry) (+6ms) (133/268)
+13:17:44   ▶ /_astro/20250104002108886_2ggoPH.webp (reused cache entry) (+13ms) (134/268)
+13:17:44   ▶ /_astro/20250104002440416_PWlsG.webp (reused cache entry) (+4ms) (135/268)
+13:17:44   ▶ /_astro/20250104002338271_Z1ulbXd.webp (reused cache entry) (+6ms) (136/268)
+13:17:44   ▶ /_astro/20250104002510891_Z1vnqiU.webp (reused cache entry) (+5ms) (137/268)
+13:17:44   ▶ /_astro/20250104002535913_j4MVx.webp (reused cache entry) (+5ms) (138/268)
+13:17:44   ▶ /_astro/20250104002557076_Zy19pa.webp (reused cache entry) (+3ms) (139/268)
+13:17:44   ▶ /_astro/20250102190608963_1Ogu4w.webp (reused cache entry) (+2ms) (140/268)
+13:17:44   ▶ /_astro/20250102190543663_Z1fb6VE.webp (reused cache entry) (+2ms) (141/268)
+13:17:44   ▶ /_astro/20250102190432190_Z1asaGd.webp (reused cache entry) (+3ms) (142/268)
+13:17:44   ▶ /_astro/20250102190711960_A4uvA.webp (reused cache entry) (+4ms) (143/268)
+13:17:44   ▶ /_astro/20250102190652322_1s6H9q.webp (reused cache entry) (+4ms) (144/268)
+13:17:44   ▶ /_astro/20250102190519994_QpShe.webp (reused cache entry) (+6ms) (145/268)
+13:17:44   ▶ /_astro/20250102190631100_lAUeB.webp (reused cache entry) (+6ms) (146/268)
+13:17:44   ▶ /_astro/20250102190754384_2tpN1S.webp (reused cache entry) (+4ms) (147/268)
+13:17:44   ▶ /_astro/20250102190739085_1v4zyk.webp (reused cache entry) (+4ms) (148/268)
+13:17:44   ▶ /_astro/20250102190813750_yLGJh.webp (reused cache entry) (+4ms) (149/268)
+13:17:44   ▶ /_astro/20250102190829917_7d2gf.webp (reused cache entry) (+6ms) (150/268)
+13:17:44   ▶ /_astro/20250102190900225_Z2pJWna.webp (reused cache entry) (+6ms) (151/268)
+13:17:44   ▶ /_astro/20250102190842697_Z174mr8.webp (reused cache entry) (+6ms) (152/268)
+13:17:44   ▶ /_astro/f1beTf_YBpjT.webp (reused cache entry) (+5ms) (153/268)
+13:17:44   ▶ /_astro/uvN7La_ZoWKFm.webp (reused cache entry) (+6ms) (154/268)
+13:17:44   ▶ /_astro/202307042132590_Z1E7XW1.webp (reused cache entry) (+7ms) (155/268)
+13:17:44   ▶ /_astro/202307042138688_1KtDdW.webp (reused cache entry) (+8ms) (156/268)
+13:17:44   ▶ /_astro/202307042134845_2ucz6q.webp (reused cache entry) (+14ms) (157/268)
+13:17:44   ▶ /_astro/202307042146685_Z2wgeHX.webp (reused cache entry) (+22ms) (158/268)
+13:17:44   ▶ /_astro/202307042133160_Z1jshMT.webp (reused cache entry) (+28ms) (159/268)
+13:17:44   ▶ /_astro/202307042147331_Z1V8pKa.webp (reused cache entry) (+33ms) (160/268)
+13:17:44   ▶ /_astro/202304251333863_nkTx2.webp (reused cache entry) (+35ms) (161/268)
+13:17:44   ▶ /_astro/202304251400967_ZQj1j8.webp (reused cache entry) (+34ms) (162/268)
+13:17:44   ▶ /_astro/202304251358159_2bUw1i.webp (reused cache entry) (+38ms) (163/268)
+13:17:44   ▶ /_astro/202304251402932_TpEDy.webp (reused cache entry) (+37ms) (164/268)
+13:17:44   ▶ /_astro/202304251351445_Z21BpS8.webp (reused cache entry) (+35ms) (165/268)
+13:17:44   ▶ /_astro/202304251427618_mREft.webp (reused cache entry) (+28ms) (166/268)
+13:17:44   ▶ /_astro/202304251352510_eCzY4.webp (reused cache entry) (+35ms) (167/268)
+13:17:44   ▶ /_astro/202304251432042_GnQRe.webp (reused cache entry) (+13ms) (168/268)
+13:17:44   ▶ /_astro/202304251435279_27a0se.webp (reused cache entry) (+10ms) (169/268)
+13:17:44   ▶ /_astro/202304251430344_1nlEYE.webp (reused cache entry) (+22ms) (170/268)
+13:17:44   ▶ /_astro/qKcIrX_YXrGK.webp (reused cache entry) (+6ms) (171/268)
+13:17:44   ▶ /_astro/CleanShot 2024-11-30 at 16.48.14@2x_ZAdfh2.webp (reused cache entry) (+7ms) (172/268)
+13:17:44   ▶ /_astro/202303161427919_ZGMJGr.webp (reused cache entry) (+2ms) (173/268)
+13:17:44   ▶ /_astro/zhOyZB_Z11q78d.webp (reused cache entry) (+5ms) (174/268)
+13:17:44   ▶ /_astro/CleanShot 2024-11-30 at 16.49.13@2x_ZPSQbp.webp (reused cache entry) (+7ms) (175/268)
+13:17:44   ▶ /_astro/CleanShot 2024-11-30 at 16.47.04@2x_Baix1.webp (reused cache entry) (+5ms) (176/268)
+13:17:44   ▶ /_astro/202302282158717_ZwDoHQ.webp (reused cache entry) (+4ms) (177/268)
+13:17:44   ▶ /_astro/202302282200636_Z2eyyPx.webp (reused cache entry) (+4ms) (178/268)
+13:17:44   ▶ /_astro/202302282324801_ZgHD5O.webp (reused cache entry) (+4ms) (179/268)
+13:17:44   ▶ /_astro/202302281259170_ZmX0Pk.webp (reused cache entry) (+5ms) (180/268)
+13:17:44   ▶ /_astro/202302251016722_FVd5r.webp (reused cache entry) (+5ms) (181/268)
+13:17:44   ▶ /_astro/202302282313956_ZNaiot.webp (reused cache entry) (+8ms) (182/268)
+13:17:44   ▶ /_astro/202302242253084_1DQr7R.webp (reused cache entry) (+8ms) (183/268)
+13:17:44   ▶ /_astro/202302282327529_2h20rz.webp (reused cache entry) (+8ms) (184/268)
+13:17:44   ▶ /_astro/202212041706685_bvkcY.webp (reused cache entry) (+6ms) (185/268)
+13:17:44   ▶ /_astro/202212041155318_yLGJf.webp (reused cache entry) (+8ms) (186/268)
+13:17:44   ▶ /_astro/202212041733152_EEdo4.webp (reused cache entry) (+8ms) (187/268)
+13:17:44   ▶ /_astro/202212041732431_Rn3oN.webp (reused cache entry) (+9ms) (188/268)
+13:17:44   ▶ /_astro/20201107144548_221aOm.webp (reused cache entry) (+10ms) (189/268)
+13:17:44   ▶ /_astro/202212041144722_1o9iqI.webp (reused cache entry) (+11ms) (190/268)
+13:17:44   ▶ /_astro/A1JMzy_1UP9UJ.webp (reused cache entry) (+8ms) (191/268)
+13:17:44   ▶ /_astro/kgsArZ_1RFQro.webp (reused cache entry) (+12ms) (192/268)
+13:17:44   ▶ /_astro/STrhcb_1G4oMz.webp (reused cache entry) (+12ms) (193/268)
+13:17:44   ▶ /_astro/dmhqvv_2ghWop.webp (reused cache entry) (+13ms) (194/268)
+13:17:44   ▶ /_astro/UOVCPO_1e8Mta.webp (reused cache entry) (+15ms) (195/268)
+13:17:44   ▶ /_astro/CleanShot 2024-12-03 at 23.11.40@2x_Z1KDX1L.webp (reused cache entry) (+10ms) (196/268)
+13:17:44   ▶ /_astro/P46IQu_ZCRkyi.webp (reused cache entry) (+13ms) (197/268)
+13:17:44   ▶ /_astro/7S82Gx_Z1FzJSj.webp (reused cache entry) (+14ms) (198/268)
+13:17:44   ▶ /_astro/UPRJBa_Z1O3oEU.webp (reused cache entry) (+13ms) (199/268)
+13:17:44   ▶ /_astro/CleanShot 2024-12-03 at 23.12.42@2x_21hF8H.webp (reused cache entry) (+15ms) (200/268)
+13:17:44   ▶ /_astro/20200312232644_ZO4Cd2.webp (reused cache entry) (+14ms) (201/268)
+13:17:44   ▶ /_astro/20200314111826_1UXI27.webp (reused cache entry) (+9ms) (202/268)
+13:17:44   ▶ /_astro/20200312232901_Z1d9ygG.webp (reused cache entry) (+11ms) (203/268)
+13:17:44   ▶ /_astro/20200312233003_1Fy9WO.webp (reused cache entry) (+9ms) (204/268)
+13:17:44   ▶ /_astro/20200314111835_2nJpY.webp (reused cache entry) (+10ms) (205/268)
+13:17:44   ▶ /_astro/20200314111827_1GLW1f.webp (reused cache entry) (+8ms) (206/268)
+13:17:44   ▶ /_astro/20200314111836_ZbN1zS.webp (reused cache entry) (+11ms) (207/268)
+13:17:44   ▶ /_astro/20200314111837_ZpYMAK.webp (reused cache entry) (+13ms) (208/268)
+13:17:44   ▶ /_astro/20200314142132_2uwMl2.webp (reused cache entry) (+10ms) (209/268)
+13:17:44   ▶ /_astro/20200314141924_1BeydI.webp (reused cache entry) (+21ms) (210/268)
+13:17:44   ▶ /_astro/20200314142146_oHtxn.webp (reused cache entry) (+16ms) (211/268)
+13:17:44   ▶ /_astro/20200314142015_1LIEha.webp (reused cache entry) (+19ms) (212/268)
+13:17:44   ▶ /_astro/20200314142205_ZR2lft.webp (reused cache entry) (+18ms) (213/268)
+13:17:44   ▶ /_astro/20200314142430_ZGzcyT.webp (reused cache entry) (+32ms) (214/268)
+13:17:44   ▶ /_astro/20200314142313_1JlKpw.webp (reused cache entry) (+37ms) (215/268)
+13:17:44   ▶ /_astro/20200314142252_ZCXtG0.webp (reused cache entry) (+42ms) (216/268)
+13:17:44   ▶ /_astro/20200314142415_2o1qAK.webp (reused cache entry) (+42ms) (217/268)
+13:17:44   ▶ /_astro/20200314142805_ZTOH9p.webp (reused cache entry) (+40ms) (218/268)
+13:17:45   ▶ /_astro/20200314142906_Z1XfWj.webp (reused cache entry) (+42ms) (219/268)
+13:17:45   ▶ /_astro/20200314142843_2axDT1.webp (reused cache entry) (+44ms) (220/268)
+13:17:45   ▶ /_astro/20200314142813_Z1BunQQ.webp (reused cache entry) (+51ms) (221/268)
+13:17:45   ▶ /_astro/20200314142444_1k46yy.webp (reused cache entry) (+63ms) (222/268)
+13:17:45   ▶ /_astro/20200314142931_Za9uV2.webp (reused cache entry) (+54ms) (223/268)
+13:17:45   ▶ /_astro/20200314142944_25Fzdi.webp (reused cache entry) (+41ms) (224/268)
+13:17:45   ▶ /_astro/20200314143028_Z1nO1WN.webp (reused cache entry) (+38ms) (225/268)
+13:17:45   ▶ /_astro/20200314143010_Z2tGg2M.webp (reused cache entry) (+43ms) (226/268)
+13:17:45   ▶ /_astro/20200314143021_ewm8h.webp (reused cache entry) (+40ms) (227/268)
+13:17:45   ▶ /_astro/20200314143040_1ilLI5.webp (reused cache entry) (+37ms) (228/268)
+13:17:45   ▶ /_astro/20200225041048_ZqwEdv.webp (reused cache entry) (+21ms) (229/268)
+13:17:45   ▶ /_astro/20200225041047_ZckScD.webp (reused cache entry) (+22ms) (230/268)
+13:17:45   ▶ /_astro/20200314143052_Z1hNuUE.webp (reused cache entry) (+34ms) (231/268)
+13:17:45   ▶ /_astro/20200314143115_1zQI1W.webp (reused cache entry) (+32ms) (232/268)
+13:17:45   ▶ /_astro/20200225041052_Z1a9LKi.webp (reused cache entry) (+23ms) (233/268)
+13:17:45   ▶ /_astro/20200225041049_ZEIqen.webp (reused cache entry) (+20ms) (234/268)
+13:17:45   ▶ /_astro/20200225041045_g2DO6.webp (reused cache entry) (+18ms) (235/268)
+13:17:45   ▶ /_astro/20200225041044_uepOX.webp (reused cache entry) (+14ms) (236/268)
+13:17:45   ▶ /_astro/20200225041046_1PRNe.webp (reused cache entry) (+25ms) (237/268)
+13:17:45   ▶ /_astro/20201130231457_2amw7i.webp (reused cache entry) (+14ms) (238/268)
+13:17:45   ▶ /_astro/20200225041051_ZUX0Jq.webp (reused cache entry) (+25ms) (239/268)
+13:17:45   ▶ /_astro/20201130231358_ZnIOX2.webp (reused cache entry) (+13ms) (240/268)
+13:17:45   ▶ /_astro/20201130231220_1g9g95.webp (reused cache entry) (+13ms) (241/268)
+13:17:45   ▶ /_astro/20200225041050_ZGLeIy.webp (reused cache entry) (+19ms) (242/268)
+13:17:45   ▶ /_astro/1P42qR_1NsFOp.webp (reused cache entry) (+8ms) (243/268)
+13:17:45   ▶ /_astro/Vjuhv6_Z1K8tSl.webp (reused cache entry) (+4ms) (244/268)
+13:17:45   ▶ /_astro/T9SPBO_ZkuSKt.webp (reused cache entry) (+5ms) (245/268)
+13:17:45   ▶ /_astro/uJvjeg_P7WGL.webp (reused cache entry) (+12ms) (246/268)
+13:17:45   ▶ /_astro/JF0xnb_13EOoi.webp (reused cache entry) (+17ms) (247/268)
+13:17:45   ▶ /_astro/1CYNSn_2o16eD.webp (reused cache entry) (+13ms) (248/268)
+13:17:45   ▶ /_astro/pTBdej_fHReM.webp (reused cache entry) (+21ms) (249/268)
+13:17:45   ▶ /_astro/Z7X8tk_Z23w438.webp (reused cache entry) (+35ms) (250/268)
+13:17:45   ▶ /_astro/nLFsIv_Z1QDfTK.webp (reused cache entry) (+41ms) (251/268)
+13:17:45   ▶ /_astro/FDeQzw_ZKQ7M2.webp (reused cache entry) (+41ms) (252/268)
+13:17:45   ▶ /_astro/lyS7U7_ZYoHIs.webp (reused cache entry) (+40ms) (253/268)
+13:17:45   ▶ /_astro/odSGxA_DjyW0.webp (reused cache entry) (+45ms) (254/268)
+13:17:45   ▶ /_astro/20201130233051_ZTiKYn.webp (reused cache entry) (+46ms) (255/268)
+13:17:45   ▶ /_astro/ZvlNUr_Z2knLJK.webp (reused cache entry) (+51ms) (256/268)
+13:17:45   ▶ /_astro/SkLFKY_Z1KV0aq.webp (reused cache entry) (+51ms) (257/268)
+13:17:45   ▶ /_astro/20201221133145_Z1yju9e.webp (reused cache entry) (+37ms) (258/268)
+13:17:45   ▶ /_astro/20201221133203_2tjzRI.webp (reused cache entry) (+23ms) (259/268)
+13:17:45   ▶ /_astro/20201221133215_Z6PGL1.webp (reused cache entry) (+16ms) (260/268)
+13:17:45   ▶ /_astro/20201221133241_ZtdHKB.webp (reused cache entry) (+17ms) (261/268)
+13:17:45   ▶ /_astro/20201011184505_Z6yMdx.webp (reused cache entry) (+16ms) (262/268)
+13:17:45   ▶ /_astro/20201011184525_I3Qlo.webp (reused cache entry) (+10ms) (263/268)
+13:17:45   ▶ /_astro/20201130231745_8iJVx.webp (reused cache entry) (+6ms) (264/268)
+13:17:45   ▶ /_astro/20201011193834_ZWRI1f.webp (reused cache entry) (+10ms) (265/268)
+13:17:45   ▶ /_astro/20201130232444_ZqEbBo.webp (reused cache entry) (+9ms) (266/268)
+13:17:45   ▶ /_astro/aYdwIr_Z12P859.webp (reused cache entry) (+62ms) (267/268)
+13:17:45   ▶ /_astro/20201130232312_1axK8g.webp (reused cache entry) (+9ms) (268/268)
+13:17:45 ✓ Completed in 436ms.
+
+13:17:45 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+13:17:45 [build] 133 page(s) built in 51.95s
+13:17:45 [build] Complete!
+real 54.39
+user 23.30
+sys 5.55
+          1894481920  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             1515822  page reclaims
+                3401  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                2703  messages sent
+                4678  messages received
+                   0  signals received
+                9458  voluntary context switches
+              147046  involuntary context switches
+          1752588112  instructions retired
+           642075527  cycles elapsed
+            93288448  peak memory footprint

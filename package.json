@@ -7,6 +7,7 @@
 		"start": "astro dev",
 		"check": "astro check",
 		"build": "node scripts/generate-stats.js && astro build && pagefind --site dist",
+		"build:fast": "FAST_BUILD=1 node scripts/generate-stats.js && FAST_BUILD=1 astro build",
 		"preview": "astro preview",
 		"astro": "astro",
 		"type-check": "tsc --noEmit --isolatedDeclarations",
