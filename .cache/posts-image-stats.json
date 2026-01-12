@@ -1,0 +1,164 @@
+{
+  "generatedAt": "2026-01-12T05:46:54.515Z",
+  "totalPosts": 121,
+  "totalExt": {
+    "png": 199,
+    "jpg": 47,
+    "jpeg": 13,
+    "tif": 6,
+    "webp": 5
+  },
+  "topByImages": [
+    {
+      "filePath": "src/content/posts/diary8.md",
+      "images": 31,
+      "extCounts": {
+        "jpg": 24,
+        "png": 7
+      }
+    },
+    {
+      "filePath": "src/content/posts/design8.md",
+      "images": 26,
+      "extCounts": {
+        "png": 26
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary27.md",
+      "images": 16,
+      "extCounts": {
+        "png": 16
+      }
+    },
+    {
+      "filePath": "src/content/posts/blog1.md",
+      "images": 15,
+      "extCounts": {
+        "png": 15
+      }
+    },
+    {
+      "filePath": "src/content/posts/design7.md",
+      "images": 13,
+      "extCounts": {
+        "png": 13
+      }
+    },
+    {
+      "filePath": "src/content/posts/ai3.md",
+      "images": 12,
+      "extCounts": {
+        "png": 12
+      }
+    },
+    {
+      "filePath": "src/content/posts/design10.md",
+      "images": 10,
+      "extCounts": {
+        "png": 10
+      }
+    },
+    {
+      "filePath": "src/content/posts/design9.md",
+      "images": 10,
+      "extCounts": {
+        "png": 10
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary30.md",
+      "images": 10,
+      "extCounts": {
+        "png": 10
+      }
+    },
+    {
+      "filePath": "src/content/posts/design2.md",
+      "images": 9,
+      "extCounts": {
+        "jpg": 9
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary9.md",
+      "images": 9,
+      "extCounts": {
+        "png": 9
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary18.md",
+      "images": 7,
+      "extCounts": {
+        "png": 7
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary31.md",
+      "images": 7,
+      "extCounts": {
+        "jpeg": 7
+      }
+    },
+    {
+      "filePath": "src/content/posts/design1.md",
+      "images": 6,
+      "extCounts": {
+        "jpeg": 2,
+        "png": 4
+      }
+    },
+    {
+      "filePath": "src/content/posts/design12.md",
+      "images": 6,
+      "extCounts": {
+        "png": 6
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary1.md",
+      "images": 6,
+      "extCounts": {
+        "tif": 6
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary10.md",
+      "images": 6,
+      "extCounts": {
+        "png": 6
+      }
+    },
+    {
+      "filePath": "src/content/posts/ai1.md",
+      "images": 5,
+      "extCounts": {
+        "png": 5
+      }
+    },
+    {
+      "filePath": "src/content/posts/design3.md",
+      "images": 5,
+      "extCounts": {
+        "png": 5
+      }
+    },
+    {
+      "filePath": "src/content/posts/diary38-life-on-the-road.md",
+      "images": 5,
+      "extCounts": {
+        "webp": 5
+      }
+    }
+  ],
+  "topByTif": [
+    {
+      "filePath": "src/content/posts/diary1.md",
+      "images": 6,
+      "extCounts": {
+        "tif": 6
+      }
+    }
+  ]
+}

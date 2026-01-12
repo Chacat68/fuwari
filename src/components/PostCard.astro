@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 import { siteConfig } from "../config";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
-import { renderPostEntry } from "../utils/post-render-cache";
+import { getPostMetadata } from "../utils/post-metadata";
 import { getDir } from "../utils/url-utils";
 import ImageWrapper from "./misc/ImageWrapper.astro";
 import PostMetadata from "./PostMeta.astro";
@@ -46,12 +46,12 @@ const actualImage =
 
 const coverWidth = "28%";
 
-const { remarkPluginFrontmatter: remarkPluginFrontmatterRaw } =
-	await renderPostEntry(entry);
-const remarkPluginFrontmatter = remarkPluginFrontmatterRaw ?? {
-	words: 0,
-	minutes: 0,
-	excerpt: "",
+// 使用预计算的元数据，避免调用 entry.render()
+const postMeta = await getPostMetadata(entry.slug);
+const remarkPluginFrontmatter = {
+	words: postMeta.words,
+	minutes: postMeta.minutes,
+	excerpt: postMeta.excerpt,
 };
 
 // 优先使用 frontmatter 中的 description，如果没有则使用自动生成的 excerpt

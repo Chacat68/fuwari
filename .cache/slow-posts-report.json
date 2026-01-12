@@ -1,0 +1,453 @@
+{
+  "generatedAt": "2026-01-12T05:45:49.216Z",
+  "source": ".cache/slow-routes.json",
+  "top": [
+    {
+      "ms": 5510,
+      "urlPath": "/posts/diary1/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary1",
+      "mdFile": "src/content/posts/diary1.md",
+      "stats": {
+        "filePath": "src/content/posts/diary1.md",
+        "bytes": 2427,
+        "lines": 45,
+        "codeFenceLines": 0,
+        "images": 6,
+        "imageExtCounts": {
+          "tif": 6
+        },
+        "links": 0,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 4840,
+      "urlPath": "/posts/diary8/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary8",
+      "mdFile": "src/content/posts/diary8.md",
+      "stats": {
+        "filePath": "src/content/posts/diary8.md",
+        "bytes": 10569,
+        "lines": 137,
+        "codeFenceLines": 0,
+        "images": 31,
+        "imageExtCounts": {
+          "jpg": 24,
+          "png": 7
+        },
+        "links": 0,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 3640,
+      "urlPath": "/posts/design8/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design8",
+      "mdFile": "src/content/posts/design8.md",
+      "stats": {
+        "filePath": "src/content/posts/design8.md",
+        "bytes": 9625,
+        "lines": 180,
+        "codeFenceLines": 0,
+        "images": 26,
+        "imageExtCounts": {
+          "png": 26
+        },
+        "links": 1,
+        "tables": 2,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 2090,
+      "urlPath": "/posts/diary27/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary27",
+      "mdFile": "src/content/posts/diary27.md",
+      "stats": {
+        "filePath": "src/content/posts/diary27.md",
+        "bytes": 6033,
+        "lines": 114,
+        "codeFenceLines": 0,
+        "images": 16,
+        "imageExtCounts": {
+          "png": 16
+        },
+        "links": 12,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1910,
+      "urlPath": "/posts/blog1/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "blog1",
+      "mdFile": "src/content/posts/blog1.md",
+      "stats": {
+        "filePath": "src/content/posts/blog1.md",
+        "bytes": 5804,
+        "lines": 127,
+        "codeFenceLines": 0,
+        "images": 15,
+        "imageExtCounts": {
+          "png": 15
+        },
+        "links": 4,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1770,
+      "urlPath": "/posts/diary30/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary30",
+      "mdFile": "src/content/posts/diary30.md",
+      "stats": {
+        "filePath": "src/content/posts/diary30.md",
+        "bytes": 4023,
+        "lines": 81,
+        "codeFenceLines": 0,
+        "images": 10,
+        "imageExtCounts": {
+          "png": 10
+        },
+        "links": 3,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1570,
+      "urlPath": "/posts/ai3/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "ai3",
+      "mdFile": "src/content/posts/ai3.md",
+      "stats": {
+        "filePath": "src/content/posts/ai3.md",
+        "bytes": 8387,
+        "lines": 210,
+        "codeFenceLines": 2,
+        "images": 12,
+        "imageExtCounts": {
+          "png": 12
+        },
+        "links": 8,
+        "tables": 22,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1490,
+      "urlPath": "/posts/design10/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design10",
+      "mdFile": "src/content/posts/design10.md",
+      "stats": {
+        "filePath": "src/content/posts/design10.md",
+        "bytes": 6532,
+        "lines": 182,
+        "codeFenceLines": 0,
+        "images": 10,
+        "imageExtCounts": {
+          "png": 10
+        },
+        "links": 6,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1420,
+      "urlPath": "/posts/design7/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design7",
+      "mdFile": "src/content/posts/design7.md",
+      "stats": {
+        "filePath": "src/content/posts/design7.md",
+        "bytes": 5929,
+        "lines": 120,
+        "codeFenceLines": 0,
+        "images": 13,
+        "imageExtCounts": {
+          "png": 13
+        },
+        "links": 5,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1340,
+      "urlPath": "/posts/design2/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design2",
+      "mdFile": "src/content/posts/design2.md",
+      "stats": {
+        "filePath": "src/content/posts/design2.md",
+        "bytes": 6605,
+        "lines": 121,
+        "codeFenceLines": 0,
+        "images": 9,
+        "imageExtCounts": {
+          "jpg": 9
+        },
+        "links": 3,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1330,
+      "urlPath": "/posts/diary9/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary9",
+      "mdFile": "src/content/posts/diary9.md",
+      "stats": {
+        "filePath": "src/content/posts/diary9.md",
+        "bytes": 4412,
+        "lines": 76,
+        "codeFenceLines": 0,
+        "images": 9,
+        "imageExtCounts": {
+          "png": 9
+        },
+        "links": 0,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1320,
+      "urlPath": "/posts/design9/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design9",
+      "mdFile": "src/content/posts/design9.md",
+      "stats": {
+        "filePath": "src/content/posts/design9.md",
+        "bytes": 3681,
+        "lines": 84,
+        "codeFenceLines": 0,
+        "images": 10,
+        "imageExtCounts": {
+          "png": 10
+        },
+        "links": 1,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 1030,
+      "urlPath": "/about/index.html",
+      "pageFile": "src/pages/about.astro",
+      "slug": null,
+      "mdFile": null,
+      "stats": null
+    },
+    {
+      "ms": 878,
+      "urlPath": "/posts/diary31/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary31",
+      "mdFile": "src/content/posts/diary31.md",
+      "stats": {
+        "filePath": "src/content/posts/diary31.md",
+        "bytes": 4084,
+        "lines": 69,
+        "codeFenceLines": 0,
+        "images": 7,
+        "imageExtCounts": {
+          "jpeg": 7
+        },
+        "links": 0,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 871,
+      "urlPath": "/posts/design1/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design1",
+      "mdFile": "src/content/posts/design1.md",
+      "stats": {
+        "filePath": "src/content/posts/design1.md",
+        "bytes": 5930,
+        "lines": 111,
+        "codeFenceLines": 0,
+        "images": 6,
+        "imageExtCounts": {
+          "jpeg": 2,
+          "png": 4
+        },
+        "links": 0,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 870,
+      "urlPath": "/posts/diary10/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary10",
+      "mdFile": "src/content/posts/diary10.md",
+      "stats": {
+        "filePath": "src/content/posts/diary10.md",
+        "bytes": 3442,
+        "lines": 60,
+        "codeFenceLines": 0,
+        "images": 6,
+        "imageExtCounts": {
+          "png": 6
+        },
+        "links": 0,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 850,
+      "urlPath": "/posts/design12/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design12",
+      "mdFile": "src/content/posts/design12.md",
+      "stats": {
+        "filePath": "src/content/posts/design12.md",
+        "bytes": 7542,
+        "lines": 134,
+        "codeFenceLines": 0,
+        "images": 6,
+        "imageExtCounts": {
+          "png": 6
+        },
+        "links": 1,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 806,
+      "urlPath": "/posts/diary18/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "diary18",
+      "mdFile": "src/content/posts/diary18.md",
+      "stats": {
+        "filePath": "src/content/posts/diary18.md",
+        "bytes": 2695,
+        "lines": 60,
+        "codeFenceLines": 0,
+        "images": 7,
+        "imageExtCounts": {
+          "png": 7
+        },
+        "links": 6,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 732,
+      "urlPath": "/posts/ai1/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "ai1",
+      "mdFile": "src/content/posts/ai1.md",
+      "stats": {
+        "filePath": "src/content/posts/ai1.md",
+        "bytes": 9842,
+        "lines": 164,
+        "codeFenceLines": 0,
+        "images": 5,
+        "imageExtCounts": {
+          "png": 5
+        },
+        "links": 10,
+        "tables": 2,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    },
+    {
+      "ms": 697,
+      "urlPath": "/posts/design3/index.html",
+      "pageFile": "src/pages/posts/[...slug].astro",
+      "slug": "design3",
+      "mdFile": "src/content/posts/design3.md",
+      "stats": {
+        "filePath": "src/content/posts/design3.md",
+        "bytes": 4773,
+        "lines": 68,
+        "codeFenceLines": 0,
+        "images": 5,
+        "imageExtCounts": {
+          "png": 5
+        },
+        "links": 1,
+        "tables": 0,
+        "mathBlocks": 0,
+        "githubAdmonitions": 0,
+        "directiveSyntaxLines": 0,
+        "htmlTags": 0
+      }
+    }
+  ]
+}

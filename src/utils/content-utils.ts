@@ -4,20 +4,14 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
 
-let sortedPostsProdCache: Promise<CollectionEntry<"posts">[]> | undefined;
-let tagListProdCache: Promise<Tag[]> | undefined;
-let categoryListProdCache: Promise<Category[]> | undefined;
+// 缓存 getSortedPosts 结果，避免重复调用
+let sortedPostsCache: CollectionEntry<"posts">[] | null = null;
 
 export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
-	if (import.meta.env.PROD) {
-		sortedPostsProdCache ??= getSortedPostsImpl();
-		return sortedPostsProdCache;
+	if (sortedPostsCache) {
+		return sortedPostsCache;
 	}
 
-	return getSortedPostsImpl();
-}
-
-async function getSortedPostsImpl(): Promise<CollectionEntry<"posts">[]> {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
@@ -37,6 +31,7 @@ async function getSortedPostsImpl(): Promise<CollectionEntry<"posts">[]> {
 		sorted[i].data.prevTitle = sorted[i + 1].data.title;
 	}
 
+	sortedPostsCache = sorted;
 	return sorted;
 }
 
@@ -46,15 +41,6 @@ export type Tag = {
 };
 
 export async function getTagList(): Promise<Tag[]> {
-	if (import.meta.env.PROD) {
-		tagListProdCache ??= getTagListImpl();
-		return tagListProdCache;
-	}
-
-	return getTagListImpl();
-}
-
-async function getTagListImpl(): Promise<Tag[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
@@ -82,15 +68,6 @@ export type Category = {
 };
 
 export async function getCategoryList(): Promise<Category[]> {
-	if (import.meta.env.PROD) {
-		categoryListProdCache ??= getCategoryListImpl();
-		return categoryListProdCache;
-	}
-
-	return getCategoryListImpl();
-}
-
-async function getCategoryListImpl(): Promise<Category[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});

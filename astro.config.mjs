@@ -25,9 +25,6 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
-const isFastBuild =
-	process.env.FAST_BUILD === "1" || process.env.FAST_BUILD === "true";
-
 // https://astro.build/config
 export default defineConfig({
 	site:
@@ -37,6 +34,10 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	compressHTML: true,
+	// 启用并发页面构建以加速静态生成
+	experimental: {
+		contentIntellisense: true,
+	},
 	image: {
 		domains: ["blog-1259751088.cos.ap-shanghai.myqcloud.com"],
 		remotePatterns: [
@@ -50,6 +51,8 @@ export default defineConfig({
 	},
 	build: {
 		inlineStylesheets: "auto",
+		// 增加并发页面构建数量
+		concurrency: 10,
 	},
 	integrations: [
 		tailwind({
@@ -124,55 +127,51 @@ export default defineConfig({
 			},
 		}),
 
-		...(!isFastBuild
-			? [
-					expressiveCode({
-						themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
-						plugins: [
-							pluginCollapsibleSections(),
-							pluginLineNumbers(),
-							pluginLanguageBadge(),
-							pluginCustomCopyButton(),
-						],
-						defaultProps: {
-							wrap: true,
-							overridesByLang: {
-								shellsession: {
-									showLineNumbers: false,
-								},
-							},
-						},
-						styleOverrides: {
-							codeBackground: "var(--codeblock-bg)",
-							borderRadius: "0.75rem",
-							borderColor: "none",
-							codeFontSize: "0.875rem",
-							codeFontFamily:
-								"'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-							codeLineHeight: "1.5rem",
-							frames: {
-								editorBackground: "var(--codeblock-bg)",
-								terminalBackground: "var(--codeblock-bg)",
-								terminalTitlebarBackground: "var(--codeblock-topbar-bg)",
-								editorTabBarBackground: "var(--codeblock-topbar-bg)",
-								editorActiveTabBackground: "none",
-								editorActiveTabIndicatorBottomColor: "var(--primary)",
-								editorActiveTabIndicatorTopColor: "none",
-								editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
-								terminalTitlebarBorderBottomColor: "none",
-							},
-							textMarkers: {
-								delHue: 0,
-								insHue: 180,
-								markHue: 250,
-							},
-						},
-						frames: {
-							showCopyToClipboardButton: false,
-						},
-					}),
-				]
-			: []),
+		expressiveCode({
+			themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
+			plugins: [
+				pluginCollapsibleSections(),
+				pluginLineNumbers(),
+				pluginLanguageBadge(),
+				pluginCustomCopyButton(),
+			],
+			defaultProps: {
+				wrap: true,
+				overridesByLang: {
+					shellsession: {
+						showLineNumbers: false,
+					},
+				},
+			},
+			styleOverrides: {
+				codeBackground: "var(--codeblock-bg)",
+				borderRadius: "0.75rem",
+				borderColor: "none",
+				codeFontSize: "0.875rem",
+				codeFontFamily:
+					"'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeLineHeight: "1.5rem",
+				frames: {
+					editorBackground: "var(--codeblock-bg)",
+					terminalBackground: "var(--codeblock-bg)",
+					terminalTitlebarBackground: "var(--codeblock-topbar-bg)",
+					editorTabBarBackground: "var(--codeblock-topbar-bg)",
+					editorActiveTabBackground: "none",
+					editorActiveTabIndicatorBottomColor: "var(--primary)",
+					editorActiveTabIndicatorTopColor: "none",
+					editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
+					terminalTitlebarBorderBottomColor: "none",
+				},
+				textMarkers: {
+					delHue: 0,
+					insHue: 180,
+					markHue: 250,
+				},
+			},
+			frames: {
+				showCopyToClipboardButton: false,
+			},
+		}),
 		svelte(),
 		sitemap(),
 	],
@@ -249,7 +248,6 @@ export default defineConfig({
 		build: {
 			cssCodeSplit: true,
 			minify: "esbuild",
-			sourcemap: false,
 			rollupOptions: {
 				onwarn(warning, warn) {
 					// temporarily suppress this warning
