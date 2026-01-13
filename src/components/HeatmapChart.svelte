@@ -44,6 +44,141 @@ let longestStreak = 0;
 let avgPerActiveDay = 0;
 let avgPerDay = 0;
 
+// 年份切换功能
+let displayYear = year;
+let minYear = year;
+let maxYear = year;
+
+// 计算可用的年份范围
+function calculateYearRange() {
+	if (sortedPosts.length === 0) {
+		minYear = year;
+		maxYear = year;
+		return;
+	}
+
+	let earliest = year;
+	let latest = year;
+
+	sortedPosts.forEach((post) => {
+		if (post?.data?.published) {
+			const postYear = new Date(post.data.published).getUTCFullYear();
+			if (postYear < earliest) earliest = postYear;
+			if (postYear > latest) latest = postYear;
+		}
+	});
+
+	minYear = earliest;
+	maxYear = latest;
+}
+
+// 切换到上一年
+function goToPrevYear() {
+	if (displayYear > minYear) {
+		displayYear--;
+		refreshHeatmapData();
+	}
+}
+
+// 切换到下一年
+function goToNextYear() {
+	if (displayYear < maxYear) {
+		displayYear++;
+		refreshHeatmapData();
+	}
+}
+
+// 刷新热力图数据
+function refreshHeatmapData() {
+	const { start, end } = getDateRange(displayYear);
+	const postsByDate = new Map<string, Post[]>();
+	const startStr = formatDate(start);
+	const endStr = formatDate(end);
+
+	// 按日期分组文章（用于热力图显示）
+	sortedPosts.forEach((post) => {
+		if (!post || !post.data || !post.data.published) {
+			return;
+		}
+		const dateStr = formatDate(post.data.published);
+		if (dateStr < startStr || dateStr > endStr) return;
+		if (!postsByDate.has(dateStr)) {
+			postsByDate.set(dateStr, []);
+		}
+		const posts = postsByDate.get(dateStr);
+		if (posts) {
+			posts.push(post);
+		}
+	});
+
+	// 生成所有日期的数据
+	const data: DayData[] = [];
+	const currentDate = new Date(start);
+	let maxCount = 0;
+
+	const endDateStr = formatDate(end);
+	while (true) {
+		const dateStr = formatDate(currentDate);
+		const posts = postsByDate.get(dateStr) || [];
+		const count = posts.length;
+
+		if (count > maxCount) {
+			maxCount = count;
+		}
+
+		data.push({
+			date: dateStr,
+			count,
+			level: 0,
+			posts,
+		});
+
+		if (dateStr === endDateStr) {
+			break;
+		}
+
+		currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+	}
+
+	// 计算活跃度等级和统计信息
+	let postsCount = 0;
+	let activeDaysCount = 0;
+	let maxPostsInDayYear = 0;
+
+	data.forEach((day) => {
+		day.level = getActivityLevel(day.count, maxCount);
+		postsCount += day.count;
+		if (day.count > 0) {
+			activeDaysCount++;
+		}
+		if (day.count > maxPostsInDayYear) {
+			maxPostsInDayYear = day.count;
+		}
+	});
+
+	// streak 计算
+	let current = 0;
+	let longest = 0;
+	for (const day of data) {
+		if (day.count > 0) {
+			current++;
+			if (current > longest) longest = current;
+		} else {
+			current = 0;
+		}
+	}
+
+	heatmapData = data;
+	totalPostsCount = postsCount;
+	activeDays = activeDaysCount;
+	maxPostsInDay = maxPostsInDayYear;
+	longestStreak = longest;
+	currentStreak =
+		data.length > 0 && data[data.length - 1].count > 0 ? current : 0;
+	avgPerActiveDay = activeDaysCount > 0 ? postsCount / activeDaysCount : 0;
+	avgPerDay = data.length > 0 ? postsCount / data.length : 0;
+}
+
 // 响应式计算周数据和月份标签
 // 注意：Svelte 的依赖追踪是静态的，需要显式引用 heatmapData
 $: {
@@ -150,96 +285,9 @@ function handleBlur() {
 
 // 初始化热力图数据
 onMount(() => {
-	const { start, end } = getDateRange(year);
-	const postsByDate = new Map<string, Post[]>();
-	const startStr = formatDate(start);
-	const endStr = formatDate(end);
-
-	// 按日期分组文章（用于热力图显示）
-	sortedPosts.forEach((post) => {
-		// 安全检查：确保 post 和 post.data 存在，且 published 属性存在
-		if (!post || !post.data || !post.data.published) {
-			console.warn("Invalid post data structure:", post);
-			return;
-		}
-		const dateStr = formatDate(post.data.published);
-		if (dateStr < startStr || dateStr > endStr) return;
-		if (!postsByDate.has(dateStr)) {
-			postsByDate.set(dateStr, []);
-		}
-		const posts = postsByDate.get(dateStr);
-		if (posts) {
-			posts.push(post);
-		}
-	});
-
-	// 生成所有日期的数据
-	const data: DayData[] = [];
-	const currentDate = new Date(start);
-	let maxCount = 0;
-
-	const endDateStr = formatDate(end);
-	while (true) {
-		const dateStr = formatDate(currentDate);
-		const posts = postsByDate.get(dateStr) || [];
-		const count = posts.length;
-
-		if (count > maxCount) {
-			maxCount = count;
-		}
-
-		data.push({
-			date: dateStr,
-			count,
-			level: 0, // 稍后计算
-			posts,
-		});
-
-		// 如果已经处理了结束日期，退出循环
-		if (dateStr === endDateStr) {
-			break;
-		}
-
-		currentDate.setUTCDate(currentDate.getUTCDate() + 1);
-	}
-
-	// 计算活跃度等级和统计信息
-	let postsCount = 0;
-	let activeDaysCount = 0;
-	let maxPostsInDayYear = 0;
-
-	data.forEach((day) => {
-		day.level = getActivityLevel(day.count, maxCount);
-		postsCount += day.count;
-		if (day.count > 0) {
-			activeDaysCount++;
-		}
-		if (day.count > maxPostsInDayYear) {
-			maxPostsInDayYear = day.count;
-		}
-	});
-
-	// streak 计算：以 date 数组为序（连续自然日）
-	let current = 0;
-	let longest = 0;
-	for (const day of data) {
-		if (day.count > 0) {
-			current++;
-			if (current > longest) longest = current;
-		} else {
-			current = 0;
-		}
-	}
-
-	heatmapData = data;
-	totalPostsCount = postsCount;
-	activeDays = activeDaysCount;
-	maxPostsInDay = maxPostsInDayYear;
-	longestStreak = longest;
-	currentStreak =
-		data.length > 0 && data[data.length - 1].count > 0 ? current : 0;
-	avgPerActiveDay = activeDaysCount > 0 ? postsCount / activeDaysCount : 0;
-	avgPerDay = data.length > 0 ? postsCount / data.length : 0;
+	calculateYearRange();
+	displayYear = year;
+	refreshHeatmapData();
 });
 
 // 获取月份标签，基于实际的周数分布
@@ -344,7 +392,31 @@ function getWeeklyData(): DayData[][] {
 
 <div class="heatmap-container">
 	<div class="heatmap-header">
-		<h3 class="text-lg font-bold text-75">{year} 年更新</h3>
+		<div class="year-switcher">
+			<button 
+				class="year-btn" 
+				on:click={goToPrevYear} 
+				disabled={displayYear <= minYear}
+				aria-label="上一年"
+				title="上一年"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<polyline points="15 18 9 12 15 6"></polyline>
+				</svg>
+			</button>
+			<h3 class="text-lg font-bold text-75 year-title">{displayYear} 年</h3>
+			<button 
+				class="year-btn" 
+				on:click={goToNextYear} 
+				disabled={displayYear >= maxYear}
+				aria-label="下一年"
+				title="下一年"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<polyline points="9 18 15 12 9 6"></polyline>
+				</svg>
+			</button>
+		</div>
 		<div class="heatmap-stats">
 			<span class="stat-item text-50">总计 <strong class="text-75">{totalPostsCount}</strong> 篇文章</span>
 			<span class="stat-item text-50">更新 <strong class="text-75">{activeDays}</strong> 天</span>
@@ -379,7 +451,7 @@ function getWeeklyData(): DayData[][] {
 			</div>
 
 			<!-- 热力图方块 -->
-			<div class="heatmap-weeks" role="grid" aria-label={`${year} 年文章更新热力图`} tabindex="0" on:mousemove={handleMouseMove}>
+			<div class="heatmap-weeks" role="grid" aria-label={`${displayYear} 年文章更新热力图`} tabindex="0" on:mousemove={handleMouseMove}>
 				{#each weeklyData as week}
 					<div class="heatmap-week" role="presentation">
 						{#each week as day}
@@ -459,6 +531,49 @@ function getWeeklyData(): DayData[][] {
 		gap: 0.5rem;
 	}
 	
+	.year-switcher {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	
+	.year-title {
+		min-width: 7rem;
+		text-align: center;
+	}
+	
+	.year-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border: none;
+		border-radius: var(--radius-large);
+		background: oklch(var(--btn-content) / 0.1);
+		color: var(--primary);
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+	
+	.year-btn:hover:not(:disabled) {
+		background: oklch(var(--btn-content) / 0.2);
+		transform: scale(1.05);
+	}
+	
+	.year-btn:active:not(:disabled) {
+		transform: scale(0.95);
+	}
+	
+	.year-btn:disabled {
+		opacity: 0.3;
+		cursor: not-allowed;
+	}
+	
+	.year-btn svg {
+		flex-shrink: 0;
+	}
+	
 	.heatmap-stats {
 		display: flex;
 		gap: 0.75rem;
@@ -475,6 +590,7 @@ function getWeeklyData(): DayData[][] {
 		overflow-y: hidden;
 		padding-bottom: 0.25rem;
 		-webkit-overflow-scrolling: touch;
+		width: 100%;
 	}
 
 	.month-labels {
@@ -483,7 +599,6 @@ function getWeeklyData(): DayData[][] {
 		column-gap: var(--gap);
 		align-items: center;
 		margin-bottom: 0.5rem;
-		min-width: calc(1.5rem + (var(--week-count) * var(--cell)) + ((var(--week-count) - 1) * var(--gap)));
 	}
 	
 	.month-label {
@@ -496,7 +611,6 @@ function getWeeklyData(): DayData[][] {
 	.heatmap-grid {
 		display: flex;
 		gap: 0.5rem;
-		min-width: calc(1.5rem + (var(--week-count) * var(--cell)) + ((var(--week-count) - 1) * var(--gap)));
 	}
 	
 	.weekday-labels {
@@ -517,7 +631,6 @@ function getWeeklyData(): DayData[][] {
 	.heatmap-weeks {
 		display: flex;
 		gap: var(--gap);
-		flex: 1;
 	}
 	
 	.heatmap-week {
