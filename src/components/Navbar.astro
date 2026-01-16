@@ -44,7 +44,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
                 else if (l.url.includes("neodb")) iconName = "material-symbols:interests-outline-rounded";
                 else iconName = "material-symbols:link";
                 
-                return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
+                return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null} rel={l.external ? "noopener noreferrer" : undefined}
                           class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"
                 >
                     <div class="flex items-center">
@@ -117,6 +117,7 @@ loadButtonScript();
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
+const isDev = import.meta.env.DEV;
 async function loadPagefind() {
     try {
         const response = await fetch(scriptUrl, { method: 'HEAD' });
@@ -133,7 +134,9 @@ async function loadPagefind() {
         window.pagefind = pagefind;
 
         document.dispatchEvent(new CustomEvent('pagefindready'));
-        console.log('Pagefind loaded and initialized successfully, event dispatched.');
+        if (isDev) {
+            console.log('Pagefind loaded and initialized successfully, event dispatched.');
+        }
     } catch (error) {
         console.error('Failed to load Pagefind:', error);
         window.pagefind = {
@@ -141,7 +144,9 @@ async function loadPagefind() {
             options: () => Promise.resolve(),
         };
         document.dispatchEvent(new CustomEvent('pagefindloaderror'));
-        console.log('Pagefind load error, event dispatched.');
+        if (isDev) {
+            console.log('Pagefind load error, event dispatched.');
+        }
     }
 }
 

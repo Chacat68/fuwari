@@ -12,6 +12,9 @@ let result: SearchResult[] = [];
 let isSearching = false;
 let pagefindLoaded = false;
 let initialized = false;
+const isDev = import.meta.env.DEV;
+let desktopSearchTimer: ReturnType<typeof setTimeout> | null = null;
+let mobileSearchTimer: ReturnType<typeof setTimeout> | null = null;
 
 const fakeResult: SearchResult[] = [
 	{
@@ -44,6 +47,21 @@ const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
 		panel.classList.remove("float-panel-closed");
 	} else {
 		panel.classList.add("float-panel-closed");
+	}
+};
+
+const scheduleSearch = (keyword: string, isDesktop: boolean): void => {
+	const currentTimer = isDesktop ? desktopSearchTimer : mobileSearchTimer;
+	if (currentTimer) {
+		clearTimeout(currentTimer);
+	}
+	const nextTimer = setTimeout(() => {
+		void search(keyword, isDesktop);
+	}, 200);
+	if (isDesktop) {
+		desktopSearchTimer = nextTimer;
+	} else {
+		mobileSearchTimer = nextTimer;
 	}
 };
 
@@ -93,19 +111,23 @@ onMount(() => {
 			typeof window !== "undefined" &&
 			!!window.pagefind &&
 			typeof window.pagefind.search === "function";
-		console.log("Pagefind status on init:", pagefindLoaded);
-		if (keywordDesktop) search(keywordDesktop, true);
-		if (keywordMobile) search(keywordMobile, false);
+		if (isDev) {
+			console.log("Pagefind status on init:", pagefindLoaded);
+		}
 	};
 
 	if (import.meta.env.DEV) {
-		console.log(
-			"Pagefind is not available in development mode. Using mock data.",
-		);
+		if (isDev) {
+			console.log(
+				"Pagefind is not available in development mode. Using mock data.",
+			);
+		}
 		initializeSearch();
 	} else {
 		document.addEventListener("pagefindready", () => {
-			console.log("Pagefind ready event received.");
+			if (isDev) {
+				console.log("Pagefind ready event received.");
+			}
 			initializeSearch();
 		});
 		document.addEventListener("pagefindloaderror", () => {
@@ -118,7 +140,9 @@ onMount(() => {
 		// Fallback in case events are not caught or pagefind is already loaded by the time this script runs
 		setTimeout(() => {
 			if (!initialized) {
-				console.log("Fallback: Initializing search after timeout.");
+				if (isDev) {
+					console.log("Fallback: Initializing search after timeout.");
+				}
 				initializeSearch();
 			}
 		}, 2000); // Adjust timeout as needed
@@ -126,15 +150,11 @@ onMount(() => {
 });
 
 $: if (initialized && keywordDesktop) {
-	(async () => {
-		await search(keywordDesktop, true);
-	})();
+	scheduleSearch(keywordDesktop, true);
 }
 
 $: if (initialized && keywordMobile) {
-	(async () => {
-		await search(keywordMobile, false);
-	})();
+	scheduleSearch(keywordMobile, false);
 }
 </script>
 

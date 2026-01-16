@@ -448,6 +448,7 @@ const breadcrumbStructuredData =
 			});
 		}
 		
+		const isDev = import.meta.env.DEV;
 		// 搜索功能增强
 		const searchForm = document.querySelector('.search-form');
 		const searchInput = document.getElementById('site-search') as HTMLInputElement;
@@ -469,7 +470,9 @@ const breadcrumbStructuredData =
 				const query = searchInput.value.trim();
 				if (query.length > 2) {
 					// 这里可以实现搜索建议功能
-					console.log('搜索建议:', query);
+					if (isDev) {
+						console.log('搜索建议:', query);
+					}
 				}
 			}, 300));
 		}
@@ -489,13 +492,17 @@ const breadcrumbStructuredData =
 	
 	// 防抖函数
 	function debounce(func: Function, wait: number) {
-		let timeout: NodeJS.Timeout;
+		let timeout: ReturnType<typeof setTimeout> | null = null;
 		return function executedFunction(...args: any[]) {
 			const later = () => {
-				clearTimeout(timeout);
+				if (timeout) {
+					clearTimeout(timeout);
+				}
 				func(...args);
 			};
-			clearTimeout(timeout);
+			if (timeout) {
+				clearTimeout(timeout);
+			}
 			timeout = setTimeout(later, wait);
 		};
 	}

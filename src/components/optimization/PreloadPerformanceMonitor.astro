@@ -4,6 +4,9 @@
 ---
 
 <script>
+const isDev = import.meta.env.DEV;
+
+if (isDev) {
 class PreloadPerformanceMonitor {
   private metrics = {
     preloadCount: 0,
@@ -187,6 +190,7 @@ if (document.readyState === 'loading') {
 
 // 导出到全局，便于调试
 (window as any).preloadPerformanceMonitor = performanceMonitor;
+}
 </script>
 
 <!-- 开发环境下的性能监控面板 -->

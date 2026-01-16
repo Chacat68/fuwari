@@ -389,23 +389,42 @@ function isBannerEnabled() {
 	return !!document.getElementById('banner-wrapper')
 }
 
-function setClickOutsideToClose(panel: string, ignores: string[]) {
-	document.addEventListener("click", event => {
-		let panelDom = document.getElementById(panel);
-		let tDom = event.target;
-		if (!(tDom instanceof Node)) return;		// Ensure the event target is an HTML Node
-		for (let ig of ignores) {
-			let ie = document.getElementById(ig)
-			if (ie == tDom || (ie?.contains(tDom))) {
-				return;
+const panelsToClose = [
+	{
+		panelId: "display-setting",
+		ignoreIds: ["display-setting", "display-settings-switch"],
+	},
+	{
+		panelId: "nav-menu-panel",
+		ignoreIds: ["nav-menu-panel", "nav-menu-switch"],
+	},
+	{
+		panelId: "search-panel",
+		ignoreIds: ["search-panel", "search-bar", "search-switch"],
+	},
+];
+
+document.addEventListener("click", event => {
+	const target = event.target;
+	if (!(target instanceof Node)) return;
+
+	for (const { panelId, ignoreIds } of panelsToClose) {
+		const panelDom = document.getElementById(panelId);
+		if (!panelDom) continue;
+
+		let shouldSkip = false;
+		for (const ignoreId of ignoreIds) {
+			const ignoreElement = document.getElementById(ignoreId);
+			if (ignoreElement && (ignoreElement === target || ignoreElement.contains(target))) {
+				shouldSkip = true;
+				break;
 			}
 		}
-		panelDom!.classList.add("float-panel-closed");
-	});
-}
-setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
-setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
-setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+
+		if (shouldSkip) continue;
+		panelDom.classList.add("float-panel-closed");
+	}
+});
 
 
 function loadTheme() {
