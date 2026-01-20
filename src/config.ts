@@ -11,7 +11,7 @@ export const siteConfig: SiteConfig = {
 	title: "付之一笑",
 	subtitle: "阅读、思考、写作",
 	metaDescription:
-		"CHACAT 的个人博客，记录游戏开发与前端开发实践，分享阅读思考、摄影与内容创作笔记，持续写作与复盘。",
+		"Charliefoo 的个人博客，记录游戏开发与前端开发实践，分享阅读思考、摄影与内容创作笔记，持续写作与复盘。",
 	lang: "zh_CN", // 'en'、'zh_CN'、'zh_TW'、'ja'、'ko'、'es'、'th'
 	keywords: [
 		"游戏开发",
@@ -38,7 +38,7 @@ export const siteConfig: SiteConfig = {
 		position: "center", // 等同于object-position，仅支持'top'、'center'、'bottom'。默认为'center'
 		credit: {
 			enable: false, // 显示横幅图片的署名文本
-			text: "CHACAT绘制", // 要显示的署名文本
+			text: "Charliefoo绘制", // 要显示的署名文本
 			url: "", // （可选）原始作品或艺术家页面的URL链接
 		},
 	},
@@ -75,7 +75,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar:
 		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260121004951647.webp?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
-	name: "CHACAT",
+	name: "Charliefoo",
 	bio: "日常在阅读、创作、跑步。",
 	links: [
 		{
