@@ -74,7 +74,7 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar:
-		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260121004152736.webp?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
+		"https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260121004951647.webp?imageSlim", // 相对于/src目录。如果以'/'开头，则相对于/public目录
 	name: "CHACAT",
 	bio: "日常在阅读、创作、跑步。",
 	links: [
