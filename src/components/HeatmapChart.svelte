@@ -43,6 +43,7 @@ let currentStreak = 0;
 let longestStreak = 0;
 let avgPerActiveDay = 0;
 let avgPerDay = 0;
+let isCompact = false;
 
 // 年份切换功能
 let displayYear = year;
@@ -188,6 +189,10 @@ $: {
 $: {
 	heatmapData.length;
 	monthLabels = getMonthLabels();
+}
+$: {
+	weeklyData.length;
+	isCompact = weeklyData.length < 40;
 }
 
 function parseDate(dateStr: string): Date {
@@ -429,7 +434,7 @@ function getWeeklyData(): DayData[][] {
 	
 	<div class="heatmap-scroll">
 		<!-- 月份标签 -->
-		<div class="month-labels" style="--week-count: {weeklyData.length}">
+		<div class="month-labels" class:compact={isCompact} style="--week-count: {weeklyData.length}">
 			{#each monthLabels as month}
 				{#if month.span > 1}
 					<span class="month-label text-50" style="grid-column: {month.start} / span {month.span}">{month.label}</span>
@@ -451,7 +456,7 @@ function getWeeklyData(): DayData[][] {
 			</div>
 
 			<!-- 热力图方块 -->
-			<div class="heatmap-weeks" role="grid" aria-label={`${displayYear} 年文章更新热力图`} tabindex="0" on:mousemove={handleMouseMove}>
+			<div class="heatmap-weeks" class:compact={isCompact} role="grid" aria-label={`${displayYear} 年文章更新热力图`} tabindex="0" on:mousemove={handleMouseMove}>
 				{#each weeklyData as week}
 					<div class="heatmap-week" role="presentation">
 						{#each week as day}
@@ -597,6 +602,11 @@ function getWeeklyData(): DayData[][] {
 		align-items: center;
 		margin-bottom: 0.5rem;
 	}
+
+	.month-labels.compact {
+		grid-template-columns: 1.5rem repeat(var(--week-count), var(--cell));
+		width: max-content;
+	}
 	
 	.month-label {
 		font-size: 0.75rem;
@@ -632,6 +642,12 @@ function getWeeklyData(): DayData[][] {
 		gap: var(--gap);
 		flex: 1;
 		width: 100%;
+	}
+
+	.heatmap-weeks.compact {
+		grid-template-columns: repeat(var(--week-count), var(--cell));
+		width: max-content;
+		flex: 0 0 auto;
 	}
 	
 	.heatmap-week {
