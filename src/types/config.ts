@@ -13,6 +13,11 @@ export type SiteConfig = {
 
 	keywords?: string[]; // 网站关键词
 
+	theme: {
+		// Enable time-based auto switching (6:00/18:00)
+		timeBasedSwitch: boolean;
+	};
+
 	themeColor: {
 		hue: number;
 		fixed: boolean;

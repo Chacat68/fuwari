@@ -9,31 +9,109 @@ import {
 	setTheme,
 } from "@utils/setting-utils.ts";
 import { onMount } from "svelte";
+import { siteConfig } from "@/config";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
 let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
 
+// Enable time-based auto switching (6:00/18:00).
+const ENABLE_TIME_BASED_THEME_SWITCH = siteConfig.theme.timeBasedSwitch;
+let timeSwitchTimer: ReturnType<typeof setTimeout> | null = null;
+
+function getTimeBasedTheme(): LIGHT_DARK_MODE {
+	const hour = new Date().getHours();
+	return hour >= 6 && hour < 18 ? LIGHT_MODE : DARK_MODE;
+}
+
+function getNextSwitchDelayMs(): number {
+	const now = new Date();
+	const next = new Date(now);
+
+	if (now.getHours() < 6) {
+		next.setHours(6, 0, 0, 0);
+	} else if (now.getHours() < 18) {
+		next.setHours(18, 0, 0, 0);
+	} else {
+		next.setDate(next.getDate() + 1);
+		next.setHours(6, 0, 0, 0);
+	}
+
+	return Math.max(next.getTime() - now.getTime(), 0);
+}
+
+function clearTimeSwitchTimer() {
+	if (timeSwitchTimer) {
+		clearTimeout(timeSwitchTimer);
+		timeSwitchTimer = null;
+	}
+}
+
+function scheduleTimeSwitch() {
+	clearTimeSwitchTimer();
+	const delay = getNextSwitchDelayMs();
+	if (delay <= 0) {
+		return;
+	}
+	const targetMode = mode;
+	timeSwitchTimer = setTimeout(() => {
+		if (ENABLE_TIME_BASED_THEME_SWITCH && targetMode === AUTO_MODE) {
+			applyThemeToDocument(getTimeBasedTheme());
+			scheduleTimeSwitch();
+		}
+	}, delay);
+}
+
+function setupAutoThemeBehavior() {
+	if (mode !== AUTO_MODE) {
+		clearTimeSwitchTimer();
+		return;
+	}
+
+	if (ENABLE_TIME_BASED_THEME_SWITCH) {
+		applyThemeToDocument(getTimeBasedTheme());
+		scheduleTimeSwitch();
+	} else {
+		applyThemeToDocument(AUTO_MODE);
+	}
+}
+
 onMount(() => {
 	mode = getStoredTheme();
+	setupAutoThemeBehavior();
+
+	if (ENABLE_TIME_BASED_THEME_SWITCH) {
+		return () => {
+			clearTimeSwitchTimer();
+		};
+	}
+
 	const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
 	const changeThemeWhenSchemeChanged: Parameters<
 		typeof darkModePreference.addEventListener<"change">
 	>[1] = (_e) => {
-		applyThemeToDocument(mode);
+		if (mode === AUTO_MODE) {
+			applyThemeToDocument(mode);
+		}
 	};
-	darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
+	if (typeof darkModePreference.addEventListener === "function") {
+		darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
+	}
 	return () => {
-		darkModePreference.removeEventListener(
-			"change",
-			changeThemeWhenSchemeChanged,
-		);
+		if (typeof darkModePreference.removeEventListener === "function") {
+			darkModePreference.removeEventListener(
+				"change",
+				changeThemeWhenSchemeChanged,
+			);
+		}
+		clearTimeSwitchTimer();
 	};
 });
 
 function switchScheme(newMode: LIGHT_DARK_MODE) {
 	mode = newMode;
 	setTheme(newMode);
+	setupAutoThemeBehavior();
 }
 
 function toggleScheme() {

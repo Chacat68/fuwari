@@ -22,6 +22,10 @@ export const siteConfig: SiteConfig = {
 		"思考",
 		"写作",
 	],
+	theme: {
+		// 是否启用基于时间的自动切换（6:00/18:00）
+		timeBasedSwitch: false,
+	},
 	themeColor: {
 		hue: 260, // 主题颜色的默认色调，范围从0到360。例如：红色：0，青色：200，蓝青色：250，粉色：345
 		fixed: true, // 对访问者隐藏主题颜色选择器
