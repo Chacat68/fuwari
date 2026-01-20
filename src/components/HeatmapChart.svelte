@@ -390,7 +390,7 @@ function getWeeklyData(): DayData[][] {
 }
 </script>
 
-<div class="heatmap-container">
+<div class="heatmap-container card-base px-8 py-6">
 	<div class="heatmap-header">
 		<div class="year-switcher">
 			<button 
@@ -514,11 +514,8 @@ function getWeeklyData(): DayData[][] {
 
 <style>
 	.heatmap-container {
-		--cell: 10px;
+		--cell: 12px;
 		--gap: 2px;
-		padding: 1rem;
-		border-radius: var(--radius-large);
-		background: var(--card-bg);
 		margin-bottom: 1.5rem;
 	}
 	
@@ -595,7 +592,7 @@ function getWeeklyData(): DayData[][] {
 
 	.month-labels {
 		display: grid;
-		grid-template-columns: 1.5rem repeat(var(--week-count), var(--cell));
+		grid-template-columns: 1.5rem repeat(var(--week-count), minmax(var(--cell), 1fr));
 		column-gap: var(--gap);
 		align-items: center;
 		margin-bottom: 0.5rem;
@@ -611,6 +608,7 @@ function getWeeklyData(): DayData[][] {
 	.heatmap-grid {
 		display: flex;
 		gap: 0.5rem;
+		width: 100%;
 	}
 	
 	.weekday-labels {
@@ -629,19 +627,23 @@ function getWeeklyData(): DayData[][] {
 	}
 	
 	.heatmap-weeks {
-		display: flex;
+		display: grid;
+		grid-template-columns: repeat(var(--week-count), minmax(var(--cell), 1fr));
 		gap: var(--gap);
+		flex: 1;
+		width: 100%;
 	}
 	
 	.heatmap-week {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-rows: repeat(7, minmax(var(--cell), 1fr));
 		gap: var(--gap);
 	}
 	
 	.heatmap-day {
-		width: var(--cell);
-		height: var(--cell);
+		width: 100%;
+		height: 100%;
+		aspect-ratio: 1 / 1;
 		border-radius: 2px;
 		cursor: pointer;
 		outline: none;
@@ -766,7 +768,7 @@ function getWeeklyData(): DayData[][] {
 
 	@media (max-width: 768px) {
 		.heatmap-container {
-			--cell: 8px;
+			--cell: 10px;
 			--gap: 2px;
 		}
 	}
