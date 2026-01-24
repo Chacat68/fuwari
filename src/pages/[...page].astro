@@ -18,16 +18,17 @@ const { page } = Astro.props;
 const len = page.data.length;
 
 const pageIndex = page.currentPage;
-const title =
-	pageIndex && pageIndex > 1
-		? `${siteConfig.title} - 第${pageIndex}页`
-		: siteConfig.title;
+// 首页不传 title，让 Layout 使用默认的 "网站名 - 副标题" 格式
+// 分页页面只传 "第X页" 作为标题前缀
+const title = pageIndex && pageIndex > 1 ? `第${pageIndex}页` : undefined;
 const description =
 	(siteConfig.metaDescription || siteConfig.subtitle) +
 	(pageIndex && pageIndex > 1 ? `（第${pageIndex}页）` : "");
 ---
 
 <MainGridLayout title={title} description={description}>
+    <!-- SEO: 添加 H1 标签，使用 sr-only 类隐藏视觉显示但保留给搜索引擎 -->
+    <h1 class="sr-only">{pageIndex && pageIndex > 1 ? `${siteConfig.title} - 第${pageIndex}页` : siteConfig.title}</h1>
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>
