@@ -10,13 +10,11 @@ draft: false
 
 > 港乐集：细数那些光影交织的粤语歌年代，记录心中难忘的旋律，分享或流行或小众的港乐故事。
 
-如果你对港乐的印象还停留在“天王天后 + 大情歌”，Swing 可能会让你突然意识到：原来港乐里一直藏着一股更“顽皮”、更“乐手脑”、更像从录音室里长出来的气质。
-
-他们更偏爱爵士、放克、电子等元素，而不是传统的摇滚或民谣；他们喜欢在编曲里玩点小花样，而不是一味追求旋律的朗朗上口；他们喜欢用幽默感去处理情绪，而不是一味煽情。
+Swing 可能会打破你对港乐的刻板印象。这支二人组不做传统的大情歌，反而偏爱爵士、放克和电子元素。编曲里总有各种小花样，情绪处理也不爱煽情，倒常带点黑色幽默。
 
 ## 《1984》
 
-这首歌可以说是 Swing 的“名片”，我对它的第一印象，是非常琅琅上口的旋律，配上带点复古感的电子节奏，让人一听就忍不住跟着哼唱。它会给你带来一种熟悉感，但又不完全是传统流行歌的那种直接。
+《1984》算 Swing 的代表作。复古电子节奏配上琅琅上口的旋律，一听就想跟着哼。它有熟悉感，但不像普通流行歌那么直白。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Gt3-nNqUgp8?si=HepdPsfn9fXVT9qr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -50,9 +48,9 @@ draft: false
 
 ## 《半张飞》
 
-《半张飞》的妙处，在于它让“玩心”不显得轻浮。Swing 很擅长把一个有棱角的情绪，包进一个看似轻巧的表达里：旋律可以顺、画面可以俏皮，但底层的力道并没有松。
+《半张飞》的妙处在于"玩心"不显轻浮。Swing 把有棱角的情绪包进轻巧的表达：旋律顺、画面俏皮，但底层的力道没松。
 
-这也是我喜欢 Swing 的原因之一：他们不把流行歌当成单一情绪的容器，而更像一段短片——镜头会切、景别会换，偶尔还会在不经意处塞一点黑色幽默。你笑了一下，但笑完会回到那个更认真的问题：为什么这句会刺到你？
+我喜欢 Swing 就因为这个：流行歌在他们手里不是单一情绪的容器，更像短片——镜头会切、景别会换，偶尔在不经意处塞点黑色幽默。你笑了一下，但笑完会回到那个更认真的问题：为什么这句会刺到你？
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2mZ1vIWPxPE?si=U2dR6O019yrG8pTx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -82,7 +80,7 @@ draft: false
 
 ## 《帝國大廈》
 
-《帝國大廈》是一首充满都市孤独感的歌曲。Swing 用细腻的编曲和层次丰富的和声，营造出一种既现代又带点怀旧的氛围。歌词描绘了两个人在感情中的挣扎与无奈，以一种比赛的隐喻，表达了在爱情中总是感觉自己处于“亚军”的位置。大家都想做冠軍，最终却发现，赢了却输了彼此。
+《帝國大廈》的都市孤独感很强。Swing 用细腻的编曲和层次丰富的和声，营造出现代又带点怀旧的氛围。歌词用比赛的隐喻写感情中的挣扎：总觉得自己是"亚军"，想做冠軍，最终却发现赢了却输了彼此。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eQ7DATYl8Xo?si=Te56HwqV5ZcgAYra" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -114,7 +112,7 @@ draft: false
 
 ## 结语
 
-Swing 的音乐有点像“港乐里的实验电影”：它们不是为了迎合大众口味而生，但也不是为了炫技而存在。相反，它们在“流行”与“实验”之间找到了一条有趣的缝隙，让人既能享受旋律的愉悦，也能体会到音乐结构的巧思。
+Swing 的音乐像"港乐里的实验电影"。它们不为迎合大众而生，也不为炫技而存在。在"流行"与"实验"之间的缝隙里，既能享受旋律的愉悦，也能体会音乐结构的巧思。
 
 > 本站 RSS 地址已更新，麻烦读者朋友们重新订阅一次喔！
 
