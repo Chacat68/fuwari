@@ -10,6 +10,7 @@ import DisplaySettings from "./widget/DisplaySettings.svelte";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
 
 const className = Astro.props.class;
+const isDev = import.meta.env.DEV;
 
 let links: NavBarLink[] = navBarConfig.links.map(
 	(item: NavBarLink | LinkPreset): NavBarLink => {
@@ -116,7 +117,7 @@ function loadButtonScript() {
 loadButtonScript();
 </script>
 
-{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js'), isDev: import.meta.env.DEV}}>
+{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js'), isDev}}>
 async function loadPagefind() {
     try {
         const response = await fetch(scriptUrl, { method: 'HEAD' });
