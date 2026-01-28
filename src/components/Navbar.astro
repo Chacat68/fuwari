@@ -116,8 +116,7 @@ function loadButtonScript() {
 loadButtonScript();
 </script>
 
-{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
-const isDev = import.meta.env.DEV;
+{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js'), isDev: import.meta.env.DEV}}>
 async function loadPagefind() {
     try {
         const response = await fetch(scriptUrl, { method: 'HEAD' });
