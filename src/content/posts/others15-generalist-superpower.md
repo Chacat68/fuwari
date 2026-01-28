@@ -2,6 +2,7 @@
 title: "「杂而不精」可能是你的超能力:把通才优势用在正确的场景里(视频笔记)"
 published: 2026-01-26
 updated: 2026-01-26
+image: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260129025101114.webp?imageSlim"
 description: "当世界从「棋盘」变成「火场」,广度不再是缺点。关键是:给多兴趣一个能复利的结构。"
 tags: [自我提升, 学习方法, 职业发展, 通才, 多兴趣, 复利]
 category: "它山之石"
