@@ -17,7 +17,7 @@ Swing 可能会打破你对港乐的刻板印象。这支二人组不做传统�
 
 《1984》算 Swing 的代表作。复古电子节奏配上琅琅上口的旋律，一听就想跟着哼。它有熟悉感，但不像普通流行歌那么直白。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Gt3-nNqUgp8?si=HepdPsfn9fXVT9qr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/Gt3-nNqUgp8?si=HepdPsfn9fXVT9qr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 歌词：
 
@@ -53,7 +53,7 @@ Swing 可能会打破你对港乐的刻板印象。这支二人组不做传统�
 
 我喜欢 Swing 就因为这个：流行歌在他们手里不是单一情绪的容器，更像短片——镜头会切、景别会换，偶尔在不经意处塞点黑色幽默。你笑了一下，但笑完会回到那个更认真的问题：为什么这句会刺到你？
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2mZ1vIWPxPE?si=U2dR6O019yrG8pTx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/2mZ1vIWPxPE?si=U2dR6O019yrG8pTx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 歌词：
 
@@ -83,7 +83,7 @@ Swing 可能会打破你对港乐的刻板印象。这支二人组不做传统�
 
 《帝國大廈》的都市孤独感很强。Swing 用细腻的编曲和层次丰富的和声，营造出现代又带点怀旧的氛围。歌词用比赛的隐喻写感情中的挣扎：总觉得自己是"亚军"，想做冠軍，最终却发现赢了却输了彼此。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eQ7DATYl8Xo?si=Te56HwqV5ZcgAYra" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/eQ7DATYl8Xo?si=Te56HwqV5ZcgAYra" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 曲: Eric kwok  詞: 黃偉文
 
