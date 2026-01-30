@@ -3,7 +3,7 @@ title: "Swing：千禧年前后的港乐“创作型组合”，把玩心与技�
 published: 2026-01-26
 updated: 2026-01-26
 description: "从 Snowman 到 Swing，这对香港创作二人组用编曲的奇思、和声的巧劲与黑色幽默，留下了属于千禧年的港乐切面。"
-image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260129020617275.webp?imageSlim'
+image: 'https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260130123518269.webp?imageSlim'
 tags: ["港乐", "粤语", "Swing", "乐队/组合", "千禧年", "编曲", "流行音乐"]
 category: "音乐欣赏"
 draft: false
