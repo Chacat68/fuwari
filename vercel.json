@@ -1,4 +1,88 @@
 {
+	"redirects": [
+		{
+			"source": "/article/:path*",
+			"destination": "/posts/:path*/",
+			"permanent": true
+		},
+		{
+			"source": "/page/:num(\\d+)/",
+			"destination": "/:num/",
+			"permanent": true
+		},
+		{
+			"source": "/page/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/posts/hk18-kiri-t-outrageous-thing-cover/",
+			"destination": "/posts/hk19-kiri-t-outrageous-thing-cover/",
+			"permanent": true
+		},
+		{
+			"source": "/archive/tag/:tag*/",
+			"destination": "/archive/",
+			"permanent": true
+		},
+		{
+			"source": "/archive/category/:category*/",
+			"destination": "/archive/",
+			"permanent": true
+		},
+		{
+			"source": "/:num(\\d+)/",
+			"has": [
+				{
+					"type": "query",
+					"key": "__invalid_page__",
+					"value": "true"
+				}
+			],
+			"destination": "/",
+			"permanent": false
+		},
+		{
+			"source": "/8/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/9/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/10/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/11/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/12/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/13/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/14/",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/15/",
+			"destination": "/",
+			"permanent": true
+		}
+	],
 	"headers": [
 		{
 			"source": "/(.*)",
