@@ -3,7 +3,7 @@ title: "SDL 3.4 发布：一次让跨平台开发更顺手的升级（视频笔�
 published: 2026-01-10
 updated: 2026-01-10
 description: "把视频要点整理成文章，并结合 SDL 3.4.0 官方更新：GPU 与 2D 渲染互操作、原生 PNG、Emscripten 与输入支持等，让跨平台开发更省心。"
-image: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260110053145364.webp?imageSlim"
+image: "https://blog-1259751088.cos.ap-shanghai.myqcloud.com/20260130234501463.webp?imageSlim"
 tags: [游戏开发, SDL, SDL3, 跨平台, 图形渲染]
 category: "它山之石"
 draft: false
