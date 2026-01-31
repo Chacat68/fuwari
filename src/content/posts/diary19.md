@@ -23,7 +23,7 @@ draft: false
 
 ## 播客推荐
 
-近期常听的播客推荐：[跳转前往](https://www.chawfoo.com/look)
+近期常听的播客推荐：（见下方列表）
 
 ![](https://blog-1259751088.cos.ap-shanghai.myqcloud.com/uPic/CleanShot%202024-06-25%20at%2020.50.45.png)
 
