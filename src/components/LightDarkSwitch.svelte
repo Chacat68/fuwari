@@ -11,10 +11,6 @@ import {
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
-// Explicitly define that this component accepts no props
-type Props = Record<string, never>;
-const _props = $props<Props>();
-
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
 let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
 
@@ -52,12 +48,12 @@ function toggleScheme() {
 
 function showPanel() {
 	const panel = document.querySelector("#light-dark-panel");
-	panel.classList.remove("float-panel-closed");
+	panel?.classList.remove("float-panel-closed");
 }
 
 function hidePanel() {
 	const panel = document.querySelector("#light-dark-panel");
-	panel.classList.add("float-panel-closed");
+	panel?.classList.add("float-panel-closed");
 }
 </script>
 
