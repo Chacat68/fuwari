@@ -102,7 +102,7 @@ const bannerOffset =
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} class="dark bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
+<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
 	  data-overlayscrollbars-initialize
 >
 	<head>
@@ -189,7 +189,7 @@ const bannerOffset =
 		))}
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue, timeBasedSwitch: siteConfig.theme.timeBasedSwitch}}>
 			const safeGetItem = (key) => {
 				try {
 					return localStorage.getItem(key);
@@ -208,13 +208,23 @@ const bannerOffset =
 					document.documentElement.classList.add('dark');
 					break
 				case AUTO_MODE: {
-					const prefersDark =
-						typeof window.matchMedia === 'function' &&
-						window.matchMedia('(prefers-color-scheme: dark)').matches;
-					if (prefersDark) {
-						document.documentElement.classList.add('dark');
+					if (timeBasedSwitch) {
+						const hour = new Date().getHours();
+						const isDark = hour < 6 || hour >= 18;
+						if (isDark) {
+							document.documentElement.classList.add('dark');
+						} else {
+							document.documentElement.classList.remove('dark');
+						}
 					} else {
-						document.documentElement.classList.remove('dark');
+						const prefersDark =
+							typeof window.matchMedia === 'function' &&
+							window.matchMedia('(prefers-color-scheme: dark)').matches;
+						if (prefersDark) {
+							document.documentElement.classList.add('dark');
+						} else {
+							document.documentElement.classList.remove('dark');
+						}
 					}
 					break;
 				}
