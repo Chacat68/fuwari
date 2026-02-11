@@ -26,6 +26,7 @@ enum I18nKey {
 	lightMode = "lightMode",
 	darkMode = "darkMode",
 	systemMode = "systemMode",
+	timeAutoMode = "timeAutoMode",
 
 	more = "more",
 

@@ -29,6 +29,7 @@ export const es: Translation = {
 	[Key.lightMode]: "Claro",
 	[Key.darkMode]: "Oscuro",
 	[Key.systemMode]: "Sistema",
+	[Key.timeAutoMode]: "Automático por Hora",
 
 	[Key.more]: "Más",
 

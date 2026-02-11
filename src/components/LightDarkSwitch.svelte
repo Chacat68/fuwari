@@ -1,5 +1,5 @@
 <script lang="ts">
-import { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants.ts";
+import { AUTO_MODE, DARK_MODE, LIGHT_MODE, TIME_AUTO_MODE } from "@constants/constants.ts";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
@@ -11,8 +11,9 @@ import {
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
-const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
+const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE, TIME_AUTO_MODE];
 let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
+let timeCheckInterval: number | undefined;
 
 onMount(() => {
 	mode = getStoredTheme();
@@ -23,17 +24,48 @@ onMount(() => {
 		applyThemeToDocument(mode);
 	};
 	darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
+	
+	// Start time-based auto mode timer if enabled
+	if (mode === TIME_AUTO_MODE) {
+		startTimeCheckInterval();
+	}
+	
 	return () => {
 		darkModePreference.removeEventListener(
 			"change",
 			changeThemeWhenSchemeChanged,
 		);
+		if (timeCheckInterval !== undefined) {
+			clearInterval(timeCheckInterval);
+		}
 	};
 });
+
+function startTimeCheckInterval() {
+	// Clear any existing interval
+	if (timeCheckInterval !== undefined) {
+		clearInterval(timeCheckInterval);
+	}
+	
+	// Check every minute if we need to switch theme
+	timeCheckInterval = setInterval(() => {
+		if (mode === TIME_AUTO_MODE) {
+			applyThemeToDocument(mode);
+		}
+	}, 60000) as unknown as number; // 60000ms = 1 minute
+}
 
 function switchScheme(newMode: LIGHT_DARK_MODE) {
 	mode = newMode;
 	setTheme(newMode);
+	
+	// Start or stop the time check interval based on mode
+	if (newMode === TIME_AUTO_MODE) {
+		startTimeCheckInterval();
+	} else if (timeCheckInterval !== undefined) {
+		clearInterval(timeCheckInterval);
+		timeCheckInterval = undefined;
+	}
 }
 
 function toggleScheme() {
@@ -69,6 +101,9 @@ function hidePanel() {
         <div class="absolute" class:opacity-0={mode !== AUTO_MODE}>
             <Icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem]"></Icon>
         </div>
+        <div class="absolute" class:opacity-0={mode !== TIME_AUTO_MODE}>
+            <Icon icon="material-symbols:schedule-outline-rounded" class="text-[1.25rem]"></Icon>
+        </div>
     </button>
 
     <div id="light-dark-panel" class="hidden lg:block absolute transition float-panel-closed top-11 -right-2 pt-5" >
@@ -87,12 +122,19 @@ function hidePanel() {
                 <Icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem] mr-3"></Icon>
                 {i18n(I18nKey.darkMode)}
             </button>
-            <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95"
+            <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95 mb-0.5"
                     class:current-theme-btn={mode === AUTO_MODE}
                     onclick={() => switchScheme(AUTO_MODE)}
             >
                 <Icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem] mr-3"></Icon>
                 {i18n(I18nKey.systemMode)}
+            </button>
+            <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95"
+                    class:current-theme-btn={mode === TIME_AUTO_MODE}
+                    onclick={() => switchScheme(TIME_AUTO_MODE)}
+            >
+                <Icon icon="material-symbols:schedule-outline-rounded" class="text-[1.25rem] mr-3"></Icon>
+                {i18n(I18nKey.timeAutoMode)}
             </button>
         </div>
     </div>

@@ -14,6 +14,7 @@ import {
 	DEFAULT_THEME,
 	LIGHT_MODE,
 	PAGE_WIDTH,
+	TIME_AUTO_MODE,
 } from "../constants/constants";
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
@@ -110,7 +111,7 @@ const bannerOffset =
 		))}
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, TIME_AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
 			// Load the theme from local storage
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
@@ -126,6 +127,15 @@ const bannerOffset =
 					} else {
 						document.documentElement.classList.remove('dark');
 					}
+					break
+				case TIME_AUTO_MODE:
+					const hour = new Date().getHours();
+					if (hour >= 6 && hour < 18) {
+						document.documentElement.classList.remove('dark');
+					} else {
+						document.documentElement.classList.add('dark');
+					}
+					break
 			}
 
 			// Load the hue from local storage

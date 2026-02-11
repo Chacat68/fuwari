@@ -29,6 +29,7 @@ export const tr: Translation = {
 	[Key.lightMode]: "Aydınlık",
 	[Key.darkMode]: "Koyu",
 	[Key.systemMode]: "Sistem",
+	[Key.timeAutoMode]: "Zaman Otomatik",
 
 	[Key.more]: "Daha Fazla",
 
