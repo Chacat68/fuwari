@@ -29,6 +29,7 @@ export const id: Translation = {
 	[Key.lightMode]: "Terang",
 	[Key.darkMode]: "Gelap",
 	[Key.systemMode]: "Sistem",
+	[Key.timeAutoMode]: "Otomatis Waktu",
 
 	[Key.more]: "Lainnya",
 

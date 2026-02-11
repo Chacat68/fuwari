@@ -29,6 +29,7 @@ export const ja: Translation = {
 	[Key.lightMode]: "ライト",
 	[Key.darkMode]: "ダーク",
 	[Key.systemMode]: "システム",
+	[Key.timeAutoMode]: "時刻自動",
 
 	[Key.more]: "もっと",
 

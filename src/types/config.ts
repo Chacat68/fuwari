@@ -1,4 +1,4 @@
-import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
+import type { AUTO_MODE, DARK_MODE, LIGHT_MODE, TIME_AUTO_MODE } from "@constants/constants";
 
 export type SiteConfig = {
 	title: string;
@@ -80,7 +80,8 @@ export type LicenseConfig = {
 export type LIGHT_DARK_MODE =
 	| typeof LIGHT_MODE
 	| typeof DARK_MODE
-	| typeof AUTO_MODE;
+	| typeof AUTO_MODE
+	| typeof TIME_AUTO_MODE;
 
 export type BlogPostData = {
 	body: string;

@@ -3,6 +3,7 @@ import {
 	DARK_MODE,
 	DEFAULT_THEME,
 	LIGHT_MODE,
+	TIME_AUTO_MODE,
 } from "@constants/constants.ts";
 import { expressiveCodeConfig } from "@/config";
 import type { LIGHT_DARK_MODE } from "@/types/config";
@@ -27,6 +28,11 @@ export function setHue(hue: number): void {
 	r.style.setProperty("--hue", String(hue));
 }
 
+export function isDaytime(): boolean {
+	const hour = new Date().getHours();
+	return hour >= 6 && hour < 18;
+}
+
 export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 	switch (theme) {
 		case LIGHT_MODE:
@@ -40,6 +46,13 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 				document.documentElement.classList.add("dark");
 			} else {
 				document.documentElement.classList.remove("dark");
+			}
+			break;
+		case TIME_AUTO_MODE:
+			if (isDaytime()) {
+				document.documentElement.classList.remove("dark");
+			} else {
+				document.documentElement.classList.add("dark");
 			}
 			break;
 	}

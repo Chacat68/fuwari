@@ -29,6 +29,7 @@ export const zh_CN: Translation = {
 	[Key.lightMode]: "亮色",
 	[Key.darkMode]: "暗色",
 	[Key.systemMode]: "跟随系统",
+	[Key.timeAutoMode]: "定时自动",
 
 	[Key.more]: "更多",
 

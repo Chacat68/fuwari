@@ -29,6 +29,7 @@ export const ko: Translation = {
 	[Key.lightMode]: "밝은 모드",
 	[Key.darkMode]: "어두운 모드",
 	[Key.systemMode]: "시스템 모드",
+	[Key.timeAutoMode]: "시간 자동",
 
 	[Key.more]: "더 보기",
 
